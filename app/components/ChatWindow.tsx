@@ -1,88 +1,63 @@
 'use client'
 
-import { useState } from 'react'
-import { PaperAirplaneIcon, PaperClipIcon } from '@heroicons/react/24/outline'
+import { useState, useEffect } from 'react'
+import { PaperAirplaneIcon, PaperClipIcon, PencilIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { UserIcon, CpuChipIcon } from '@heroicons/react/24/solid'
+import { useChatStore } from '../store/chat-store'
 
 interface ChatWindowProps {
   chatId: string | null
 }
 
-interface Message {
-  id: string
-  content: string
-  sender: 'user' | 'ai'
-  timestamp: string
-}
-
-// ダミーメッセージデータ
-const mockMessages: Record<string, Message[]> = {
-  'chat-1': [
-    {
-      id: 'msg-1',
-      content: 'React開発でuseEffectの使い方について教えてください。',
-      sender: 'user',
-      timestamp: '10:30'
-    },
-    {
-      id: 'msg-2',
-      content: 'useEffectは副作用を扱うためのReactフックです。コンポーネントのレンダリング後に実行される処理を記述できます。\n\n基本的な使い方:\n```javascript\nuseEffect(() => {\n  // 副作用の処理\n}, [dependencies]);\n```\n\n第二引数の依存配列によって実行タイミングを制御できます。',
-      sender: 'ai',
-      timestamp: '10:31'
-    },
-    {
-      id: 'msg-3',
-      content: 'ありがとうございます！依存配列が空の場合はどうなりますか？',
-      sender: 'user',
-      timestamp: '10:32'
-    },
-    {
-      id: 'msg-4',
-      content: '依存配列が空の場合（`[]`）、useEffectはコンポーネントのマウント時に一度だけ実行されます。これは `componentDidMount` と同じ動作です。\n\n```javascript\nuseEffect(() => {\n  // マウント時に一度だけ実行\n  console.log("Component mounted");\n}, []); // 空の依存配列\n```\n\nこの場合、コンポーネントが再レンダリングされても、useEffect内の処理は実行されません。',
-      sender: 'ai',
-      timestamp: '10:33'
-    }
-  ],
-  'chat-2': [
-    {
-      id: 'msg-5',
-      content: 'TypeScriptでtsconfig.jsonの設定について教えてください。',
-      sender: 'user',
-      timestamp: '09:15'
-    },
-    {
-      id: 'msg-6',
-      content: 'tsconfig.jsonはTypeScriptプロジェクトの設定ファイルです。コンパイラオプション、ファイルの包含・除外、型チェックの厳格さなどを設定できます。\n\n基本的な設定例:\n```json\n{\n  "compilerOptions": {\n    "target": "es5",\n    "lib": ["dom", "dom.iterable", "esnext"],\n    "allowJs": true,\n    "skipLibCheck": true,\n    "strict": true,\n    "forceConsistentCasingInFileNames": true,\n    "noEmit": true,\n    "esModuleInterop": true,\n    "module": "esnext",\n    "moduleResolution": "node",\n    "resolveJsonModule": true,\n    "isolatedModules": true,\n    "jsx": "preserve"\n  },\n  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],\n  "exclude": ["node_modules"]\n}\n```',
-      sender: 'ai',
-      timestamp: '09:16'
-    }
-  ]
-}
-
 export default function ChatWindow({ chatId }: ChatWindowProps) {
   const [inputMessage, setInputMessage] = useState('')
-  const [messages, setMessages] = useState<Message[]>(chatId ? mockMessages[chatId] || [] : [])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isApiLoading, setIsApiLoading] = useState(false)
+  const [editingMessageIndex, setEditingMessageIndex] = useState<number | null>(null)
+  const [editingContent, setEditingContent] = useState('')
+  const [isClient, setIsClient] = useState(false)
+
+  const {
+    getCurrentSession,
+    addMessage,
+    updateMessage,
+    isLoading,
+    setLoading
+  } = useChatStore()
+
+  const currentSession = isClient ? getCurrentSession() : null
+
+  // クライアントサイドでのマウントを検出
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  // chatIdが変更されたときの処理
+  useEffect(() => {
+    if (chatId && currentSession?.id !== chatId) {
+      // 別のセッションが選択された場合の処理
+      // この場合、親コンポーネントでselectSessionを呼び出す必要がある
+    }
+  }, [chatId, currentSession?.id])
 
   const handleSendMessage = async () => {
-    if (!inputMessage.trim() || !chatId || isLoading) return
+    if (!inputMessage.trim() || !currentSession || isApiLoading) return
 
-    const userMessage: Message = {
-      id: `msg-${Date.now()}`,
-      content: inputMessage,
-      sender: 'user',
-      timestamp: new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })
+    const userMessage = {
+      role: 'user' as const,
+      content: inputMessage
     }
 
     const currentMessage = inputMessage
-    setMessages(prev => [...prev, userMessage])
     setInputMessage('')
-    setIsLoading(true)
+    setIsApiLoading(true)
+
+    // ユーザーメッセージを追加
+    addMessage(currentSession.id, userMessage)
 
     try {
       // 会話履歴をAPI用の形式に変換
-      const conversationHistory = messages.map(msg => ({
-        role: msg.sender === 'user' ? 'user' : 'assistant',
+      const conversationHistory = currentSession.messages.map(msg => ({
+        role: msg.role,
         content: msg.content
       }))
 
@@ -103,28 +78,25 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         throw new Error(data.error || 'APIエラーが発生しました')
       }
 
-      const aiResponse: Message = {
-        id: `msg-${Date.now()}-ai`,
-        content: data.message,
-        sender: 'ai',
-        timestamp: new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })
+      // AIの応答を追加
+      const aiMessage = {
+        role: 'assistant' as const,
+        content: data.message
       }
 
-      setMessages(prev => [...prev, aiResponse])
+      addMessage(currentSession.id, aiMessage)
 
     } catch (error) {
       console.error('Chat error:', error)
 
-      const errorMessage: Message = {
-        id: `msg-${Date.now()}-error`,
-        content: error instanceof Error ? error.message : 'エラーが発生しました。もう一度お試しください。',
-        sender: 'ai',
-        timestamp: new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })
+      const errorMessage = {
+        role: 'assistant' as const,
+        content: error instanceof Error ? error.message : 'エラーが発生しました。もう一度お試しください。'
       }
 
-      setMessages(prev => [...prev, errorMessage])
+      addMessage(currentSession.id, errorMessage)
     } finally {
-      setIsLoading(false)
+      setIsApiLoading(false)
     }
   }
 
@@ -135,7 +107,83 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     }
   }
 
-  if (!chatId) {
+  // 編集機能の関数
+  const handleEditMessage = (messageIndex: number, content: string) => {
+    setEditingMessageIndex(messageIndex)
+    setEditingContent(content)
+  }
+
+  const handleCancelEdit = () => {
+    setEditingMessageIndex(null)
+    setEditingContent('')
+  }
+
+  const handleResendMessage = async () => {
+    if (!currentSession || !editingContent.trim() || editingMessageIndex === null) return
+
+    setIsApiLoading(true)
+
+    try {
+      // 編集されたメッセージで更新
+      updateMessage(currentSession.id, editingMessageIndex, editingContent.trim())
+
+      // 編集後のメッセージまでの会話履歴を構築
+      const editedMessages = currentSession.messages.slice(0, editingMessageIndex + 1)
+      editedMessages[editingMessageIndex] = {
+        ...editedMessages[editingMessageIndex],
+        content: editingContent.trim()
+      }
+
+      const conversationHistory = editedMessages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }))
+
+      // OpenAI APIに再送信
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: editingContent.trim(),
+          conversationHistory: conversationHistory.slice(0, -1) // 最後のメッセージは除く
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'APIエラーが発生しました')
+      }
+
+      // 新しいAIの応答を追加
+      const aiMessage = {
+        role: 'assistant' as const,
+        content: data.message
+      }
+
+      addMessage(currentSession.id, aiMessage)
+
+      // 編集状態をリセット
+      setEditingMessageIndex(null)
+      setEditingContent('')
+
+    } catch (error) {
+      console.error('Resend error:', error)
+
+      const errorMessage = {
+        role: 'assistant' as const,
+        content: error instanceof Error ? error.message : 'エラーが発生しました。もう一度お試しください。'
+      }
+
+      addMessage(currentSession.id, errorMessage)
+    } finally {
+      setIsApiLoading(false)
+    }
+  }
+
+  if (!currentSession) {
     return (
       <div className="flex flex-col items-center justify-center h-full px-4">
         <div className="text-center">
@@ -156,42 +204,97 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     <div className="flex flex-col h-full">
       {/* チャットヘッダー */}
       <div className="flex-shrink-0 border-b border-gray-700 p-4">
-        <h1 className="text-lg font-semibold text-white text-center md:text-left">チャット</h1>
+        <h1 className="text-lg font-semibold text-white text-center md:text-left">
+          {currentSession.title}
+        </h1>
       </div>
 
       {/* メッセージエリア */}
       <div className="flex-1 overflow-y-auto scrollbar-thin px-4 sm:px-6 md:px-4 py-4">
-        {messages.length === 0 ? (
+        {currentSession.messages.length === 0 ? (
           <div className="text-center py-8">
             <p className="text-gray-300 text-sm sm:text-base font-medium">まだメッセージがありません。最初のメッセージを送信してください。</p>
           </div>
         ) : (
           <div className="space-y-6">
-            {messages.map((message) => (
+            {currentSession.messages.map((message, index) => (
               <div
-                key={message.id}
-                className={`flex gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                key={`${currentSession.id}-${index}`}
+                className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                {message.sender === 'ai' && (
+                {message.role === 'assistant' && (
                   <div className="w-8 h-8 rounded-full bg-[#1E90FF] flex items-center justify-center flex-shrink-0">
                     <CpuChipIcon className="w-5 h-5 text-white" />
                   </div>
                 )}
-                <div
-                  className={`max-w-[85%] sm:max-w-[75%] md:max-w-[70%] px-4 py-3 rounded-lg ${
-                    message.sender === 'user'
-                      ? 'bg-[#1E90FF] text-white'
-                      : 'bg-[#161B22] text-white border border-gray-700'
-                  }`}
-                >
-                  <div className="whitespace-pre-wrap break-words text-sm sm:text-base font-normal leading-relaxed">
-                    {message.content}
+
+                {/* 編集中のメッセージ */}
+                {editingMessageIndex === index && message.role === 'user' ? (
+                  <div className="max-w-[85%] sm:max-w-[75%] md:max-w-[70%] px-4 py-3 rounded-lg bg-gray-700 border-2 border-gray-500">
+                    <textarea
+                      value={editingContent}
+                      onChange={(e) => setEditingContent(e.target.value)}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault()
+                          handleResendMessage()
+                        }
+                      }}
+                      className="w-full bg-gray-600 text-white rounded-md px-3 py-2 text-sm sm:text-base font-normal leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-[#1E90FF]"
+                      rows={3}
+                      style={{ minHeight: '60px' }}
+                      placeholder="メッセージを編集してください..."
+                    />
+                    <div className="flex gap-2 mt-3">
+                      <button
+                        onClick={handleCancelEdit}
+                        disabled={isApiLoading}
+                        className="px-3 py-1 text-sm bg-gray-600 hover:bg-gray-500 text-white rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <XMarkIcon className="w-4 h-4 inline mr-1" />
+                        キャンセル
+                      </button>
+                      <button
+                        onClick={handleResendMessage}
+                        disabled={isApiLoading || !editingContent.trim()}
+                        className="px-3 py-1 text-sm bg-[#1E90FF] hover:bg-blue-600 text-white rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <PaperAirplaneIcon className="w-4 h-4 inline mr-1" />
+                        再送信
+                      </button>
+                    </div>
                   </div>
-                  <div className="text-xs mt-2 opacity-70 font-medium">
-                    {message.timestamp}
+                ) : (
+                  /* 通常のメッセージ */
+                  <div
+                    className={`max-w-[85%] sm:max-w-[75%] md:max-w-[70%] px-4 py-3 rounded-lg group relative ${
+                      message.role === 'user'
+                        ? 'bg-[#1E90FF] text-white'
+                        : 'bg-[#161B22] text-white border border-gray-700'
+                    }`}
+                  >
+                    <div className="whitespace-pre-wrap break-words text-sm sm:text-base font-normal leading-relaxed">
+                      {message.content}
+                    </div>
+                    <div className="flex justify-between items-center mt-2">
+                      <div className="text-xs opacity-70 font-medium">
+                        {message.timestamp}
+                      </div>
+                      {/* 編集ボタン（ユーザーメッセージのみ） */}
+                      {message.role === 'user' && (
+                        <button
+                          onClick={() => handleEditMessage(index, message.content)}
+                          disabled={isApiLoading}
+                          className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 p-1 hover:bg-blue-600 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          <PencilIcon className="w-3 h-3" />
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
-                {message.sender === 'user' && (
+                )}
+
+                {message.role === 'user' && (
                   <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center flex-shrink-0">
                     <UserIcon className="w-5 h-5 text-white" />
                   </div>
@@ -200,7 +303,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
             ))}
 
             {/* ローディング表示 */}
-            {isLoading && (
+            {isApiLoading && (
               <div className="flex gap-3 justify-start">
                 <div className="w-8 h-8 rounded-full bg-[#1E90FF] flex items-center justify-center flex-shrink-0">
                   <CpuChipIcon className="w-5 h-5 text-white" />
@@ -240,7 +343,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
           </div>
           <button
             onClick={handleSendMessage}
-            disabled={!inputMessage.trim() || isLoading}
+            disabled={!inputMessage.trim() || isApiLoading}
             className="p-2 text-[#1E90FF] hover:text-blue-400 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors"
           >
             <PaperAirplaneIcon className="w-5 h-5" />
