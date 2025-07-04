@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { PaperAirplaneIcon, PaperClipIcon, PencilIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { PaperAirplaneIcon, PaperClipIcon, PencilIcon, XMarkIcon, PhotoIcon } from '@heroicons/react/24/outline'
 import { UserIcon, CpuChipIcon } from '@heroicons/react/24/solid'
 import { useChatStore } from '../store/chat-store'
 
@@ -15,6 +15,14 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   const [editingMessageIndex, setEditingMessageIndex] = useState<number | null>(null)
   const [editingContent, setEditingContent] = useState('')
   const [isClient, setIsClient] = useState(false)
+  const [uploadedImage, setUploadedImage] = useState<{
+    file: File
+    base64: string
+    preview: string
+    mimeType: string
+  } | null>(null)
+  const [isDragOver, setIsDragOver] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   const {
     getCurrentSession,
@@ -31,6 +39,100 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     setIsClient(true)
   }, [])
 
+  // クリーンアップ処理
+  useEffect(() => {
+    return () => {
+      if (uploadedImage) {
+        URL.revokeObjectURL(uploadedImage.preview)
+      }
+    }
+  }, [uploadedImage])
+
+  // 画像ファイルをBase64に変換
+  const convertToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => {
+        const base64 = reader.result as string
+        // data:image/jpeg;base64, の部分を除去（API用）
+        const base64Data = base64.split(',')[1]
+        resolve(base64Data)
+      }
+      reader.onerror = reject
+      reader.readAsDataURL(file)
+    })
+  }
+
+  const convertToDataURL = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => {
+        const dataURL = reader.result as string
+        resolve(dataURL)
+      }
+      reader.onerror = reject
+      reader.readAsDataURL(file)
+    })
+  }
+
+  // 画像ファイルの処理
+  const handleImageUpload = async (file: File) => {
+    // 画像ファイルのみを許可
+    if (!file.type.startsWith('image/')) {
+      alert('画像ファイルのみアップロード可能です')
+      return
+    }
+
+    try {
+      const base64 = await convertToBase64(file)
+      const dataURL = await convertToDataURL(file)
+
+      setUploadedImage({
+        file,
+        base64,
+        preview: dataURL, // 完全なデータURLを使用
+        mimeType: file.type
+      })
+    } catch (error) {
+      console.error('画像の読み込みに失敗しました:', error)
+      alert('画像の読み込みに失敗しました')
+    }
+  }
+
+  // 画像削除
+  const handleImageRemove = () => {
+    setUploadedImage(null)
+  }
+
+  // ドラッグ＆ドロップハンドラー
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(true)
+  }
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(false)
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(false)
+
+    const files = e.dataTransfer.files
+    if (files.length > 0) {
+      handleImageUpload(files[0])
+    }
+  }
+
+  // ファイル選択（クリック）
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (files && files.length > 0) {
+      handleImageUpload(files[0])
+    }
+  }
+
   // chatIdが変更されたときの処理
   useEffect(() => {
     if (chatId && currentSession?.id !== chatId) {
@@ -44,15 +146,24 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
 
     const userMessage = {
       role: 'user' as const,
-      content: inputMessage
+      content: inputMessage,
+      imageBase64: uploadedImage?.base64,
+      imagePreview: uploadedImage?.preview
     }
 
     const currentMessage = inputMessage
+    const currentImageBase64 = uploadedImage?.base64
+    const currentImageMimeType = uploadedImage?.mimeType
     setInputMessage('')
     setIsApiLoading(true)
 
     // ユーザーメッセージを追加
     addMessage(currentSession.id, userMessage)
+
+    // 画像をクリア
+    if (uploadedImage) {
+      handleImageRemove()
+    }
 
     try {
       // 会話履歴をAPI用の形式に変換
@@ -61,6 +172,12 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         content: msg.content
       }))
 
+      console.log('API呼び出し開始:', {
+        message: currentMessage,
+        hasImage: !!currentImageBase64,
+        historyLength: conversationHistory.length
+      })
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -68,15 +185,25 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         },
         body: JSON.stringify({
           message: currentMessage,
-          conversationHistory
+          conversationHistory,
+          imageBase64: currentImageBase64,
+          imageMimeType: currentImageMimeType
         }),
+      })
+
+      console.log('API応答受信:', {
+        status: response.status,
+        ok: response.ok
       })
 
       const data = await response.json()
 
       if (!response.ok) {
+        console.error('API応答エラー:', data)
         throw new Error(data.error || 'APIエラーが発生しました')
       }
+
+      console.log('API応答成功:', data)
 
       // AIの応答を追加
       const aiMessage = {
@@ -129,8 +256,9 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
 
       // 編集後のメッセージまでの会話履歴を構築
       const editedMessages = currentSession.messages.slice(0, editingMessageIndex + 1)
+      const originalMessage = editedMessages[editingMessageIndex]
       editedMessages[editingMessageIndex] = {
-        ...editedMessages[editingMessageIndex],
+        ...originalMessage,
         content: editingContent.trim()
       }
 
@@ -145,10 +273,12 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          message: editingContent.trim(),
-          conversationHistory: conversationHistory.slice(0, -1) // 最後のメッセージは除く
-        }),
+                  body: JSON.stringify({
+            message: editingContent.trim(),
+            conversationHistory: conversationHistory.slice(0, -1), // 最後のメッセージは除く
+            imageBase64: originalMessage.imageBase64,
+            imageMimeType: 'image/jpeg' // 再送信時はデフォルト値
+          }),
       })
 
       const data = await response.json()
@@ -217,7 +347,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
           </div>
         ) : (
           <div className="space-y-6">
-            {currentSession.messages.map((message, index) => (
+                                    {currentSession.messages.map((message, index) => (
               <div
                 key={`${currentSession.id}-${index}`}
                 className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -273,6 +403,18 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
                         : 'bg-[#161B22] text-white border border-gray-700'
                     }`}
                   >
+                    {/* 画像表示（ユーザーメッセージで画像がある場合） */}
+                    {message.role === 'user' && message.imagePreview && (
+                      <div className="mb-3">
+                        <img
+                          src={message.imagePreview}
+                          alt="送信した画像"
+                          className="max-w-[200px] sm:max-w-[250px] max-h-24 sm:max-h-32 rounded-lg object-contain cursor-pointer hover:opacity-90 transition-opacity"
+                          onClick={() => setSelectedImage(message.imagePreview!)}
+                        />
+                      </div>
+                    )}
+
                     <div className="whitespace-pre-wrap break-words text-sm sm:text-base font-normal leading-relaxed">
                       {message.content}
                     </div>
@@ -280,8 +422,8 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
                       <div className="text-xs opacity-70 font-medium">
                         {message.timestamp}
                       </div>
-                      {/* 編集ボタン（ユーザーメッセージのみ） */}
-                      {message.role === 'user' && (
+                      {/* 編集ボタン（ユーザーメッセージのみ、画像なしの場合のみ） */}
+                      {message.role === 'user' && !message.imagePreview && (
                         <button
                           onClick={() => handleEditMessage(index, message.content)}
                           disabled={isApiLoading}
@@ -324,32 +466,102 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         )}
       </div>
 
-      {/* 入力エリア */}
+            {/* 入力エリア */}
       <div className="flex-shrink-0 border-t border-gray-700 p-4 bg-[#0D1117]">
-        <div className="flex gap-3 items-end">
-          <button className="p-2 text-gray-400 hover:text-gray-300 transition-colors hidden sm:block">
-            <PaperClipIcon className="w-5 h-5" />
-          </button>
-          <div className="flex-1 relative">
-            <textarea
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="メッセージを入力してください..."
-              className="w-full px-4 py-3 bg-[#161B22] border border-gray-600 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1E90FF] focus:border-transparent resize-none text-sm sm:text-base font-normal"
-              rows={1}
-              style={{ minHeight: '44px', maxHeight: '120px' }}
-            />
+        <div className="space-y-3">
+          {/* 画像プレビュー（アップロード後のみ表示） */}
+          {uploadedImage && (
+            <div className="relative inline-block">
+              <img
+                src={uploadedImage.preview}
+                alt="アップロード画像"
+                className="max-w-full max-h-32 rounded-lg object-contain"
+              />
+              <button
+                onClick={handleImageRemove}
+                className="absolute top-2 right-2 w-6 h-6 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white transition-colors"
+              >
+                <XMarkIcon className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+
+          {/* テキスト入力エリア */}
+          <div className="flex gap-3 items-end">
+            {/* ファイル選択ボタン */}
+            <div className="relative">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileSelect}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+              <button className="p-2 text-gray-400 hover:text-gray-300 transition-colors cursor-pointer">
+                <PaperClipIcon className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex-1 relative">
+              <textarea
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                placeholder="メッセージを入力してください..."
+                className={`w-full px-4 py-3 bg-[#161B22] border rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1E90FF] focus:border-transparent resize-none text-sm sm:text-base font-normal transition-colors ${
+                  isDragOver
+                    ? 'border-[#1E90FF] bg-blue-900/10'
+                    : 'border-gray-600'
+                }`}
+                rows={1}
+                style={{ minHeight: '44px', maxHeight: '120px' }}
+              />
+              {/* ドラッグオーバー時のオーバーレイ */}
+              {isDragOver && (
+                <div className="absolute inset-0 border-2 border-[#1E90FF] border-dashed rounded-lg bg-blue-900/20 flex items-center justify-center pointer-events-none">
+                  <div className="text-center">
+                    <PhotoIcon className="w-8 h-8 mx-auto text-[#1E90FF] mb-1" />
+                    <p className="text-sm text-[#1E90FF] font-medium">画像をドロップしてください</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={handleSendMessage}
+              disabled={!inputMessage.trim() || isApiLoading}
+              className="p-2 text-[#1E90FF] hover:text-blue-400 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors"
+            >
+              <PaperAirplaneIcon className="w-5 h-5" />
+            </button>
           </div>
-          <button
-            onClick={handleSendMessage}
-            disabled={!inputMessage.trim() || isApiLoading}
-            className="p-2 text-[#1E90FF] hover:text-blue-400 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors"
-          >
-            <PaperAirplaneIcon className="w-5 h-5" />
-          </button>
         </div>
       </div>
+
+      {/* 画像拡大モーダル */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-4xl max-h-full">
+            <img
+              src={selectedImage}
+              alt="拡大画像"
+              className="max-w-full max-h-full object-contain rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 w-8 h-8 bg-black bg-opacity-50 hover:bg-opacity-75 rounded-full flex items-center justify-center text-white transition-all"
+            >
+              <XMarkIcon className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

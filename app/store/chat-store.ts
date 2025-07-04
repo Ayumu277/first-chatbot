@@ -5,6 +5,8 @@ export interface ChatMessage {
   role: 'user' | 'assistant'
   content: string
   timestamp: string
+  imageBase64?: string
+  imagePreview?: string
 }
 
 export interface ChatSession {
@@ -166,7 +168,15 @@ export const useChatStore = create<ChatState>()(
     {
       name: 'chat-sessions', // localStorage key
       partialize: (state) => ({
-        sessions: state.sessions,
+        sessions: state.sessions.map(session => ({
+          ...session,
+          messages: session.messages.map(message => ({
+            ...message,
+            // 画像データはLocalStorageに保存しない
+            imageBase64: undefined,
+            imagePreview: undefined
+          }))
+        })),
         currentSessionId: state.currentSessionId
       })
     }

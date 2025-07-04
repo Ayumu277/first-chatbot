@@ -7,7 +7,7 @@ const openai = new OpenAI({
 
 export async function POST(request: NextRequest) {
   try {
-    const { message, conversationHistory = [] } = await request.json()
+    const { message, conversationHistory = [], imageBase64, imageMimeType } = await request.json()
 
     if (!message) {
       return NextResponse.json(
@@ -25,13 +25,21 @@ export async function POST(request: NextRequest) {
       ...conversationHistory,
       {
         role: 'user',
-        content: message
+                content: imageBase64 ? [
+          { type: 'text', text: message },
+          {
+            type: 'image_url',
+            image_url: {
+              url: `data:${imageMimeType || 'image/jpeg'};base64,${imageBase64}`
+            }
+          }
+        ] : message
       }
     ]
 
-    // OpenAI API呼び出し
+    // OpenAI API呼び出し（画像がある場合はGPT-4 Vision使用）
     const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: imageBase64 ? 'gpt-4o' : 'gpt-3.5-turbo',
       messages: messages as any,
       max_tokens: 1000,
       temperature: 0.7,
