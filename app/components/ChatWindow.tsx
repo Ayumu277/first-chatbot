@@ -62,30 +62,70 @@ const mockMessages: Record<string, Message[]> = {
 export default function ChatWindow({ chatId }: ChatWindowProps) {
   const [inputMessage, setInputMessage] = useState('')
   const [messages, setMessages] = useState<Message[]>(chatId ? mockMessages[chatId] || [] : [])
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSendMessage = () => {
-    if (!inputMessage.trim() || !chatId) return
+  const handleSendMessage = async () => {
+    if (!inputMessage.trim() || !chatId || isLoading) return
 
-    const newMessage: Message = {
+    const userMessage: Message = {
       id: `msg-${Date.now()}`,
       content: inputMessage,
       sender: 'user',
       timestamp: new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })
     }
 
-    setMessages([...messages, newMessage])
+    const currentMessage = inputMessage
+    setMessages(prev => [...prev, userMessage])
     setInputMessage('')
+    setIsLoading(true)
 
-    // AIの応答をシミュレート
-    setTimeout(() => {
+    try {
+      // 会話履歴をAPI用の形式に変換
+      const conversationHistory = messages.map(msg => ({
+        role: msg.sender === 'user' ? 'user' : 'assistant',
+        content: msg.content
+      }))
+
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: currentMessage,
+          conversationHistory
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'APIエラーが発生しました')
+      }
+
       const aiResponse: Message = {
         id: `msg-${Date.now()}-ai`,
-        content: 'これはAIの応答のダミーテキストです。実際のAI機能は後で実装します。',
+        content: data.message,
         sender: 'ai',
         timestamp: new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })
       }
+
       setMessages(prev => [...prev, aiResponse])
-    }, 1000)
+
+    } catch (error) {
+      console.error('Chat error:', error)
+
+      const errorMessage: Message = {
+        id: `msg-${Date.now()}-error`,
+        content: error instanceof Error ? error.message : 'エラーが発生しました。もう一度お試しください。',
+        sender: 'ai',
+        timestamp: new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })
+      }
+
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -137,7 +177,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
                     <CpuChipIcon className="w-5 h-5 text-white" />
                   </div>
                 )}
-                                  <div
+                <div
                   className={`max-w-[85%] sm:max-w-[75%] md:max-w-[70%] px-4 py-3 rounded-lg ${
                     message.sender === 'user'
                       ? 'bg-[#1E90FF] text-white'
@@ -158,6 +198,25 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
                 )}
               </div>
             ))}
+
+            {/* ローディング表示 */}
+            {isLoading && (
+              <div className="flex gap-3 justify-start">
+                <div className="w-8 h-8 rounded-full bg-[#1E90FF] flex items-center justify-center flex-shrink-0">
+                  <CpuChipIcon className="w-5 h-5 text-white" />
+                </div>
+                <div className="max-w-[85%] sm:max-w-[75%] md:max-w-[70%] px-4 py-3 rounded-lg bg-[#161B22] text-white border border-gray-700">
+                  <div className="flex items-center gap-2">
+                    <div className="flex space-x-1">
+                      <div className="w-2 h-2 bg-[#1E90FF] rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-[#1E90FF] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-[#1E90FF] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    </div>
+                    <span className="text-sm text-gray-300">AIが回答を生成中...</span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -181,7 +240,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
           </div>
           <button
             onClick={handleSendMessage}
-            disabled={!inputMessage.trim()}
+            disabled={!inputMessage.trim() || isLoading}
             className="p-2 text-[#1E90FF] hover:text-blue-400 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors"
           >
             <PaperAirplaneIcon className="w-5 h-5" />
