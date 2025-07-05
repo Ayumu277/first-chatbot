@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node test-server.js",
-    "start-next": "NODE_ENV=production next start -p 8080",
+    "start": "NODE_ENV=production next start -p 8080",
+    "start-test": "node test-server.js",
     "lint": "next lint",
     "postinstall": "prisma generate"
   },
