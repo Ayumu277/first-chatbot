@@ -6,12 +6,13 @@ const prisma = new PrismaClient()
 // DELETE: セッションを削除
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
+    const { sessionId } = await params
     await prisma.chatSession.delete({
       where: {
-        id: params.sessionId
+        id: sessionId
       }
     })
 
@@ -28,14 +29,15 @@ export async function DELETE(
 // PATCH: セッションのタイトルを更新
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
+    const { sessionId } = await params
     const { title } = await request.json()
 
     await prisma.chatSession.update({
       where: {
-        id: params.sessionId
+        id: sessionId
       },
       data: {
         title

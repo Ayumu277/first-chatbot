@@ -6,14 +6,15 @@ const prisma = new PrismaClient()
 // POST: セッションにメッセージを追加
 export async function POST(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> }
 ) {
   try {
+    const { sessionId } = await params
     const message = await request.json()
 
     await prisma.chatMessage.create({
       data: {
-        sessionId: params.sessionId,
+        sessionId: sessionId,
         role: message.role,
         content: message.content,
         imageBase64: message.imageBase64,
@@ -24,7 +25,7 @@ export async function POST(
     // セッションの更新日時を更新
     await prisma.chatSession.update({
       where: {
-        id: params.sessionId
+        id: sessionId
       },
       data: {
         updatedAt: new Date()
