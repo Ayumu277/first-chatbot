@@ -1,5 +1,25 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { PrismaClient } from '../generated/prisma'
+
+// Prismaクライアントのインスタンス
+let prisma: PrismaClient | null = null
+
+// サーバーサイドではPrismaクライアントを初期化しない
+if (typeof window === 'undefined') {
+  // サーバーサイド
+} else {
+  // クライアントサイド - Prismaクライアントは使用しない
+}
+
+export interface User {
+  id: string
+  name?: string | null
+  email?: string | null
+  image?: string | null
+  isGuest?: boolean
+  guestToken?: string | null
+}
 
 export interface ChatMessage {
   role: 'user' | 'assistant'
@@ -21,26 +41,70 @@ interface ChatState {
   sessions: ChatSession[]
   currentSessionId: string | null
   isLoading: boolean
+  currentUser: User | null
+  isGuest: boolean
 
   // Actions
-  createSession: () => string
+  createSession: () => Promise<string>
   selectSession: (sessionId: string) => void
-  deleteSession: (sessionId: string) => void
-  addMessage: (sessionId: string, message: Omit<ChatMessage, 'timestamp'>) => void
+  deleteSession: (sessionId: string) => Promise<void>
+  addMessage: (sessionId: string, message: Omit<ChatMessage, 'timestamp'>) => Promise<void>
   updateMessage: (sessionId: string, messageIndex: number, newContent: string) => void
-  updateSessionTitle: (sessionId: string, title: string) => void
+  updateSessionTitle: (sessionId: string, title: string) => Promise<void>
   getCurrentSession: () => ChatSession | null
   clearSessions: () => void
   setLoading: (loading: boolean) => void
+  loadSessions: () => Promise<void>
+  setUser: (user: User | null) => void
+  createGuestUser: () => Promise<User>
+  setGuest: (isGuest: boolean) => void
 }
 
 const generateSessionTitle = (firstMessage: string): string => {
-  // 最初のメッセージから適切なタイトルを生成
   const truncated = firstMessage.length > 30
     ? firstMessage.substring(0, 30) + '...'
     : firstMessage
 
   return truncated || '新しいチャット'
+}
+
+// データベースAPI呼び出し用の関数
+const dbApi = {
+  async createSession(title: string, userId: string): Promise<ChatSession> {
+    const response = await fetch('/api/chat-sessions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, userId })
+    })
+    return response.json()
+  },
+
+  async getSessions(userId: string): Promise<ChatSession[]> {
+    const response = await fetch(`/api/chat-sessions?userId=${userId}`)
+    return response.json()
+  },
+
+  async deleteSession(sessionId: string): Promise<void> {
+    await fetch(`/api/chat-sessions/${sessionId}`, {
+      method: 'DELETE'
+    })
+  },
+
+  async addMessage(sessionId: string, message: ChatMessage): Promise<void> {
+    await fetch(`/api/chat-sessions/${sessionId}/messages`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(message)
+    })
+  },
+
+  async updateSession(sessionId: string, title: string): Promise<void> {
+    await fetch(`/api/chat-sessions/${sessionId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title })
+    })
+  }
 }
 
 export const useChatStore = create<ChatState>()(
@@ -49,37 +113,74 @@ export const useChatStore = create<ChatState>()(
       sessions: [],
       currentSessionId: null,
       isLoading: false,
+      currentUser: null,
+      isGuest: false,
 
-      createSession: () => {
+                  createSession: async () => {
+        const state = get()
+        if (!state.currentUser) {
+          throw new Error('User not authenticated')
+        }
+
         const newSessionId = `session-${Date.now()}`
+        const title = '新しいチャット'
+
+        // データベース接続を試行する前に、ローカルセッションを作成
         const newSession: ChatSession = {
           id: newSessionId,
-          title: '新しいチャット',
+          title,
           messages: [],
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         }
 
-        set(state => ({
-          sessions: [newSession, ...state.sessions],
+        // まずローカルストレージに保存
+        set(prevState => ({
+          sessions: [newSession, ...prevState.sessions],
           currentSessionId: newSessionId
         }))
 
-        return newSessionId
+        // バックグラウンドでデータベースに保存を試行
+        try {
+          const dbSession = await dbApi.createSession(title, state.currentUser.id)
+          // データベースからのIDでローカルセッションを更新
+          set(prevState => ({
+            sessions: prevState.sessions.map(session =>
+              session.id === newSessionId
+                ? { ...session, id: dbSession.id }
+                : session
+            ),
+            currentSessionId: dbSession.id
+          }))
+          console.log('Session saved to database successfully')
+          return dbSession.id
+        } catch (error) {
+          console.error('Database create failed, using local storage only:', error)
+          return newSessionId
+        }
       },
 
       selectSession: (sessionId: string) => {
         set({ currentSessionId: sessionId })
       },
 
-      deleteSession: (sessionId: string) => {
+            deleteSession: async (sessionId: string) => {
+        // まずローカルストレージから削除
         set(state => ({
           sessions: state.sessions.filter(session => session.id !== sessionId),
           currentSessionId: state.currentSessionId === sessionId ? null : state.currentSessionId
         }))
+
+        // バックグラウンドでデータベースから削除を試行
+        try {
+          await dbApi.deleteSession(sessionId)
+          console.log('Session deleted from database successfully')
+        } catch (error) {
+          console.error('Database delete failed:', error)
+        }
       },
 
-            addMessage: (sessionId: string, message: Omit<ChatMessage, 'timestamp'>) => {
+      addMessage: async (sessionId: string, message: Omit<ChatMessage, 'timestamp'>) => {
         const timestamp = new Date().toLocaleTimeString('ja-JP', {
           hour: '2-digit',
           minute: '2-digit'
@@ -90,14 +191,14 @@ export const useChatStore = create<ChatState>()(
           timestamp
         }
 
+        // まずローカルストレージに保存
         set(state => ({
           sessions: state.sessions.map(session => {
             if (session.id === sessionId) {
-              const updatedMessages = [...session.messages, newMessage]
+              const updatedMessages = [...(session.messages || []), newMessage]
               let updatedTitle = session.title
 
-              // 最初のユーザーメッセージの場合、タイトルを自動生成
-              if (session.messages.length === 0 && message.role === 'user') {
+              if ((session.messages || []).length === 0 && message.role === 'user') {
                 updatedTitle = generateSessionTitle(message.content)
               }
 
@@ -111,6 +212,14 @@ export const useChatStore = create<ChatState>()(
             return session
           })
         }))
+
+        // バックグラウンドでデータベースに保存を試行
+        try {
+          await dbApi.addMessage(sessionId, newMessage)
+          console.log('Message saved to database successfully')
+        } catch (error) {
+          console.error('Database message save failed:', error)
+        }
       },
 
       updateMessage: (sessionId: string, messageIndex: number, newContent: string) => {
@@ -142,7 +251,8 @@ export const useChatStore = create<ChatState>()(
         }))
       },
 
-      updateSessionTitle: (sessionId: string, title: string) => {
+            updateSessionTitle: async (sessionId: string, title: string) => {
+        // まずローカルストレージを更新
         set(state => ({
           sessions: state.sessions.map(session =>
             session.id === sessionId
@@ -150,6 +260,14 @@ export const useChatStore = create<ChatState>()(
               : session
           )
         }))
+
+        // バックグラウンドでデータベースを更新
+        try {
+          await dbApi.updateSession(sessionId, title)
+          console.log('Session title updated in database successfully')
+        } catch (error) {
+          console.error('Database title update failed:', error)
+        }
       },
 
       getCurrentSession: () => {
@@ -163,16 +281,82 @@ export const useChatStore = create<ChatState>()(
 
       setLoading: (loading: boolean) => {
         set({ isLoading: loading })
+      },
+
+      loadSessions: async () => {
+        const state = get()
+        if (!state.currentUser) {
+          console.log('No user authenticated, skipping session load')
+          return
+        }
+
+        try {
+          const sessions = await dbApi.getSessions(state.currentUser.id)
+          // データベースからのセッションにmessages配列があることを確認
+          const validatedSessions = sessions.map(session => ({
+            ...session,
+            messages: session.messages || []
+          }))
+          // データベースからのデータでLocalStorageを上書き
+          set({ sessions: validatedSessions })
+          console.log('Sessions loaded from database:', validatedSessions.length)
+        } catch (error) {
+          console.error('Failed to load sessions from database:', error)
+        }
+      },
+
+      setUser: (user: User | null) => {
+        set({ currentUser: user })
+      },
+
+            createGuestUser: async () => {
+        try {
+          console.log('Storeでゲストユーザー作成を開始')
+          const response = await fetch('/api/users/guest', {
+            method: 'POST'
+          })
+          console.log('API応答のステータス:', response.status)
+
+          // レスポンスが正常なJSONかチェック
+          const contentType = response.headers.get('content-type')
+          if (!contentType || !contentType.includes('application/json')) {
+            const textResponse = await response.text()
+            console.error('JSONではないレスポンス:', textResponse)
+            throw new Error('サーバーからの応答が正しくありません')
+          }
+
+          const data = await response.json()
+          console.log('API応答のデータ:', data)
+
+          if (response.ok && data.success) {
+            console.log('ゲストユーザーをStoreに設定中:', data.user)
+            set({
+              currentUser: data.user,
+              isGuest: true
+            })
+            console.log('ゲストユーザーがStoreに設定されました')
+            return data.user
+          } else {
+            console.error('API応答でエラー:', data.error || 'Unknown error')
+            throw new Error(data.error || data.details || 'ゲストユーザーの作成に失敗しました')
+          }
+        } catch (error) {
+          console.error('Failed to create guest user:', error)
+          throw error
+        }
+      },
+
+      setGuest: (isGuest: boolean) => {
+        set({ isGuest })
       }
     }),
     {
-      name: 'chat-sessions', // localStorage key
+      name: 'chat-sessions',
       partialize: (state) => ({
         sessions: state.sessions.map(session => ({
           ...session,
-          messages: session.messages.map(message => ({
+          messages: (session.messages || []).map(message => ({
             ...message,
-            // 画像データはLocalStorageに保存しない
             imageBase64: undefined,
             imagePreview: undefined
           }))

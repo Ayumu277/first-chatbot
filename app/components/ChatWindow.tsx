@@ -158,7 +158,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     setIsApiLoading(true)
 
     // ユーザーメッセージを追加
-    addMessage(currentSession.id, userMessage)
+    await addMessage(currentSession.id, userMessage)
 
     // 画像をクリア
     if (uploadedImage) {
@@ -211,7 +211,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         content: data.message
       }
 
-      addMessage(currentSession.id, aiMessage)
+      await addMessage(currentSession.id, aiMessage)
 
     } catch (error) {
       console.error('Chat error:', error)
@@ -221,7 +221,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         content: error instanceof Error ? error.message : 'エラーが発生しました。もう一度お試しください。'
       }
 
-      addMessage(currentSession.id, errorMessage)
+      await addMessage(currentSession.id, errorMessage)
     } finally {
       setIsApiLoading(false)
     }
@@ -293,7 +293,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         content: data.message
       }
 
-      addMessage(currentSession.id, aiMessage)
+      await addMessage(currentSession.id, aiMessage)
 
       // 編集状態をリセット
       setEditingMessageIndex(null)
@@ -307,7 +307,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         content: error instanceof Error ? error.message : 'エラーが発生しました。もう一度お試しください。'
       }
 
-      addMessage(currentSession.id, errorMessage)
+      await addMessage(currentSession.id, errorMessage)
     } finally {
       setIsApiLoading(false)
     }
@@ -347,7 +347,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
           </div>
         ) : (
           <div className="space-y-6">
-                                    {currentSession.messages.map((message, index) => (
+            {currentSession.messages.map((message, index) => (
               <div
                 key={`${currentSession.id}-${index}`}
                 className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -419,8 +419,15 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
                       {message.content}
                     </div>
                     <div className="flex justify-between items-center mt-2">
-                      <div className="text-xs opacity-70 font-medium">
-                        {message.timestamp}
+                      <div className="flex items-center gap-2 text-xs opacity-70 font-medium">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          message.role === 'user'
+                            ? 'bg-blue-900 text-blue-200'
+                            : 'bg-green-900 text-green-200'
+                        }`}>
+                          {message.role === 'user' ? 'ユーザー' : 'AI'}
+                        </span>
+                        <span>{message.timestamp}</span>
                       </div>
                       {/* 編集ボタン（ユーザーメッセージのみ、画像なしの場合のみ） */}
                       {message.role === 'user' && !message.imagePreview && (
@@ -466,7 +473,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         )}
       </div>
 
-            {/* 入力エリア */}
+      {/* 入力エリア */}
       <div className="flex-shrink-0 border-t border-gray-700 p-4 bg-[#0D1117]">
         <div className="space-y-3">
           {/* 画像プレビュー（アップロード後のみ表示） */}

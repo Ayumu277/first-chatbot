@@ -30,8 +30,8 @@ export default function Sidebar({ selectedChatId, onChatSelect }: SidebarProps) 
   // サーバーサイドでは空の配列を表示
   const displaySessions = isClient ? sessions : []
 
-  const handleNewChat = () => {
-    const newSessionId = createSession()
+  const handleNewChat = async () => {
+    const newSessionId = await createSession()
     selectSession(newSessionId)
     onChatSelect(newSessionId)
   }
@@ -42,9 +42,9 @@ export default function Sidebar({ selectedChatId, onChatSelect }: SidebarProps) 
     setDropdownOpen(null)
   }
 
-  const handleDeleteChat = (sessionId: string, event: React.MouseEvent) => {
+  const handleDeleteChat = async (sessionId: string, event: React.MouseEvent) => {
     event.stopPropagation()
-    deleteSession(sessionId)
+    await deleteSession(sessionId)
     setDropdownOpen(null)
 
     // 削除されたチャットが選択されていた場合、選択を解除
@@ -70,7 +70,7 @@ export default function Sidebar({ selectedChatId, onChatSelect }: SidebarProps) 
 
     const getLastMessage = (sessionId: string) => {
     const session = displaySessions.find(s => s.id === sessionId)
-    if (!session || session.messages.length === 0) return ''
+    if (!session || !session.messages || session.messages.length === 0) return ''
 
     const lastMessage = session.messages[session.messages.length - 1]
     const truncated = lastMessage.content.length > 50
