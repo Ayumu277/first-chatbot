@@ -4,11 +4,8 @@ const nextConfig = {
   images: {
     domains: ['localhost'],
   },
-  output: 'standalone',
   experimental: {
-    serverActions: {
-      allowedOrigins: ['localhost', '*.azurewebsites.net'],
-    },
+    appDir: true,
   },
 }
 
