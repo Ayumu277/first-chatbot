@@ -117,4 +117,4 @@ Azure App Serviceにデプロイする場合：
 
 - OpenAI API キーは必ず `.env.local` ファイルに設定してください
 - 画像アップロードは現在Base64形式で処理されます
-- Azure SQL Database への接続設定が必要です
+- Azure SQL Database への接続設定が必要です# Updated #午後
