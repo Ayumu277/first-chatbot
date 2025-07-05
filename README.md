@@ -92,6 +92,27 @@ npm run dev
 4. スタイリングの実装
 5. デプロイ設定
 
+## デプロイ
+
+### Azure App Service
+
+このプロジェクトはAzure App Serviceにデプロイできます。
+
+Azure App Serviceにデプロイする場合：
+1. [Azure Portal](https://portal.azure.com)でApp Serviceを作成
+2. Runtime stack: Node.js 18 LTS
+3. GitHubリポジトリと連携
+4. 環境変数を設定：
+   - `OPENAI_API_KEY`: OpenAI APIキー
+   - `DATABASE_URL`: Azure SQL Databaseの接続文字列
+   - `NEXTAUTH_URL`: アプリのURL (https://your-app-name.azurewebsites.net)
+   - `NEXTAUTH_SECRET`: NextAuth.jsの秘密鍵
+5. デプロイ完了
+
+### Vercel
+
+このプロジェクトは[Vercel](https://vercel.com)にもデプロイできます。
+
 ## 注意事項
 
 - OpenAI API キーは必ず `.env.local` ファイルに設定してください
