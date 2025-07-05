@@ -1,16 +1,5 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { PrismaClient } from '../generated/prisma'
-
-// Prismaクライアントのインスタンス
-let prisma: PrismaClient | null = null
-
-// サーバーサイドではPrismaクライアントを初期化しない
-if (typeof window === 'undefined') {
-  // サーバーサイド
-} else {
-  // クライアントサイド - Prismaクライアントは使用しない
-}
 
 export interface User {
   id: string
