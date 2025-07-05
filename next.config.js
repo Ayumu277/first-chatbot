@@ -4,7 +4,9 @@ const nextConfig = {
   images: {
     domains: ['localhost'],
   },
-  serverExternalPackages: ['@prisma/client', 'prisma'],
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client', 'prisma'],
+  },
 }
 
 module.exports = nextConfig
