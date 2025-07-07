@@ -11,6 +11,8 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  AZURE_WEBAPP_NAME: chatbot-app-new
+  AZURE_RESOURCE_GROUP: chatbot-app-new_group
 
 jobs:
   build-and-push:
@@ -75,28 +77,40 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9E8B0094EC594A868B50FBCBF17ED2F8 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1BCD2E75C67346CD9DF4D936616543DD }}
 
+      - name: Check Azure App Service
+        run: |
+          echo "Checking if Azure App Service exists..."
+          if az webapp show --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} > /dev/null 2>&1; then
+            echo "✅ Azure App Service found"
+          else
+            echo "❌ Azure App Service not found. Please check the app name and resource group."
+            echo "Available web apps:"
+            az webapp list --query "[].{name:name, resourceGroup:resourceGroup, state:state}" --output table || true
+            exit 1
+          fi
+
       - name: Deploy to Azure Web App for Containers
         id: deploy-to-webapp
         run: |
-          RESOURCE_GROUP=$(az webapp show --name chatbot-app-new --query resourceGroup --output tsv)
+          echo "Deploying to Azure App Service..."
           az webapp config container set \
-            --name chatbot-app-new \
-            --resource-group $RESOURCE_GROUP \
+            --name ${{ env.AZURE_WEBAPP_NAME }} \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
             --docker-custom-image-name ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
             --docker-registry-server-url https://${{ env.REGISTRY }}
 
       - name: Set Azure App Service configuration
         run: |
-          RESOURCE_GROUP=$(az webapp show --name chatbot-app-new --query resourceGroup --output tsv)
+          echo "Setting Azure App Service configuration..."
           az webapp config appsettings set \
-            --name chatbot-app-new \
-            --resource-group $RESOURCE_GROUP \
+            --name ${{ env.AZURE_WEBAPP_NAME }} \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
             --settings WEBSITES_PORT=8080 NODE_ENV=production PORT=8080
 
       - name: Restart Azure App Service
         run: |
-          RESOURCE_GROUP=$(az webapp show --name chatbot-app-new --query resourceGroup --output tsv)
-          az webapp restart --name chatbot-app-new --resource-group $RESOURCE_GROUP
+          echo "Restarting Azure App Service..."
+          az webapp restart --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
 
   health-check:
     runs-on: ubuntu-latest
@@ -109,7 +123,7 @@ jobs:
 
       - name: Health check
         run: |
-          APP_URL="https://chatbot-app-new.azurewebsites.net"
+          APP_URL="https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net"
           echo "Checking health of: $APP_URL"
 
           # Retry mechanism for health check
@@ -136,7 +150,7 @@ jobs:
         run: |
           if [ ${{ job.status }} == 'success' ]; then
             echo "🚀 Deployment successful!"
-            echo "App URL: https://chatbot-app-new.azurewebsites.net"
+            echo "App URL: https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net"
           else
             echo "❌ Deployment failed!"
           fi
