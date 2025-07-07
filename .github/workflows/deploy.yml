@@ -124,6 +124,10 @@ jobs:
     needs: deploy
     if: github.ref == 'refs/heads/main'
 
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
       - name: Log in to Azure
         uses: azure/login@v2
