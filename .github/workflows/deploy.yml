@@ -11,7 +11,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  AZURE_WEBAPP_NAME: chatbot-app-new
+  AZURE_WEBAPP_NAME: chatbot-app-container
   AZURE_RESOURCE_GROUP: chatbot-app-new_group
 
 jobs:
