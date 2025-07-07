@@ -89,6 +89,13 @@ jobs:
             exit 1
           fi
 
+      - name: Get Azure App Service URL
+        id: get-url
+        run: |
+          APP_URL=$(az webapp show --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --query "defaultHostName" --output tsv)
+          echo "APP_URL=https://$APP_URL" >> $GITHUB_OUTPUT
+          echo "✅ App URL: https://$APP_URL"
+
       - name: Deploy to Azure Web App for Containers
         id: deploy-to-webapp
         run: |
@@ -118,12 +125,26 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
+      - name: Log in to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_973863C808424D3FB27129286CC79F80 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9E8B0094EC594A868B50FBCBF17ED2F8 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1BCD2E75C67346CD9DF4D936616543DD }}
+
+      - name: Get Azure App Service URL
+        id: get-url
+        run: |
+          APP_URL=$(az webapp show --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --query "defaultHostName" --output tsv)
+          echo "APP_URL=https://$APP_URL" >> $GITHUB_OUTPUT
+          echo "✅ App URL: https://$APP_URL"
+
       - name: Wait for deployment to complete
         run: sleep 60
 
       - name: Health check
         run: |
-          APP_URL="https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net"
+          APP_URL="${{ steps.get-url.outputs.APP_URL }}"
           echo "Checking health of: $APP_URL"
 
           # Retry mechanism for health check
@@ -148,9 +169,10 @@ jobs:
       - name: Notify deployment status
         if: always()
         run: |
+          APP_URL="${{ steps.get-url.outputs.APP_URL }}"
           if [ ${{ job.status }} == 'success' ]; then
             echo "🚀 Deployment successful!"
-            echo "App URL: https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net"
+            echo "App URL: $APP_URL"
           else
             echo "❌ Deployment failed!"
           fi
