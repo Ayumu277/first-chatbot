@@ -1,0 +1,558 @@
+2025-07-07T02:05:37.1909621Z    _____                               
+2025-07-07T02:05:37.1910203Z   /  _  \ __________ _________   ____  
+2025-07-07T02:05:37.1910230Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-07-07T02:05:37.1910246Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-07-07T02:05:37.1910260Z \____|__  /_____ \____/ |__|    \___  >
+2025-07-07T02:05:37.1910275Z         \/      \/                  \/ 
+2025-07-07T02:05:37.1910290Z A P P   S E R V I C E   O N   L I N U X
+2025-07-07T02:05:37.1910314Z 
+2025-07-07T02:05:37.1910331Z Documentation: http://aka.ms/webapp-linux
+2025-07-07T02:05:37.1910412Z NodeJS quickstart: https://aka.ms/node-qs
+2025-07-07T02:05:37.1910452Z NodeJS Version : v18.20.8
+2025-07-07T02:05:37.1910469Z Note: Any data outside '/home' is not persisted
+2025-07-07T02:05:37.1910481Z 
+2025-07-07T02:05:38.7016818Z Starting OpenBSD Secure Shell server: sshd.
+2025-07-07T02:05:38.8008321Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-07-07T02:05:38.8710297Z Updating certificates in /etc/ssl/certs...
+2025-07-07T02:05:50.4025568Z 2 added, 0 removed; done.
+2025-07-07T02:05:50.4108212Z Running hooks in /etc/ca-certificates/update.d...
+2025-07-07T02:05:50.4217964Z done.
+2025-07-07T02:05:50.4522905Z CA certificates copied and updated successfully.
+2025-07-07T02:05:51.1155776Z Starting periodic command scheduler: cron.
+2025-07-07T02:05:51.2383009Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-07-07T02:05:51.2655074Z Could not find operation ID in manifest. Generating an operation id...
+2025-07-07T02:05:51.2655497Z Build Operation ID: 5bc24637-b526-4b41-85db-334ffaaa2ddc
+2025-07-07T02:05:51.9223369Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-07-07T02:05:52.0407075Z Writing output script to '/opt/startup/startup.sh'
+2025-07-07T02:05:52.2137860Z Running #!/bin/sh
+2025-07-07T02:05:52.2138423Z 
+2025-07-07T02:05:52.2138458Z # Enter the source directory to make sure the script runs where the user expects
+2025-07-07T02:05:52.2138474Z cd "/home/site/wwwroot"
+2025-07-07T02:05:52.2138488Z 
+2025-07-07T02:05:52.2138510Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-07-07T02:05:52.2138523Z if [ -z "$PORT" ]; then
+2025-07-07T02:05:52.2138536Z 		export PORT=8080
+2025-07-07T02:05:52.2138618Z fi
+2025-07-07T02:05:52.2138631Z 
+2025-07-07T02:05:52.2138647Z echo Found tar.gz based node_modules.
+2025-07-07T02:05:52.2138664Z extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2025-07-07T02:05:52.2138679Z echo "Removing existing modules directory from root..."
+2025-07-07T02:05:52.2138694Z rm -fr /node_modules
+2025-07-07T02:05:52.2138708Z mkdir -p /node_modules
+2025-07-07T02:05:52.2138722Z echo Extracting modules...
+2025-07-07T02:05:52.2138740Z $extractionCommand
+2025-07-07T02:05:52.2138756Z export NODE_PATH="/node_modules":$NODE_PATH
+2025-07-07T02:05:52.2138785Z export PATH=/node_modules/.bin:$PATH
+2025-07-07T02:05:52.2138801Z if [ -d node_modules ]; then
+2025-07-07T02:05:52.2138817Z     mv -f node_modules _del_node_modules || true
+2025-07-07T02:05:52.2138831Z fi
+2025-07-07T02:05:52.2138843Z 
+2025-07-07T02:05:52.2138857Z if [ -d /node_modules ]; then
+2025-07-07T02:05:52.2138872Z     ln -sfn /node_modules ./node_modules 
+2025-07-07T02:05:52.2138885Z fi
+2025-07-07T02:05:52.2138897Z 
+2025-07-07T02:05:52.2138910Z echo "Done."
+2025-07-07T02:05:52.2415643Z PATH="$PATH:/home/site/wwwroot" npm start
+2025-07-07T02:05:52.2415951Z Found tar.gz based node_modules.
+2025-07-07T02:05:52.2415971Z Removing existing modules directory from root...
+2025-07-07T02:05:52.2724178Z Extracting modules...
+2025-07-07T02:06:38.9890088Z Done.
+2025-07-07T02:06:42.4213898Z npm info using npm@10.9.2
+2025-07-07T02:06:42.4222877Z npm info using node@v18.20.8
+2025-07-07T02:06:44.4969763Z 
+2025-07-07T02:06:44.4970437Z > ai-chatbot@0.1.0 start
+2025-07-07T02:06:44.4970459Z > next start -p $PORT
+2025-07-07T02:06:44.4970477Z 
+2025-07-07T02:06:47.0237728Z node:internal/modules/cjs/loader:1143
+2025-07-07T02:06:47.0238345Z   throw err;
+2025-07-07T02:06:47.0238366Z   ^
+2025-07-07T02:06:47.0238382Z 
+2025-07-07T02:06:47.0238400Z Error: Cannot find module '../server/require-hook'
+2025-07-07T02:06:47.0238413Z Require stack:
+2025-07-07T02:06:47.0238431Z - /node_modules/.bin/next
+2025-07-07T02:06:47.0238450Z     at Module._resolveFilename (node:internal/modules/cjs/loader:1140:15)
+2025-07-07T02:06:47.0238541Z     at Module._load (node:internal/modules/cjs/loader:981:27)
+2025-07-07T02:06:47.0238559Z     at Module.require (node:internal/modules/cjs/loader:1231:19)
+2025-07-07T02:06:47.0238579Z     at Module.patchedRequire [as require] (/agents/nodejs/node_modules/diagnostic-channel/dist/src/patchRequire.js:16:46)
+2025-07-07T02:06:47.0238593Z     at require (node:internal/modules/helpers:177:18)
+2025-07-07T02:06:47.0238609Z     at Object.<anonymous> (/node_modules/.bin/next:6:1)
+2025-07-07T02:06:47.0238625Z     at Module._compile (node:internal/modules/cjs/loader:1364:14)
+2025-07-07T02:06:47.0238642Z     at Module._extensions..js (node:internal/modules/cjs/loader:1422:10)
+2025-07-07T02:06:47.0238657Z     at Module.load (node:internal/modules/cjs/loader:1203:32)
+2025-07-07T02:06:47.0238673Z     at Module._load (node:internal/modules/cjs/loader:1019:12) {
+2025-07-07T02:06:47.0238708Z   code: 'MODULE_NOT_FOUND',
+2025-07-07T02:06:47.0238724Z   requireStack: [ '/node_modules/.bin/next' ]
+2025-07-07T02:06:47.0238737Z }
+2025-07-07T02:06:47.0248406Z 
+2025-07-07T02:06:47.0248651Z Node.js v18.20.8
+2025-07-07T02:06:47.0550305Z npm http fetch GET 200 https://registry.npmjs.org/npm 543ms
+2025-07-07T02:06:47.1563330Z npm notice
+2025-07-07T02:06:47.1563690Z npm notice New major version of npm available! 10.9.2 -> 11.4.2
+2025-07-07T02:06:47.1563713Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-07T02:06:47.1563733Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-07T02:06:47.1563815Z npm notice
+2025-07-07T02:14:29.3116375Z    _____                               
+2025-07-07T02:14:29.3116964Z   /  _  \ __________ _________   ____  
+2025-07-07T02:14:29.3117073Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-07-07T02:14:29.3117089Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-07-07T02:14:29.3117104Z \____|__  /_____ \____/ |__|    \___  >
+2025-07-07T02:14:29.3117118Z         \/      \/                  \/ 
+2025-07-07T02:14:29.3117132Z A P P   S E R V I C E   O N   L I N U X
+2025-07-07T02:14:29.3117152Z 
+2025-07-07T02:14:29.3117168Z Documentation: http://aka.ms/webapp-linux
+2025-07-07T02:14:29.3117183Z NodeJS quickstart: https://aka.ms/node-qs
+2025-07-07T02:14:29.3117198Z NodeJS Version : v18.20.8
+2025-07-07T02:14:29.3117213Z Note: Any data outside '/home' is not persisted
+2025-07-07T02:14:29.3117226Z 
+2025-07-07T02:14:30.8719688Z Starting OpenBSD Secure Shell server: sshd.
+2025-07-07T02:14:30.8860863Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-07-07T02:14:30.9527183Z Updating certificates in /etc/ssl/certs...
+2025-07-07T02:14:38.7197714Z 2 added, 0 removed; done.
+2025-07-07T02:14:38.7207044Z Running hooks in /etc/ca-certificates/update.d...
+2025-07-07T02:14:38.7691648Z done.
+2025-07-07T02:14:38.7716636Z CA certificates copied and updated successfully.
+2025-07-07T02:14:39.2544643Z Starting periodic command scheduler: cron.
+2025-07-07T02:14:39.7068387Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-07-07T02:14:39.7446568Z Could not find operation ID in manifest. Generating an operation id...
+2025-07-07T02:14:39.7446927Z Build Operation ID: bfbe9f8c-ee07-46d5-a447-0505b216f3bd
+2025-07-07T02:14:41.0614400Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-07-07T02:14:41.1737034Z Writing output script to '/opt/startup/startup.sh'
+2025-07-07T02:14:41.3863192Z Running #!/bin/sh
+2025-07-07T02:14:41.3863873Z 
+2025-07-07T02:14:41.3863905Z # Enter the source directory to make sure the script runs where the user expects
+2025-07-07T02:14:41.3863920Z cd "/home/site/wwwroot"
+2025-07-07T02:14:41.3863933Z 
+2025-07-07T02:14:41.3863950Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-07-07T02:14:41.3863964Z if [ -z "$PORT" ]; then
+2025-07-07T02:14:41.3863978Z 		export PORT=8080
+2025-07-07T02:14:41.3863991Z fi
+2025-07-07T02:14:41.3864003Z 
+2025-07-07T02:14:41.3864019Z echo Found tar.gz based node_modules.
+2025-07-07T02:14:41.3864036Z extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2025-07-07T02:14:41.3864065Z echo "Removing existing modules directory from root..."
+2025-07-07T02:14:41.3864080Z rm -fr /node_modules
+2025-07-07T02:14:41.3864094Z mkdir -p /node_modules
+2025-07-07T02:14:41.3864107Z echo Extracting modules...
+2025-07-07T02:14:41.3864122Z $extractionCommand
+2025-07-07T02:14:41.3864136Z export NODE_PATH="/node_modules":$NODE_PATH
+2025-07-07T02:14:41.3864155Z export PATH=/node_modules/.bin:$PATH
+2025-07-07T02:14:41.4137600Z if [ -d node_modules ]; then
+2025-07-07T02:14:41.4137904Z     mv -f node_modules _del_node_modules || true
+2025-07-07T02:14:41.4137932Z fi
+2025-07-07T02:14:41.4137948Z 
+2025-07-07T02:14:41.4138025Z if [ -d /node_modules ]; then
+2025-07-07T02:14:41.4138041Z     ln -sfn /node_modules ./node_modules 
+2025-07-07T02:14:41.4138054Z fi
+2025-07-07T02:14:41.4138067Z 
+2025-07-07T02:14:41.4138082Z echo "Done."
+2025-07-07T02:14:41.4138446Z PATH="$PATH:/home/site/wwwroot" npm start
+2025-07-07T02:14:41.4138466Z Found tar.gz based node_modules.
+2025-07-07T02:14:41.4138482Z Removing existing modules directory from root...
+2025-07-07T02:14:41.4559180Z Extracting modules...
+2025-07-07T02:15:18.8844147Z Done.
+2025-07-07T02:15:21.9866179Z npm info using npm@10.9.2
+2025-07-07T02:15:21.9880613Z npm info using node@v18.20.8
+2025-07-07T02:15:24.8195121Z 
+2025-07-07T02:15:24.8195751Z > ai-chatbot@0.1.0 start
+2025-07-07T02:15:24.8195776Z > next start -p $PORT
+2025-07-07T02:15:24.8195790Z 
+2025-07-07T02:15:29.7364937Z node:internal/modules/cjs/loader:1143
+2025-07-07T02:15:29.7365425Z   throw err;
+2025-07-07T02:15:29.7365445Z   ^
+2025-07-07T02:15:29.7365460Z 
+2025-07-07T02:15:29.7365476Z Error: Cannot find module '../server/require-hook'
+2025-07-07T02:15:29.7365491Z Require stack:
+2025-07-07T02:15:29.7365508Z - /node_modules/.bin/next
+2025-07-07T02:15:29.7365526Z     at Module._resolveFilename (node:internal/modules/cjs/loader:1140:15)
+2025-07-07T02:15:29.7365606Z     at Module._load (node:internal/modules/cjs/loader:981:27)
+2025-07-07T02:15:29.7365623Z     at Module.require (node:internal/modules/cjs/loader:1231:19)
+2025-07-07T02:15:29.7365642Z     at Module.patchedRequire [as require] (/agents/nodejs/node_modules/diagnostic-channel/dist/src/patchRequire.js:16:46)
+2025-07-07T02:15:29.7365657Z     at require (node:internal/modules/helpers:177:18)
+2025-07-07T02:15:29.7365672Z     at Object.<anonymous> (/node_modules/.bin/next:6:1)
+2025-07-07T02:15:29.7365688Z     at Module._compile (node:internal/modules/cjs/loader:1364:14)
+2025-07-07T02:15:29.7365705Z     at Module._extensions..js (node:internal/modules/cjs/loader:1422:10)
+2025-07-07T02:15:29.7365721Z     at Module.load (node:internal/modules/cjs/loader:1203:32)
+2025-07-07T02:15:29.7365736Z     at Module._load (node:internal/modules/cjs/loader:1019:12) {
+2025-07-07T02:15:29.7365771Z   code: 'MODULE_NOT_FOUND',
+2025-07-07T02:15:29.7365786Z   requireStack: [ '/node_modules/.bin/next' ]
+2025-07-07T02:15:29.7365799Z }
+2025-07-07T02:15:29.7651787Z 
+2025-07-07T02:15:29.7652142Z Node.js v18.20.8
+2025-07-07T02:15:29.7652174Z npm http fetch GET 200 https://registry.npmjs.org/npm 473ms
+2025-07-07T02:15:29.8352506Z npm notice
+2025-07-07T02:15:29.8352918Z npm notice New major version of npm available! 10.9.2 -> 11.4.2
+2025-07-07T02:15:29.8352940Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-07T02:15:29.8352957Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-07T02:15:29.8353038Z npm notice
+2025-07-07T02:35:40.2717429Z    _____                               
+2025-07-07T02:35:40.2723334Z   /  _  \ __________ _________   ____  
+2025-07-07T02:35:40.2723568Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-07-07T02:35:40.2723592Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-07-07T02:35:40.2723624Z \____|__  /_____ \____/ |__|    \___  >
+2025-07-07T02:35:40.2723665Z         \/      \/                  \/ 
+2025-07-07T02:35:40.2723691Z A P P   S E R V I C E   O N   L I N U X
+2025-07-07T02:35:40.2723721Z 
+2025-07-07T02:35:40.2723743Z Documentation: http://aka.ms/webapp-linux
+2025-07-07T02:35:40.2723766Z NodeJS quickstart: https://aka.ms/node-qs
+2025-07-07T02:35:40.2723791Z NodeJS Version : v18.20.8
+2025-07-07T02:35:40.2723832Z Note: Any data outside '/home' is not persisted
+2025-07-07T02:35:40.2723852Z 
+2025-07-07T02:35:41.6713121Z Starting OpenBSD Secure Shell server: sshd.
+2025-07-07T02:35:41.6918144Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-07-07T02:35:41.7504623Z Updating certificates in /etc/ssl/certs...
+2025-07-07T02:35:50.9136738Z 2 added, 0 removed; done.
+2025-07-07T02:35:50.9144635Z Running hooks in /etc/ca-certificates/update.d...
+2025-07-07T02:35:50.9352542Z done.
+2025-07-07T02:35:50.9635056Z CA certificates copied and updated successfully.
+2025-07-07T02:35:51.5378097Z Starting periodic command scheduler: cron.
+2025-07-07T02:35:52.3803458Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-07-07T02:35:52.4229901Z Could not find operation ID in manifest. Generating an operation id...
+2025-07-07T02:35:52.4230538Z Build Operation ID: b41f1931-40f3-43da-a418-78cfcb23f257
+2025-07-07T02:35:53.2668586Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-07-07T02:35:53.3713150Z Writing output script to '/opt/startup/startup.sh'
+2025-07-07T02:35:53.7446707Z Running #!/bin/sh
+2025-07-07T02:35:53.7450700Z 
+2025-07-07T02:35:53.7450803Z # Enter the source directory to make sure the script runs where the user expects
+2025-07-07T02:35:53.7450832Z cd "/home/site/wwwroot"
+2025-07-07T02:35:53.7450853Z 
+2025-07-07T02:35:53.7450877Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-07-07T02:35:53.7450902Z if [ -z "$PORT" ]; then
+2025-07-07T02:35:53.7450923Z 		export PORT=8080
+2025-07-07T02:35:53.7450967Z fi
+2025-07-07T02:35:53.7450987Z 
+2025-07-07T02:35:53.7451010Z echo Found tar.gz based node_modules.
+2025-07-07T02:35:53.7451034Z extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2025-07-07T02:35:53.7451058Z echo "Removing existing modules directory from root..."
+2025-07-07T02:35:53.7451078Z rm -fr /node_modules
+2025-07-07T02:35:53.7451099Z mkdir -p /node_modules
+2025-07-07T02:35:53.7451143Z echo Extracting modules...
+2025-07-07T02:35:53.7451165Z $extractionCommand
+2025-07-07T02:35:53.7451187Z export NODE_PATH="/node_modules":$NODE_PATH
+2025-07-07T02:35:53.7451229Z export PATH=/node_modules/.bin:$PATH
+2025-07-07T02:35:53.7451252Z if [ -d node_modules ]; then
+2025-07-07T02:35:53.7451274Z     mv -f node_modules _del_node_modules || true
+2025-07-07T02:35:53.7451311Z fi
+2025-07-07T02:35:53.7451331Z 
+2025-07-07T02:35:53.7451351Z if [ -d /node_modules ]; then
+2025-07-07T02:35:53.7451373Z     ln -sfn /node_modules ./node_modules 
+2025-07-07T02:35:53.7451392Z fi
+2025-07-07T02:35:53.7451411Z 
+2025-07-07T02:35:53.7451431Z echo "Done."
+2025-07-07T02:35:53.7451473Z PATH="$PATH:/home/site/wwwroot" npm start
+2025-07-07T02:35:53.7451494Z Found tar.gz based node_modules.
+2025-07-07T02:35:53.7451517Z Removing existing modules directory from root...
+2025-07-07T02:35:53.8551494Z Extracting modules...
+2025-07-07T02:36:43.3952281Z Done.
+2025-07-07T02:36:47.3802319Z npm info using npm@10.9.2
+2025-07-07T02:36:48.1267764Z npm info using node@v18.20.8
+2025-07-07T02:36:49.2577502Z 
+2025-07-07T02:36:49.2578105Z > ai-chatbot@0.1.0 start
+2025-07-07T02:36:49.2578138Z > next start -p $PORT
+2025-07-07T02:36:49.2578159Z 
+2025-07-07T02:36:51.9749368Z node:internal/modules/cjs/loader:1143
+2025-07-07T02:36:51.9750117Z   throw err;
+2025-07-07T02:36:51.9750163Z   ^
+2025-07-07T02:36:51.9750188Z 
+2025-07-07T02:36:51.9750214Z Error: Cannot find module '../server/require-hook'
+2025-07-07T02:36:51.9750241Z Require stack:
+2025-07-07T02:36:51.9750339Z - /node_modules/.bin/next
+2025-07-07T02:36:51.9750366Z     at Module._resolveFilename (node:internal/modules/cjs/loader:1140:15)
+2025-07-07T02:36:51.9750390Z     at Module._load (node:internal/modules/cjs/loader:981:27)
+2025-07-07T02:36:51.9750416Z     at Module.require (node:internal/modules/cjs/loader:1231:19)
+2025-07-07T02:36:51.9750443Z     at Module.patchedRequire [as require] (/agents/nodejs/node_modules/diagnostic-channel/dist/src/patchRequire.js:16:46)
+2025-07-07T02:36:51.9750490Z     at require (node:internal/modules/helpers:177:18)
+2025-07-07T02:36:51.9750516Z     at Object.<anonymous> (/node_modules/.bin/next:6:1)
+2025-07-07T02:36:51.9750540Z     at Module._compile (node:internal/modules/cjs/loader:1364:14)
+2025-07-07T02:36:51.9750563Z     at Module._extensions..js (node:internal/modules/cjs/loader:1422:10)
+2025-07-07T02:36:51.9750586Z     at Module.load (node:internal/modules/cjs/loader:1203:32)
+2025-07-07T02:36:51.9750609Z     at Module._load (node:internal/modules/cjs/loader:1019:12) {
+2025-07-07T02:36:51.9750651Z   code: 'MODULE_NOT_FOUND',
+2025-07-07T02:36:51.9750674Z   requireStack: [ '/node_modules/.bin/next' ]
+2025-07-07T02:36:51.9750695Z }
+2025-07-07T02:36:51.9752483Z 
+2025-07-07T02:36:51.9752539Z Node.js v18.20.8
+2025-07-07T02:36:52.0245321Z npm http fetch GET 200 https://registry.npmjs.org/npm 544ms
+2025-07-07T02:36:52.1540400Z npm notice
+2025-07-07T02:36:52.1744301Z npm notice New major version of npm available! 10.9.2 -> 11.4.2
+2025-07-07T02:36:52.1744405Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-07T02:36:52.1744430Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-07T02:36:52.1744460Z npm notice
+2025-07-07T02:37:34.8647225Z    _____                               
+2025-07-07T02:37:34.8648729Z   /  _  \ __________ _________   ____  
+2025-07-07T02:37:34.8648770Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-07-07T02:37:34.8648792Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-07-07T02:37:34.8648814Z \____|__  /_____ \____/ |__|    \___  >
+2025-07-07T02:37:34.8648841Z         \/      \/                  \/ 
+2025-07-07T02:37:34.8648886Z A P P   S E R V I C E   O N   L I N U X
+2025-07-07T02:37:34.8648911Z 
+2025-07-07T02:37:34.8648938Z Documentation: http://aka.ms/webapp-linux
+2025-07-07T02:37:34.8648963Z NodeJS quickstart: https://aka.ms/node-qs
+2025-07-07T02:37:34.8648985Z NodeJS Version : v18.20.8
+2025-07-07T02:37:34.8649007Z Note: Any data outside '/home' is not persisted
+2025-07-07T02:37:34.8649040Z 
+2025-07-07T02:37:39.4813634Z Starting OpenBSD Secure Shell server: sshd.
+2025-07-07T02:37:39.5693187Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-07-07T02:37:39.7212600Z Updating certificates in /etc/ssl/certs...
+2025-07-07T02:37:50.5612347Z 2 added, 0 removed; done.
+2025-07-07T02:37:50.5615474Z Running hooks in /etc/ca-certificates/update.d...
+2025-07-07T02:37:50.5726080Z done.
+2025-07-07T02:37:50.6013068Z CA certificates copied and updated successfully.
+2025-07-07T02:37:51.1336429Z Starting periodic command scheduler: cron.
+2025-07-07T02:37:51.7769858Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-07-07T02:37:51.8295949Z Could not find operation ID in manifest. Generating an operation id...
+2025-07-07T02:37:51.8601392Z Build Operation ID: ae06f3fd-1e21-4b40-a4b6-abb1c81849b7
+2025-07-07T02:37:53.1373755Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-07-07T02:37:53.2477730Z Writing output script to '/opt/startup/startup.sh'
+2025-07-07T02:37:53.4177905Z Running #!/bin/sh
+2025-07-07T02:37:53.4178704Z 
+2025-07-07T02:37:53.4178740Z # Enter the source directory to make sure the script runs where the user expects
+2025-07-07T02:37:53.4178779Z cd "/home/site/wwwroot"
+2025-07-07T02:37:53.4178798Z 
+2025-07-07T02:37:53.4178821Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-07-07T02:37:53.4178842Z if [ -z "$PORT" ]; then
+2025-07-07T02:37:53.4178862Z 		export PORT=8080
+2025-07-07T02:37:53.4178900Z fi
+2025-07-07T02:37:53.4178920Z 
+2025-07-07T02:37:53.4178941Z echo Found tar.gz based node_modules.
+2025-07-07T02:37:53.4178965Z extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2025-07-07T02:37:53.4178989Z echo "Removing existing modules directory from root..."
+2025-07-07T02:37:53.4179010Z rm -fr /node_modules
+2025-07-07T02:37:53.4179051Z mkdir -p /node_modules
+2025-07-07T02:37:53.4179073Z echo Extracting modules...
+2025-07-07T02:37:53.4179093Z $extractionCommand
+2025-07-07T02:37:53.4179129Z export NODE_PATH="/node_modules":$NODE_PATH
+2025-07-07T02:37:53.4179152Z export PATH=/node_modules/.bin:$PATH
+2025-07-07T02:37:53.4179179Z if [ -d node_modules ]; then
+2025-07-07T02:37:53.4179218Z     mv -f node_modules _del_node_modules || true
+2025-07-07T02:37:53.4179238Z fi
+2025-07-07T02:37:53.4179256Z 
+2025-07-07T02:37:53.4179276Z if [ -d /node_modules ]; then
+2025-07-07T02:37:53.4179298Z     ln -sfn /node_modules ./node_modules 
+2025-07-07T02:37:53.4179318Z fi
+2025-07-07T02:37:53.4179337Z 
+2025-07-07T02:37:53.4179357Z echo "Done."
+2025-07-07T02:37:53.4464323Z PATH="$PATH:/home/site/wwwroot" npm start
+2025-07-07T02:37:53.4464817Z Found tar.gz based node_modules.
+2025-07-07T02:37:53.4464851Z Removing existing modules directory from root...
+2025-07-07T02:37:53.5072715Z Extracting modules...
+2025-07-07T02:38:34.4831520Z Done.
+2025-07-07T02:38:37.9808054Z npm info using npm@10.9.2
+2025-07-07T02:38:37.9817932Z npm info using node@v18.20.8
+2025-07-07T02:38:39.5230079Z 
+2025-07-07T02:38:39.5230872Z > ai-chatbot@0.1.0 start
+2025-07-07T02:38:39.5230916Z > next start -p $PORT
+2025-07-07T02:38:39.5230938Z 
+2025-07-07T02:38:41.7979264Z node:internal/modules/cjs/loader:1143
+2025-07-07T02:38:41.7979959Z   throw err;
+2025-07-07T02:38:41.7980001Z   ^
+2025-07-07T02:38:41.7980026Z 
+2025-07-07T02:38:41.7980056Z Error: Cannot find module '../server/require-hook'
+2025-07-07T02:38:41.7980162Z Require stack:
+2025-07-07T02:38:41.7980185Z - /node_modules/.bin/next
+2025-07-07T02:38:41.7980213Z     at Module._resolveFilename (node:internal/modules/cjs/loader:1140:15)
+2025-07-07T02:38:41.7980238Z     at Module._load (node:internal/modules/cjs/loader:981:27)
+2025-07-07T02:38:41.7980262Z     at Module.require (node:internal/modules/cjs/loader:1231:19)
+2025-07-07T02:38:41.7980290Z     at Module.patchedRequire [as require] (/agents/nodejs/node_modules/diagnostic-channel/dist/src/patchRequire.js:16:46)
+2025-07-07T02:38:41.7980332Z     at require (node:internal/modules/helpers:177:18)
+2025-07-07T02:38:41.7980358Z     at Object.<anonymous> (/node_modules/.bin/next:6:1)
+2025-07-07T02:38:41.7980381Z     at Module._compile (node:internal/modules/cjs/loader:1364:14)
+2025-07-07T02:38:41.7980406Z     at Module._extensions..js (node:internal/modules/cjs/loader:1422:10)
+2025-07-07T02:38:41.7980431Z     at Module.load (node:internal/modules/cjs/loader:1203:32)
+2025-07-07T02:38:41.7980469Z     at Module._load (node:internal/modules/cjs/loader:1019:12) {
+2025-07-07T02:38:41.7980492Z   code: 'MODULE_NOT_FOUND',
+2025-07-07T02:38:41.7980515Z   requireStack: [ '/node_modules/.bin/next' ]
+2025-07-07T02:38:41.7980535Z }
+2025-07-07T02:38:41.7987828Z 
+2025-07-07T02:38:41.7987986Z Node.js v18.20.8
+2025-07-07T02:38:41.8274900Z npm http fetch GET 200 https://registry.npmjs.org/npm 413ms
+2025-07-07T02:38:41.8488420Z npm notice
+2025-07-07T02:38:41.8488938Z npm notice New major version of npm available! 10.9.2 -> 11.4.2
+2025-07-07T02:38:41.8488981Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-07T02:38:41.8489007Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-07T02:38:41.8489033Z npm notice
+2025-07-07T02:45:24.3239243Z    _____                               
+2025-07-07T02:45:24.3328789Z   /  _  \ __________ _________   ____  
+2025-07-07T02:45:24.3328818Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-07-07T02:45:24.3328833Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-07-07T02:45:24.3328848Z \____|__  /_____ \____/ |__|    \___  >
+2025-07-07T02:45:24.3328866Z         \/      \/                  \/ 
+2025-07-07T02:45:24.3328881Z A P P   S E R V I C E   O N   L I N U X
+2025-07-07T02:45:24.3328907Z 
+2025-07-07T02:45:24.3328923Z Documentation: http://aka.ms/webapp-linux
+2025-07-07T02:45:24.3328938Z NodeJS quickstart: https://aka.ms/node-qs
+2025-07-07T02:45:24.3329029Z NodeJS Version : v18.20.8
+2025-07-07T02:45:24.3329045Z Note: Any data outside '/home' is not persisted
+2025-07-07T02:45:24.3329059Z 
+2025-07-07T02:45:25.4405776Z Starting OpenBSD Secure Shell server: sshd.
+2025-07-07T02:45:25.4705640Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-07-07T02:45:25.5224479Z Updating certificates in /etc/ssl/certs...
+2025-07-07T02:45:34.1532644Z 2 added, 0 removed; done.
+2025-07-07T02:45:34.1802600Z Running hooks in /etc/ca-certificates/update.d...
+2025-07-07T02:45:34.1809050Z done.
+2025-07-07T02:45:34.1809241Z CA certificates copied and updated successfully.
+2025-07-07T02:45:34.4937524Z Starting periodic command scheduler: cron.
+2025-07-07T02:45:34.9872073Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-07-07T02:45:35.0263194Z Could not find operation ID in manifest. Generating an operation id...
+2025-07-07T02:45:35.0270109Z Build Operation ID: 2f508193-c2de-4311-a882-e661b915ac33
+2025-07-07T02:45:36.0510972Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-07-07T02:45:36.1540010Z Writing output script to '/opt/startup/startup.sh'
+2025-07-07T02:45:36.3434283Z Running #!/bin/sh
+2025-07-07T02:45:36.3434871Z 
+2025-07-07T02:45:36.3434900Z # Enter the source directory to make sure the script runs where the user expects
+2025-07-07T02:45:36.3434917Z cd "/home/site/wwwroot"
+2025-07-07T02:45:36.3434934Z 
+2025-07-07T02:45:36.3434951Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-07-07T02:45:36.3434964Z if [ -z "$PORT" ]; then
+2025-07-07T02:45:36.3434979Z 		export PORT=8080
+2025-07-07T02:45:36.3434992Z fi
+2025-07-07T02:45:36.3435006Z 
+2025-07-07T02:45:36.3435104Z echo Found tar.gz based node_modules.
+2025-07-07T02:45:36.3435122Z extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2025-07-07T02:45:36.3435138Z echo "Removing existing modules directory from root..."
+2025-07-07T02:45:36.3435152Z rm -fr /node_modules
+2025-07-07T02:45:36.3435166Z mkdir -p /node_modules
+2025-07-07T02:45:36.3435182Z echo Extracting modules...
+2025-07-07T02:45:36.3435196Z $extractionCommand
+2025-07-07T02:45:36.3435210Z export NODE_PATH="/node_modules":$NODE_PATH
+2025-07-07T02:45:36.3435226Z export PATH=/node_modules/.bin:$PATH
+2025-07-07T02:45:36.3435240Z if [ -d node_modules ]; then
+2025-07-07T02:45:36.3435256Z     mv -f node_modules _del_node_modules || true
+2025-07-07T02:45:36.3435284Z fi
+2025-07-07T02:45:36.3435297Z 
+2025-07-07T02:45:36.3435312Z if [ -d /node_modules ]; then
+2025-07-07T02:45:36.3435327Z     ln -sfn /node_modules ./node_modules 
+2025-07-07T02:45:36.3435339Z fi
+2025-07-07T02:45:36.3435351Z 
+2025-07-07T02:45:36.3435365Z echo "Done."
+2025-07-07T02:45:36.3628605Z PATH="$PATH:/home/site/wwwroot" npm start
+2025-07-07T02:45:36.3628932Z Found tar.gz based node_modules.
+2025-07-07T02:45:36.3628954Z Removing existing modules directory from root...
+2025-07-07T02:45:36.4340682Z Extracting modules...
+2025-07-07T02:46:17.5701806Z Done.
+2025-07-07T02:46:26.4227657Z npm info using npm@10.9.2
+2025-07-07T02:46:26.4429018Z npm info using node@v18.20.8
+2025-07-07T02:46:31.0083276Z npm http fetch GET 200 https://registry.npmjs.org/npm 595ms
+2025-07-07T02:46:31.9668078Z 
+2025-07-07T02:46:31.9848288Z > ai-chatbot@0.1.0 start
+2025-07-07T02:46:31.9856029Z > next start -p $PORT
+2025-07-07T02:46:31.9861462Z 
+2025-07-07T02:46:34.2005081Z node:internal/modules/cjs/loader:1143
+2025-07-07T02:46:34.2005604Z   throw err;
+2025-07-07T02:46:34.2005623Z   ^
+2025-07-07T02:46:34.2005641Z 
+2025-07-07T02:46:34.2005661Z Error: Cannot find module '../server/require-hook'
+2025-07-07T02:46:34.2005674Z Require stack:
+2025-07-07T02:46:34.2005690Z - /node_modules/.bin/next
+2025-07-07T02:46:34.2005714Z     at Module._resolveFilename (node:internal/modules/cjs/loader:1140:15)
+2025-07-07T02:46:34.2005731Z     at Module._load (node:internal/modules/cjs/loader:981:27)
+2025-07-07T02:46:34.2005823Z     at Module.require (node:internal/modules/cjs/loader:1231:19)
+2025-07-07T02:46:34.2005844Z     at Module.patchedRequire [as require] (/agents/nodejs/node_modules/diagnostic-channel/dist/src/patchRequire.js:16:46)
+2025-07-07T02:46:34.2005859Z     at require (node:internal/modules/helpers:177:18)
+2025-07-07T02:46:34.2005876Z     at Object.<anonymous> (/node_modules/.bin/next:6:1)
+2025-07-07T02:46:34.2005893Z     at Module._compile (node:internal/modules/cjs/loader:1364:14)
+2025-07-07T02:46:34.2005910Z     at Module._extensions..js (node:internal/modules/cjs/loader:1422:10)
+2025-07-07T02:46:34.2005931Z     at Module.load (node:internal/modules/cjs/loader:1203:32)
+2025-07-07T02:46:34.2005947Z     at Module._load (node:internal/modules/cjs/loader:1019:12) {
+2025-07-07T02:46:34.2005961Z   code: 'MODULE_NOT_FOUND',
+2025-07-07T02:46:34.2005976Z   requireStack: [ '/node_modules/.bin/next' ]
+2025-07-07T02:46:34.2006008Z }
+2025-07-07T02:46:34.2014818Z 
+2025-07-07T02:46:34.2015026Z Node.js v18.20.8
+2025-07-07T02:46:34.3212621Z npm notice
+2025-07-07T02:46:34.3212950Z npm notice New major version of npm available! 10.9.2 -> 11.4.2
+2025-07-07T02:46:34.3212975Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-07T02:46:34.3212993Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-07T02:46:34.3213007Z npm notice
+2025-07-07T03:06:19.1518980Z    _____                               
+2025-07-07T03:06:19.1589552Z   /  _  \ __________ _________   ____  
+2025-07-07T03:06:19.1589628Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-07-07T03:06:19.1589647Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-07-07T03:06:19.1589662Z \____|__  /_____ \____/ |__|    \___  >
+2025-07-07T03:06:19.1589676Z         \/      \/                  \/ 
+2025-07-07T03:06:19.1589691Z A P P   S E R V I C E   O N   L I N U X
+2025-07-07T03:06:19.1589804Z 
+2025-07-07T03:06:19.1589819Z Documentation: http://aka.ms/webapp-linux
+2025-07-07T03:06:19.1589834Z NodeJS quickstart: https://aka.ms/node-qs
+2025-07-07T03:06:19.1589849Z NodeJS Version : v18.20.8
+2025-07-07T03:06:19.1589865Z Note: Any data outside '/home' is not persisted
+2025-07-07T03:06:19.1589878Z 
+2025-07-07T03:06:21.3931755Z Starting OpenBSD Secure Shell server: sshd.
+2025-07-07T03:06:21.4050517Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-07-07T03:06:21.4532853Z Updating certificates in /etc/ssl/certs...
+2025-07-07T03:06:32.3307104Z 2 added, 0 removed; done.
+2025-07-07T03:06:32.3313978Z Running hooks in /etc/ca-certificates/update.d...
+2025-07-07T03:06:32.3402750Z done.
+2025-07-07T03:06:32.3697087Z CA certificates copied and updated successfully.
+2025-07-07T03:06:32.6729872Z Starting periodic command scheduler: cron.
+2025-07-07T03:06:32.9246732Z Found build manifest file at '/home/site/wwwroot/oryx-manifest.toml'. Deserializing it...
+2025-07-07T03:06:32.9350764Z Could not find operation ID in manifest. Generating an operation id...
+2025-07-07T03:06:32.9631054Z Build Operation ID: 45f4f47f-eb8e-48ee-a3b1-7663772ff305
+2025-07-07T03:06:33.8905943Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-07-07T03:06:34.0102910Z Writing output script to '/opt/startup/startup.sh'
+2025-07-07T03:06:34.2304753Z Running #!/bin/sh
+2025-07-07T03:06:34.2305283Z 
+2025-07-07T03:06:34.2305313Z # Enter the source directory to make sure the script runs where the user expects
+2025-07-07T03:06:34.2305329Z cd "/home/site/wwwroot"
+2025-07-07T03:06:34.2305341Z 
+2025-07-07T03:06:34.2305357Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-07-07T03:06:34.2305449Z if [ -z "$PORT" ]; then
+2025-07-07T03:06:34.2305465Z 		export PORT=8080
+2025-07-07T03:06:34.2305478Z fi
+2025-07-07T03:06:34.2305490Z 
+2025-07-07T03:06:34.2305507Z echo Found tar.gz based node_modules.
+2025-07-07T03:06:34.2305523Z extractionCommand="tar -xzf node_modules.tar.gz -C /node_modules"
+2025-07-07T03:06:34.2305539Z echo "Removing existing modules directory from root..."
+2025-07-07T03:06:34.2305553Z rm -fr /node_modules
+2025-07-07T03:06:34.2305567Z mkdir -p /node_modules
+2025-07-07T03:06:34.2305582Z echo Extracting modules...
+2025-07-07T03:06:34.2305595Z $extractionCommand
+2025-07-07T03:06:34.2305632Z export NODE_PATH="/node_modules":$NODE_PATH
+2025-07-07T03:06:34.2305648Z export PATH=/node_modules/.bin:$PATH
+2025-07-07T03:06:34.2305662Z if [ -d node_modules ]; then
+2025-07-07T03:06:34.2305679Z     mv -f node_modules _del_node_modules || true
+2025-07-07T03:06:34.2305691Z fi
+2025-07-07T03:06:34.2305703Z 
+2025-07-07T03:06:34.2305718Z if [ -d /node_modules ]; then
+2025-07-07T03:06:34.2305733Z     ln -sfn /node_modules ./node_modules 
+2025-07-07T03:06:34.2305745Z fi
+2025-07-07T03:06:34.2305758Z 
+2025-07-07T03:06:34.2305771Z echo "Done."
+2025-07-07T03:06:34.2317673Z PATH="$PATH:/home/site/wwwroot" npm start
+2025-07-07T03:06:34.2608499Z Found tar.gz based node_modules.
+2025-07-07T03:06:34.2730805Z Removing existing modules directory from root...
+2025-07-07T03:06:34.2812671Z Extracting modules...
+2025-07-07T03:07:16.4085634Z Done.
+2025-07-07T03:07:24.9561199Z npm info using npm@10.9.2
+2025-07-07T03:07:24.9561691Z npm info using node@v18.20.8
+2025-07-07T03:07:31.1513815Z 
+2025-07-07T03:07:31.1514476Z > ai-chatbot@0.1.0 start
+2025-07-07T03:07:31.1514495Z > next start -p $PORT
+2025-07-07T03:07:31.1514509Z 
+2025-07-07T03:07:37.1462269Z node:internal/modules/cjs/loader:1143
+2025-07-07T03:07:37.1462871Z   throw err;
+2025-07-07T03:07:37.1462898Z   ^
+2025-07-07T03:07:37.1462917Z 
+2025-07-07T03:07:37.1462933Z Error: Cannot find module '../server/require-hook'
+2025-07-07T03:07:37.1462947Z Require stack:
+2025-07-07T03:07:37.1462961Z - /node_modules/.bin/next
+2025-07-07T03:07:37.1462979Z     at Module._resolveFilename (node:internal/modules/cjs/loader:1140:15)
+2025-07-07T03:07:37.1463085Z     at Module._load (node:internal/modules/cjs/loader:981:27)
+2025-07-07T03:07:37.1463103Z     at Module.require (node:internal/modules/cjs/loader:1231:19)
+2025-07-07T03:07:37.1463122Z     at Module.patchedRequire [as require] (/agents/nodejs/node_modules/diagnostic-channel/dist/src/patchRequire.js:16:46)
+2025-07-07T03:07:37.1463138Z     at require (node:internal/modules/helpers:177:18)
+2025-07-07T03:07:37.1463154Z     at Object.<anonymous> (/node_modules/.bin/next:6:1)
+2025-07-07T03:07:37.1463174Z     at Module._compile (node:internal/modules/cjs/loader:1364:14)
+2025-07-07T03:07:37.1463191Z     at Module._extensions..js (node:internal/modules/cjs/loader:1422:10)
+2025-07-07T03:07:37.1463206Z     at Module.load (node:internal/modules/cjs/loader:1203:32)
+2025-07-07T03:07:37.1463222Z     at Module._load (node:internal/modules/cjs/loader:1019:12) {
+2025-07-07T03:07:37.1463237Z   code: 'MODULE_NOT_FOUND',
+2025-07-07T03:07:37.1463270Z   requireStack: [ '/node_modules/.bin/next' ]
+2025-07-07T03:07:37.1463284Z }
+2025-07-07T03:07:37.1553573Z 
+2025-07-07T03:07:37.1553895Z Node.js v18.20.8
+2025-07-07T03:07:37.1753853Z npm http fetch GET 200 https://registry.npmjs.org/npm 1037ms
+2025-07-07T03:07:37.2048160Z npm notice
+2025-07-07T03:07:37.2048641Z npm notice New major version of npm available! 10.9.2 -> 11.4.2
+2025-07-07T03:07:37.2048664Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-07T03:07:37.2048683Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-07T03:07:37.2048792Z npm notice

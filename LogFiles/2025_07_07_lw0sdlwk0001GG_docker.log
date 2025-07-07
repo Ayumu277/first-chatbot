@@ -1,0 +1,296 @@
+2025-07-07T02:05:32.1543415Z Container start method called.
+2025-07-07T02:05:32.1567627Z Establishing network.
+2025-07-07T02:05:32.1744524Z Pulling image: appsvc/node:18-lts_20250506.5.tuxprod.
+2025-07-07T02:05:33.1668300Z Container is starting.
+2025-07-07T02:05:33.1674316Z Establishing user namespace if not established already.
+2025-07-07T02:05:33.1680452Z Establishing network if not established already.
+2025-07-07T02:05:33.1763751Z Mounting volumes.
+2025-07-07T02:05:33.1872400Z Nested mountpoint 
+2025-07-07T02:05:33.2388389Z Nested mountpoint volatile/logs
+2025-07-07T02:05:33.2485229Z Nested mountpoint 
+2025-07-07T02:05:33.3280033Z Nested mountpoint 
+2025-07-07T02:05:33.3782696Z Nested mountpoint 
+2025-07-07T02:05:33.3895037Z Nested mountpoint 
+2025-07-07T02:05:33.4085260Z Nested mountpoint 
+2025-07-07T02:05:35.3504791Z Creating container.
+2025-07-07T02:05:35.3509556Z Creating pipes for streaming container io.
+2025-07-07T02:05:35.3523490Z Creating stdout named pipe at /podr/container/pipe/3ba2dcbb56c5_chatbot-app-new/stdout_816e8b86f50c45bea3ff858ad982e924.
+2025-07-07T02:05:35.3608782Z Successfully created stdout named pipe at: /podr/container/pipe/3ba2dcbb56c5_chatbot-app-new/stdout_816e8b86f50c45bea3ff858ad982e924.
+2025-07-07T02:05:35.3626387Z Opening named pipe /podr/container/pipe/3ba2dcbb56c5_chatbot-app-new/stdout_816e8b86f50c45bea3ff858ad982e924 for reading in non-blocking mode.
+2025-07-07T02:05:35.3706606Z Successfully opened named pipe: /podr/container/pipe/3ba2dcbb56c5_chatbot-app-new/stdout_816e8b86f50c45bea3ff858ad982e924.
+2025-07-07T02:05:35.3714642Z Successfully removed non-blocking flag from /podr/container/pipe/3ba2dcbb56c5_chatbot-app-new/stdout_816e8b86f50c45bea3ff858ad982e924.
+2025-07-07T02:05:35.3725398Z Creating stderr named pipe at /podr/container/pipe/3ba2dcbb56c5_chatbot-app-new/stderr_f3dcbac94a334c0195c2599166382675.
+2025-07-07T02:05:35.3807024Z Successfully created stderr named pipe at: /podr/container/pipe/3ba2dcbb56c5_chatbot-app-new/stderr_f3dcbac94a334c0195c2599166382675.
+2025-07-07T02:05:35.3812091Z Opening named pipe /podr/container/pipe/3ba2dcbb56c5_chatbot-app-new/stderr_f3dcbac94a334c0195c2599166382675 for reading in non-blocking mode.
+2025-07-07T02:05:35.3823025Z Successfully opened named pipe: /podr/container/pipe/3ba2dcbb56c5_chatbot-app-new/stderr_f3dcbac94a334c0195c2599166382675.
+2025-07-07T02:05:35.3825473Z Successfully removed non-blocking flag from /podr/container/pipe/3ba2dcbb56c5_chatbot-app-new/stderr_f3dcbac94a334c0195c2599166382675.
+2025-07-07T02:05:35.3827971Z Creating container with image: appsvc/node:18-lts_20250506.5.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/node:18-lts_20250506.5.tuxprod
+2025-07-07T02:05:36.1692994Z Starting container: 3ba2dcbb56c5_chatbot-app-new.
+2025-07-07T02:05:36.2621966Z Starting watchers and probes.
+2025-07-07T02:05:36.2770544Z Starting metrics collection.
+2025-07-07T02:05:36.2992858Z Container is running.
+2025-07-07T02:05:36.5793645Z Container start method finished after 4394 ms.
+2025-07-07T02:06:47.2848411Z Container has finished running with exit code: 1.
+2025-07-07T02:06:47.2873372Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T02:06:47.3279602Z Stop and delete container. Retry count = 0
+2025-07-07T02:06:47.3359543Z Stopping container: 3ba2dcbb56c5_chatbot-app-new.
+2025-07-07T02:06:47.4562517Z Deleting container: 3ba2dcbb56c5_chatbot-app-new. Retry count = 0
+2025-07-07T02:06:49.9753738Z Container spec TerminationMessagePolicy  path 
+2025-07-07T02:06:49.9843858Z Container is terminated. Total time elapsed: 2684 ms.
+2025-07-07T02:06:49.9856750Z Site container: chatbot-app-new terminated during site startup.
+2025-07-07T02:06:49.9935372Z Site startup probe failed after 73.3332246 seconds.
+2025-07-07T02:06:50.0833676Z Failed to start site. Revert by stopping site.
+2025-07-07T02:06:50.1003553Z Site: chatbot-app-new stopped.
+2025-07-07T02:06:50.9028284Z Site: chatbot-app-new will be blocked for 1 minutes till 07/07/2025 02:07:50
+2025-07-07T02:06:51.7168471Z Start site prohibitted because the site is being blocked.
+2025-07-07T02:07:50.9130457Z Site: chatbot-app-new is unblocked.
+2025-07-07T02:14:21.5124408Z Container start method called.
+2025-07-07T02:14:21.5135382Z Establishing network.
+2025-07-07T02:14:21.5162822Z Pulling image: appsvc/node:18-lts_20250506.5.tuxprod.
+2025-07-07T02:14:22.2986972Z Container is starting.
+2025-07-07T02:14:22.3054368Z Establishing user namespace if not established already.
+2025-07-07T02:14:22.3061417Z Establishing network if not established already.
+2025-07-07T02:14:22.3067122Z Mounting volumes.
+2025-07-07T02:14:22.3094129Z Nested mountpoint 
+2025-07-07T02:14:22.3451255Z Nested mountpoint volatile/logs
+2025-07-07T02:14:22.3559763Z Nested mountpoint 
+2025-07-07T02:14:22.3881213Z Nested mountpoint 
+2025-07-07T02:14:22.4151687Z Nested mountpoint 
+2025-07-07T02:14:22.4178290Z Nested mountpoint 
+2025-07-07T02:14:22.4571227Z Nested mountpoint 
+2025-07-07T02:14:26.0930030Z Creating container.
+2025-07-07T02:14:26.0932055Z Creating pipes for streaming container io.
+2025-07-07T02:14:26.0933022Z Creating stdout named pipe at /podr/container/pipe/4cfdef399538_chatbot-app-new/stdout_7ad4ca9fd6de4c9a87e614b36e5ddd8c.
+2025-07-07T02:14:26.1527545Z Successfully created stdout named pipe at: /podr/container/pipe/4cfdef399538_chatbot-app-new/stdout_7ad4ca9fd6de4c9a87e614b36e5ddd8c.
+2025-07-07T02:14:26.1529141Z Opening named pipe /podr/container/pipe/4cfdef399538_chatbot-app-new/stdout_7ad4ca9fd6de4c9a87e614b36e5ddd8c for reading in non-blocking mode.
+2025-07-07T02:14:26.1530205Z Successfully opened named pipe: /podr/container/pipe/4cfdef399538_chatbot-app-new/stdout_7ad4ca9fd6de4c9a87e614b36e5ddd8c.
+2025-07-07T02:14:26.1625423Z Successfully removed non-blocking flag from /podr/container/pipe/4cfdef399538_chatbot-app-new/stdout_7ad4ca9fd6de4c9a87e614b36e5ddd8c.
+2025-07-07T02:14:26.1634057Z Creating stderr named pipe at /podr/container/pipe/4cfdef399538_chatbot-app-new/stderr_97477dfb2e624d6581498fe5d114cf26.
+2025-07-07T02:14:26.1641270Z Successfully created stderr named pipe at: /podr/container/pipe/4cfdef399538_chatbot-app-new/stderr_97477dfb2e624d6581498fe5d114cf26.
+2025-07-07T02:14:26.1649422Z Opening named pipe /podr/container/pipe/4cfdef399538_chatbot-app-new/stderr_97477dfb2e624d6581498fe5d114cf26 for reading in non-blocking mode.
+2025-07-07T02:14:26.1655437Z Successfully opened named pipe: /podr/container/pipe/4cfdef399538_chatbot-app-new/stderr_97477dfb2e624d6581498fe5d114cf26.
+2025-07-07T02:14:26.1743224Z Successfully removed non-blocking flag from /podr/container/pipe/4cfdef399538_chatbot-app-new/stderr_97477dfb2e624d6581498fe5d114cf26.
+2025-07-07T02:14:26.1757127Z Creating container with image: appsvc/node:18-lts_20250506.5.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/node:18-lts_20250506.5.tuxprod
+2025-07-07T02:14:27.4373819Z Container get mounts received unexpected exception.
+2025-07-07T02:14:27.4445340Z Container get mounts received unexpected exception.
+2025-07-07T02:14:28.3327909Z Starting container: 4cfdef399538_chatbot-app-new.
+2025-07-07T02:14:28.4654625Z Starting watchers and probes.
+2025-07-07T02:14:28.4833276Z Starting metrics collection.
+2025-07-07T02:14:28.5130347Z Container is running.
+2025-07-07T02:14:28.6611516Z Container start method finished after 7147 ms.
+2025-07-07T02:15:30.0578659Z Container has finished running with exit code: 1.
+2025-07-07T02:15:30.0656289Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T02:15:30.0939805Z Stop and delete container. Retry count = 0
+2025-07-07T02:15:30.0976722Z Stopping container: 4cfdef399538_chatbot-app-new.
+2025-07-07T02:15:30.2083469Z Deleting container: 4cfdef399538_chatbot-app-new. Retry count = 0
+2025-07-07T02:15:33.3774365Z Container spec TerminationMessagePolicy  path 
+2025-07-07T02:15:33.3858794Z Container is terminated. Total time elapsed: 3313 ms.
+2025-07-07T02:15:33.3872510Z Site container: chatbot-app-new terminated during site startup.
+2025-07-07T02:15:33.3912269Z Site startup probe failed after 64.6876063 seconds.
+2025-07-07T02:15:33.4738308Z Failed to start site. Revert by stopping site.
+2025-07-07T02:15:33.4915112Z Site: chatbot-app-new stopped.
+2025-07-07T02:35:35.5895798Z Container start method called.
+2025-07-07T02:35:35.5904006Z Establishing network.
+2025-07-07T02:35:35.5967042Z Pulling image: appsvc/node:18-lts_20250506.5.tuxprod.
+2025-07-07T02:35:36.9168406Z Container is starting.
+2025-07-07T02:35:36.9242330Z Establishing user namespace if not established already.
+2025-07-07T02:35:36.9247286Z Establishing network if not established already.
+2025-07-07T02:35:36.9251389Z Mounting volumes.
+2025-07-07T02:35:36.9255342Z Nested mountpoint 
+2025-07-07T02:35:36.9370613Z Nested mountpoint volatile/logs
+2025-07-07T02:35:37.0153178Z Nested mountpoint 
+2025-07-07T02:35:37.0271006Z Nested mountpoint 
+2025-07-07T02:35:37.0277052Z Nested mountpoint 
+2025-07-07T02:35:37.0475149Z Nested mountpoint 
+2025-07-07T02:35:37.0760140Z Nested mountpoint 
+2025-07-07T02:35:38.3629028Z Creating container.
+2025-07-07T02:35:38.3638490Z Creating pipes for streaming container io.
+2025-07-07T02:35:38.4329708Z Creating stdout named pipe at /podr/container/pipe/1e7a042bb25d_chatbot-app-new/stdout_7043319c0cf44ab684375c07322aefd0.
+2025-07-07T02:35:38.4342589Z Successfully created stdout named pipe at: /podr/container/pipe/1e7a042bb25d_chatbot-app-new/stdout_7043319c0cf44ab684375c07322aefd0.
+2025-07-07T02:35:38.4347227Z Opening named pipe /podr/container/pipe/1e7a042bb25d_chatbot-app-new/stdout_7043319c0cf44ab684375c07322aefd0 for reading in non-blocking mode.
+2025-07-07T02:35:38.4351291Z Successfully opened named pipe: /podr/container/pipe/1e7a042bb25d_chatbot-app-new/stdout_7043319c0cf44ab684375c07322aefd0.
+2025-07-07T02:35:38.4355276Z Successfully removed non-blocking flag from /podr/container/pipe/1e7a042bb25d_chatbot-app-new/stdout_7043319c0cf44ab684375c07322aefd0.
+2025-07-07T02:35:38.4446556Z Creating stderr named pipe at /podr/container/pipe/1e7a042bb25d_chatbot-app-new/stderr_92bd7bab4edb48578509d110129f8584.
+2025-07-07T02:35:38.4452580Z Successfully created stderr named pipe at: /podr/container/pipe/1e7a042bb25d_chatbot-app-new/stderr_92bd7bab4edb48578509d110129f8584.
+2025-07-07T02:35:38.4456525Z Opening named pipe /podr/container/pipe/1e7a042bb25d_chatbot-app-new/stderr_92bd7bab4edb48578509d110129f8584 for reading in non-blocking mode.
+2025-07-07T02:35:38.4460447Z Successfully opened named pipe: /podr/container/pipe/1e7a042bb25d_chatbot-app-new/stderr_92bd7bab4edb48578509d110129f8584.
+2025-07-07T02:35:38.4638495Z Successfully removed non-blocking flag from /podr/container/pipe/1e7a042bb25d_chatbot-app-new/stderr_92bd7bab4edb48578509d110129f8584.
+2025-07-07T02:35:38.4646437Z Creating container with image: appsvc/node:18-lts_20250506.5.tuxprod from registry: 10.1.0.5:13209 and fully qualified image name: 10.1.0.5:13209/appsvc/node:18-lts_20250506.5.tuxprod
+2025-07-07T02:35:39.6190213Z Starting container: 1e7a042bb25d_chatbot-app-new.
+2025-07-07T02:35:39.7690499Z Starting watchers and probes.
+2025-07-07T02:35:39.7696124Z Starting metrics collection.
+2025-07-07T02:35:39.7706233Z Container is running.
+2025-07-07T02:35:40.0411844Z Container start method finished after 4450 ms.
+2025-07-07T02:36:52.3277776Z Container has finished running with exit code: 1.
+2025-07-07T02:36:52.3279161Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T02:36:52.3450011Z Stop and delete container. Retry count = 0
+2025-07-07T02:36:52.3458939Z Stopping container: 1e7a042bb25d_chatbot-app-new.
+2025-07-07T02:36:52.4391368Z Deleting container: 1e7a042bb25d_chatbot-app-new. Retry count = 0
+2025-07-07T02:36:55.0467416Z Container spec TerminationMessagePolicy  path 
+2025-07-07T02:36:55.0474828Z Container is terminated. Total time elapsed: 2718 ms.
+2025-07-07T02:36:55.0479138Z Site container: chatbot-app-new terminated during site startup.
+2025-07-07T02:36:55.0488002Z Site startup probe failed after 74.9481196 seconds.
+2025-07-07T02:36:55.1583945Z Failed to start site. Revert by stopping site.
+2025-07-07T02:36:55.1599152Z Site: chatbot-app-new stopped.
+2025-07-07T02:37:19.7945703Z Container start method called.
+2025-07-07T02:37:19.7949658Z Establishing network.
+2025-07-07T02:37:19.7955834Z Pulling image: appsvc/node:18-lts_20250506.5.tuxprod.
+2025-07-07T02:37:22.5101078Z Container is starting.
+2025-07-07T02:37:22.5102246Z Establishing user namespace if not established already.
+2025-07-07T02:37:22.5103415Z Establishing network if not established already.
+2025-07-07T02:37:22.5104802Z Mounting volumes.
+2025-07-07T02:37:22.5106337Z Nested mountpoint 
+2025-07-07T02:37:22.7120236Z Nested mountpoint volatile/logs
+2025-07-07T02:37:22.8226869Z Nested mountpoint 
+2025-07-07T02:37:22.8829893Z Nested mountpoint 
+2025-07-07T02:37:22.8932163Z Nested mountpoint 
+2025-07-07T02:37:22.9638891Z Nested mountpoint 
+2025-07-07T02:37:22.9826244Z Nested mountpoint 
+2025-07-07T02:37:31.8272947Z Creating container.
+2025-07-07T02:37:31.8274189Z Creating pipes for streaming container io.
+2025-07-07T02:37:31.8275200Z Creating stdout named pipe at /podr/container/pipe/0b75cb4dc3a6_chatbot-app-new/stdout_a5b83fa0407d4149b1298ed25355dca7.
+2025-07-07T02:37:31.8277578Z Successfully created stdout named pipe at: /podr/container/pipe/0b75cb4dc3a6_chatbot-app-new/stdout_a5b83fa0407d4149b1298ed25355dca7.
+2025-07-07T02:37:31.8278722Z Opening named pipe /podr/container/pipe/0b75cb4dc3a6_chatbot-app-new/stdout_a5b83fa0407d4149b1298ed25355dca7 for reading in non-blocking mode.
+2025-07-07T02:37:31.8280157Z Successfully opened named pipe: /podr/container/pipe/0b75cb4dc3a6_chatbot-app-new/stdout_a5b83fa0407d4149b1298ed25355dca7.
+2025-07-07T02:37:31.8852578Z Successfully removed non-blocking flag from /podr/container/pipe/0b75cb4dc3a6_chatbot-app-new/stdout_a5b83fa0407d4149b1298ed25355dca7.
+2025-07-07T02:37:31.8876806Z Creating stderr named pipe at /podr/container/pipe/0b75cb4dc3a6_chatbot-app-new/stderr_ba045e4e24824b24915f4144ed85e3a1.
+2025-07-07T02:37:31.9056191Z Successfully created stderr named pipe at: /podr/container/pipe/0b75cb4dc3a6_chatbot-app-new/stderr_ba045e4e24824b24915f4144ed85e3a1.
+2025-07-07T02:37:31.9284067Z Opening named pipe /podr/container/pipe/0b75cb4dc3a6_chatbot-app-new/stderr_ba045e4e24824b24915f4144ed85e3a1 for reading in non-blocking mode.
+2025-07-07T02:37:32.0681435Z Successfully opened named pipe: /podr/container/pipe/0b75cb4dc3a6_chatbot-app-new/stderr_ba045e4e24824b24915f4144ed85e3a1.
+2025-07-07T02:37:32.0759833Z Successfully removed non-blocking flag from /podr/container/pipe/0b75cb4dc3a6_chatbot-app-new/stderr_ba045e4e24824b24915f4144ed85e3a1.
+2025-07-07T02:37:32.0769303Z Creating container with image: appsvc/node:18-lts_20250506.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:18-lts_20250506.5.tuxprod
+2025-07-07T02:37:33.8692100Z Starting container: 0b75cb4dc3a6_chatbot-app-new.
+2025-07-07T02:37:34.2606462Z Starting watchers and probes.
+2025-07-07T02:37:34.2617146Z Starting metrics collection.
+2025-07-07T02:37:34.2706079Z Container is running.
+2025-07-07T02:37:34.7021215Z Container start method finished after 14867 ms.
+2025-07-07T02:38:42.0385978Z Container has finished running with exit code: 1.
+2025-07-07T02:38:42.0399874Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T02:38:42.0493865Z Stop and delete container. Retry count = 0
+2025-07-07T02:38:42.0505295Z Stopping container: 0b75cb4dc3a6_chatbot-app-new.
+2025-07-07T02:38:42.1395927Z Deleting container: 0b75cb4dc3a6_chatbot-app-new. Retry count = 0
+2025-07-07T02:38:44.6088062Z Container spec TerminationMessagePolicy  path 
+2025-07-07T02:38:44.6105391Z Container is terminated. Total time elapsed: 2562 ms.
+2025-07-07T02:38:44.6209359Z Site container: chatbot-app-new terminated during site startup.
+2025-07-07T02:38:44.6289090Z Site startup probe failed after 69.7636812 seconds.
+2025-07-07T02:38:44.6700409Z Failed to start site. Revert by stopping site.
+2025-07-07T02:38:44.6793069Z Site: chatbot-app-new stopped.
+2025-07-07T02:45:20.6315263Z Container start method called.
+2025-07-07T02:45:20.6328335Z Establishing network.
+2025-07-07T02:45:20.6334017Z Pulling image: appsvc/node:18-lts_20250506.5.tuxprod.
+2025-07-07T02:45:21.5187141Z Container is starting.
+2025-07-07T02:45:21.5195082Z Establishing user namespace if not established already.
+2025-07-07T02:45:21.5203462Z Establishing network if not established already.
+2025-07-07T02:45:21.5209467Z Mounting volumes.
+2025-07-07T02:45:21.5282286Z Nested mountpoint 
+2025-07-07T02:45:21.5390138Z Nested mountpoint volatile/logs
+2025-07-07T02:45:21.5605374Z Nested mountpoint 
+2025-07-07T02:45:21.5783686Z Nested mountpoint 
+2025-07-07T02:45:21.5802962Z Nested mountpoint 
+2025-07-07T02:45:21.6099649Z Nested mountpoint 
+2025-07-07T02:45:21.6915415Z Nested mountpoint 
+2025-07-07T02:45:23.0794592Z Creating container.
+2025-07-07T02:45:23.0874851Z Creating pipes for streaming container io.
+2025-07-07T02:45:23.1069154Z Creating stdout named pipe at /podr/container/pipe/ec54b0225c11_chatbot-app-new/stdout_be021c552f964fcb9da744175d02d8b4.
+2025-07-07T02:45:23.1156148Z Successfully created stdout named pipe at: /podr/container/pipe/ec54b0225c11_chatbot-app-new/stdout_be021c552f964fcb9da744175d02d8b4.
+2025-07-07T02:45:23.1164582Z Opening named pipe /podr/container/pipe/ec54b0225c11_chatbot-app-new/stdout_be021c552f964fcb9da744175d02d8b4 for reading in non-blocking mode.
+2025-07-07T02:45:23.1170257Z Successfully opened named pipe: /podr/container/pipe/ec54b0225c11_chatbot-app-new/stdout_be021c552f964fcb9da744175d02d8b4.
+2025-07-07T02:45:23.1176015Z Successfully removed non-blocking flag from /podr/container/pipe/ec54b0225c11_chatbot-app-new/stdout_be021c552f964fcb9da744175d02d8b4.
+2025-07-07T02:45:23.1181129Z Creating stderr named pipe at /podr/container/pipe/ec54b0225c11_chatbot-app-new/stderr_790ba4c215814e448f5dcf164916cb82.
+2025-07-07T02:45:23.1379572Z Successfully created stderr named pipe at: /podr/container/pipe/ec54b0225c11_chatbot-app-new/stderr_790ba4c215814e448f5dcf164916cb82.
+2025-07-07T02:45:23.1467225Z Opening named pipe /podr/container/pipe/ec54b0225c11_chatbot-app-new/stderr_790ba4c215814e448f5dcf164916cb82 for reading in non-blocking mode.
+2025-07-07T02:45:23.1481957Z Successfully opened named pipe: /podr/container/pipe/ec54b0225c11_chatbot-app-new/stderr_790ba4c215814e448f5dcf164916cb82.
+2025-07-07T02:45:23.1573324Z Successfully removed non-blocking flag from /podr/container/pipe/ec54b0225c11_chatbot-app-new/stderr_790ba4c215814e448f5dcf164916cb82.
+2025-07-07T02:45:23.1582009Z Creating container with image: appsvc/node:18-lts_20250506.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:18-lts_20250506.5.tuxprod
+2025-07-07T02:45:23.8445179Z Starting container: ec54b0225c11_chatbot-app-new.
+2025-07-07T02:45:23.9612771Z Starting watchers and probes.
+2025-07-07T02:45:23.9618467Z Starting metrics collection.
+2025-07-07T02:45:23.9621015Z Container is running.
+2025-07-07T02:45:24.2006757Z Container start method finished after 3561 ms.
+2025-07-07T02:46:34.5349085Z Container has finished running with exit code: 1.
+2025-07-07T02:46:34.5355222Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T02:46:34.5673484Z Stop and delete container. Retry count = 0
+2025-07-07T02:46:34.5742341Z Stopping container: ec54b0225c11_chatbot-app-new.
+2025-07-07T02:46:34.6976731Z Deleting container: ec54b0225c11_chatbot-app-new. Retry count = 0
+2025-07-07T02:46:38.0575739Z Container spec TerminationMessagePolicy  path 
+2025-07-07T02:46:38.0698119Z Container is terminated. Total time elapsed: 3525 ms.
+2025-07-07T02:46:38.0761600Z Site container: chatbot-app-new terminated during site startup.
+2025-07-07T02:46:38.0858544Z Site startup probe failed after 73.8537846 seconds.
+2025-07-07T02:46:38.1282045Z Failed to start site. Revert by stopping site.
+2025-07-07T02:46:38.1481348Z Site: chatbot-app-new stopped.
+2025-07-07T02:46:38.7410317Z Site: chatbot-app-new will be blocked for 1 minutes till 07/07/2025 02:47:38
+2025-07-07T02:46:39.3257418Z Start site prohibitted because the site is being blocked.
+2025-07-07T02:47:38.7425112Z Site: chatbot-app-new is unblocked.
+2025-07-07T03:06:14.0402730Z Container start method called.
+2025-07-07T03:06:14.0424133Z Establishing network.
+2025-07-07T03:06:14.0699275Z Pulling image: appsvc/node:18-lts_20250506.5.tuxprod.
+2025-07-07T03:06:14.7207382Z Container is starting.
+2025-07-07T03:06:14.7219722Z Establishing user namespace if not established already.
+2025-07-07T03:06:14.7285362Z Establishing network if not established already.
+2025-07-07T03:06:14.7290935Z Mounting volumes.
+2025-07-07T03:06:14.7378376Z Nested mountpoint 
+2025-07-07T03:06:14.7963048Z Nested mountpoint volatile/logs
+2025-07-07T03:06:14.8098632Z Nested mountpoint 
+2025-07-07T03:06:14.8428635Z Nested mountpoint 
+2025-07-07T03:06:14.8801418Z Nested mountpoint 
+2025-07-07T03:06:14.9117330Z Nested mountpoint 
+2025-07-07T03:06:14.9436049Z Nested mountpoint 
+2025-07-07T03:06:16.6833698Z Creating container.
+2025-07-07T03:06:16.6851083Z Creating pipes for streaming container io.
+2025-07-07T03:06:16.6863461Z Creating stdout named pipe at /podr/container/pipe/86cb6f37a26c_chatbot-app-new/stdout_f0a06e67ff8444f7bdea7a79502ab204.
+2025-07-07T03:06:16.6944042Z Successfully created stdout named pipe at: /podr/container/pipe/86cb6f37a26c_chatbot-app-new/stdout_f0a06e67ff8444f7bdea7a79502ab204.
+2025-07-07T03:06:16.6957602Z Opening named pipe /podr/container/pipe/86cb6f37a26c_chatbot-app-new/stdout_f0a06e67ff8444f7bdea7a79502ab204 for reading in non-blocking mode.
+2025-07-07T03:06:16.6967324Z Successfully opened named pipe: /podr/container/pipe/86cb6f37a26c_chatbot-app-new/stdout_f0a06e67ff8444f7bdea7a79502ab204.
+2025-07-07T03:06:16.7051965Z Successfully removed non-blocking flag from /podr/container/pipe/86cb6f37a26c_chatbot-app-new/stdout_f0a06e67ff8444f7bdea7a79502ab204.
+2025-07-07T03:06:16.7060890Z Creating stderr named pipe at /podr/container/pipe/86cb6f37a26c_chatbot-app-new/stderr_daba08e8fc7d4894bf056428f9296a57.
+2025-07-07T03:06:16.7070120Z Successfully created stderr named pipe at: /podr/container/pipe/86cb6f37a26c_chatbot-app-new/stderr_daba08e8fc7d4894bf056428f9296a57.
+2025-07-07T03:06:16.7145719Z Opening named pipe /podr/container/pipe/86cb6f37a26c_chatbot-app-new/stderr_daba08e8fc7d4894bf056428f9296a57 for reading in non-blocking mode.
+2025-07-07T03:06:16.7152715Z Successfully opened named pipe: /podr/container/pipe/86cb6f37a26c_chatbot-app-new/stderr_daba08e8fc7d4894bf056428f9296a57.
+2025-07-07T03:06:16.7158752Z Successfully removed non-blocking flag from /podr/container/pipe/86cb6f37a26c_chatbot-app-new/stderr_daba08e8fc7d4894bf056428f9296a57.
+2025-07-07T03:06:16.7166414Z Creating container with image: appsvc/node:18-lts_20250506.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:18-lts_20250506.5.tuxprod
+2025-07-07T03:06:18.2652980Z Starting container: 86cb6f37a26c_chatbot-app-new.
+2025-07-07T03:06:18.4067116Z Starting watchers and probes.
+2025-07-07T03:06:18.4169913Z Starting metrics collection.
+2025-07-07T03:06:18.4365247Z Container is running.
+2025-07-07T03:06:18.6584804Z Container start method finished after 4617 ms.
+2025-07-07T03:07:37.3414935Z Container has finished running with exit code: 1.
+2025-07-07T03:07:37.3434420Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T03:07:37.3611206Z Stop and delete container. Retry count = 0
+2025-07-07T03:07:37.3720032Z Stopping container: 86cb6f37a26c_chatbot-app-new.
+2025-07-07T03:07:37.5517791Z Deleting container: 86cb6f37a26c_chatbot-app-new. Retry count = 0
+2025-07-07T03:07:40.1286263Z Container spec TerminationMessagePolicy  path 
+2025-07-07T03:07:40.1313051Z Container is terminated. Total time elapsed: 2786 ms.
+2025-07-07T03:07:40.1390580Z Site container: chatbot-app-new terminated during site startup.
+2025-07-07T03:07:40.1413269Z Site startup probe failed after 81.4006874 seconds.
+2025-07-07T03:07:40.2104355Z Failed to start site. Revert by stopping site.
+2025-07-07T03:07:40.2334889Z Site: chatbot-app-new stopped.
+2025-07-07T04:06:36.7262776Z Container start method called.
+2025-07-07T04:06:36.7360995Z Establishing network.
+2025-07-07T04:06:36.7439542Z Pulling image: ghcr.io/Ayumu277/first-chatbot:latest.
+2025-07-07T04:06:39.8121210Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-07T04:06:39.8129570Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T04:06:39.8136015Z Container spec TerminationMessagePolicy  path 
+2025-07-07T04:06:39.8141159Z Container is terminated. Total time elapsed: 0 ms.
+2025-07-07T04:06:39.8214656Z Site container: chatbot-app-new terminated during site startup.
+2025-07-07T04:06:39.8430423Z Failed to start site. Revert by stopping site.
+2025-07-07T04:06:39.8533455Z Site: chatbot-app-new stopped.
+2025-07-07T04:08:29.3506395Z Container start method called.
+2025-07-07T04:08:29.3507440Z Establishing network.
+2025-07-07T04:08:29.4302581Z Pulling image: ghcr.io/Ayumu277/first-chatbot:latest.
+2025-07-07T04:08:32.5712130Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-07T04:08:32.5800209Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T04:08:32.5810080Z Container spec TerminationMessagePolicy  path 
+2025-07-07T04:08:32.5817231Z Container is terminated. Total time elapsed: 0 ms.
+2025-07-07T04:08:32.5892605Z Site container: chatbot-app-new terminated during site startup.
+2025-07-07T04:08:32.6416251Z Failed to start site. Revert by stopping site.
+2025-07-07T04:08:32.6434290Z Site: chatbot-app-new stopped.
+2025-07-07T04:09:38.6647386Z Container start method called.
+2025-07-07T04:09:38.6751802Z Establishing network.
+2025-07-07T04:09:38.6755074Z Pulling image: ghcr.io/Ayumu277/first-chatbot:latest.
+2025-07-07T04:09:42.2019526Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-07T04:09:42.2113274Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T04:09:42.2125183Z Container spec TerminationMessagePolicy  path 
+2025-07-07T04:09:42.2205011Z Container is terminated. Total time elapsed: 7 ms.
+2025-07-07T04:09:42.2210977Z Site container: chatbot-app-new terminated during site startup.
+2025-07-07T04:09:42.2501418Z Failed to start site. Revert by stopping site.
+2025-07-07T04:09:42.2518604Z Site: chatbot-app-new stopped.

@@ -1,0 +1,11 @@
+<step title="Incoming Request" date="2025-07-05T09:55:20.604" instance="1e8efd" url="/api/deployments/latest?deployer=OneDeploy&amp;time=2025-07-05_09-54-07Z" method="GET" type="request" pid="768,1,15" Host="chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_a0df8406eba08ee99bc38a6d5057acdb099dc770371e38ab0add4e46d3f0b63d" Authorization="Bea..." Content-Type="application/json; charset=utf-8" Cookie="ARRAffinity=1e8efd81b4645970fd27ae231faa7a976d2adeebc5d7764486e814ccf9926957;Path=/;HttpOnly;Secure;Domain=chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net; ARRAffinitySameSite=1e8efd81b4645970fd27ae231faa7a976d2adeebc5d7764486e814ccf9926957;Path=/;HttpOnly;SameSite=None;Secure;Domain=chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net" Content-Length="0" X-ARR-LOG-ID="7f82c00a-661a-456e-a1df-30c396733f04" CLIENT-IP="52.234.41.208:60353" X-SITE-DEPLOYMENT-ID="chatbot-app-new" WAS-DEFAULT-HOSTNAME="chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest?deployer=OneDeploy&amp;time=2025-07-05_09-54-07Z" X-Client-IP="52.234.41.208" X-Client-Port="60353" >
+  <step title="Cleanup Xml Logs" date="2025-07-05T09:55:20.622" >
+    <step title="Cleanup Infos" date="2025-07-05T09:55:20.657" totalFiles="352" totalCleanup="192" /><!-- duration: 5ms -->
+  </step><!-- duration: 45ms -->
+  <step title="DeploymentService.GetResult" date="2025-07-05T09:55:20.684" >
+    <step title="DeploymentService.GetLatestDeployment" date="2025-07-05T09:55:20.689" >
+      <step title="DeploymentManager.GetResults" date="2025-07-05T09:55:20.702" /><!-- duration: 807ms -->
+    </step><!-- duration: 860ms -->
+  </step><!-- duration: 876ms -->
+  <step title="Outgoing response" date="2025-07-05T09:55:21.574" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 6ms -->
+</step><!-- duration: 984ms -->

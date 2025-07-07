@@ -1,0 +1,25 @@
+<step title="BackgroundTrace" date="2025-07-05T10:44:21.178" instance="1e8efd" url="/api/publish" method="POST" >
+  <step title="Cleanup Xml Logs" date="2025-07-05T10:44:21.184" >
+    <step title="Cleanup Infos" date="2025-07-05T10:44:21.205" totalFiles="470" totalCleanup="310" /><!-- duration: 6ms -->
+  </step><!-- duration: 32ms -->
+  <step title="Creating temporary deployment - FetchDeploymentManager" date="2025-07-05T10:44:21.351" /><!-- duration: 6ms -->
+  <step title="Creating temporary deployment" date="2025-07-05T10:44:21.370" /><!-- duration: 84ms -->
+  <step title="Performing fetch based deployment" date="2025-07-05T10:44:21.518" >
+    <step title="Cleaning up temp folders from previous zip deployments and extracting pushed zip file /tmp/zipdeploy/09db31c1-3883-4a04-bf78-e8439a0d4ab0.zip (469.51 MB) to /tmp/zipdeploy/extracted" date="2025-07-05T10:44:23.022" >
+      <step title="ChmodRecursive Process exited with total time taken in ms: 54" date="2025-07-05T10:45:19.518" /><!-- duration: 14ms -->
+    </step><!-- duration: 56535ms -->
+    <step title="Deployment timer started" date="2025-07-05T10:45:21.585" >
+      <step title="DeploymentManager.Deploy(id:085fbc4a-8c33-4210-a944-e7c42120b364)" date="2025-07-05T10:45:21.600" >
+        <step title="Collecting changeset information" date="2025-07-05T10:45:21.630" /><!-- duration: 188ms -->
+        <step title="Updating submodules" date="2025-07-05T10:45:21.863" /><!-- duration: 1134ms -->
+        <step title="Determining deployment builder" date="2025-07-05T10:45:23.236" >
+          <step title="Builder is OneDeployBuilder" date="2025-07-05T10:45:23.264" /><!-- duration: 5ms -->
+        </step><!-- duration: 41ms -->
+        <step title="PreDeployment: context.CleanOutputPath False" date="2025-07-05T10:45:23.343" >
+          <step title="PreDeployment: context.OutputPath /home/site/wwwroot" date="2025-07-05T10:45:23.485" >
+            <step title="Building" date="2025-07-05T10:45:23.630" >
+              <step title="Executing external process" date="2025-07-05T10:45:24.264" type="process" path="starter.sh" arguments="/opt/Kudu/Scripts/absoluteTar.sh /tmp/zipdeploy/extracted/node_modules /tmp/zipdeploy/extracted/node_modules.tar.gz" >
+                <step title="Cpu: gzip(1163,42.720s)+sh(1162,0.000s)+tar(1161,1.720s)+absoluteTar.sh(1160,0.020s)=total(44.460s)" date="2025-07-05T10:46:24.806" /><!-- duration: 59ms -->
+                <step title="starter.sh: no io activity for 60s, prev-cpu=-1.000s, current-cpu=44.460s" date="2025-07-05T10:46:24.894" /><!-- duration: 19ms -->
+                <step title="Cpu: gzip(1163,55.080s)+sh(1162,0.000s)+tar(1161,2.110s)+absoluteTar.sh(1160,0.020s)=total(57.210s)" date="2025-07-05T10:47:25.152" /><!-- duration: 30ms -->
+                <step title="starter.sh: no io activity for 121s, prev-cpu=44.460s, current-cpu=57.210s" date="2025-07-05T10:47:25.979" /><!-- duration: 131ms -->

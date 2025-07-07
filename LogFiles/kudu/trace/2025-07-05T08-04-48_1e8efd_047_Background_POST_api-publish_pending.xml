@@ -1,0 +1,37 @@
+<step title="BackgroundTrace" date="2025-07-05T08:04:48.520" instance="1e8efd" url="/api/publish" method="POST" >
+  <step title="Cleanup Xml Logs" date="2025-07-05T08:04:48.536" /><!-- duration: 14ms -->
+  <step title="Creating temporary deployment - FetchDeploymentManager" date="2025-07-05T08:04:48.654" /><!-- duration: 6ms -->
+  <step title="Creating temporary deployment" date="2025-07-05T08:04:48.666" /><!-- duration: 119ms -->
+  <step title="Performing fetch based deployment" date="2025-07-05T08:04:48.855" >
+    <step title="Cleaning up temp folders from previous zip deployments and extracting pushed zip file /tmp/zipdeploy/de6205f6-b7dc-499b-be5e-835639d67d7b.zip (315.76 MB) to /tmp/zipdeploy/extracted" date="2025-07-05T08:04:50.013" >
+      <step title="ChmodRecursive Process exited with total time taken in ms: 466" date="2025-07-05T08:05:27.249" /><!-- duration: 17ms -->
+    </step><!-- duration: 37450ms -->
+    <step title="Deployment timer started" date="2025-07-05T08:05:29.485" >
+      <step title="DeploymentManager.Deploy(id:97399c9a-0a42-47a2-83ad-2f6d34849af2)" date="2025-07-05T08:05:29.504" >
+        <step title="Collecting changeset information" date="2025-07-05T08:05:29.565" /><!-- duration: 208ms -->
+        <step title="Updating submodules" date="2025-07-05T08:05:29.785" /><!-- duration: 1125ms -->
+        <step title="Determining deployment builder" date="2025-07-05T08:05:31.148" >
+          <step title="Builder is OneDeployBuilder" date="2025-07-05T08:05:31.178" /><!-- duration: 5ms -->
+        </step><!-- duration: 40ms -->
+        <step title="PreDeployment: context.CleanOutputPath False" date="2025-07-05T08:05:31.262" >
+          <step title="PreDeployment: context.OutputPath /home/site/wwwroot" date="2025-07-05T08:05:31.414" >
+            <step title="Building" date="2025-07-05T08:05:31.618" >
+              <step title="Executing external process" date="2025-07-05T08:05:32.283" type="process" path="starter.sh" arguments="/opt/Kudu/Scripts/absoluteTar.sh /tmp/zipdeploy/extracted/node_modules /tmp/zipdeploy/extracted/node_modules.tar.gz" >
+                <step title="Cpu: gzip(1169,37.340s)+sh(1168,0.000s)+tar(1167,2.240s)+absoluteTar.sh(1166,0.020s)=total(39.600s)" date="2025-07-05T08:06:32.713" /><!-- duration: 18ms -->
+                <step title="starter.sh: no io activity for 60s, prev-cpu=-1.000s, current-cpu=39.600s" date="2025-07-05T08:06:32.751" /><!-- duration: 22ms -->
+                <step title="Cpu: gzip(1169,72.580s)+sh(1168,0.000s)+tar(1167,3.820s)+absoluteTar.sh(1166,0.020s)=total(76.420s)" date="2025-07-05T08:07:33.241" /><!-- duration: 170ms -->
+                <step title="starter.sh: no io activity for 121s, prev-cpu=39.600s, current-cpu=76.420s" date="2025-07-05T08:07:33.459" /><!-- duration: 102ms -->
+              </step><!-- duration: 134837ms -->
+              <step title="Executing external process" date="2025-07-05T08:07:47.503" type="process" path="starter.sh" arguments="/opt/Kudu/Scripts/parallel_rsync.sh /tmp/zipdeploy/extracted /home/site/wwwroot 8 /tmp/ False False node_modules " /><!-- duration: 18662ms -->
+              <step title="Modified file to trigger a restart of the app container." date="2025-07-05T08:08:07.061" /><!-- duration: 13ms -->
+              <step title="Skip function trigger and logicapp sync because function is not enabled." date="2025-07-05T08:08:07.084" /><!-- duration: 10ms -->
+            </step><!-- duration: 156523ms -->
+          </step><!-- duration: 156749ms -->
+          <step title="Cleaning up temp files" date="2025-07-05T08:08:08.169" /><!-- duration: 14ms -->
+          <step title="Cleaning up temp files" date="2025-07-05T08:08:08.200" /><!-- duration: 508ms -->
+          <step title="Reloading status file with latest updates" date="2025-07-05T08:08:08.745" >
+            <step title="WebHooksManager.PublishEventAsync: PostDeployment" date="2025-07-05T08:08:08.761" /><!-- duration: 58ms -->
+          </step><!-- duration: 79ms -->
+          <step title="Cleaning up temporary deployment - fetch deployment was successful" date="2025-07-05T08:08:08.836" /><!-- duration: 14ms -->
+        </step><!-- duration: 157705ms -->
+      </step><!-- duration: 159490ms -->

@@ -1,0 +1,16 @@
+<step title="Incoming Request" date="2025-07-05T08:42:07.932" instance="1e8efd" url="/api/publish?async=true&amp;deployer=GITHUB_ONE_DEPLOY&amp;type=zip&amp;message=%7B%22type%22%3A%22deployment%22%2C%22sha%22%3A%22df73d8d6274b1befc4849e42719ca0e0fe5fdd73%22%2C%22repoName%22%3A%22Ayumu277%2Ffirst-chatbot%22%2C%22actor%22%3A%22Ayumu277%22%2C%22slotName%22%3A%22Production%22%2C%22commitMessage%22%3A%22Remove%20test-server.js%20to%20deploy%20actual%20Next.js%20app%22%7D" method="POST" type="request" pid="776,1,5" Host="chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_a0df8406eba08ee99bc38a6d5057acdb099dc770371e38ab0add4e46d3f0b63d" Authorization="Bea..." Content-Type="application/octet-stream" Cookie="ARRAffinity=1e8efd81b4645970fd27ae231faa7a976d2adeebc5d7764486e814ccf9926957;Path=/;HttpOnly;Secure;Domain=chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net; ARRAffinitySameSite=1e8efd81b4645970fd27ae231faa7a976d2adeebc5d7764486e814ccf9926957;Path=/;HttpOnly;SameSite=None;Secure;Domain=chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net" Transfer-Encoding="chunked" X-ARR-LOG-ID="22bcd492-0707-4612-bbfa-f99873c93354" CLIENT-IP="40.83.3.209:24448" X-SITE-DEPLOYMENT-ID="chatbot-app-new" WAS-DEFAULT-HOSTNAME="chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/publish?async=true&amp;deployer=GITHUB_ONE_DEPLOY&amp;type=zip&amp;message=%7B%22type%22%3A%22deployment%22%2C%22sha%22%3A%22df73d8d6274b1befc4849e42719ca0e0fe5fdd73%22%2C%22repoName%22%3A%22Ayumu277%2Ffirst-chatbot%22%2C%22actor%22%3A%22Ayumu277%22%2C%22slotName%22%3A%22Production%22%2C%22commitMessage%22%3A%22Remove%20test-server.js%20to%20deploy%20actual%20Next.js%20app%22%7D" X-Client-IP="40.83.3.209" X-Client-Port="24448" >
+  <step title="Cleanup Xml Logs" date="2025-07-05T08:42:07.937" >
+    <step title="Cleanup Infos" date="2025-07-05T08:42:07.956" totalFiles="271" totalCleanup="111" /><!-- duration: 5ms -->
+  </step><!-- duration: 37ms -->
+  <step title="OneDeploy" date="2025-07-05T08:42:08.026" >
+    <step title="Starting PushDeployAsync" date="2025-07-05T08:42:08.065" /><!-- duration: 11ms -->
+    <step title="Writing artifact to /tmp/zipdeploy/1319f5bc-189c-4977-97df-1a7721f803ef.zip" date="2025-07-05T08:42:08.134" >
+      <step title="Writing multipart request body to /tmp/zipdeploy/1319f5bc-189c-4977-97df-1a7721f803ef.zip" date="2025-07-05T08:42:08.154" /><!-- duration: 22ms -->
+    </step><!-- duration: 17906ms -->
+    <step title="Start deployment in the background" date="2025-07-05T08:42:26.270" >
+      <step title="Acquiring Deployment Lock" date="2025-07-05T08:42:26.688" /><!-- duration: 34ms -->
+      <step title="Acquired Deployment Lock" date="2025-07-05T08:42:26.785" /><!-- duration: 28ms -->
+    </step><!-- duration: 875ms -->
+  </step><!-- duration: 19717ms -->
+  <step title="Outgoing response" date="2025-07-05T08:42:27.823" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 32ms -->
+</step><!-- duration: 19941ms -->
