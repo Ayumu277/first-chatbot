@@ -23,4 +23,5 @@ npx prisma migrate deploy
 echo "✅ Prisma setup completed successfully"
 
 echo "🌐 Starting Next.js application on port $PORT..."
-exec node server.js
+# Use npm start instead of direct node server.js
+npm start
