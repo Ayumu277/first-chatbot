@@ -23,5 +23,6 @@ npx prisma migrate deploy
 echo "✅ Prisma setup completed successfully"
 
 echo "🌐 Starting Next.js application on port $PORT..."
-# 修正：next start は使わず、Dockerでは node . が正解
-exec node .
+
+# 🔥 修正ポイント：Next.js アプリは next start で起動
+exec npx next start -p $PORT

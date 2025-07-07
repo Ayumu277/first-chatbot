@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlserver"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -43,10 +43,10 @@ model ChatMessage {
   id           String      @id @default(uuid())
   sessionId    String
   role         String      // "user" or "assistant"
-  content      String      @db.NVarChar(Max)
+  content      String
   timestamp    DateTime    @default(now())
-  imageBase64  String?     @db.NVarChar(Max)
-  imagePreview String?     @db.NVarChar(Max)
+  imageBase64  String?
+  imagePreview String?
 
   session      ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
