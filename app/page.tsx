@@ -10,13 +10,27 @@ import { useChatStore } from './store/chat-store'
 export default function Home() {
   const [isClient, setIsClient] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   const { currentSessionId, selectSession } = useChatStore()
 
   // クライアントサイドでのマウントを検出
   useEffect(() => {
     setIsClient(true)
-    setIsLoading(false)
+
+    // デスクトップの場合、サイドバーを開く
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsSidebarOpen(true)
+      } else {
+        setIsSidebarOpen(false)
+      }
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   // セッション選択ハンドラー
@@ -39,18 +53,6 @@ export default function Home() {
   }
 
   const displaySessionId = isClient ? currentSessionId : null
-
-  // ローディング状態
-  if (isLoading) {
-    return (
-      <div className="flex h-screen bg-[#0D1117] text-white items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1E90FF] mx-auto mb-4"></div>
-          <p className="text-gray-300 font-medium">読み込み中...</p>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <AuthWrapper>
@@ -79,7 +81,7 @@ export default function Home() {
         <div className={`
           ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
           md:translate-x-0 fixed md:static inset-y-0 left-0 z-30
-          w-64 md:w-80 transition-transform duration-300 ease-in-out
+          w-64 transition-transform duration-300 ease-in-out
         `}>
           <Sidebar
             selectedChatId={displaySessionId}
@@ -88,13 +90,8 @@ export default function Home() {
         </div>
 
         {/* メインコンテンツ */}
-        <main className="flex-1 flex flex-col items-center min-w-0">
-          <div className="w-full max-w-4xl h-full flex flex-col">
-            {/* チャットウィンドウ */}
-            <div className="flex-1 flex flex-col">
-              <ChatWindow chatId={displaySessionId} />
-            </div>
-          </div>
+        <main className="flex-1 flex flex-col min-w-0">
+          <ChatWindow chatId={displaySessionId} />
         </main>
       </div>
     </AuthWrapper>

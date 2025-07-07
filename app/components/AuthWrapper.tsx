@@ -23,11 +23,11 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
 
   useEffect(() => {
     const initializeUser = async () => {
-      setIsLoading(true)
-
       if (status === 'loading') {
         return
       }
+
+      setIsLoading(true)
 
       if (session?.user) {
         // 認証されたユーザー
@@ -42,20 +42,14 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
         setGuest(false)
         await loadSessions()
       } else {
-        // 既存のゲストユーザーがいるかチェック
-        const guestToken = localStorage.getItem('guestToken')
-        if (guestToken && currentUser?.isGuest) {
-          console.log('既存のゲストユーザーを検出しました')
-          setGuest(true)
-          await loadSessions()
-        }
+        // 認証されていない場合は何もしない（ログイン画面を表示）
       }
 
       setIsLoading(false)
     }
 
     initializeUser()
-  }, [session, status, setUser, setGuest, loadSessions, currentUser])
+  }, [session, status])
 
   const handleGuestMode = async () => {
     try {

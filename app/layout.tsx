@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja" className="dark">
-      <body className="bg-dark-bg text-gray-100 font-sans antialiased">
+      <body className="bg-[#0D1117] text-gray-100 font-sans antialiased">
         <SessionProvider>
           {children}
         </SessionProvider>

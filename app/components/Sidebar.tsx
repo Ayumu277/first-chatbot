@@ -81,7 +81,7 @@ export default function Sidebar({ selectedChatId, onChatSelect }: SidebarProps) 
   }
 
   return (
-    <aside className="hidden md:block w-64 bg-[#161B22] h-full flex flex-col border-r border-gray-700">
+    <aside className="w-64 bg-[#161B22] h-full flex flex-col border-r border-gray-700">
       {/* ヘッダー */}
       <div className="flex-shrink-0 p-4 border-b border-gray-700">
         <button

@@ -19,7 +19,7 @@ module.exports = {
         'gray-50': '#F0F6FC',
       },
       fontFamily: {
-        'sans': ['var(--font-sans)'],
+        'sans': ['Inter', 'Noto Sans JP', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       fontWeight: {
         'normal': '400',

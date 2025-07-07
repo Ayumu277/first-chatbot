@@ -7,7 +7,7 @@
     "npm": ">=8.0.0"
   },
   "scripts": {
-    "dev": "next dev -p 8080",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
     "start-test": "node test-server.js",
@@ -18,7 +18,6 @@
     "@auth/prisma-adapter": "^2.10.0",
     "@heroicons/react": "^2.2.0",
     "@prisma/client": "^5.22.0",
-    "@tailwindcss/postcss": "^4.1.11",
     "express": "^4.18.2",
     "next": "14.2.5",
     "next-auth": "^4.24.8",
