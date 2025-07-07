@@ -4,7 +4,7 @@
 FROM node:18-alpine AS builder
 
 # Install dependencies only when needed
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat vips-dev
 WORKDIR /app
 
 # Copy package files
@@ -27,7 +27,7 @@ RUN npm run build
 FROM node:18-alpine AS runner
 
 # Install dumb-init for proper signal handling
-RUN apk add --no-cache dumb-init
+RUN apk add --no-cache dumb-init vips
 
 # Create app directory
 WORKDIR /app
