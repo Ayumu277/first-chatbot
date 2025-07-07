@@ -1,0 +1,224 @@
+# ==================================
+# Next.js + Prisma + TypeScript
+# Optimized .dockerignore
+# ==================================
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Next.js Build Output
+.next/
+out/
+build/
+dist/
+
+# Next.js Cache
+.next/cache/
+
+# Production builds
+.vercel/
+.netlify/
+
+# Environment Variables
+.env*
+!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Testing
+coverage/
+.nyc_output/
+.jest/
+jest.config.js
+.coverage/
+test-results/
+playwright-report/
+
+# Prisma
+dev.db
+dev.db-journal
+*.db
+*.db-journal
+prisma/migrations/migration_lock.toml
+# Keep schema and migrations for Docker build
+# !prisma/schema.prisma
+# !prisma/migrations/
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+lib-cov/
+
+# nyc test coverage
+.nyc_output/
+
+# Grunt intermediate storage
+.grunt/
+
+# Bower dependency directory
+bower_components/
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons
+build/Release
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.cache/
+.parcel-cache/
+
+# Temporary folders
+tmp/
+temp/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+docker-compose*.yaml
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+*.md
+
+# Storybook
+.storybook/
+storybook-static/
+
+# ESLint
+.eslintrc*
+.eslintignore
+
+# Prettier
+.prettierrc*
+.prettierignore
+
+# Webpack
+webpack.config.js
+webpack.*.js
+
+# Babel
+.babelrc*
+babel.config.*
+
+# PostCSS
+postcss.config.*
+
+# Tailwind
+tailwind.config.*
+
+# Development tools
+.editorconfig
+.env.example
+.github/
+.husky/
+.vscode/
+.idea/
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Additional excludes for Docker optimization
+*.map
+*.orig
+*.rej
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*_BACKUP_*
+*_BASE_*
+*_LOCAL_*
+*_REMOTE_*

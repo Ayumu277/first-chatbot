@@ -7,6 +7,8 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['@prisma/client', 'prisma'],
   },
+  // Docker standalone output for Azure App Service
+  output: 'standalone',
 }
 
 module.exports = nextConfig
