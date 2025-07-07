@@ -151,7 +151,6 @@ jobs:
           APP_URL="${{ steps.get-url.outputs.APP_URL }}"
           echo "Checking health of: $APP_URL"
 
-          # Retry mechanism for health check
           max_attempts=10
           attempt=1
 
