@@ -4,9 +4,9 @@ import OpenAI from 'openai'
 export async function POST(request: NextRequest) {
   try {
     // OpenAIクライアントをリクエスト時に初期化
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    })
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+})
 
     const { message, conversationHistory = [], imageBase64, imageMimeType } = await request.json()
 

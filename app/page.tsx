@@ -91,7 +91,7 @@ export default function Home() {
 
         {/* メインコンテンツ */}
         <main className="flex-1 flex flex-col min-w-0">
-          <ChatWindow chatId={displaySessionId} />
+              <ChatWindow chatId={displaySessionId} />
         </main>
       </div>
     </AuthWrapper>

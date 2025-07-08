@@ -1,0 +1,12 @@
+<step title="Incoming Request" date="2025-07-07T12:42:02.148" instance="1e8efd" url="/logstream/filesystem" method="GET" type="request" pid="767,1,23" Host="chatbot-app-container-fse7g9cnf8hfgpej.scm.japaneast-01.azurewebsites.net" User-Agent="AZURECLI/2.75.0 (HOMEBREW)" Accept-Encoding="identity" Authorization="Bea..." x-ms-client-request-id="bdb5d3d2-5b2f-11f0-9583-52db202025b8" X-ARR-LOG-ID="bdb5d3d2-5b2f-11f0-9583-52db202025b8" CLIENT-IP="114.178.166.42:52202" X-SITE-DEPLOYMENT-ID="chatbot-app-container" WAS-DEFAULT-HOSTNAME="chatbot-app-container-fse7g9cnf8hfgpej.scm.japaneast-01.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/logstream/filesystem" X-Client-IP="114.178.166.42" X-Client-Port="52202" >
+  <step title="Cleanup Xml Logs" date="2025-07-07T12:42:02.196" /><!-- duration: 70ms -->
+  <step title="LogStreamHandlerMiddleware.Invoke" date="2025-07-07T12:42:02.368" /><!-- duration: 152ms -->
+  <step title="Error occurred" date="2025-07-07T12:42:02.549" type="error" text="Could not find a part of the path &apos;/appsvctmp/volatile/logs/runtime&apos;." stackTrace="   at System.IO.Enumeration.FileSystemEnumerator`1.Init()
+   at Kudu.Services.Performance.LogStreamManager.GetFiles(String path, String ext) in /tmp/KuduLite/Kudu.Services/Diagnostics/LogStreamManager.cs:line 263
+   at Kudu.Services.Performance.LogStreamManager.Initialize(String path, HttpContext context) in /tmp/KuduLite/Kudu.Services/Diagnostics/LogStreamManager.cs:line 311
+   at Kudu.Services.Performance.LogStreamManager.ProcessRequest(HttpContext context) in /tmp/KuduLite/Kudu.Services/Diagnostics/LogStreamManager.cs:line 123
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.InvokeCore(HttpContext context, PathString matchedPath, PathString remainingPath)
+   at Kudu.Services.Web.Tracing.TraceMiddleware.Invoke(HttpContext context) in /tmp/KuduLite/Kudu.Services.Web/Tracing/TraceMiddleware.cs:line 101" /><!-- duration: 10ms -->
+  <step title="LogStreamManager: Dispose() called" date="2025-07-07T12:42:02.609" /><!-- duration: 19ms -->
+  <step title="Error occurred" date="2025-07-07T12:42:02.639" type="error" text="LogStreamManager: Inside Reset" /><!-- duration: 18ms -->
+  <step title="LogStreamManager: Dispose() done" date="2025-07-07T12:42:02.690" /><!-- duration: 18ms -->

@@ -1,0 +1,397 @@
+2025-07-07T15:48:52.7323043Z Container start method called.
+2025-07-07T15:48:52.7601559Z Establishing network.
+2025-07-07T15:48:52.7615050Z Pulling image: docker.io/library/node:18-alpine.
+2025-07-07T15:49:06.7003822Z Image docker.io/library/node:18-alpine is pulled from registry docker.io
+2025-07-07T15:49:06.7086973Z Container is starting.
+2025-07-07T15:49:06.7099138Z Establishing user namespace if not established already.
+2025-07-07T15:49:06.7113257Z Establishing network if not established already.
+2025-07-07T15:49:06.7199585Z Mounting volumes.
+2025-07-07T15:49:06.7295193Z Nested mountpoint volatile/logs
+2025-07-07T15:49:06.7717007Z Nested mountpoint 
+2025-07-07T15:49:06.8699330Z Creating container.
+2025-07-07T15:49:06.8716745Z Creating pipes for streaming container io.
+2025-07-07T15:49:06.8808664Z Creating stdout named pipe at /podr/container/pipe/2508c9f538d2_chatbot-app-container/stdout_6fba64876d3e47cca6ab0676870b7333.
+2025-07-07T15:49:06.8821163Z Successfully created stdout named pipe at: /podr/container/pipe/2508c9f538d2_chatbot-app-container/stdout_6fba64876d3e47cca6ab0676870b7333.
+2025-07-07T15:49:06.8904964Z Opening named pipe /podr/container/pipe/2508c9f538d2_chatbot-app-container/stdout_6fba64876d3e47cca6ab0676870b7333 for reading in non-blocking mode.
+2025-07-07T15:49:06.8913931Z Successfully opened named pipe: /podr/container/pipe/2508c9f538d2_chatbot-app-container/stdout_6fba64876d3e47cca6ab0676870b7333.
+2025-07-07T15:49:06.8919890Z Successfully removed non-blocking flag from /podr/container/pipe/2508c9f538d2_chatbot-app-container/stdout_6fba64876d3e47cca6ab0676870b7333.
+2025-07-07T15:49:06.8993435Z Creating stderr named pipe at /podr/container/pipe/2508c9f538d2_chatbot-app-container/stderr_d2d76699289e4244bbb9ff17bd67e5e4.
+2025-07-07T15:49:06.9000606Z Successfully created stderr named pipe at: /podr/container/pipe/2508c9f538d2_chatbot-app-container/stderr_d2d76699289e4244bbb9ff17bd67e5e4.
+2025-07-07T15:49:06.9004910Z Opening named pipe /podr/container/pipe/2508c9f538d2_chatbot-app-container/stderr_d2d76699289e4244bbb9ff17bd67e5e4 for reading in non-blocking mode.
+2025-07-07T15:49:06.9010416Z Successfully opened named pipe: /podr/container/pipe/2508c9f538d2_chatbot-app-container/stderr_d2d76699289e4244bbb9ff17bd67e5e4.
+2025-07-07T15:49:06.9014672Z Successfully removed non-blocking flag from /podr/container/pipe/2508c9f538d2_chatbot-app-container/stderr_d2d76699289e4244bbb9ff17bd67e5e4.
+2025-07-07T15:49:06.9095424Z Creating container with image: docker.io/library/node:18-alpine from registry: docker.io and fully qualified image name: docker.io/library/node:18-alpine
+2025-07-07T15:49:07.6930505Z Starting container: 2508c9f538d2_chatbot-app-container.
+2025-07-07T15:49:07.9158752Z Starting watchers and probes.
+2025-07-07T15:49:07.9458652Z Starting metrics collection.
+2025-07-07T15:49:08.0256310Z Container is running.
+2025-07-07T15:49:09.8158836Z Container start method finished after 17082 ms.
+2025-07-07T15:49:09.9541346Z Container has finished running with exit code: 0.
+2025-07-07T15:49:09.9859431Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T15:49:10.0564961Z Stop and delete container. Retry count = 0
+2025-07-07T15:49:10.0757800Z Stopping container: 2508c9f538d2_chatbot-app-container.
+2025-07-07T15:49:10.5771093Z Deleting container: 2508c9f538d2_chatbot-app-container. Retry count = 0
+2025-07-07T15:49:11.3756944Z Container spec TerminationMessagePolicy  path 
+2025-07-07T15:49:11.3783521Z Container is terminated. Total time elapsed: 1382 ms.
+2025-07-07T15:49:11.3861808Z Site container: chatbot-app-container terminated during site startup.
+2025-07-07T15:49:11.3961729Z Site startup probe failed after 1.5369271 seconds.
+2025-07-07T15:49:11.4372837Z Failed to start site. Revert by stopping site.
+2025-07-07T15:49:11.4876965Z Site: chatbot-app-container stopped.
+2025-07-07T15:49:17.543Z INFO  - Pulling image: node:18-alpine
+2025-07-07T15:49:20.344Z INFO  - 18-alpine Pulling from library/node
+2025-07-07T15:49:21.060Z INFO  - f18232174bc9 Pulling fs layer
+2025-07-07T15:49:21.063Z INFO  - dd71dde834b5 Pulling fs layer
+2025-07-07T15:49:21.065Z INFO  - 1e5a4c89cee5 Pulling fs layer
+2025-07-07T15:49:21.065Z INFO  - 25ff2da83641 Pulling fs layer
+2025-07-07T15:49:21.727Z INFO  - 25ff2da83641 Downloading 446B / 446B
+2025-07-07T15:49:21.748Z INFO  - 1e5a4c89cee5 Verifying Checksum
+2025-07-07T15:49:21.749Z INFO  - 1e5a4c89cee5 Download complete
+2025-07-07T15:49:21.766Z INFO  - 25ff2da83641 Verifying Checksum
+2025-07-07T15:49:21.766Z INFO  - 25ff2da83641 Download complete
+2025-07-07T15:49:21.817Z INFO  - f18232174bc9 Verifying Checksum
+2025-07-07T15:49:21.818Z INFO  - f18232174bc9 Download complete
+2025-07-07T15:49:22.021Z INFO  - dd71dde834b5 Downloading 3MB / 38MB
+2025-07-07T15:49:22.162Z INFO  - dd71dde834b5 Downloading 5MB / 38MB
+2025-07-07T15:49:22.311Z INFO  - f18232174bc9 Extracting 576KB / 3MB
+2025-07-07T15:49:22.402Z INFO  - f18232174bc9 Extracting 960KB / 3MB
+2025-07-07T15:49:22.502Z INFO  - dd71dde834b5 Downloading 13MB / 38MB
+2025-07-07T15:49:22.553Z INFO  - f18232174bc9 Extracting 1MB / 3MB
+2025-07-07T15:49:22.824Z INFO  - dd71dde834b5 Downloading 15MB / 38MB
+2025-07-07T15:49:22.896Z INFO  - f18232174bc9 Extracting 3MB / 3MB
+2025-07-07T15:49:22.946Z INFO  - f18232174bc9 Extracting 3MB / 3MB
+2025-07-07T15:49:22.967Z INFO  - dd71dde834b5 Downloading 19MB / 38MB
+2025-07-07T15:49:22.993Z INFO  - f18232174bc9 Pull complete
+2025-07-07T15:49:23.144Z INFO  - dd71dde834b5 Downloading 23MB / 38MB
+2025-07-07T15:49:23.185Z INFO  - dd71dde834b5 Downloading 26MB / 38MB
+2025-07-07T15:49:23.386Z INFO  - dd71dde834b5 Downloading 34MB / 38MB
+2025-07-07T15:49:23.477Z INFO  - dd71dde834b5 Downloading 38MB / 38MB
+2025-07-07T15:49:23.486Z INFO  - dd71dde834b5 Verifying Checksum
+2025-07-07T15:49:23.487Z INFO  - dd71dde834b5 Download complete
+2025-07-07T15:49:24.010Z INFO  - dd71dde834b5 Extracting 1MB / 38MB
+2025-07-07T15:49:24.372Z INFO  - dd71dde834b5 Extracting 5MB / 38MB
+2025-07-07T15:49:24.723Z INFO  - dd71dde834b5 Extracting 7MB / 38MB
+2025-07-07T15:49:24.973Z INFO  - dd71dde834b5 Extracting 9MB / 38MB
+2025-07-07T15:49:26.209Z INFO  - dd71dde834b5 Extracting 18MB / 38MB
+2025-07-07T15:49:26.633Z INFO  - dd71dde834b5 Extracting 24MB / 38MB
+2025-07-07T15:49:27.324Z INFO  - dd71dde834b5 Extracting 28MB / 38MB
+2025-07-07T15:49:27.555Z INFO  - dd71dde834b5 Extracting 30MB / 38MB
+2025-07-07T15:49:28.089Z INFO  - dd71dde834b5 Extracting 33MB / 38MB
+2025-07-07T15:49:28.169Z INFO  - dd71dde834b5 Extracting 34MB / 38MB
+2025-07-07T15:49:28.582Z INFO  - dd71dde834b5 Extracting 35MB / 38MB
+2025-07-07T15:49:28.904Z INFO  - dd71dde834b5 Extracting 36MB / 38MB
+2025-07-07T15:49:30.223Z INFO  - dd71dde834b5 Extracting 38MB / 38MB
+2025-07-07T15:49:30.316Z INFO  - dd71dde834b5 Pull complete
+2025-07-07T15:49:30.320Z INFO  - 1e5a4c89cee5 Extracting 32KB / 1MB
+2025-07-07T15:49:30.536Z INFO  - 1e5a4c89cee5 Extracting 1MB / 1MB
+2025-07-07T15:49:30.543Z INFO  - 1e5a4c89cee5 Extracting 1MB / 1MB
+2025-07-07T15:49:30.553Z INFO  - 1e5a4c89cee5 Pull complete
+2025-07-07T15:49:30.559Z INFO  - 25ff2da83641 Extracting 446B / 446B
+2025-07-07T15:49:30.563Z INFO  - 25ff2da83641 Extracting 446B / 446B
+2025-07-07T15:49:30.602Z INFO  - 25ff2da83641 Pull complete
+2025-07-07T15:49:30.653Z INFO  -  Digest: sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-07-07T15:49:30.657Z INFO  -  Status: Downloaded newer image for node:18-alpine
+2025-07-07T15:49:30.710Z INFO  - Pull Image successful, Time taken: 13 Seconds
+2025-07-07T15:49:30.962Z INFO  - Starting container for site
+2025-07-07T15:49:30.962Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_0_4e737e36 -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=9da6f42456cf76339b7a62cfbea492d8c74fb5f6480b6482b271f4e84f0528a5 node:18-alpine REDACTED
+2025-07-07T15:49:30.963Z INFO  - Logging is not enabled for this container.
+Please use https://aka.ms/linux-diagnostics to enable logging to see container logs here.
+2025-07-07T15:49:33.354Z INFO  - Initiating warmup request to container chatbot-app-container_0_4e737e36 for site chatbot-app-container
+2025-07-07T15:49:33.465Z ERROR - Container chatbot-app-container_0_4e737e36 for site chatbot-app-container has exited, failing site start
+2025-07-07T15:49:33.510Z ERROR - Container chatbot-app-container_0_4e737e36 didn't respond to HTTP pings on port: 8080. Failing site start. See container logs for debugging.
+2025-07-07T15:49:33.845Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-07T15:49:45.024Z INFO  - Pulling image: node:18-alpine
+2025-07-07T15:49:46.771Z INFO  - 18-alpine Pulling from library/node
+2025-07-07T15:49:46.871Z INFO  -  Digest: sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-07-07T15:49:46.879Z INFO  -  Status: Image is up to date for node:18-alpine
+2025-07-07T15:49:46.892Z INFO  - Pull Image successful, Time taken: 1 Seconds
+2025-07-07T15:49:46.972Z INFO  - Starting container for site
+2025-07-07T15:49:46.980Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_0_d1bc33cd -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=9da6f42456cf76339b7a62cfbea492d8c74fb5f6480b6482b271f4e84f0528a5 node:18-alpine REDACTED
+2025-07-07T15:49:46.981Z INFO  - Logging is not enabled for this container.
+Please use https://aka.ms/linux-diagnostics to enable logging to see container logs here.
+2025-07-07T15:49:49.213Z INFO  - Initiating warmup request to container chatbot-app-container_0_d1bc33cd for site chatbot-app-container
+2025-07-07T15:49:49.283Z ERROR - Container chatbot-app-container_0_d1bc33cd for site chatbot-app-container has exited, failing site start
+2025-07-07T15:49:49.289Z ERROR - Container chatbot-app-container_0_d1bc33cd didn't respond to HTTP pings on port: 8080. Failing site start. See container logs for debugging.
+2025-07-07T15:49:49.304Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-07T15:49:59.800Z INFO  - Pulling image: node:18-alpine
+2025-07-07T15:50:01.597Z INFO  - 18-alpine Pulling from library/node
+2025-07-07T15:50:01.798Z INFO  -  Digest: sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-07-07T15:50:01.818Z INFO  -  Status: Image is up to date for node:18-alpine
+2025-07-07T15:50:01.909Z INFO  - Pull Image successful, Time taken: 2 Seconds
+2025-07-07T15:50:02.038Z INFO  - Starting container for site
+2025-07-07T15:50:02.046Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_0_f26c8256 -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=9da6f42456cf76339b7a62cfbea492d8c74fb5f6480b6482b271f4e84f0528a5 node:18-alpine REDACTED
+2025-07-07T15:50:02.048Z INFO  - Logging is not enabled for this container.
+Please use https://aka.ms/linux-diagnostics to enable logging to see container logs here.
+2025-07-07T15:50:05.225Z INFO  - Initiating warmup request to container chatbot-app-container_0_f26c8256 for site chatbot-app-container
+2025-07-07T15:50:05.757Z ERROR - Container chatbot-app-container_0_f26c8256 for site chatbot-app-container has exited, failing site start
+2025-07-07T15:50:05.799Z ERROR - Container chatbot-app-container_0_f26c8256 didn't respond to HTTP pings on port: 8080. Failing site start. See container logs for debugging.
+2025-07-07T15:50:05.850Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-07T15:50:20.446Z INFO  - Pulling image: node:18-alpine
+2025-07-07T15:50:22.184Z INFO  - 18-alpine Pulling from library/node
+2025-07-07T15:50:22.237Z INFO  -  Digest: sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-07-07T15:50:22.238Z INFO  -  Status: Image is up to date for node:18-alpine
+2025-07-07T15:50:22.256Z INFO  - Pull Image successful, Time taken: 1 Seconds
+2025-07-07T15:50:22.306Z INFO  - Starting container for site
+2025-07-07T15:50:22.306Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_0_314522bb -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=9da6f42456cf76339b7a62cfbea492d8c74fb5f6480b6482b271f4e84f0528a5 node:18-alpine REDACTED
+2025-07-07T15:50:22.306Z INFO  - Logging is not enabled for this container.
+Please use https://aka.ms/linux-diagnostics to enable logging to see container logs here.
+2025-07-07T15:50:26.307Z INFO  - Initiating warmup request to container chatbot-app-container_0_314522bb for site chatbot-app-container
+2025-07-07T15:50:26.451Z ERROR - Container chatbot-app-container_0_314522bb for site chatbot-app-container has exited, failing site start
+2025-07-07T15:50:26.457Z ERROR - Container chatbot-app-container_0_314522bb didn't respond to HTTP pings on port: 8080. Failing site start. See container logs for debugging.
+2025-07-07T15:50:26.487Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-07T15:52:53.340Z INFO  - Pulling image: node:18-alpine
+2025-07-07T15:52:55.058Z INFO  - 18-alpine Pulling from library/node
+2025-07-07T15:52:55.102Z INFO  -  Digest: sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+2025-07-07T15:52:55.104Z INFO  -  Status: Image is up to date for node:18-alpine
+2025-07-07T15:52:55.112Z INFO  - Pull Image successful, Time taken: 1 Seconds
+2025-07-07T15:52:56.059Z INFO  - Starting container for site
+2025-07-07T15:52:56.067Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_0_8acd4c28 -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=9da6f42456cf76339b7a62cfbea492d8c74fb5f6480b6482b271f4e84f0528a5 node:18-alpine REDACTED
+2025-07-07T15:52:56.071Z INFO  - Logging is not enabled for this container.
+Please use https://aka.ms/linux-diagnostics to enable logging to see container logs here.
+2025-07-07T15:52:57.599Z INFO  - Initiating warmup request to container chatbot-app-container_0_8acd4c28 for site chatbot-app-container
+2025-07-07T15:52:57.820Z ERROR - Container chatbot-app-container_0_8acd4c28 for site chatbot-app-container has exited, failing site start
+2025-07-07T15:52:57.850Z ERROR - Container chatbot-app-container_0_8acd4c28 didn't respond to HTTP pings on port: 8080. Failing site start. See container logs for debugging.
+2025-07-07T15:52:58.105Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-07T15:55:25.4437494Z Container start method called.
+2025-07-07T15:55:25.4443409Z Establishing network.
+2025-07-07T15:55:25.4449227Z Pulling image: docker.io/library/node:18-alpine.
+2025-07-07T15:55:28.1804601Z Container is starting.
+2025-07-07T15:55:28.1814248Z Establishing user namespace if not established already.
+2025-07-07T15:55:28.1892069Z Establishing network if not established already.
+2025-07-07T15:55:28.1905523Z Mounting volumes.
+2025-07-07T15:55:28.1995981Z Nested mountpoint volatile/logs
+2025-07-07T15:55:28.2097688Z Nested mountpoint 
+2025-07-07T15:55:28.3013769Z Creating container.
+2025-07-07T15:55:28.3102584Z Creating pipes for streaming container io.
+2025-07-07T15:55:28.3117708Z Creating stdout named pipe at /podr/container/pipe/de6af29c45bf_chatbot-app-container/stdout_43e1bfa4b5564477b46b585f3b3a6884.
+2025-07-07T15:55:28.3198435Z Successfully created stdout named pipe at: /podr/container/pipe/de6af29c45bf_chatbot-app-container/stdout_43e1bfa4b5564477b46b585f3b3a6884.
+2025-07-07T15:55:28.3211435Z Opening named pipe /podr/container/pipe/de6af29c45bf_chatbot-app-container/stdout_43e1bfa4b5564477b46b585f3b3a6884 for reading in non-blocking mode.
+2025-07-07T15:55:28.3223420Z Successfully opened named pipe: /podr/container/pipe/de6af29c45bf_chatbot-app-container/stdout_43e1bfa4b5564477b46b585f3b3a6884.
+2025-07-07T15:55:28.3303838Z Successfully removed non-blocking flag from /podr/container/pipe/de6af29c45bf_chatbot-app-container/stdout_43e1bfa4b5564477b46b585f3b3a6884.
+2025-07-07T15:55:28.3313330Z Creating stderr named pipe at /podr/container/pipe/de6af29c45bf_chatbot-app-container/stderr_c3ddb74fcb4c42f095c787da23b9a5be.
+2025-07-07T15:55:28.3323187Z Successfully created stderr named pipe at: /podr/container/pipe/de6af29c45bf_chatbot-app-container/stderr_c3ddb74fcb4c42f095c787da23b9a5be.
+2025-07-07T15:55:28.3400846Z Opening named pipe /podr/container/pipe/de6af29c45bf_chatbot-app-container/stderr_c3ddb74fcb4c42f095c787da23b9a5be for reading in non-blocking mode.
+2025-07-07T15:55:28.3407613Z Successfully opened named pipe: /podr/container/pipe/de6af29c45bf_chatbot-app-container/stderr_c3ddb74fcb4c42f095c787da23b9a5be.
+2025-07-07T15:55:28.3413408Z Successfully removed non-blocking flag from /podr/container/pipe/de6af29c45bf_chatbot-app-container/stderr_c3ddb74fcb4c42f095c787da23b9a5be.
+2025-07-07T15:55:28.3419082Z Creating container with image: docker.io/library/node:18-alpine from registry: docker.io and fully qualified image name: docker.io/library/node:18-alpine
+2025-07-07T15:55:28.8552432Z Starting container: de6af29c45bf_chatbot-app-container.
+2025-07-07T15:55:28.9460173Z Starting watchers and probes.
+2025-07-07T15:55:28.9464991Z Starting metrics collection.
+2025-07-07T15:55:28.9473518Z Container is running.
+2025-07-07T15:55:29.0563946Z Container start method finished after 3612 ms.
+2025-07-07T15:55:29.5098004Z Container has finished running with exit code: 0.
+2025-07-07T15:55:29.5103386Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T15:55:29.5108380Z Stop and delete container. Retry count = 0
+2025-07-07T15:55:29.5113525Z Stopping container: de6af29c45bf_chatbot-app-container.
+2025-07-07T15:55:29.5711066Z Deleting container: de6af29c45bf_chatbot-app-container. Retry count = 0
+2025-07-07T15:55:30.2596745Z Container spec TerminationMessagePolicy  path 
+2025-07-07T15:55:30.2684736Z Container is terminated. Total time elapsed: 749 ms.
+2025-07-07T15:55:30.2692011Z Site container: chatbot-app-container terminated during site startup.
+2025-07-07T15:55:30.2699685Z Site startup probe failed after 1.2127989 seconds.
+2025-07-07T15:55:30.2995769Z Failed to start site. Revert by stopping site.
+2025-07-07T15:55:30.3099560Z Site: chatbot-app-container stopped.
+2025-07-07T15:55:41.4936630Z Container start method called.
+2025-07-07T15:55:41.6763663Z Establishing network.
+2025-07-07T15:55:41.6866034Z Pulling image: docker.io/library/node:18-alpine.
+2025-07-07T15:55:44.7190199Z Container is starting.
+2025-07-07T15:55:44.7365384Z Establishing user namespace if not established already.
+2025-07-07T15:55:44.7462105Z Establishing network if not established already.
+2025-07-07T15:55:44.7488807Z Mounting volumes.
+2025-07-07T15:55:44.7591545Z Nested mountpoint volatile/logs
+2025-07-07T15:55:44.7974084Z Nested mountpoint 
+2025-07-07T15:55:44.8897924Z Creating container.
+2025-07-07T15:55:44.8991944Z Creating pipes for streaming container io.
+2025-07-07T15:55:44.9080115Z Creating stdout named pipe at /podr/container/pipe/bbaa5a2771f4_chatbot-app-container/stdout_8f6e53099ede47d2a6a602d63f7fa1e9.
+2025-07-07T15:55:44.9094339Z Successfully created stdout named pipe at: /podr/container/pipe/bbaa5a2771f4_chatbot-app-container/stdout_8f6e53099ede47d2a6a602d63f7fa1e9.
+2025-07-07T15:55:44.9269227Z Opening named pipe /podr/container/pipe/bbaa5a2771f4_chatbot-app-container/stdout_8f6e53099ede47d2a6a602d63f7fa1e9 for reading in non-blocking mode.
+2025-07-07T15:55:44.9383698Z Successfully opened named pipe: /podr/container/pipe/bbaa5a2771f4_chatbot-app-container/stdout_8f6e53099ede47d2a6a602d63f7fa1e9.
+2025-07-07T15:55:44.9480932Z Successfully removed non-blocking flag from /podr/container/pipe/bbaa5a2771f4_chatbot-app-container/stdout_8f6e53099ede47d2a6a602d63f7fa1e9.
+2025-07-07T15:55:44.9592503Z Creating stderr named pipe at /podr/container/pipe/bbaa5a2771f4_chatbot-app-container/stderr_ee6300794f9c4f108457f8d044ee91a7.
+2025-07-07T15:55:44.9698831Z Successfully created stderr named pipe at: /podr/container/pipe/bbaa5a2771f4_chatbot-app-container/stderr_ee6300794f9c4f108457f8d044ee91a7.
+2025-07-07T15:55:44.9803160Z Opening named pipe /podr/container/pipe/bbaa5a2771f4_chatbot-app-container/stderr_ee6300794f9c4f108457f8d044ee91a7 for reading in non-blocking mode.
+2025-07-07T15:55:44.9885021Z Successfully opened named pipe: /podr/container/pipe/bbaa5a2771f4_chatbot-app-container/stderr_ee6300794f9c4f108457f8d044ee91a7.
+2025-07-07T15:55:44.9887875Z Successfully removed non-blocking flag from /podr/container/pipe/bbaa5a2771f4_chatbot-app-container/stderr_ee6300794f9c4f108457f8d044ee91a7.
+2025-07-07T15:55:44.9890699Z Creating container with image: docker.io/library/node:18-alpine from registry: docker.io and fully qualified image name: docker.io/library/node:18-alpine
+2025-07-07T15:55:46.0756018Z Starting container: bbaa5a2771f4_chatbot-app-container.
+2025-07-07T15:55:46.1730520Z Starting watchers and probes.
+2025-07-07T15:55:46.1744307Z Starting metrics collection.
+2025-07-07T15:55:46.1833301Z Container is running.
+2025-07-07T15:55:46.4258293Z Container start method finished after 4920 ms.
+2025-07-07T15:55:46.4867001Z Container has finished running with exit code: 0.
+2025-07-07T15:55:46.5042444Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T15:55:46.5055004Z Stop and delete container. Retry count = 0
+2025-07-07T15:55:46.5062398Z Stopping container: bbaa5a2771f4_chatbot-app-container.
+2025-07-07T15:55:46.5964841Z Deleting container: bbaa5a2771f4_chatbot-app-container. Retry count = 0
+2025-07-07T15:55:47.4527146Z Container spec TerminationMessagePolicy  path 
+2025-07-07T15:55:47.4730089Z Container is terminated. Total time elapsed: 967 ms.
+2025-07-07T15:55:47.4829911Z Site container: chatbot-app-container terminated during site startup.
+2025-07-07T15:55:47.5121413Z Site startup probe failed after 1.0648029 seconds.
+2025-07-07T15:55:47.7132145Z Failed to start site. Revert by stopping site.
+2025-07-07T15:55:47.7341405Z Site: chatbot-app-container stopped.
+2025-07-07T15:55:48.6469456Z Site: chatbot-app-container will be blocked for 1 minutes till 07/07/2025 15:56:48
+2025-07-07T15:55:54.6880717Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:55:59.8114755Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:56:05.9835797Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:56:11.2169403Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:56:16.3957786Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:56:21.6504299Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:56:27.7482356Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:56:32.9332865Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:56:38.3034345Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:56:43.5186184Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:56:49.2530478Z Site: chatbot-app-container is unblocked.
+2025-07-07T15:56:50.5422749Z Container start method called.
+2025-07-07T15:56:50.5423806Z Establishing network.
+2025-07-07T15:56:50.5424696Z Pulling image: docker.io/library/node:18-alpine.
+2025-07-07T15:56:53.3798605Z Container is starting.
+2025-07-07T15:56:53.3883335Z Establishing user namespace if not established already.
+2025-07-07T15:56:53.3896775Z Establishing network if not established already.
+2025-07-07T15:56:53.3977682Z Mounting volumes.
+2025-07-07T15:56:53.4074974Z Nested mountpoint volatile/logs
+2025-07-07T15:56:53.4178053Z Nested mountpoint 
+2025-07-07T15:56:53.4989327Z Creating container.
+2025-07-07T15:56:53.4999361Z Creating pipes for streaming container io.
+2025-07-07T15:56:53.5007937Z Creating stdout named pipe at /podr/container/pipe/359610fd102a_chatbot-app-container/stdout_7d02b14b5081426a9fd8dec167a4aaee.
+2025-07-07T15:56:53.5104119Z Successfully created stdout named pipe at: /podr/container/pipe/359610fd102a_chatbot-app-container/stdout_7d02b14b5081426a9fd8dec167a4aaee.
+2025-07-07T15:56:53.5190714Z Opening named pipe /podr/container/pipe/359610fd102a_chatbot-app-container/stdout_7d02b14b5081426a9fd8dec167a4aaee for reading in non-blocking mode.
+2025-07-07T15:56:53.5200434Z Successfully opened named pipe: /podr/container/pipe/359610fd102a_chatbot-app-container/stdout_7d02b14b5081426a9fd8dec167a4aaee.
+2025-07-07T15:56:53.5208655Z Successfully removed non-blocking flag from /podr/container/pipe/359610fd102a_chatbot-app-container/stdout_7d02b14b5081426a9fd8dec167a4aaee.
+2025-07-07T15:56:53.5285313Z Creating stderr named pipe at /podr/container/pipe/359610fd102a_chatbot-app-container/stderr_7b364223509642db982dfdb77c7c2342.
+2025-07-07T15:56:53.5293164Z Successfully created stderr named pipe at: /podr/container/pipe/359610fd102a_chatbot-app-container/stderr_7b364223509642db982dfdb77c7c2342.
+2025-07-07T15:56:53.5298486Z Opening named pipe /podr/container/pipe/359610fd102a_chatbot-app-container/stderr_7b364223509642db982dfdb77c7c2342 for reading in non-blocking mode.
+2025-07-07T15:56:53.5304544Z Successfully opened named pipe: /podr/container/pipe/359610fd102a_chatbot-app-container/stderr_7b364223509642db982dfdb77c7c2342.
+2025-07-07T15:56:53.5407751Z Successfully removed non-blocking flag from /podr/container/pipe/359610fd102a_chatbot-app-container/stderr_7b364223509642db982dfdb77c7c2342.
+2025-07-07T15:56:53.5484000Z Creating container with image: docker.io/library/node:18-alpine from registry: docker.io and fully qualified image name: docker.io/library/node:18-alpine
+2025-07-07T15:56:54.8685839Z Starting container: 359610fd102a_chatbot-app-container.
+2025-07-07T15:56:55.1776231Z Starting watchers and probes.
+2025-07-07T15:56:55.1980654Z Starting metrics collection.
+2025-07-07T15:56:55.2078598Z Container is running.
+2025-07-07T15:56:55.5099058Z Container start method finished after 4947 ms.
+2025-07-07T15:56:57.2861741Z Container has finished running with exit code: 0.
+2025-07-07T15:56:57.2959014Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T15:56:57.3075966Z Stop and delete container. Retry count = 0
+2025-07-07T15:56:57.3174806Z Stopping container: 359610fd102a_chatbot-app-container.
+2025-07-07T15:56:57.5829457Z Deleting container: 359610fd102a_chatbot-app-container. Retry count = 0
+2025-07-07T15:56:58.6618680Z Container spec TerminationMessagePolicy  path 
+2025-07-07T15:56:58.6741525Z Container is terminated. Total time elapsed: 1375 ms.
+2025-07-07T15:56:58.7018010Z Site container: chatbot-app-container terminated during site startup.
+2025-07-07T15:56:58.7037320Z Site startup probe failed after 3.1521151 seconds.
+2025-07-07T15:56:58.8938207Z Failed to start site. Revert by stopping site.
+2025-07-07T15:56:58.9660187Z Site: chatbot-app-container stopped.
+2025-07-07T15:57:00.0904888Z Site: chatbot-app-container will be blocked for 1 minutes till 07/07/2025 15:58:00
+2025-07-07T15:57:06.3620124Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:57:11.7542203Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:57:17.1283852Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:57:22.8187171Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:57:28.1184760Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:57:33.3575783Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:57:38.6475963Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:57:43.7933507Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:57:49.1732485Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:57:54.3914779Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:58:00.1368874Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:58:00.3071006Z Site: chatbot-app-container is unblocked.
+2025-07-07T15:58:06.8917847Z Container start method called.
+2025-07-07T15:58:06.8929823Z Establishing network.
+2025-07-07T15:58:06.8938219Z Pulling image: docker.io/library/node:18-alpine.
+2025-07-07T15:58:09.0342202Z Container is starting.
+2025-07-07T15:58:09.0424219Z Establishing user namespace if not established already.
+2025-07-07T15:58:09.0442396Z Establishing network if not established already.
+2025-07-07T15:58:09.0450786Z Mounting volumes.
+2025-07-07T15:58:09.0545482Z Nested mountpoint volatile/logs
+2025-07-07T15:58:09.0845366Z Nested mountpoint 
+2025-07-07T15:58:09.2136482Z Creating container.
+2025-07-07T15:58:09.2149691Z Creating pipes for streaming container io.
+2025-07-07T15:58:09.2229414Z Creating stdout named pipe at /podr/container/pipe/fb5b7e4149f1_chatbot-app-container/stdout_4e3ec70dccb34da2a68e1d1bf7ab5b1e.
+2025-07-07T15:58:09.2239676Z Successfully created stdout named pipe at: /podr/container/pipe/fb5b7e4149f1_chatbot-app-container/stdout_4e3ec70dccb34da2a68e1d1bf7ab5b1e.
+2025-07-07T15:58:09.2251887Z Opening named pipe /podr/container/pipe/fb5b7e4149f1_chatbot-app-container/stdout_4e3ec70dccb34da2a68e1d1bf7ab5b1e for reading in non-blocking mode.
+2025-07-07T15:58:09.2339011Z Successfully opened named pipe: /podr/container/pipe/fb5b7e4149f1_chatbot-app-container/stdout_4e3ec70dccb34da2a68e1d1bf7ab5b1e.
+2025-07-07T15:58:09.2354565Z Successfully removed non-blocking flag from /podr/container/pipe/fb5b7e4149f1_chatbot-app-container/stdout_4e3ec70dccb34da2a68e1d1bf7ab5b1e.
+2025-07-07T15:58:09.2436610Z Creating stderr named pipe at /podr/container/pipe/fb5b7e4149f1_chatbot-app-container/stderr_5160c76876ac4e0382c1448e58fa09a3.
+2025-07-07T15:58:09.2450907Z Successfully created stderr named pipe at: /podr/container/pipe/fb5b7e4149f1_chatbot-app-container/stderr_5160c76876ac4e0382c1448e58fa09a3.
+2025-07-07T15:58:09.2531630Z Opening named pipe /podr/container/pipe/fb5b7e4149f1_chatbot-app-container/stderr_5160c76876ac4e0382c1448e58fa09a3 for reading in non-blocking mode.
+2025-07-07T15:58:09.2542523Z Successfully opened named pipe: /podr/container/pipe/fb5b7e4149f1_chatbot-app-container/stderr_5160c76876ac4e0382c1448e58fa09a3.
+2025-07-07T15:58:09.2550636Z Successfully removed non-blocking flag from /podr/container/pipe/fb5b7e4149f1_chatbot-app-container/stderr_5160c76876ac4e0382c1448e58fa09a3.
+2025-07-07T15:58:09.2625966Z Creating container with image: docker.io/library/node:18-alpine from registry: docker.io and fully qualified image name: docker.io/library/node:18-alpine
+2025-07-07T15:58:09.8379908Z Starting container: fb5b7e4149f1_chatbot-app-container.
+2025-07-07T15:58:09.9646859Z Starting watchers and probes.
+2025-07-07T15:58:09.9768906Z Starting metrics collection.
+2025-07-07T15:58:10.0044823Z Container is running.
+2025-07-07T15:58:10.0758683Z Container start method finished after 3182 ms.
+2025-07-07T15:58:10.5439286Z Container has finished running with exit code: 0.
+2025-07-07T15:58:10.5520386Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T15:58:10.5629690Z Stop and delete container. Retry count = 0
+2025-07-07T15:58:10.5644454Z Stopping container: fb5b7e4149f1_chatbot-app-container.
+2025-07-07T15:58:10.6139775Z Deleting container: fb5b7e4149f1_chatbot-app-container. Retry count = 0
+2025-07-07T15:58:10.9616248Z Container spec TerminationMessagePolicy  path 
+2025-07-07T15:58:10.9691983Z Container is terminated. Total time elapsed: 408 ms.
+2025-07-07T15:58:10.9695505Z Site container: chatbot-app-container terminated during site startup.
+2025-07-07T15:58:10.9698607Z Site startup probe failed after 0.8031468 seconds.
+2025-07-07T15:58:10.9818417Z Failed to start site. Revert by stopping site.
+2025-07-07T15:58:10.9905803Z Site: chatbot-app-container stopped.
+2025-07-07T15:58:11.4781229Z Site: chatbot-app-container will be blocked for 2 minutes till 07/07/2025 16:00:11
+2025-07-07T15:58:16.8058471Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:58:21.9782484Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:58:27.1429698Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:58:32.2702666Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:58:37.4985760Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:58:42.6485998Z Start site prohibitted because the site is being blocked.
+2025-07-07T15:58:47.9305659Z Start site prohibitted because the site is being blocked.
+2025-07-07T16:00:11.4757271Z Site: chatbot-app-container is unblocked.
+2025-07-07T16:22:09.4271632Z Container start method called.
+2025-07-07T16:22:09.4367903Z Establishing network.
+2025-07-07T16:22:09.4455059Z Pulling image: docker.io/library/node:18-alpine.
+2025-07-07T16:22:12.0555721Z Container is starting.
+2025-07-07T16:22:12.0569166Z Establishing user namespace if not established already.
+2025-07-07T16:22:12.0575463Z Establishing network if not established already.
+2025-07-07T16:22:12.0954593Z Mounting volumes.
+2025-07-07T16:22:12.1162080Z Nested mountpoint volatile/logs
+2025-07-07T16:22:12.2754809Z Nested mountpoint 
+2025-07-07T16:22:12.2961441Z Creating container.
+2025-07-07T16:22:12.2972221Z Creating pipes for streaming container io.
+2025-07-07T16:22:12.3344843Z Creating stdout named pipe at /podr/container/pipe/51e69b3e5c01_chatbot-app-container/stdout_3da805d55f1742f481fbc93dc83e75b2.
+2025-07-07T16:22:12.3528290Z Successfully created stdout named pipe at: /podr/container/pipe/51e69b3e5c01_chatbot-app-container/stdout_3da805d55f1742f481fbc93dc83e75b2.
+2025-07-07T16:22:12.3537961Z Opening named pipe /podr/container/pipe/51e69b3e5c01_chatbot-app-container/stdout_3da805d55f1742f481fbc93dc83e75b2 for reading in non-blocking mode.
+2025-07-07T16:22:12.3608380Z Successfully opened named pipe: /podr/container/pipe/51e69b3e5c01_chatbot-app-container/stdout_3da805d55f1742f481fbc93dc83e75b2.
+2025-07-07T16:22:12.3615802Z Successfully removed non-blocking flag from /podr/container/pipe/51e69b3e5c01_chatbot-app-container/stdout_3da805d55f1742f481fbc93dc83e75b2.
+2025-07-07T16:22:12.3620249Z Creating stderr named pipe at /podr/container/pipe/51e69b3e5c01_chatbot-app-container/stderr_e54477e9441f4a47b10bff9b406ad1da.
+2025-07-07T16:22:12.3624865Z Successfully created stderr named pipe at: /podr/container/pipe/51e69b3e5c01_chatbot-app-container/stderr_e54477e9441f4a47b10bff9b406ad1da.
+2025-07-07T16:22:12.3630773Z Opening named pipe /podr/container/pipe/51e69b3e5c01_chatbot-app-container/stderr_e54477e9441f4a47b10bff9b406ad1da for reading in non-blocking mode.
+2025-07-07T16:22:12.3634861Z Successfully opened named pipe: /podr/container/pipe/51e69b3e5c01_chatbot-app-container/stderr_e54477e9441f4a47b10bff9b406ad1da.
+2025-07-07T16:22:12.3638608Z Successfully removed non-blocking flag from /podr/container/pipe/51e69b3e5c01_chatbot-app-container/stderr_e54477e9441f4a47b10bff9b406ad1da.
+2025-07-07T16:22:12.3717403Z Creating container with image: docker.io/library/node:18-alpine from registry: docker.io and fully qualified image name: docker.io/library/node:18-alpine
+2025-07-07T16:22:13.8050779Z Starting container: 51e69b3e5c01_chatbot-app-container.
+2025-07-07T16:22:14.0985086Z Starting watchers and probes.
+2025-07-07T16:22:14.1974264Z Starting metrics collection.
+2025-07-07T16:22:14.2153720Z Container is running.
+2025-07-07T16:22:14.3831145Z Container start method finished after 4936 ms.
+2025-07-07T16:22:15.7816423Z Container has finished running with exit code: 0.
+2025-07-07T16:22:15.7826439Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T16:22:15.8391599Z Stop and delete container. Retry count = 0
+2025-07-07T16:22:15.8490142Z Stopping container: 51e69b3e5c01_chatbot-app-container.
+2025-07-07T16:22:15.9423358Z Deleting container: 51e69b3e5c01_chatbot-app-container. Retry count = 0
+2025-07-07T16:22:16.8059397Z Container spec TerminationMessagePolicy  path 
+2025-07-07T16:22:16.8145617Z Container is terminated. Total time elapsed: 997 ms.
+2025-07-07T16:22:16.8173866Z Site container: chatbot-app-container terminated during site startup.
+2025-07-07T16:22:16.8532443Z Site startup probe failed after 2.3836104 seconds.
+2025-07-07T16:22:16.9526238Z Failed to start site. Revert by stopping site.
+2025-07-07T16:22:16.9909348Z Site: chatbot-app-container stopped.
+2025-07-07T16:27:29.8296341Z Container start method called.
+2025-07-07T16:27:29.8390282Z Establishing network.
+2025-07-07T16:27:29.8396400Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-07T16:27:37.5631629Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-07T16:27:37.5643272Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T16:27:37.5651145Z Container spec TerminationMessagePolicy  path 
+2025-07-07T16:27:37.5726333Z Container is terminated. Total time elapsed: 7 ms.
+2025-07-07T16:27:37.5730382Z Site container: chatbot-app-container terminated during site startup.
+2025-07-07T16:27:37.5951392Z Failed to start site. Revert by stopping site.
+2025-07-07T16:27:37.6044957Z Site: chatbot-app-container stopped.
+2025-07-07T16:27:55.1359851Z Container start method called.
+2025-07-07T16:27:55.1361204Z Establishing network.
+2025-07-07T16:27:55.1362250Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-07T16:27:55.4082622Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-07T16:27:55.4089211Z Container is terminating. Grace period: 5 seconds.
+2025-07-07T16:27:55.4093468Z Container spec TerminationMessagePolicy  path 
+2025-07-07T16:27:55.4165547Z Container is terminated. Total time elapsed: 0 ms.
+2025-07-07T16:27:55.4167304Z Site container: chatbot-app-container terminated during site startup.
+2025-07-07T16:27:55.4379932Z Failed to start site. Revert by stopping site.
+2025-07-07T16:27:55.4613720Z Site: chatbot-app-container stopped.
