@@ -13,6 +13,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   AZURE_WEBAPP_NAME: chatbot-app-container
   AZURE_RESOURCE_GROUP: chatbot-app-new_group
+  DOCKER_HUB_IMAGE: ayumu277/chatbot-app
 
 jobs:
   build-and-push:
@@ -43,7 +44,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            docker.io/ayumu277/chatbot-app
+            docker.io/${{ env.DOCKER_HUB_IMAGE }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=ref,event=branch
@@ -105,15 +106,15 @@ jobs:
           echo "APP_URL=https://$APP_URL" >> $GITHUB_OUTPUT
           echo "✅ App URL: https://$APP_URL"
 
-      - name: Deploy to Azure Web App for Containers
+      - name: Deploy to Azure Web App for Containers using Docker Hub
         id: deploy-to-webapp
         run: |
-          echo "Deploying to Azure App Service..."
+          echo "Deploying Docker Hub image to Azure App Service..."
           az webapp config container set \
             --name ${{ env.AZURE_WEBAPP_NAME }} \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --docker-custom-image-name ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-            --docker-registry-server-url https://${{ env.REGISTRY }}
+            --docker-custom-image-name docker.io/${{ env.DOCKER_HUB_IMAGE }}:latest \
+            --docker-registry-server-url https://docker.io
 
       - name: Set Azure App Service configuration
         run: |
@@ -121,12 +122,22 @@ jobs:
           az webapp config appsettings set \
             --name ${{ env.AZURE_WEBAPP_NAME }} \
             --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --settings WEBSITES_PORT=8080 NODE_ENV=production PORT=8080
+            --settings \
+              WEBSITES_PORT=8080 \
+              NODE_ENV=production \
+              PORT=8080 \
+              WEBSITES_ENABLE_APP_SERVICE_STORAGE=false \
+              DOCKER_ENABLE_CI=true
 
       - name: Restart Azure App Service
         run: |
           echo "Restarting Azure App Service..."
           az webapp restart --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
+
+      - name: Wait for restart to complete
+        run: |
+          echo "Waiting for Azure App Service to fully restart..."
+          sleep 90
 
   health-check:
     runs-on: ubuntu-latest
@@ -141,7 +152,9 @@ jobs:
       - name: Log in to Azure
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_973863C808424D3FB27129286CC79F80 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9E8B0094EC594A868B50FBCBF17ED2F8 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1BCD2E75C67346CD9DF4D936616543DD }}
 
       - name: Get Azure App Service URL
         id: get-url
@@ -150,30 +163,39 @@ jobs:
           echo "APP_URL=https://$APP_URL" >> $GITHUB_OUTPUT
           echo "✅ App URL: https://$APP_URL"
 
-      - name: Wait for deployment to complete
-        run: sleep 60
-
       - name: Health check
         run: |
           APP_URL="${{ steps.get-url.outputs.APP_URL }}"
           echo "Checking health of: $APP_URL"
 
-          max_attempts=10
+          max_attempts=15
           attempt=1
 
           while [ $attempt -le $max_attempts ]; do
-            if curl -f -s -o /dev/null -w "%{http_code}" "$APP_URL" | grep -q "200"; then
+            echo "Attempt $attempt/$max_attempts..."
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL" || echo "000")
+            echo "HTTP Status Code: $HTTP_CODE"
+
+            if [ "$HTTP_CODE" = "200" ]; then
               echo "✅ Health check passed! App is running."
               curl -I "$APP_URL"
               exit 0
+            elif [ "$HTTP_CODE" = "503" ]; then
+              echo "⚠️ Service unavailable (503). App may still be starting..."
             else
-              echo "❌ Attempt $attempt failed. Retrying in 30 seconds..."
-              sleep 30
-              attempt=$((attempt + 1))
+              echo "❌ Unexpected status code: $HTTP_CODE"
             fi
+
+            if [ $attempt -lt $max_attempts ]; then
+              echo "Retrying in 30 seconds..."
+              sleep 30
+            fi
+            attempt=$((attempt + 1))
           done
 
           echo "❌ Health check failed after $max_attempts attempts"
+          echo "Final check details:"
+          curl -v "$APP_URL" || true
           exit 1
 
       - name: Notify deployment status
@@ -185,4 +207,5 @@ jobs:
             echo "App URL: $APP_URL"
           else
             echo "❌ Deployment failed!"
+            echo "Please check the Azure App Service logs for more details."
           fi
