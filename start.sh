@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Azure App Service startup script for Next.js + Prisma
 
@@ -7,6 +7,11 @@ echo "Environment: $NODE_ENV"
 echo "Port: $PORT"
 echo "Working directory: $(pwd)"
 echo "User: $(whoami)"
+
+# .envファイルを読み込む
+if [ -f .env ]; then
+  export $(cat .env | grep -v '^#' | xargs)
+fi
 
 # デバッグ：環境変数を確認
 echo "🔍 Environment variables check:"
@@ -34,28 +39,15 @@ echo "🔍 Node.js version: $(node --version)"
 echo "🔍 npm version: $(npm --version)"
 
 echo "🔧 Generating Prisma client..."
-if npx prisma generate; then
-    echo "✅ Prisma client generated successfully"
-else
-    echo "❌ Prisma client generation failed"
-    echo "Prisma schema content (first 10 lines):"
-    head -10 prisma/schema.prisma || echo "Cannot read schema.prisma"
-    exit 1
-fi
+npx prisma generate || echo "⚠ prisma generate failed (ignoring and continuing)"
 
 echo "🚀 Running database migrations..."
-if npx prisma migrate deploy; then
-    echo "✅ Database migrations completed successfully"
-else
-    echo "❌ Database migrations failed"
-    echo "This might be normal for the first deployment if database doesn't exist yet"
-    echo "Continuing with application startup..."
-fi
+npx prisma migrate deploy || echo "⚠ migrate failed (ignoring and continuing)"
 
 echo "🌐 Starting Next.js application on port $PORT..."
 echo "Available files in current directory:"
 ls -la
 
-# Next.js アプリケーション起動
-echo "Starting with: npx next start -p $PORT"
-exec npx next start -p $PORT
+# Next.js アプリケーション起動（execを使ってPID 1をNode.jsに）
+echo "Starting with: node server.js"
+exec node server.js

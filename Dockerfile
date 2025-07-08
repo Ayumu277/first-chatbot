@@ -1,77 +1,76 @@
+# =====================================================================
 # Multi-stage build for Next.js 14 + Prisma on Azure App Service
+# =====================================================================
 
-# ===== BUILD STAGE =====
+# ============ BUILD STAGE ============================================
 FROM node:18-alpine AS builder
 
-# Install dependencies only when needed
-RUN apk add --no-cache libc6-compat vips-dev
+# ---- build-time deps -------------------------------------------------
+RUN apk add --no-cache \
+      libc6-compat \
+      vips-dev \
+      openssl
+
 WORKDIR /app
 
-# Copy package files
+# ---- install node deps (incl. dev) ----------------------------------
 COPY package*.json ./
 COPY prisma ./prisma/
-
-# Install all dependencies (including dev dependencies for build)
 RUN npm ci
 
-# Copy source code
+# ---- copy source & generate client ----------------------------------
 COPY . .
-
-# Generate Prisma client
 RUN npx prisma generate
-
-# Build the application
 RUN npm run build
 
-# ===== PRODUCTION STAGE =====
-FROM node:18-alpine AS runner
+# ============ RUNTIME STAGE ==========================================
+FROM node:18-slim AS runner
 
-# Install dumb-init for proper signal handling
-RUN apk add --no-cache dumb-init vips
+# ---- runtime deps ----------------------------------------------------
+RUN apt-get update && \
+    apt-get install -y \
+      libssl3 \
+      dumb-init \
+      libvips-dev && \
+    rm -rf /var/lib/apt/lists/*
 
-# Create app directory
+# ---- app dir --------------------------------------------------------
 WORKDIR /app
 
-# Create non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-# Copy package files
+# ---- install production deps ----------------------------------------
 COPY package*.json ./
-
-# Install production dependencies only
 RUN npm ci --only=production --ignore-scripts && npm cache clean --force
 
-# Copy Prisma schema
-COPY --from=builder /app/prisma ./prisma/
+# ---- create non-root user ------------------------------------------
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
 
-# Copy built application
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+# ---- copy application files -----------------------------------------
+COPY --from=builder /app/prisma            ./prisma/
+COPY --from=builder /app/.next/standalone  ./
+COPY --from=builder /app/.next/static      ./.next/static
+COPY --from=builder /app/public            ./public
+COPY --from=builder /app/next.config.js    ./
 
-# Copy necessary files
-COPY --from=builder --chown=nextjs:nodejs /app/next.config.js ./
-
-# Copy startup script
+# ---- startup script -------------------------------------------------
 COPY start.sh ./
 RUN chmod +x start.sh
 
-# Set proper permissions
+# ---- set permissions for nextjs user --------------------------------
 RUN chown -R nextjs:nodejs /app
+
+# ---- switch to non-root ---------------------------------------------
 USER nextjs
 
-# Expose port 8080 (Azure App Service default)
+# ---- ports & env ----------------------------------------------------
 EXPOSE 8080
-
-# Set environment variables
 ENV NODE_ENV=production
 ENV PORT=8080
 
-# Health check
+# ---- healthcheck ---------------------------------------------------
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:8080', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"
+  CMD node -e "require('http').get('http://localhost:8080', r => process.exit(r.statusCode===200?0:1))"
 
-# Use dumb-init for proper signal handling
+# ---- entrypoint ----------------------------------------------------
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["./start.sh"]

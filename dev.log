@@ -1,0 +1,33 @@
+
+> ai-chatbot@0.1.0 dev
+> next dev -p 8080
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:8080
+  - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1337ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.7s (597 modules)
+ GET / 200 in 2818ms
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 732ms (528 modules)
+ GET /api/auth/session 200 in 1195ms
+ GET /api/auth/session 200 in 39ms
+ GET /api/auth/session 200 in 26ms
+ ✓ Compiled /api/users/guest in 112ms (554 modules)
+ゲストユーザー作成APIが呼び出されました
+既存のゲストユーザーを使用します: {
+  id: 'c4e808a5-1d25-4e44-b89a-7d60d85d5c4b',
+  email: null,
+  name: 'ゲストユーザー_1751688459764',
+  image: null,
+  isGuest: true,
+  guestToken: 'guest_1751688459764_6341sfdrs',
+  createdAt: 2025-07-05T04:07:39.765Z,
+  updatedAt: 2025-07-05T04:07:39.765Z
+}
+ POST /api/users/guest 200 in 428ms
+ ✓ Compiled /api/chat-sessions in 120ms (556 modules)
+ GET /api/chat-sessions?userId=c4e808a5-1d25-4e44-b89a-7d60d85d5c4b 200 in 390ms
