@@ -85,7 +85,7 @@ jobs:
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_973863C808424D3FB27129286CC79F80 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9E8B0094EC594A868B50FBCBF17ED2F8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1BCD2E75C67346CD9DF4D936616543DD }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_54673d08-8089-403a-932d-e1a38b27df53 }}
 
       - name: Check Azure App Service
         run: |
