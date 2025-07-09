@@ -305,3 +305,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 質問や問題がある場合は、[Issues](https://github.com/Ayumu277/first-chatbot/issues) でお知らせください。
 
 **Happy Coding! 🚀**
+# Force redeploy #午後
