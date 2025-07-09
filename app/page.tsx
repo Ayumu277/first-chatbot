@@ -56,16 +56,23 @@ export default function Home() {
 
   return (
     <AuthWrapper>
-      <div className="flex h-screen bg-[#0D1117] text-white overflow-hidden">
+      <div className="flex h-screen bg-dark-theme text-light-theme overflow-hidden" style={{
+        backgroundColor: '#0D1117',
+        color: '#C9D1D9'
+      }}>
         {/* モバイル用ハンバーガーボタン */}
         <button
           onClick={toggleSidebar}
-          className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#161B22] rounded-lg border border-gray-700 hover:bg-[#21262D] transition-colors"
+          className="md:hidden fixed top-4 left-4 z-50 p-2 bg-sidebar rounded-lg border border-theme hover:bg-gray-700 transition-colors"
+          style={{
+            backgroundColor: '#161B22',
+            borderColor: '#30363D'
+          }}
         >
           {isSidebarOpen ? (
-            <XMarkIcon className="w-6 h-6 text-white" />
+            <XMarkIcon className="w-6 h-6 text-light-theme" style={{color: '#C9D1D9'}} />
           ) : (
-            <Bars3Icon className="w-6 h-6 text-white" />
+            <Bars3Icon className="w-6 h-6 text-light-theme" style={{color: '#C9D1D9'}} />
           )}
         </button>
 
