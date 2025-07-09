@@ -6,18 +6,19 @@ const nextConfig = {
     // Docker build時の画像最適化を無効化
     unoptimized: true,
   },
-  // Docker standalone output for Azure App Service
-  output: 'standalone',
+
   // CSS最適化設定
   optimizeFonts: false,
   swcMinify: true,
   experimental: {
     serverComponentsExternalPackages: ['@prisma/client', 'prisma'],
   },
+
   // コンパイラー設定
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+
   // Azure App Service用のHTTP設定
   async rewrites() {
     return [
@@ -27,15 +28,18 @@ const nextConfig = {
       },
     ];
   },
+
   // 静的ファイルの配信設定
   assetPrefix: '',
   trailingSlash: false,
   poweredByHeader: false,
+
   // サーバー設定
   serverRuntimeConfig: {
     port: process.env.PORT || 8080,
     hostname: process.env.HOST || '0.0.0.0',
   },
+
   // セキュリティヘッダー
   async headers() {
     return [

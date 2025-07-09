@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
-    "start": "next start -p ${PORT:-8080} -H ${HOST:-0.0.0.0}",
+    "start": "next start -p 8080 -H 0.0.0.0",
     "start-test": "node test-server.js",
     "lint": "next lint",
     "postinstall": "prisma generate || echo 'Prisma generate failed, continuing...'"
