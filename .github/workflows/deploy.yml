@@ -103,7 +103,7 @@ jobs:
         id: get-url
         run: |
           APP_URL=$(az webapp show --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --query "defaultHostName" --output tsv)
-          echo "APP_URL=https://$APP_URL" >> $GITHUB_OUTPUT
+          echo "APP_URL=https://$APP_URL" >> "$GITHUB_OUTPUT"
           echo "✅ App URL: https://$APP_URL"
 
       - name: Deploy to Azure Web App for Containers using Docker Hub
