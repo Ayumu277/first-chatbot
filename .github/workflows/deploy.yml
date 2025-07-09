@@ -83,9 +83,11 @@ jobs:
       - name: Log in to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_973863C808424D3FB27129286CC79F80 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9E8B0094EC594A868B50FBCBF17ED2F8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_54673d08-8089-403a-932d-e1a38b27df53 }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          auth-type: SERVICE_PRINCIPAL
 
       - name: Check Azure App Service
         run: |
@@ -154,7 +156,7 @@ jobs:
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: 54673d08-8089-403a-932d-e1a38b27df53
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
           auth-type: SERVICE_PRINCIPAL
 
