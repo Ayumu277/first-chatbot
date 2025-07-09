@@ -6,9 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  # Docker Hub のリポジトリ
   DOCKER_HUB_IMAGE: ayumu277/chatbot-app
-  # Azure App Service
   AZURE_WEBAPP_NAME: chatbot-app-container
   AZURE_RESOURCE_GROUP: chatbot-app-new_group
 
@@ -22,8 +20,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # ── Docker レイヤーキャッシュ ──────────────────────────────────────────
-      - name: Cache Buildx layers
+      # ── Node.js モジュールと Next.js キャッシュ ─────────────────────
+      - name: Cache node_modules and .next/cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            .next/cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # ── Docker レイヤーキャッシュ ───────────────────────────────────
+      - name: Cache Docker Buildx layers
         uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
@@ -37,7 +46,7 @@ jobs:
           username: ayumu277
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Set up QEMU (for multi-platform build)
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
       - name: Set up Docker Buildx
@@ -49,7 +58,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           tags: docker.io/${{ env.DOCKER_HUB_IMAGE }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
@@ -62,7 +71,6 @@ jobs:
       id-token: write
 
     steps:
-      # ── Azure へログイン ───────────────────────────────────────────────────
       - name: Log in to Azure
         uses: azure/login@v2
         with:
@@ -71,7 +79,6 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           auth-type: SERVICE_PRINCIPAL
 
-      # ── コンテナ設定＆デプロイ ─────────────────────────────────────────────
       - name: Deploy to Azure Web App (Container)
         uses: azure/webapps-deploy@v3
         with:
