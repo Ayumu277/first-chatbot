@@ -154,7 +154,7 @@ jobs:
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          subscription-id: 54673d08-8089-403a-932d-e1a38b27df53
           client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
           auth-type: SERVICE_PRINCIPAL
 
