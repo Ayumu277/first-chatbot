@@ -10,6 +10,7 @@ const nextConfig = {
   // CSS最適化設定
   optimizeFonts: false,
   swcMinify: true,
+
   experimental: {
     serverComponentsExternalPackages: ['@prisma/client', 'prisma'],
   },
@@ -30,7 +31,7 @@ const nextConfig = {
   },
 
   // 静的ファイルの配信設定
-  assetPrefix: '',
+  assetPrefix: './', // ← ここを空文字から変更（Azureで重要）
   trailingSlash: false,
   poweredByHeader: false,
 
@@ -60,7 +61,6 @@ const nextConfig = {
           },
         ],
       },
-      // CSS ファイル用のヘッダー
       {
         source: '/_next/static/css/:path*',
         headers: [
@@ -76,6 +76,6 @@ const nextConfig = {
       },
     ];
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
