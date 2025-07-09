@@ -30,8 +30,8 @@ const nextConfig = {
     ];
   },
 
-  // 静的ファイルの配信設定
-  assetPrefix: './', // ← ここを空文字から変更（Azureで重要）
+  // 静的ファイルの配信設定 - 空文字が正解
+  assetPrefix: '',
   trailingSlash: false,
   poweredByHeader: false,
 
