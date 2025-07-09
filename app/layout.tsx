@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import SessionProvider from './components/SessionProvider'
 import { InlineStyles } from './styles/inline-styles'
-import './globals.css'
+import './styles/globals.css'
 
 export const metadata: Metadata = {
   title: 'ChatGPT風チャットアプリ',
@@ -14,21 +14,21 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const inlineCSS = `
-    * { 
-      box-sizing: border-box !important; 
-      margin: 0 !important; 
-      padding: 0 !important; 
+    * {
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
-    html, body { 
-      background-color: #0D1117 !important; 
-      color: #C9D1D9 !important; 
+    html, body {
+      background-color: #0D1117 !important;
+      color: #C9D1D9 !important;
       font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
       height: 100% !important;
       overflow: hidden !important;
     }
-    #__next { 
-      height: 100vh !important; 
-      background-color: #0D1117 !important; 
+    #__next {
+      height: 100vh !important;
+      background-color: #0D1117 !important;
     }
     .flex { display: flex !important; }
     .flex-1 { flex: 1 1 0% !important; }

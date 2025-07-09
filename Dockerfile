@@ -27,7 +27,6 @@ RUN npx prisma generate || echo "Prisma generate failed, continuing..."
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# ✅ TailwindはNext.jsがPostCSS経由で処理するのでCLIビルド不要！
 RUN npm run build
 
 # ============ RUNTIME STAGE ==========================================
@@ -44,26 +43,26 @@ RUN apt-get update && \
 # ---- app dir --------------------------------------------------------
 WORKDIR /app
 
-# ---- copy prisma first for postinstall script ----------------------
-COPY --from=builder /app/prisma            ./prisma/
-
-# ---- install production deps ----------------------------------------
-COPY package*.json ./
-RUN npm ci --only=production && npm cache clean --force
-
 # ---- create non-root user ------------------------------------------
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-# ---- copy application files -----------------------------------------
-COPY --from=builder /app/.next/standalone  ./
-COPY --from=builder /app/.next/standalone/server.js ./server.js
-COPY --from=builder /app/.next/static      ./.next/static
-COPY --from=builder /app/public            ./public
-COPY --from=builder /app/next.config.js    ./
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder /app/app/globals.css   ./app/globals.css
+# ---- copy prisma configuration ------
+COPY --from=builder /app/prisma ./prisma/
+COPY package*.json ./
 
+# ---- install only production deps ---
+RUN npm ci --only=production && npm cache clean --force
+
+# ---- copy standalone application -----------------------------------
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+
+# ---- copy additional required files --------------------------------
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/next.config.js ./next.config.js
+COPY --from=builder /app/app ./app
 
 # ---- startup script -------------------------------------------------
 COPY start.sh ./
