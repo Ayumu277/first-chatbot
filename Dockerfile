@@ -57,11 +57,13 @@ RUN addgroup --system --gid 1001 nodejs && \
 
 # ---- copy application files -----------------------------------------
 COPY --from=builder /app/.next/standalone  ./
+COPY --from=builder /app/.next/standalone/server.js ./server.js
 COPY --from=builder /app/.next/static      ./.next/static
 COPY --from=builder /app/public            ./public
 COPY --from=builder /app/next.config.js    ./
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/app/globals.css   ./app/globals.css
+
 
 # ---- startup script -------------------------------------------------
 COPY start.sh ./
