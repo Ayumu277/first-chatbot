@@ -1,30 +1,35 @@
-# Docker + Azure App Service for Containers Deployment
 name: Docker Deploy to Azure App Service
 
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  # Docker Hub のリポジトリ
+  DOCKER_HUB_IMAGE: ayumu277/chatbot-app
+  # Azure App Service
   AZURE_WEBAPP_NAME: chatbot-app-container
   AZURE_RESOURCE_GROUP: chatbot-app-new_group
-  DOCKER_HUB_IMAGE: ayumu277/chatbot-app
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
+
+      # ── Docker レイヤーキャッシュ ──────────────────────────────────────────
+      - name: Cache Buildx layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -32,54 +37,32 @@ jobs:
           username: ayumu277
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract metadata for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            docker.io/${{ env.DOCKER_HUB_IMAGE }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=sha,prefix=sha-
-            type=raw,value=latest,enable={{is_default_branch}}
+      - name: Set up QEMU (for multi-platform build)
+        uses: docker/setup-qemu-action@v2
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push Docker image
+      - name: Build & push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile
+          file: Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          tags: docker.io/${{ env.DOCKER_HUB_IMAGE }}:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
   deploy:
     runs-on: ubuntu-latest
     needs: build-and-push
     if: github.ref == 'refs/heads/main'
-
     permissions:
       id-token: write
-      contents: read
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
+      # ── Azure へログイン ───────────────────────────────────────────────────
       - name: Log in to Azure
         uses: azure/login@v2
         with:
@@ -88,66 +71,19 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           auth-type: SERVICE_PRINCIPAL
 
-      - name: Check Azure App Service
-        run: |
-          echo "Checking if Azure App Service exists..."
-          if az webapp show --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} > /dev/null 2>&1; then
-            echo "✅ Azure App Service found"
-          else
-            echo "❌ Azure App Service not found. Please check the app name and resource group."
-            echo "Available web apps:"
-            az webapp list --query "[].{name:name, resourceGroup:resourceGroup, state:state}" --output table || true
-            exit 1
-          fi
-
-      - name: Get Azure App Service URL
-        id: get-url
-        run: |
-          APP_URL=$(az webapp show --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --query "defaultHostName" --output tsv)
-          echo "APP_URL=https://$APP_URL" >> "$GITHUB_OUTPUT"
-          echo "✅ App URL: https://$APP_URL"
-
-      - name: Deploy to Azure Web App for Containers using Docker Hub
-        id: deploy-to-webapp
-        run: |
-          echo "Deploying Docker Hub image to Azure App Service..."
-          az webapp config container set \
-            --name ${{ env.AZURE_WEBAPP_NAME }} \
-            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --docker-custom-image-name docker.io/${{ env.DOCKER_HUB_IMAGE }}:latest \
-            --docker-registry-server-url https://docker.io
-
-      - name: Set Azure App Service configuration
-        run: |
-          echo "Setting Azure App Service configuration..."
-          az webapp config appsettings set \
-            --name ${{ env.AZURE_WEBAPP_NAME }} \
-            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-            --settings \
-              WEBSITES_PORT=8080 \
-              NODE_ENV=production \
-              PORT=8080 \
-              WEBSITES_ENABLE_APP_SERVICE_STORAGE=false \
-              DOCKER_ENABLE_CI=true
-
-      - name: Restart Azure App Service
-        run: |
-          echo "Restarting Azure App Service..."
-          az webapp restart --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }}
-
-      - name: Wait for restart to complete
-        run: |
-          echo "Waiting for Azure App Service to fully restart..."
-          sleep 90
+      # ── コンテナ設定＆デプロイ ─────────────────────────────────────────────
+      - name: Deploy to Azure Web App (Container)
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          images: docker.io/${{ env.DOCKER_HUB_IMAGE }}:latest
 
   health-check:
     runs-on: ubuntu-latest
     needs: deploy
     if: github.ref == 'refs/heads/main'
-
     permissions:
       id-token: write
-      contents: read
 
     steps:
       - name: Log in to Azure
@@ -158,56 +94,24 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           auth-type: SERVICE_PRINCIPAL
 
-      - name: Get Azure App Service URL
+      - name: Get App URL
         id: get-url
         run: |
-          APP_URL=$(az webapp show --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --query "defaultHostName" --output tsv)
-          echo "APP_URL=https://$APP_URL" >> $GITHUB_OUTPUT
-          echo "✅ App URL: https://$APP_URL"
+          echo "APP_URL=https://$(az webapp show \
+            --name ${{ env.AZURE_WEBAPP_NAME }} \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --query defaultHostName -o tsv)" >> "$GITHUB_OUTPUT"
 
-      - name: Health check
+      - name: Health check (max 15 attempts)
         run: |
-          APP_URL="${{ steps.get-url.outputs.APP_URL }}"
-          echo "Checking health of: $APP_URL"
-
-          max_attempts=15
-          attempt=1
-
-          while [ $attempt -le $max_attempts ]; do
-            echo "Attempt $attempt/$max_attempts..."
-            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL" || echo "000")
-            echo "HTTP Status Code: $HTTP_CODE"
-
-            if [ "$HTTP_CODE" = "200" ]; then
-              echo "✅ Health check passed! App is running."
-              curl -I "$APP_URL"
+          for i in $(seq 1 15); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" ${{ steps.get-url.outputs.APP_URL }})
+            echo "Attempt $i: HTTP $code"
+            if [ "$code" = "200" ]; then
+              echo "✅ Healthy!"
               exit 0
-            elif [ "$HTTP_CODE" = "503" ]; then
-              echo "⚠️ Service unavailable (503). App may still be starting..."
-            else
-              echo "❌ Unexpected status code: $HTTP_CODE"
             fi
-
-            if [ $attempt -lt $max_attempts ]; then
-              echo "Retrying in 30 seconds..."
-              sleep 30
-            fi
-            attempt=$((attempt + 1))
+            sleep 10
           done
-
-          echo "❌ Health check failed after $max_attempts attempts"
-          echo "Final check details:"
-          curl -v "$APP_URL" || true
+          echo "❌ Health check failed"
           exit 1
-
-      - name: Notify deployment status
-        if: always()
-        run: |
-          APP_URL="${{ steps.get-url.outputs.APP_URL }}"
-          if [ ${{ job.status }} == 'success' ]; then
-            echo "🚀 Deployment successful!"
-            echo "App URL: $APP_URL"
-          else
-            echo "❌ Deployment failed!"
-            echo "Please check the Azure App Service logs for more details."
-          fi
