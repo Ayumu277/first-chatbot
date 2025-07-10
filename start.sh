@@ -4,10 +4,9 @@ set -e
 # AzureのPORT指定
 PORT=${PORT:-8080}
 
-# Prisma用バイナリを明示（Azureで必要になることがある）
-export PRISMA_CLI_QUERY_ENGINE_TYPE=binary
-export PRISMA_SCHEMA_ENGINE_BINARY="/app/node_modules/.prisma/client/schema-engine-debian-openssl-1.1.x"
-export PRISMA_QUERY_ENGINE_BINARY="/app/node_modules/.prisma/client/query-engine-debian-openssl-1.1.x"
+echo "🚀 Starting Next.js chatbot application..."
+echo "📍 Port: $PORT"
+echo "🔧 Environment: ${NODE_ENV:-production}"
 
 # 環境変数の確認ログ
 echo "🔍 DATABASE_URL: ${DATABASE_URL:0:50}..."
@@ -18,23 +17,33 @@ echo "🔍 NEXTAUTH_URL: $NEXTAUTH_URL"
 # DB接続チェック
 if [ -z "$DATABASE_URL" ]; then
     echo "❌ ERROR: DATABASE_URL not set"
-    env | grep DATABASE
+    env | grep DATABASE || echo "No DATABASE environment variables found"
     exit 1
 fi
 
-# Prisma Clientの生成
+# Prisma Clientの生成（本番環境でも実行）
 echo "🔧 Generating Prisma client..."
-npx prisma generate || {
+if npx prisma generate; then
+    echo "✅ Prisma client generated successfully"
+else
     echo "❌ Prisma generate failed"
     exit 1
-}
+fi
 
-# マイグレーションの適用
+# マイグレーションの適用（本番環境）
 echo "🚀 Running migrations..."
-npx prisma migrate deploy || {
-    echo "⚠️ Migration failed or skipped"
-}
+if npx prisma migrate deploy; then
+    echo "✅ Migrations applied successfully"
+else
+    echo "⚠️ Migration failed or skipped, continuing..."
+fi
 
-# 最後にNext.jsアプリを起動
+# ファイル確認
+echo "📁 Checking required files..."
+echo "- server.js: $(test -f server.js && echo '✅ Found' || echo '❌ Missing')"
+echo "- .next directory: $(test -d .next && echo '✅ Found' || echo '❌ Missing')"
+echo "- node_modules: $(test -d node_modules && echo '✅ Found' || echo '❌ Missing')"
+
+# Next.jsアプリケーションを起動
 echo "🌐 Starting Next.js app on port $PORT..."
-exec node .next/standalone/server.js
+exec node server.js

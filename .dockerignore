@@ -14,12 +14,11 @@ yarn.lock
 pnpm-lock.yaml
 
 # Next.js Build Output (keep standalone and static for Docker)
-# .next/
 out/
 build/
 dist/
 
-# Next.js Cache
+# Next.js Cache (exclude only cache, keep build output)
 .next/cache/
 
 # Production builds
@@ -182,11 +181,11 @@ webpack.*.js
 .babelrc*
 babel.config.*
 
-# PostCSS
-postcss.config.*
+# PostCSS (keep for Docker builds)
+# postcss.config.*
 
-# Tailwind
-tailwind.config.*
+# Tailwind (keep for Docker builds)
+# tailwind.config.*
 
 # Development tools
 .editorconfig
