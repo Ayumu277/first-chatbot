@@ -55,8 +55,8 @@ dev.db-journal
 *.db-journal
 prisma/migrations/migration_lock.toml
 # Keep schema and migrations for Docker build
-# !prisma/schema.prisma
-# !prisma/migrations/
+!prisma/schema.prisma
+!prisma/migrations/
 
 # IDE & Editor
 .vscode/
