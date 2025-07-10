@@ -7,6 +7,7 @@ PORT=${PORT:-8080}
 echo "🚀 Starting Next.js chatbot application..."
 echo "📍 Port: $PORT"
 echo "🔧 Environment: ${NODE_ENV:-production}"
+echo "🏗️ Platform: $(uname -m)"
 
 # 環境変数の確認ログ
 echo "🔍 DATABASE_URL: ${DATABASE_URL:0:50}..."
@@ -20,6 +21,12 @@ if [ -z "$DATABASE_URL" ]; then
     env | grep DATABASE || echo "No DATABASE environment variables found"
     exit 1
 fi
+
+# Prismaエンジンの診断
+echo "🔧 Prisma engine diagnostics..."
+echo "- Prisma client location: $(find /app -name "*.prisma" -type f 2>/dev/null | head -3)"
+echo "- Prisma engines: $(find /app -name "*query*engine*" -type f 2>/dev/null | head -3)"
+echo "- OpenSSL version: $(openssl version 2>/dev/null || echo 'OpenSSL not found')"
 
 # Prisma Clientの生成（本番環境でも実行）
 echo "🔧 Generating Prisma client..."
