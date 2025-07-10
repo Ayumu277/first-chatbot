@@ -1,6 +1,7 @@
 #!/bin/bash
+
+# AzureのPORT指定
 PORT=${PORT:-8080}
-exec node .next/standalone/server.js
 
 # Set Prisma environment variables for Azure
 export PRISMA_CLI_QUERY_ENGINE_TYPE=binary
@@ -34,5 +35,5 @@ if ! npx prisma migrate deploy; then
 fi
 
 # 最後にアプリ起動
-echo "🌐 Starting Next.js app on port ${PORT:-8080}..."
-exec PORT=${PORT:-8080} node .next/standalone/server.js
+echo "🌐 Starting Next.js app on port $PORT..."
+exec node .next/standalone/server.js
