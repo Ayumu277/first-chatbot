@@ -1,7 +1,9 @@
 version: '3.8'
 services:
   app:
+    # マルチアーキテクチャ対応のイメージを指定
     image: ayumu277/chatbot-app:latest
+    platform: linux/amd64  # Azure App Service用に明示的にAMD64を指定
     restart: always
     ports:
       - "8080:8080"
@@ -9,3 +11,9 @@ services:
       PORT: 8080
       NODE_ENV: production
       DATABASE_URL: ${DATABASE_URL}
+      # TailwindCSS環境変数
+      DISABLE_CSSNANO: "true"
+      TAILWIND_MODE: "build"
+      # Azure対応
+      HOST: "0.0.0.0"
+      HOSTNAME: "0.0.0.0"

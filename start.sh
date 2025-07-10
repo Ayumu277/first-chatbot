@@ -1,5 +1,6 @@
 #!/bin/bash
-# ⭐ 確実にHTTP 200にするためのstart.sh v2 ⭐
+# ⭐ 確実にHTTP 200にするためのstart.sh v3 ⭐
+# TailwindCSS本番環境対応版
 
 set -e  # エラーで停止
 
@@ -15,12 +16,34 @@ export PORT=${PORT:-8080}
 export HOST=0.0.0.0
 export HOSTNAME=0.0.0.0
 
+# 🎨 TailwindCSS環境変数設定
+export DISABLE_CSSNANO=true
+export TAILWIND_MODE=build
+export CSS_MINIMIZE=false
+
+echo "🎨 TailwindCSS settings:"
+echo "- DISABLE_CSSNANO: ${DISABLE_CSSNANO}"
+echo "- TAILWIND_MODE: ${TAILWIND_MODE}"
+echo "- CSS_MINIMIZE: ${CSS_MINIMIZE}"
+
 # ファイル確認
 echo "📁 File check:"
 echo "- package.json: $(test -f package.json && echo '✅' || echo '❌')"
 echo "- .next folder: $(test -d .next && echo '✅' || echo '❌')"
 echo "- prisma folder: $(test -d prisma && echo '✅' || echo '❌')"
 echo "- node_modules: $(test -d node_modules && echo '✅' || echo '❌')"
+echo "- tailwind.config.js: $(test -f tailwind.config.js && echo '✅' || echo '❌')"
+echo "- postcss.config.js: $(test -f postcss.config.js && echo '✅' || echo '❌')"
+
+# TailwindCSS設定確認
+if [ -f "tailwind.config.js" ]; then
+    echo "✅ TailwindCSS config found"
+    # safelistの行数をチェック
+    safelist_lines=$(grep -c "safelist\|pattern" tailwind.config.js || echo "0")
+    echo "- Safelist patterns: ${safelist_lines}"
+else
+    echo "⚠️ TailwindCSS config not found"
+fi
 
 # Node.js情報
 echo "🔧 Environment:"
@@ -29,7 +52,7 @@ echo "- npm: $(npm --version)"
 
 # Prismaクライアント生成（最重要 - エラーハンドリング強化）
 echo "🔧 Setting up Prisma..."
-export PRISMA_CLI_BINARY_TARGETS=linux-musl
+export PRISMA_CLI_BINARY_TARGETS=linux-musl,linux-musl-openssl-3.0.x
 export OPENSSL_CONF=""
 
 # Prismaクライアント確認・生成
@@ -66,6 +89,7 @@ fi
 echo "🚀 Starting Next.js application..."
 echo "- Host: ${HOST}"
 echo "- Port: ${PORT}"
+echo "- TailwindCSS Mode: ${TAILWIND_MODE}"
 
 # プロセス監視とクリーンアップ
 cleanup() {

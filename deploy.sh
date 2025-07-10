@@ -1,139 +1,110 @@
 #!/bin/bash
+# 🚀 Azure App Service用マルチアーキテクチャ対応デプロイスクリプト v3
+# TailwindCSS本番環境対応版
 
-# ----------------------
-# KUDU Deployment Script
-# Version: 1.0.17
-# ----------------------
+set -e
 
-# Helpers
-# -------
+echo "🚀 Starting deployment process..."
 
-exitWithMessageOnError () {
-  if [ ! $? -eq 0 ]; then
-    echo "An error has occurred during web site deployment."
-    echo $1
+# 設定
+DOCKER_USERNAME="ayumu277"
+IMAGE_NAME="chatbot-app"
+FULL_IMAGE_NAME="${DOCKER_USERNAME}/${IMAGE_NAME}"
+
+echo "📋 Build configuration:"
+echo "- Docker username: ${DOCKER_USERNAME}"
+echo "- Image name: ${IMAGE_NAME}"
+echo "- Full image name: ${FULL_IMAGE_NAME}"
+
+# Docker Buildxが有効か確認
+echo "🔧 Checking Docker Buildx..."
+if ! docker buildx version >/dev/null 2>&1; then
+    echo "❌ Docker Buildx is not available"
+    echo "Please enable Docker Desktop experimental features or install Buildx"
     exit 1
-  fi
-}
-
-# Prerequisites
-# -------------
-
-# Verify node.js installed
-hash node 2>/dev/null
-exitWithMessageOnError "Missing node.js executable, please install node.js, if already installed make sure it can be reached from current environment."
-
-# Setup
-# -----
-
-SCRIPT_DIR="${BASH_SOURCE[0]%\\*}"
-SCRIPT_DIR="${SCRIPT_DIR%/*}"
-ARTIFACTS_DIR="${SCRIPT_DIR%\\*}"
-KUDU_SYNC_CMD=${KUDU_SYNC_CMD//\"}
-
-if [[ ! -n "$DEPLOYMENT_SOURCE" ]]; then
-  DEPLOYMENT_SOURCE=$SCRIPT_DIR
 fi
 
-if [[ ! -n "$NEXT_MANIFEST_PATH" ]]; then
-  NEXT_MANIFEST_PATH=$ARTIFACTS_DIR/manifest
+# マルチアーキテクチャビルダーの作成・使用
+echo "🏗️  Setting up multi-architecture builder..."
+docker buildx create --name multiarch-builder --use --bootstrap 2>/dev/null || docker buildx use multiarch-builder
 
-  if [[ ! -n "$PREVIOUS_MANIFEST_PATH" ]]; then
-    PREVIOUS_MANIFEST_PATH=$NEXT_MANIFEST_PATH
-  fi
-fi
+# 既存のコンテナとイメージをクリーンアップ
+echo "🧹 Cleaning up existing containers and images..."
+docker stop $(docker ps -q --filter ancestor=${FULL_IMAGE_NAME}) 2>/dev/null || true
+docker rm $(docker ps -aq --filter ancestor=${FULL_IMAGE_NAME}) 2>/dev/null || true
+docker rmi ${FULL_IMAGE_NAME}:latest 2>/dev/null || true
 
-if [[ ! -n "$DEPLOYMENT_TARGET" ]]; then
-  DEPLOYMENT_TARGET=$ARTIFACTS_DIR/wwwroot
+# TailwindCSS環境変数設定
+export DISABLE_CSSNANO=true
+export TAILWIND_MODE=build
+
+echo "🎨 TailwindCSS build settings:"
+echo "- DISABLE_CSSNANO: ${DISABLE_CSSNANO}"
+echo "- TAILWIND_MODE: ${TAILWIND_MODE}"
+
+# マルチアーキテクチャビルド実行
+echo "🔨 Building multi-architecture Docker image..."
+docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  --build-arg DISABLE_CSSNANO=true \
+  --build-arg TAILWIND_MODE=build \
+  -t ${FULL_IMAGE_NAME}:latest \
+  --push \
+  .
+
+if [ $? -eq 0 ]; then
+    echo "✅ Multi-architecture build completed successfully"
 else
-  KUDU_SERVICE=true
+    echo "❌ Build failed"
+    exit 1
 fi
 
-if [[ ! -n "$KUDU_SYNC_CMD" ]]; then
-  # Install kudu sync
-  echo Installing Kudu Sync
-  npm install kudusync -g --silent
-  exitWithMessageOnError "npm failed"
+# イメージ情報表示
+echo "📊 Image information:"
+docker buildx imagetools inspect ${FULL_IMAGE_NAME}:latest
 
-  if [[ ! -n "$KUDU_SERVICE" ]]; then
-    # In case we are running locally this is the correct location of kuduSync
-    KUDU_SYNC_CMD=kuduSync
-  else
-    # In case we are running on kudu service this is the correct location of kuduSync
-    KUDU_SYNC_CMD=$APPDATA/npm/node_modules/kuduSync/bin/kuduSync
-  fi
-fi
+# ローカルテスト（オプション）
+read -p "🧪 Do you want to run a local test? (y/N): " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "🧪 Running local test..."
 
-# Node Helpers
-# ------------
+    # AMD64版をプルしてテスト
+    docker pull --platform linux/amd64 ${FULL_IMAGE_NAME}:latest
 
-selectNodeVersion () {
-  if [[ -n "$KUDU_SELECT_NODE_VERSION_CMD" ]]; then
-    SELECT_NODE_VERSION="$KUDU_SELECT_NODE_VERSION_CMD \"$DEPLOYMENT_SOURCE\" \"$DEPLOYMENT_TARGET\" \"$DEPLOYMENT_TEMP\""
-    eval $SELECT_NODE_VERSION
-    exitWithMessageOnError "select node version failed"
+    echo "🚀 Starting test container..."
+    docker run -d \
+      --name test-container \
+      --platform linux/amd64 \
+      -p 8080:8080 \
+      -e DISABLE_CSSNANO=true \
+      -e TAILWIND_MODE=build \
+      ${FULL_IMAGE_NAME}:latest
 
-    if [[ -e "$DEPLOYMENT_TEMP/__nodeVersion.tmp" ]]; then
-      NODE_EXE=`cat "$DEPLOYMENT_TEMP/__nodeVersion.tmp"`
-      exitWithMessageOnError "getting node version failed"
+    echo "⏳ Waiting for container to start..."
+    sleep 10
+
+    # ヘルスチェック
+    if curl -f http://localhost:8080 >/dev/null 2>&1; then
+        echo "✅ Local test passed - app is responding"
+    else
+        echo "❌ Local test failed - app is not responding"
+        docker logs test-container
     fi
 
-    if [[ -e "$DEPLOYMENT_TEMP/__npmVersion.tmp" ]]; then
-      NPM_JS_PATH=`cat "$DEPLOYMENT_TEMP/__npmVersion.tmp"`
-      exitWithMessageOnError "getting npm version failed"
-    fi
+    # テストコンテナクリーンアップ
+    docker stop test-container 2>/dev/null || true
+    docker rm test-container 2>/dev/null || true
 
-    if [[ ! -n "$NODE_EXE" ]]; then
-      NODE_EXE=node
-    fi
-
-    NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
-  else
-    NPM_CMD=npm
-    NODE_EXE=node
-  fi
-}
-
-##################################################################################################################################
-# Deployment
-# ----------
-
-echo Handling node.js deployment.
-
-# 1. KuduSync
-if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
-  "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh"
-  exitWithMessageOnError "Kudu Sync failed"
+    echo "🧹 Test container cleaned up"
 fi
 
-# 2. Select node version
-selectNodeVersion
+echo "🎉 Deployment completed successfully!"
+echo "📝 Next steps:"
+echo "1. Your multi-architecture image is available at: ${FULL_IMAGE_NAME}:latest"
+echo "2. Azure App Service will automatically use the linux/amd64 version"
+echo "3. TailwindCSS styles are preserved with the safelist configuration"
+echo "4. The image supports both AMD64 and ARM64 architectures"
 
-# 3. Install npm packages
-if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
-  cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install --production
-  exitWithMessageOnError "npm failed"
-  cd - > /dev/null
-fi
-
-# 4. Install Prisma
-if [ -e "$DEPLOYMENT_TARGET/prisma" ]; then
-  cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install prisma @prisma/client
-  exitWithMessageOnError "Prisma installation failed"
-  npx prisma generate
-  exitWithMessageOnError "Prisma generate failed"
-  cd - > /dev/null
-fi
-
-# 5. Build Next.js app
-if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
-  cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD run build
-  exitWithMessageOnError "Next.js build failed"
-  cd - > /dev/null
-fi
-
-##################################################################################################################################
-echo "Finished successfully."
+echo "🔗 Image URL for Azure App Service:"
+echo "   docker.io/${FULL_IMAGE_NAME}:latest"
