@@ -1,0 +1,7 @@
+<step title="Incoming Request" date="2025-07-09T12:28:48.765" instance="949b23" url="/api/deployments/a805472c0312edb21b8d08ca517a9b4e8cefc7931752064127789" method="PUT" type="request" pid="772,1,22" Host="chatbot-app-container-fse7g9cnf8hfgpej.scm.japaneast-01.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_a0df8406eba08ee99bc38a6d5057acdb099dc770371e38ab0add4e46d3f0b63d" Authorization="Bea..." Content-Type="application/json; charset=utf-8" Content-Length="309" X-ARR-LOG-ID="132a07ba-73d3-4763-899d-b5fdccae1c10" CLIENT-IP="20.25.193.255:35456" X-SITE-DEPLOYMENT-ID="chatbot-app-container" WAS-DEFAULT-HOSTNAME="chatbot-app-container-fse7g9cnf8hfgpej.scm.japaneast-01.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/a805472c0312edb21b8d08ca517a9b4e8cefc7931752064127789" X-Client-IP="20.25.193.255" X-Client-Port="35456" >
+  <step title="Cleanup Xml Logs" date="2025-07-09T12:28:48.771" /><!-- duration: 15ms -->
+  <step title="DeploymentService.Deploy(id)" date="2025-07-09T12:28:48.951" >
+    <step title="DeploymentService.Create(id)" date="2025-07-09T12:28:48.961" /><!-- duration: 1352ms -->
+  </step><!-- duration: 1369ms -->
+  <step title="Outgoing response" date="2025-07-09T12:28:50.334" type="response" statusCode="200" statusText="OK" /><!-- duration: 4ms -->
+</step><!-- duration: 1577ms -->

@@ -1,0 +1,6 @@
+<step title="Incoming Request" date="2025-07-10T16:41:19.889" instance="8357d4" url="/logstream" method="GET" type="request" pid="767,1,3" Host="chatbot-app-container-fse7g9cnf8hfgpej.scm.japaneast-01.azurewebsites.net" User-Agent="AZURECLI/2.75.0 (HOMEBREW)" Accept-Encoding="identity" Authorization="Bea..." x-ms-client-request-id="58d98ccc-5dac-11f0-8337-52db202025ba" X-ARR-LOG-ID="58d98ccc-5dac-11f0-8337-52db202025ba" CLIENT-IP="153.243.2.15:42088" X-SITE-DEPLOYMENT-ID="chatbot-app-container" WAS-DEFAULT-HOSTNAME="chatbot-app-container-fse7g9cnf8hfgpej.scm.japaneast-01.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/logstream" X-Client-IP="153.243.2.15" X-Client-Port="42088" >
+  <step title="Cleanup Xml Logs" date="2025-07-10T16:41:19.898" /><!-- duration: 16ms -->
+  <step title="LogStreamHandlerMiddleware.Invoke" date="2025-07-10T16:41:19.938" /><!-- duration: 640ms -->
+  <step title="Error occurred" date="2025-07-10T16:45:20.582" type="error" text="LogStreamManager: ProcessRequest end" /><!-- duration: 14ms -->
+  <step title="Outgoing response" date="2025-07-10T16:45:20.609" type="response" statusCode="200" statusText="OK" /><!-- duration: 6ms -->
+</step><!-- duration: 240731ms -->

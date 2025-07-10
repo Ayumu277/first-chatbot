@@ -25,8 +25,14 @@ fi
 # Prismaエンジンの診断
 echo "🔧 Prisma engine diagnostics..."
 echo "- Prisma client location: $(find /app -name "*.prisma" -type f 2>/dev/null | head -3)"
-echo "- Prisma engines: $(find /app -name "*query*engine*" -type f 2>/dev/null | head -3)"
+echo "- Query engines: $(find /app -name "*query*engine*" -type f 2>/dev/null | head -3)"
+echo "- Schema engines: $(find /app -name "*schema*engine*" -type f 2>/dev/null | head -3)"
 echo "- OpenSSL version: $(openssl version 2>/dev/null || echo 'OpenSSL not found')"
+
+# Prismaエンジンの存在確認
+echo "🔍 Checking Prisma binaries..."
+ls -la /app/node_modules/@prisma/engines/ 2>/dev/null || echo "Engines directory not found"
+ls -la /app/node_modules/.prisma/client/ 2>/dev/null || echo "Client directory not found"
 
 # Prisma Clientの生成（本番環境でも実行）
 echo "🔧 Generating Prisma client..."
@@ -42,7 +48,13 @@ echo "🚀 Running migrations..."
 if npx prisma migrate deploy; then
     echo "✅ Migrations applied successfully"
 else
-    echo "⚠️ Migration failed or skipped, continuing..."
+    echo "⚠️ Migration failed, trying direct database access..."
+    # データベース接続テスト
+    if npx prisma db execute --stdin <<< "SELECT 1 as test"; then
+        echo "✅ Database connection successful"
+    else
+        echo "❌ Database connection failed"
+    fi
 fi
 
 # ファイル確認

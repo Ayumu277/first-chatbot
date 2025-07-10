@@ -1,0 +1,197 @@
+2025-07-09T18:15:26.1215513Z 🚀 [Wed Jul  9 18:15:26 UTC 2025] Starting Next.js application...
+2025-07-09T18:15:26.1226842Z Environment: production
+2025-07-09T18:15:26.1227078Z Port: 8080
+2025-07-09T18:15:26.1227200Z Working directory: /app
+2025-07-09T18:15:26.1227255Z User: nextjs
+2025-07-09T18:15:26.1227570Z 🎨 TailwindCSS settings:
+2025-07-09T18:15:26.1227696Z - DISABLE_CSSNANO: true
+2025-07-09T18:15:26.1227740Z - TAILWIND_MODE: build
+2025-07-09T18:15:26.1227781Z - CSS_MINIMIZE: false
+2025-07-09T18:15:26.1227825Z 📁 File check:
+2025-07-09T18:15:26.1227865Z - package.json: ✅
+2025-07-09T18:15:26.1227913Z - .next folder: ✅
+2025-07-09T18:15:26.1227969Z - prisma folder: ✅
+2025-07-09T18:15:26.1228009Z - node_modules: ✅
+2025-07-09T18:15:26.1228048Z - tailwind.config.js: ❌
+2025-07-09T18:15:26.1228086Z - postcss.config.js: ❌
+2025-07-09T18:15:26.1228136Z ⚠️ TailwindCSS config not found
+2025-07-09T18:15:26.1228180Z 🔧 Environment:
+2025-07-09T18:15:26.9828562Z - Node.js: v18.20.8
+2025-07-09T18:15:29.9421845Z - npm: 10.8.2
+2025-07-09T18:15:29.9422608Z 🔧 Setting up Prisma...
+2025-07-09T18:15:29.9422663Z ✅ Prisma client already exists
+2025-07-09T18:15:29.9422755Z 🔍 Testing database connection...
+2025-07-09T18:15:40.4282784Z Terminated
+2025-07-09T18:15:40.4294988Z ⚠️ Database connection failed or timed out, proceeding without DB features
+2025-07-09T18:15:40.4304223Z 🚀 Starting Next.js application...
+2025-07-09T18:15:40.4908636Z - Host: 0.0.0.0
+2025-07-09T18:15:40.5199590Z - Port: 8080
+2025-07-09T18:15:40.5200056Z - TailwindCSS Mode: build
+2025-07-09T18:15:40.5200188Z 🎯 Attempting to start Next.js server...
+2025-07-09T18:15:40.5200330Z ✅ Next.js started with npm start (PID: 48)
+2025-07-09T18:15:41.6450917Z 
+2025-07-09T18:15:41.6451715Z > ai-chatbot@0.1.0 start
+2025-07-09T18:15:41.6451760Z > next start -p 8080 -H 0.0.0.0
+2025-07-09T18:15:41.6451784Z 
+2025-07-09T18:15:45.0467035Z   ▲ Next.js 14.2.5
+2025-07-09T18:15:45.0468092Z   - Local:        http://localhost:8080
+2025-07-09T18:15:45.0468150Z   - Network:      http://0.0.0.0:8080
+2025-07-09T18:15:45.0468186Z 
+2025-07-09T18:15:45.0468285Z  ✓ Starting...
+2025-07-09T18:15:46.7593274Z  ⚠ Disabling SWC Minifer will not be an option in the next major version. Please report any issues you may be experiencing to https://github.com/vercel/next.js/issues
+2025-07-09T18:15:47.5403872Z  ✓ Ready in 5.4s
+2025-07-09T18:27:20.2466381Z 🚀 [Wed Jul  9 18:27:19 UTC 2025] Starting Next.js application...
+2025-07-09T18:27:20.2470937Z Environment: production
+2025-07-09T18:27:20.2471038Z Port: 8080
+2025-07-09T18:27:20.2471061Z Working directory: /app
+2025-07-09T18:27:20.2471081Z User: nextjs
+2025-07-09T18:27:20.2471104Z 🎨 TailwindCSS settings:
+2025-07-09T18:27:20.2471155Z - DISABLE_CSSNANO: true
+2025-07-09T18:27:20.2471174Z - TAILWIND_MODE: build
+2025-07-09T18:27:20.2471193Z - CSS_MINIMIZE: false
+2025-07-09T18:27:20.2471214Z 📁 File check:
+2025-07-09T18:27:20.2471238Z - package.json: ✅
+2025-07-09T18:27:20.2471258Z - .next folder: ✅
+2025-07-09T18:27:20.2471292Z - prisma folder: ✅
+2025-07-09T18:27:20.2471313Z - node_modules: ✅
+2025-07-09T18:27:20.2471333Z - tailwind.config.js: ❌
+2025-07-09T18:27:20.2471353Z - postcss.config.js: ❌
+2025-07-09T18:27:20.2471378Z ⚠️ TailwindCSS config not found
+2025-07-09T18:27:20.2471400Z 🔧 Environment:
+2025-07-09T18:27:21.7883276Z - Node.js: v18.20.8
+2025-07-09T18:27:30.6071724Z - npm: 10.8.2
+2025-07-09T18:27:30.6072372Z 🔧 Setting up Prisma...
+2025-07-09T18:27:30.6072409Z ✅ Prisma client already exists
+2025-07-09T18:27:30.6072437Z 🔍 Testing database connection...
+2025-07-09T18:27:40.9292946Z Terminated
+2025-07-09T18:27:40.9296058Z ⚠️ Database connection failed or timed out, proceeding without DB features
+2025-07-09T18:27:40.9297190Z 🚀 Starting Next.js application...
+2025-07-09T18:27:40.9297649Z - Host: 0.0.0.0
+2025-07-09T18:27:40.9298126Z - Port: 8080
+2025-07-09T18:27:40.9300593Z - TailwindCSS Mode: build
+2025-07-09T18:27:40.9601885Z 🎯 Attempting to start Next.js server...
+2025-07-09T18:27:40.9613310Z ✅ Next.js started with npm start (PID: 42)
+2025-07-09T18:27:50.7197618Z 
+2025-07-09T18:27:50.7198066Z > ai-chatbot@0.1.0 start
+2025-07-09T18:27:50.7198098Z > next start -p 8080 -H 0.0.0.0
+2025-07-09T18:27:50.7198118Z 
+2025-07-09T18:27:55.4194811Z   ▲ Next.js 14.2.5
+2025-07-09T18:27:55.4376712Z   - Local:        http://localhost:8080
+2025-07-09T18:27:55.4377023Z   - Network:      http://0.0.0.0:8080
+2025-07-09T18:27:55.4377063Z 
+2025-07-09T18:27:55.4377095Z  ✓ Starting...
+2025-07-09T18:27:57.1387526Z  ⚠ Disabling SWC Minifer will not be an option in the next major version. Please report any issues you may be experiencing to https://github.com/vercel/next.js/issues
+2025-07-09T18:27:57.8122471Z  ✓ Ready in 5.6s
+2025-07-09T18:28:19.5716551Z 🛑 [Wed Jul  9 18:28:19 UTC 2025] Received shutdown signal, cleaning up...
+2025-07-09T18:29:01.4557454Z 🚀 [Wed Jul  9 18:29:01 UTC 2025] Starting Next.js application...
+2025-07-09T18:29:01.4745777Z Environment: production
+2025-07-09T18:29:01.5050910Z Port: 8080
+2025-07-09T18:29:01.5051044Z Working directory: /app
+2025-07-09T18:29:01.5051066Z User: nextjs
+2025-07-09T18:29:01.5051130Z 🎨 TailwindCSS settings:
+2025-07-09T18:29:01.5051165Z - DISABLE_CSSNANO: true
+2025-07-09T18:29:01.5051184Z - TAILWIND_MODE: build
+2025-07-09T18:29:01.5051201Z - CSS_MINIMIZE: false
+2025-07-09T18:29:01.5051219Z 📁 File check:
+2025-07-09T18:29:01.5051241Z - package.json: ✅
+2025-07-09T18:29:01.5051276Z - .next folder: ✅
+2025-07-09T18:29:01.5051296Z - prisma folder: ✅
+2025-07-09T18:29:01.5051315Z - node_modules: ✅
+2025-07-09T18:29:01.5051333Z - tailwind.config.js: ❌
+2025-07-09T18:29:01.5051351Z - postcss.config.js: ❌
+2025-07-09T18:29:01.5051374Z ⚠️ TailwindCSS config not found
+2025-07-09T18:29:01.5051393Z 🔧 Environment:
+2025-07-09T18:29:02.0071524Z - Node.js: v18.20.8
+2025-07-09T18:29:04.3822778Z - npm: 10.8.2
+2025-07-09T18:29:04.3829627Z 🔧 Setting up Prisma...
+2025-07-09T18:29:04.3836643Z ✅ Prisma client already exists
+2025-07-09T18:29:04.4106295Z 🔍 Testing database connection...
+2025-07-09T18:29:14.5108342Z Terminated
+2025-07-09T18:29:14.5113972Z ⚠️ Database connection failed or timed out, proceeding without DB features
+2025-07-09T18:29:14.5115627Z 🚀 Starting Next.js application...
+2025-07-09T18:29:14.5116183Z - Host: 0.0.0.0
+2025-07-09T18:29:14.5117550Z - Port: 8080
+2025-07-09T18:29:14.5118577Z - TailwindCSS Mode: build
+2025-07-09T18:29:14.5124663Z 🎯 Attempting to start Next.js server...
+2025-07-09T18:29:14.5197395Z ✅ Next.js started with npm start (PID: 49)
+2025-07-09T18:29:15.3448695Z 
+2025-07-09T18:29:15.3449220Z > ai-chatbot@0.1.0 start
+2025-07-09T18:29:15.3449255Z > next start -p 8080 -H 0.0.0.0
+2025-07-09T18:29:15.3449281Z 
+2025-07-09T18:29:17.2817149Z   ▲ Next.js 14.2.5
+2025-07-09T18:29:17.2817461Z   - Local:        http://localhost:8080
+2025-07-09T18:29:17.2817560Z   - Network:      http://0.0.0.0:8080
+2025-07-09T18:29:17.2817584Z 
+2025-07-09T18:29:17.2817606Z  ✓ Starting...
+2025-07-09T18:29:18.0082608Z  ⚠ Disabling SWC Minifer will not be an option in the next major version. Please report any issues you may be experiencing to https://github.com/vercel/next.js/issues
+2025-07-09T18:29:18.3484867Z  ✓ Ready in 2.6s
+2025-07-09T18:29:19.8730054Z 🛑 [Wed Jul  9 18:29:19 UTC 2025] Received shutdown signal, cleaning up...
+2025-07-09T18:29:42.2323487Z 🛑 [Wed Jul  9 18:29:42 UTC 2025] Received shutdown signal, cleaning up...
+2025-07-09T18:33:59.2280357Z 🚀 [Wed Jul  9 18:33:59 UTC 2025] Starting Next.js application...
+2025-07-09T18:33:59.2282926Z Environment: production
+2025-07-09T18:33:59.2283103Z Port: 8080
+2025-07-09T18:33:59.2283163Z Working directory: /app
+2025-07-09T18:34:00.3775455Z User: nextjs
+2025-07-09T18:34:00.3775708Z 🎨 TailwindCSS settings:
+2025-07-09T18:34:00.3775737Z - DISABLE_CSSNANO: true
+2025-07-09T18:34:00.3775755Z - TAILWIND_MODE: build
+2025-07-09T18:34:00.3775773Z - CSS_MINIMIZE: false
+2025-07-09T18:34:00.3775803Z 📁 File check:
+2025-07-09T18:34:00.3775822Z - package.json: ✅
+2025-07-09T18:34:00.3775840Z - .next folder: ✅
+2025-07-09T18:34:00.3775876Z - prisma folder: ✅
+2025-07-09T18:34:00.3775896Z - node_modules: ✅
+2025-07-09T18:34:00.3775915Z - tailwind.config.js: ❌
+2025-07-09T18:34:00.3775933Z - postcss.config.js: ❌
+2025-07-09T18:34:00.3775956Z ⚠️ TailwindCSS config not found
+2025-07-09T18:34:00.3775975Z 🔧 Environment:
+2025-07-09T18:34:00.3776013Z - Node.js: v18.20.8
+2025-07-09T18:34:00.5990580Z - npm: 10.8.2
+2025-07-09T18:34:00.5992174Z 🔧 Setting up Prisma...
+2025-07-09T18:34:00.5993805Z ✅ Prisma client already exists
+2025-07-09T18:34:00.5994216Z 🔍 Testing database connection...
+2025-07-09T18:34:08.9098621Z Prisma schema loaded from prisma/schema.prisma
+2025-07-09T18:34:08.9215696Z Datasource "db": SQL Server database
+2025-07-09T18:34:09.0006672Z 
+2025-07-09T18:34:09.0288474Z - Introspecting based on datasource defined in prisma/schema.prisma
+2025-07-09T18:34:10.6927000Z Terminated
+2025-07-09T18:34:10.7205627Z ⚠️ Database connection failed or timed out, proceeding without DB features
+2025-07-09T18:34:10.7205951Z 🚀 Starting Next.js application...
+2025-07-09T18:34:10.7206048Z - Host: 0.0.0.0
+2025-07-09T18:34:10.7206071Z - Port: 8080
+2025-07-09T18:34:10.7206090Z - TailwindCSS Mode: build
+2025-07-09T18:34:10.7206111Z 🎯 Attempting to start Next.js server...
+2025-07-09T18:34:10.7206132Z ✅ Next.js started with npm start (PID: 75)
+2025-07-09T18:34:12.4091952Z 
+2025-07-09T18:34:12.4092536Z > ai-chatbot@0.1.0 start
+2025-07-09T18:34:12.4092631Z > next start -p 8080 -H 0.0.0.0
+2025-07-09T18:34:12.4092650Z 
+2025-07-09T18:34:15.9052103Z   ▲ Next.js 14.2.5
+2025-07-09T18:34:15.9065680Z   - Local:        http://localhost:8080
+2025-07-09T18:34:15.9077721Z   - Network:      http://0.0.0.0:8080
+2025-07-09T18:34:15.9355642Z 
+2025-07-09T18:34:15.9356302Z  ✓ Starting...
+2025-07-09T18:34:17.1017071Z  ⚠ Disabling SWC Minifer will not be an option in the next major version. Please report any issues you may be experiencing to https://github.com/vercel/next.js/issues
+2025-07-09T18:34:17.4162596Z  ✓ Ready in 4.5s
+2025-07-09T18:34:29.2149048Z PrismaClientInitializationError: Prisma Client could not locate the Query Engine for runtime "linux-musl-openssl-3.0.x".
+2025-07-09T18:34:29.2149495Z 
+2025-07-09T18:34:29.2149526Z This happened because Prisma Client was generated for "linux-musl-arm64-openssl-3.0.x", but the actual deployment required "linux-musl-openssl-3.0.x".
+2025-07-09T18:34:29.2149545Z Add "linux-musl-openssl-3.0.x" to `binaryTargets` in the "schema.prisma" file and run `prisma generate` after saving it:
+2025-07-09T18:34:29.2149557Z 
+2025-07-09T18:34:29.2149696Z generator client {
+2025-07-09T18:34:29.2149714Z   provider      = "prisma-client-js"
+2025-07-09T18:34:29.2149731Z   binaryTargets = ["native", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+2025-07-09T18:34:29.2149744Z }
+2025-07-09T18:34:29.2149756Z 
+2025-07-09T18:34:29.2149772Z The following locations have been searched:
+2025-07-09T18:34:29.2149785Z   /app/node_modules/.prisma/client
+2025-07-09T18:34:29.2149799Z   /app/node_modules/@prisma/client
+2025-07-09T18:34:29.2149813Z   /tmp/prisma-engines
+2025-07-09T18:34:29.2149826Z   /app/prisma
+2025-07-09T18:34:29.2149843Z     at za (/app/node_modules/@prisma/client/runtime/library.js:64:805)
+2025-07-09T18:34:29.2149883Z     at async Object.loadLibrary (/app/node_modules/@prisma/client/runtime/library.js:111:10084)
+2025-07-09T18:34:29.2149901Z     at async _r.loadEngine (/app/node_modules/@prisma/client/runtime/library.js:112:448)
+2025-07-09T18:34:29.2149918Z     at async _r.instantiateLibrary (/app/node_modules/@prisma/client/runtime/library.js:111:12599) {
+2025-07-09T18:34:29.2149932Z   clientVersion: '5.22.0',
+2025-07-09T18:34:29.2149946Z   errorCode: undefined
+2025-07-09T18:34:29.2149958Z }

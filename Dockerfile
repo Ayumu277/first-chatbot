@@ -8,7 +8,7 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # プラットフォーム固有の環境変数
-ENV PRISMA_CLI_BINARY_TARGETS="rhel-openssl-1.0.x"
+ENV PRISMA_CLI_BINARY_TARGETS="debian-openssl-1.1.x,rhel-openssl-1.0.x"
 ENV PRISMA_ENGINES_MIRROR="https://binaries.prisma.sh"
 
 RUN npm ci --verbose
@@ -16,8 +16,9 @@ RUN npm ci --verbose
 # アプリケーションソースをコピー
 COPY . .
 
-# Prismaクライアントを生成（linux/amd64用）
+# Prismaクライアントとエンジンを生成（全バイナリ含む）
 RUN npx prisma generate
+RUN npx prisma db pull --force || true
 
 # Next.jsアプリケーションをビルド（standalone出力）
 ENV NODE_ENV=production
@@ -45,7 +46,7 @@ RUN groupadd --gid 1001 nodejs && \
     useradd --uid 1001 --gid nodejs --shell /bin/bash --create-home nextjs
 
 # Prisma環境変数設定
-ENV PRISMA_CLI_BINARY_TARGETS="rhel-openssl-1.0.x"
+ENV PRISMA_CLI_BINARY_TARGETS="debian-openssl-1.1.x,rhel-openssl-1.0.x"
 ENV PRISMA_ENGINES_MIRROR="https://binaries.prisma.sh"
 ENV OPENSSL_CONF=/etc/ssl/openssl.cnf
 
@@ -54,7 +55,12 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
+
+# node_modulesと@prismaディレクトリを確実にコピー
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/prisma ./node_modules/prisma
+
 COPY --from=builder --chown=nextjs:nodejs /app/package*.json ./
 COPY --from=builder --chown=nextjs:nodejs /app/next.config.js ./
 COPY --from=builder --chown=nextjs:nodejs /app/start.sh ./
@@ -62,12 +68,15 @@ COPY --from=builder --chown=nextjs:nodejs /app/start.sh ./
 # 実行権限と所有者を設定
 RUN chmod +x start.sh
 
+# Prismaクライアントとエンジンを本番環境で再生成
+USER nextjs
+RUN npm install prisma @prisma/client --save-exact && \
+    npx prisma generate
+
 # 環境変数設定
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=8080
-
-USER nextjs
 
 EXPOSE 8080
 

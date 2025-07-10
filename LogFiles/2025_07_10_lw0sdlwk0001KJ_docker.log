@@ -1,0 +1,207 @@
+2025-07-10T15:05:41.6241652Z Container start method called.
+2025-07-10T15:05:41.6443229Z Establishing network.
+2025-07-10T15:05:41.6452024Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T15:05:54.7359341Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T15:05:54.7480176Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T15:05:54.7572533Z Container spec TerminationMessagePolicy  path 
+2025-07-10T15:05:54.7677062Z Container is terminated. Total time elapsed: 11 ms.
+2025-07-10T15:05:54.7758398Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T15:05:54.8084490Z Failed to start site. Revert by stopping site.
+2025-07-10T15:05:54.8458215Z Site: chatbot-app-container stopped.
+2025-07-10T15:05:59.323Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T15:06:01.642Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:06:01.661Z INFO  -  
+2025-07-10T15:06:01.667Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:06:01.671Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:06:01.675Z ERROR - Pulling docker image ayumu277/chatbot-app:latest failed:
+2025-07-10T15:06:04.209Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:06:04.240Z INFO  -  
+2025-07-10T15:06:04.242Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:06:04.261Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:06:04.279Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T15:06:04.301Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T15:06:04.500Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T15:06:17.183Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T15:06:19.543Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:06:19.551Z INFO  -  
+2025-07-10T15:06:19.553Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:06:19.556Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:06:19.558Z ERROR - Pulling docker image ayumu277/chatbot-app:latest failed:
+2025-07-10T15:06:21.767Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:06:21.776Z INFO  -  
+2025-07-10T15:06:21.778Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:06:21.782Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:06:21.784Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T15:06:21.791Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T15:06:21.801Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T15:06:32.557Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T15:06:34.813Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:06:34.826Z INFO  -  
+2025-07-10T15:06:34.829Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:06:34.832Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:06:34.834Z ERROR - Pulling docker image ayumu277/chatbot-app:latest failed:
+2025-07-10T15:06:37.093Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:06:37.106Z INFO  -  
+2025-07-10T15:06:37.107Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:06:37.112Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:06:37.114Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T15:06:37.123Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T15:06:37.153Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T15:06:47.674Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T15:06:49.985Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:06:49.993Z INFO  -  
+2025-07-10T15:06:49.994Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:06:49.997Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:06:49.999Z ERROR - Pulling docker image ayumu277/chatbot-app:latest failed:
+2025-07-10T15:06:52.302Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:06:52.341Z INFO  -  
+2025-07-10T15:06:52.343Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:06:52.348Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:06:52.350Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T15:06:52.353Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T15:06:52.370Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T15:09:23.264Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T15:09:25.553Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:09:25.567Z INFO  -  
+2025-07-10T15:09:25.568Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:09:25.572Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:09:25.577Z ERROR - Pulling docker image ayumu277/chatbot-app:latest failed:
+2025-07-10T15:09:27.817Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:09:27.833Z INFO  -  
+2025-07-10T15:09:27.835Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:09:27.844Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:09:27.846Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T15:09:27.855Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T15:09:27.876Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T15:11:55.9412882Z Container start method called.
+2025-07-10T15:11:55.9416045Z Establishing network.
+2025-07-10T15:11:55.9419323Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T15:11:56.0819463Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T15:11:56.0822303Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T15:11:56.0823739Z Container spec TerminationMessagePolicy  path 
+2025-07-10T15:11:56.0825403Z Container is terminated. Total time elapsed: 0 ms.
+2025-07-10T15:11:56.0826501Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T15:11:56.1531937Z Failed to start site. Revert by stopping site.
+2025-07-10T15:11:56.2631699Z Site: chatbot-app-container stopped.
+2025-07-10T15:12:03.6778000Z Container start method called.
+2025-07-10T15:12:03.6857352Z Establishing network.
+2025-07-10T15:12:03.6862747Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T15:12:03.9961709Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T15:12:04.0034578Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T15:12:04.0045455Z Container spec TerminationMessagePolicy  path 
+2025-07-10T15:12:04.0534435Z Container is terminated. Total time elapsed: 1 ms.
+2025-07-10T15:12:04.0545187Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T15:12:04.2462087Z Failed to start site. Revert by stopping site.
+2025-07-10T15:12:04.2746602Z Site: chatbot-app-container stopped.
+2025-07-10T15:12:04.9663005Z Site: chatbot-app-container will be blocked for 1 minutes till 07/10/2025 15:13:04
+2025-07-10T15:12:10.5512565Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:12:15.8670998Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:12:21.1602873Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:12:26.5157558Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:12:31.7262840Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:12:36.9304905Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:12:42.1192250Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:12:47.2969191Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:12:52.4991062Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:12:57.7325071Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:13:02.8570852Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:13:04.9655558Z Site: chatbot-app-container is unblocked.
+2025-07-10T15:13:11.5826405Z Container start method called.
+2025-07-10T15:13:11.5834457Z Establishing network.
+2025-07-10T15:13:11.5913339Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T15:13:11.7020502Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T15:13:11.7029220Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T15:13:11.7034936Z Container spec TerminationMessagePolicy  path 
+2025-07-10T15:13:11.7039909Z Container is terminated. Total time elapsed: 0 ms.
+2025-07-10T15:13:11.7143798Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T15:13:11.7431147Z Failed to start site. Revert by stopping site.
+2025-07-10T15:13:11.7443170Z Site: chatbot-app-container stopped.
+2025-07-10T15:13:12.0852475Z Site: chatbot-app-container will be blocked for 1 minutes till 07/10/2025 15:14:12
+2025-07-10T15:13:17.3571715Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:13:22.5731637Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:13:27.7471795Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:13:32.8357836Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:13:37.9544395Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:13:43.0866809Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:13:48.8485247Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:13:53.9971014Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:13:59.1958303Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:14:04.3445829Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:14:09.5413972Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:14:12.0868261Z Site: chatbot-app-container is unblocked.
+2025-07-10T15:14:16.8561052Z Container start method called.
+2025-07-10T15:14:16.8569028Z Establishing network.
+2025-07-10T15:14:16.8574286Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T15:14:16.9551703Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T15:14:16.9566931Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T15:14:16.9576648Z Container spec TerminationMessagePolicy  path 
+2025-07-10T15:14:16.9653682Z Container is terminated. Total time elapsed: 7 ms.
+2025-07-10T15:14:16.9661095Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T15:14:16.9976652Z Failed to start site. Revert by stopping site.
+2025-07-10T15:14:17.0063834Z Site: chatbot-app-container stopped.
+2025-07-10T15:14:17.3576254Z Site: chatbot-app-container will be blocked for 2 minutes till 07/10/2025 15:16:17
+2025-07-10T15:14:22.6077911Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:14:27.7880997Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:14:33.0004941Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:14:38.0984484Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:14:43.2437071Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:14:48.3980713Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:14:53.5128370Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:14:58.6294017Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:15:03.7955265Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:15:08.9110406Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:15:14.0615531Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:15:19.2229073Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:15:24.3461000Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:15:29.4746255Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:15:34.6833708Z Start site prohibitted because the site is being blocked.
+2025-07-10T15:16:17.3599547Z Site: chatbot-app-container is unblocked.
+2025-07-10T15:44:00.6759917Z Container start method called.
+2025-07-10T15:44:00.6838291Z Establishing network.
+2025-07-10T15:44:00.6844041Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T15:44:00.8251979Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T15:44:00.8261633Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T15:44:00.8362508Z Container spec TerminationMessagePolicy  path 
+2025-07-10T15:44:00.8437118Z Container is terminated. Total time elapsed: 2 ms.
+2025-07-10T15:44:00.8443309Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T15:44:00.8747260Z Failed to start site. Revert by stopping site.
+2025-07-10T15:44:00.8871120Z Site: chatbot-app-container stopped.
+2025-07-10T15:46:49.094Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T15:46:51.493Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:46:51.505Z INFO  -  
+2025-07-10T15:46:51.506Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:46:51.512Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:46:51.513Z ERROR - Pulling docker image ayumu277/chatbot-app:latest failed:
+2025-07-10T15:46:53.828Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:46:53.849Z INFO  -  
+2025-07-10T15:46:53.858Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:46:53.870Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:46:53.878Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T15:46:53.882Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T15:46:53.899Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T15:54:49.989Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T15:54:52.746Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:54:52.748Z INFO  -  
+2025-07-10T15:54:52.750Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:54:52.753Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:54:52.755Z ERROR - Pulling docker image ayumu277/chatbot-app:latest failed:
+2025-07-10T15:54:55.048Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T15:54:55.057Z INFO  -  
+2025-07-10T15:54:55.069Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T15:54:55.073Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T15:54:55.074Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T15:54:55.081Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T15:54:55.093Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T16:00:22.625Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T16:00:24.955Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T16:00:24.967Z INFO  -  
+2025-07-10T16:00:24.969Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T16:00:24.978Z INFO  - Pull Image failed, Time taken: 2 Seconds
+2025-07-10T16:00:24.979Z ERROR - Pulling docker image ayumu277/chatbot-app:latest failed:
+2025-07-10T16:00:26.689Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T16:00:26.709Z INFO  -  
+2025-07-10T16:00:26.711Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T16:00:26.726Z INFO  - Pull Image failed, Time taken: 1 Seconds
+2025-07-10T16:00:26.728Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T16:00:26.738Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T16:00:26.758Z INFO  - Stopping site chatbot-app-container because it failed during startup.

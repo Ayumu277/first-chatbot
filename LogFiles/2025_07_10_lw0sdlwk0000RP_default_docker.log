@@ -1,0 +1,46 @@
+2025-07-10T16:26:48.490610579Z 🚀 Starting Azure App Service deployment...
+2025-07-10T16:26:48.501121999Z Environment: production
+2025-07-10T16:26:48.501127453Z Port: 8080
+2025-07-10T16:26:48.501406184Z Working directory: /app
+2025-07-10T16:26:48.509717802Z User: nextjs
+2025-07-10T16:26:48.509876420Z ./start.sh: 15: Bad substitution
+
+2025-07-10T16:31:08.881801265Z 🚀 Starting Azure App Service deployment...
+2025-07-10T16:31:08.881904383Z Environment: production
+2025-07-10T16:31:08.881954415Z Port: 8080
+2025-07-10T16:31:08.885763792Z Working directory: /app
+2025-07-10T16:31:08.907957903Z ./start.sh: 15: Bad substitution
+2025-07-10T16:31:08.908037527Z User: nextjs
+
+2025-07-10T16:40:56.083140219Z Using PORT 8080
+2025-07-10T16:40:57.017426233Z node:internal/modules/cjs/loader:1143
+2025-07-10T16:40:57.202832617Z   throw err;
+2025-07-10T16:40:57.202837016Z   ^
+2025-07-10T16:40:57.202839750Z 
+2025-07-10T16:40:57.202842269Z Error: Cannot find module '/app/.next/standalone/server.js'
+2025-07-10T16:40:57.202845016Z     at Module._resolveFilename (node:internal/modules/cjs/loader:1140:15)
+2025-07-10T16:40:57.202847655Z     at Module._load (node:internal/modules/cjs/loader:981:27)
+2025-07-10T16:40:57.202850302Z     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:128:12)
+2025-07-10T16:40:57.202852779Z     at node:internal/main/run_main_module:28:49 {
+2025-07-10T16:40:57.202855213Z   code: 'MODULE_NOT_FOUND',
+2025-07-10T16:40:57.202857605Z   requireStack: []
+2025-07-10T16:40:57.202860072Z }
+2025-07-10T16:40:57.202862419Z 
+2025-07-10T16:40:57.202866791Z Node.js v18.20.8
+
+2025-07-10T16:56:05.314270804Z Using PORT 8080
+2025-07-10T16:56:05.818858084Z node:internal/modules/cjs/loader:1143
+2025-07-10T16:56:05.818901132Z   throw err;
+2025-07-10T16:56:05.818904529Z   ^
+2025-07-10T16:56:05.818907280Z 
+2025-07-10T16:56:05.818909842Z Error: Cannot find module '/app/.next/standalone/server.js'
+2025-07-10T16:56:05.818912439Z     at Module._resolveFilename (node:internal/modules/cjs/loader:1140:15)
+2025-07-10T16:56:05.818915048Z     at Module._load (node:internal/modules/cjs/loader:981:27)
+2025-07-10T16:56:05.818917921Z     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:128:12)
+2025-07-10T16:56:05.818920450Z     at node:internal/main/run_main_module:28:49 {
+2025-07-10T16:56:05.818922826Z   code: 'MODULE_NOT_FOUND',
+2025-07-10T16:56:05.818930456Z   requireStack: []
+2025-07-10T16:56:05.818932996Z }
+2025-07-10T16:56:05.827536174Z 
+2025-07-10T16:56:05.827551918Z Node.js v18.20.8
+

@@ -1,0 +1,299 @@
+2025-07-08T03:23:16.9360425Z 🚀 Starting Azure App Service deployment...
+2025-07-08T03:23:16.9576429Z Environment: production
+2025-07-08T03:23:16.9576705Z Port: 8080
+2025-07-08T03:23:16.9576845Z 🔧 Generating Prisma client...
+2025-07-08T03:23:23.7291833Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:23:23.7292688Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:23:28.2012968Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T03:23:28.3233311Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:23:28.3234002Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:23:32.1023795Z 
+2025-07-08T03:23:32.1024595Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 461ms
+2025-07-08T03:23:32.1024659Z 
+2025-07-08T03:23:32.1024691Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T03:23:32.1024714Z 
+2025-07-08T03:23:32.1024791Z Tip: Want to turn off tips and other hints? https://pris.ly/tip-4-nohints
+2025-07-08T03:23:32.1024868Z 
+2025-07-08T03:23:32.5100113Z npm notice
+2025-07-08T03:23:32.5100905Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T03:23:32.5100964Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T03:23:32.5101055Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T03:23:32.5101079Z npm notice
+2025-07-08T03:23:32.5601125Z 🚀 Running database migrations...
+2025-07-08T03:23:38.1017407Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:23:38.1017846Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:23:40.7485223Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:23:40.7485873Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:23:40.7671217Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T03:23:40.7877822Z Datasource "db": SQL Server database
+2025-07-08T03:23:40.8901100Z 
+2025-07-08T03:23:40.8911512Z Error: Could not parse schema engine response: SyntaxError: Unexpected token E in JSON at position 0
+2025-07-08T03:25:26.080610111Z 🚀 Starting Azure App Service deployment...
+2025-07-08T03:25:26.081025955Z Environment: production
+2025-07-08T03:25:26.081030320Z Port: 8080
+2025-07-08T03:25:26.081033125Z 🔧 Generating Prisma client...
+2025-07-08T03:25:34.482562065Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:25:34.482606152Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:25:41.214942696Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T03:25:41.405664971Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:25:41.405688530Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:25:46.112979658Z 
+2025-07-08T03:25:46.113033912Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 392ms
+2025-07-08T03:25:46.113039805Z 
+2025-07-08T03:25:46.113042622Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T03:25:46.113045196Z 
+2025-07-08T03:25:46.113047643Z Tip: Curious about the SQL queries Prisma ORM generates? Optimize helps you enhance your visibility: https://pris.ly/tip-2-optimize
+2025-07-08T03:25:46.113050438Z 
+2025-07-08T03:25:46.965344447Z npm notice
+2025-07-08T03:25:46.965367065Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T03:25:46.965390503Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T03:25:46.965394283Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T03:25:46.965396920Z npm notice
+2025-07-08T03:25:47.027341999Z 🚀 Running database migrations...
+2025-07-08T03:25:54.981767406Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:25:54.981821092Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:25:56.860335321Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:25:56.860380842Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:25:56.871245717Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T03:25:56.881211573Z Datasource "db": SQL Server database
+2025-07-08T03:25:56.981703414Z 
+2025-07-08T03:25:57.000008287Z Error: Could not parse schema engine response: SyntaxError: Unexpected token E in JSON at position 0
+
+2025-07-08T03:26:15.973062154Z 🚀 Starting Azure App Service deployment...
+2025-07-08T03:26:15.973111843Z Environment: production
+2025-07-08T03:26:15.973115748Z Port: 8080
+2025-07-08T03:26:15.973118385Z 🔧 Generating Prisma client...
+2025-07-08T03:26:22.077388891Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:26:22.077606112Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:26:26.461280216Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T03:26:26.621679725Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:26:26.621703787Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:26:30.142742375Z 
+2025-07-08T03:26:30.142795541Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 354ms
+2025-07-08T03:26:30.142800522Z 
+2025-07-08T03:26:30.142803335Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T03:26:30.142805947Z 
+2025-07-08T03:26:30.142808759Z Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
+2025-07-08T03:26:30.142811535Z 
+2025-07-08T03:26:30.573252332Z npm notice
+2025-07-08T03:26:30.573295608Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T03:26:30.573300352Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T03:26:30.573303303Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T03:26:30.573305844Z npm notice
+2025-07-08T03:26:30.615146026Z 🚀 Running database migrations...
+2025-07-08T03:26:35.993420581Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:26:35.993450545Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:26:37.673190784Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:26:37.673243280Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:26:37.691494783Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T03:26:37.721384134Z Datasource "db": SQL Server database
+2025-07-08T03:26:37.812304009Z 
+2025-07-08T03:26:37.813468495Z Error: Could not parse schema engine response: SyntaxError: Unexpected token E in JSON at position 0
+
+2025-07-08T03:26:54.001870577Z 🚀 Starting Azure App Service deployment...
+2025-07-08T03:26:54.001913522Z Environment: production
+2025-07-08T03:26:54.001917037Z Port: 8080
+2025-07-08T03:26:54.001919535Z 🔧 Generating Prisma client...
+2025-07-08T03:27:00.304506198Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:27:00.304551905Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:27:05.186103693Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T03:27:05.428732971Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:27:05.428878561Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:27:10.374074464Z 
+2025-07-08T03:27:10.374091317Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 343ms
+2025-07-08T03:27:10.374095384Z 
+2025-07-08T03:27:10.374097927Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T03:27:10.374100678Z 
+2025-07-08T03:27:10.374103155Z Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
+2025-07-08T03:27:10.374105899Z 
+2025-07-08T03:27:10.817829665Z npm notice
+2025-07-08T03:27:10.817874234Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T03:27:10.817878875Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T03:27:10.817882195Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T03:27:10.817884880Z npm notice
+2025-07-08T03:27:10.909104012Z 🚀 Running database migrations...
+2025-07-08T03:27:24.672976100Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:27:24.673023527Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:27:26.964577778Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:27:26.964612747Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:27:26.976018216Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T03:27:27.016560174Z Datasource "db": SQL Server database
+2025-07-08T03:27:27.267033232Z Error: Could not parse schema engine response: SyntaxError: Unexpected token E in JSON at position 0
+2025-07-08T03:27:27.267478376Z 
+
+2025-07-08T03:27:42.509865946Z 🚀 Starting Azure App Service deployment...
+2025-07-08T03:27:42.509911086Z Environment: production
+2025-07-08T03:27:42.509914587Z Port: 8080
+2025-07-08T03:27:42.509917098Z 🔧 Generating Prisma client...
+2025-07-08T03:27:50.979909190Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:27:50.979948803Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:27:55.261519081Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T03:27:55.374095085Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:27:55.374117850Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:27:59.365620520Z 
+2025-07-08T03:27:59.365674386Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 311ms
+2025-07-08T03:27:59.365679837Z 
+2025-07-08T03:27:59.365682599Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T03:27:59.365685372Z 
+2025-07-08T03:27:59.365688153Z Tip: Easily identify and fix slow SQL queries in your app. Optimize helps you enhance your visibility: https://pris.ly/--optimize
+2025-07-08T03:27:59.365691406Z 
+2025-07-08T03:27:59.856925508Z npm notice
+2025-07-08T03:27:59.856949551Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T03:27:59.856952960Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T03:27:59.856955942Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T03:27:59.856958534Z npm notice
+2025-07-08T03:27:59.957019913Z 🚀 Running database migrations...
+2025-07-08T03:28:07.611444618Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:28:07.611495640Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:28:09.270123880Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T03:28:09.270147737Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T03:28:09.282104718Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T03:28:09.321023192Z Datasource "db": SQL Server database
+2025-07-08T03:28:09.402244505Z 
+2025-07-08T03:28:09.411180958Z Error: Could not parse schema engine response: SyntaxError: Unexpected token E in JSON at position 0
+
+2025-07-08T04:03:50.1545337Z 🚀 Starting Azure App Service deployment...
+2025-07-08T04:03:50.1571327Z Environment: production
+2025-07-08T04:03:50.1571521Z Port: 8080
+2025-07-08T04:03:50.1571560Z 🔧 Generating Prisma client...
+2025-07-08T04:03:59.3420094Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T04:03:59.3420666Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T04:04:06.6741114Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T04:04:06.8037990Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T04:04:06.8038492Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T04:04:11.4688970Z 
+2025-07-08T04:04:11.4689387Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 424ms
+2025-07-08T04:04:11.4689445Z 
+2025-07-08T04:04:11.4689471Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T04:04:11.4689491Z 
+2025-07-08T04:04:11.4692728Z Tip: Want to turn off tips and other hints? https://pris.ly/tip-4-nohints
+2025-07-08T04:04:11.4692774Z 
+2025-07-08T04:04:12.1525663Z npm notice
+2025-07-08T04:04:12.1526324Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T04:04:12.1526380Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T04:04:12.1526403Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T04:04:12.1526426Z npm notice
+2025-07-08T04:04:12.2130035Z 🚀 Running database migrations...
+2025-07-08T04:04:18.6908746Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T04:04:18.6909346Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T04:04:20.3196777Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T04:04:20.3197377Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T04:04:20.3374426Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T04:04:20.3803639Z Datasource "db": SQL Server database
+2025-07-08T04:04:20.4703228Z 
+2025-07-08T04:04:20.4883785Z Error: Prisma schema validation - (get-config wasm)
+2025-07-08T04:04:20.4884444Z Error code: P1012
+2025-07-08T04:04:20.4884487Z error: Error validating datasource `db`: the URL must start with the protocol `sqlserver://`.
+2025-07-08T04:04:20.4884524Z   -->  prisma/schema.prisma:7
+2025-07-08T04:04:20.4884548Z    | 
+2025-07-08T04:04:20.4884570Z  6 |   provider = "sqlserver"
+2025-07-08T04:04:20.4884591Z  7 |   url      = env("DATABASE_URL")
+2025-07-08T04:04:20.4884611Z    | 
+2025-07-08T04:04:20.4884650Z 
+2025-07-08T04:04:20.4884690Z Validation Error Count: 1
+2025-07-08T04:04:20.4884712Z [Context: getConfig]
+2025-07-08T04:04:20.4884730Z 
+2025-07-08T04:04:20.4884750Z Prisma CLI Version : 5.22.0
+2025-07-08T04:04:30.822886622Z 🚀 Starting Azure App Service deployment...
+2025-07-08T04:04:30.822932073Z Environment: production
+2025-07-08T04:04:30.822935615Z Port: 8080
+2025-07-08T04:04:30.822938123Z 🔧 Generating Prisma client...
+2025-07-08T04:04:39.411657545Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T04:04:39.411708806Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T04:04:44.170017967Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T04:04:44.281386787Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T04:04:44.281410725Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T04:04:48.434547467Z 
+2025-07-08T04:04:48.434597549Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 353ms
+2025-07-08T04:04:48.434603440Z 
+2025-07-08T04:04:48.434606136Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T04:04:48.434608823Z 
+2025-07-08T04:04:48.434611312Z Tip: Curious about the SQL queries Prisma ORM generates? Optimize helps you enhance your visibility: https://pris.ly/tip-2-optimize
+2025-07-08T04:04:48.434614175Z 
+2025-07-08T04:04:48.855727342Z npm notice
+2025-07-08T04:04:48.855773752Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T04:04:48.855778359Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T04:04:48.855781244Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T04:04:48.855783864Z npm notice
+2025-07-08T04:04:48.996510270Z 🚀 Running database migrations...
+2025-07-08T04:04:54.978387474Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T04:04:54.978463028Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T04:04:56.879667425Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T04:04:56.879713557Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T04:04:56.949846494Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T04:04:56.949870319Z Datasource "db": SQL Server database
+2025-07-08T04:04:56.978762918Z 
+2025-07-08T04:04:56.979883933Z Error: Prisma schema validation - (get-config wasm)
+2025-07-08T04:04:56.979897760Z Error code: P1012
+2025-07-08T04:04:56.979900896Z error: Error validating datasource `db`: the URL must start with the protocol `sqlserver://`.
+2025-07-08T04:04:56.979903771Z   -->  prisma/schema.prisma:7
+2025-07-08T04:04:56.979906590Z    | 
+2025-07-08T04:04:56.979919626Z  6 |   provider = "sqlserver"
+2025-07-08T04:04:56.979922464Z  7 |   url      = env("DATABASE_URL")
+2025-07-08T04:04:56.979941448Z    | 
+2025-07-08T04:04:56.979943831Z 
+2025-07-08T04:04:56.979946183Z Validation Error Count: 1
+2025-07-08T04:04:56.979948643Z [Context: getConfig]
+2025-07-08T04:04:56.979951073Z 
+2025-07-08T04:04:56.979953338Z Prisma CLI Version : 5.22.0
+
+2025-07-08T10:17:22.0379236Z 🚀 Starting Azure App Service deployment...
+2025-07-08T10:17:22.0444398Z Environment: production
+2025-07-08T10:17:22.0444546Z Port: 8080
+2025-07-08T10:17:22.0444573Z 🔧 Generating Prisma client...
+2025-07-08T10:17:30.5774768Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T10:17:30.5775263Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T10:17:36.2906338Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T10:17:36.4533703Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T10:17:36.4534327Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T10:17:40.0744399Z 
+2025-07-08T10:17:40.0744963Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 343ms
+2025-07-08T10:17:40.0745013Z 
+2025-07-08T10:17:40.0745120Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T10:17:40.0745141Z 
+2025-07-08T10:17:40.0745184Z Tip: Easily identify and fix slow SQL queries in your app. Optimize helps you enhance your visibility: https://pris.ly/--optimize
+2025-07-08T10:17:40.0745204Z 
+2025-07-08T10:17:40.5346639Z npm notice
+2025-07-08T10:17:40.5347276Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T10:17:40.5347327Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T10:17:40.5347349Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T10:17:40.5347369Z npm notice
+2025-07-08T10:17:40.6173678Z 🚀 Running database migrations...
+2025-07-08T10:17:47.4400736Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T10:17:47.4401249Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T10:17:49.2579928Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T10:17:49.2580561Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T10:17:49.2684990Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T10:17:49.2981788Z Datasource "db": SQL Server database
+2025-07-08T10:17:49.4209392Z 
+2025-07-08T10:17:49.4381645Z Error: Could not parse schema engine response: SyntaxError: Unexpected token E in JSON at position 0
+2025-07-08T10:17:56.2712927Z 🚀 Starting Azure App Service deployment...
+2025-07-08T10:17:56.2713600Z Environment: production
+2025-07-08T10:17:56.2713634Z Port: 8080
+2025-07-08T10:17:56.2713653Z 🔧 Generating Prisma client...
+2025-07-08T10:18:04.7162046Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T10:18:04.7162414Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T10:18:09.2934628Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T10:18:09.4246502Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T10:18:09.4246991Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T10:18:13.8956815Z 
+2025-07-08T10:18:13.8957200Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 572ms
+2025-07-08T10:18:13.8957224Z 
+2025-07-08T10:18:13.8957246Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T10:18:13.8957259Z 
+2025-07-08T10:18:13.8957279Z Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
+2025-07-08T10:18:13.8957292Z 
+2025-07-08T10:18:14.2591004Z npm notice
+2025-07-08T10:18:14.2768318Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T10:18:14.2774853Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T10:18:14.2780461Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T10:18:14.2786476Z npm notice
+2025-07-08T10:18:14.3186233Z 🚀 Running database migrations...
+2025-07-08T10:18:19.8409426Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T10:18:19.8409918Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T10:18:21.7502945Z prisma:warn Prisma failed to detect the libssl/openssl version to use, and may not work as expected. Defaulting to "openssl-1.1.x".
+2025-07-08T10:18:21.7503564Z Please manually install OpenSSL and try installing Prisma again.
+2025-07-08T10:18:21.7706760Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T10:18:21.8014590Z Datasource "db": SQL Server database
+2025-07-08T10:18:21.8935927Z Error: Could not parse schema engine response: SyntaxError: Unexpected token E in JSON at position 0
+2025-07-08T10:18:21.9827867Z 

@@ -1,0 +1,228 @@
+2025-07-08T12:24:59.011676533Z 🚀 Starting Azure App Service deployment...
+2025-07-08T12:24:59.011818138Z Environment: production
+2025-07-08T12:24:59.011864196Z Port: 8080
+2025-07-08T12:24:59.030449570Z Working directory: /app
+2025-07-08T12:24:59.041382598Z User: nextjs
+2025-07-08T12:24:59.041394236Z 🔍 Environment variables check:
+2025-07-08T12:24:59.041504136Z DATABASE_URL: sqlserver://chatbot-sqlserver.database.windows.net...
+2025-07-08T12:24:59.041644848Z OPENAI_API_KEY: SET
+2025-07-08T12:24:59.041889813Z NEXTAUTH_SECRET: SET
+2025-07-08T12:24:59.041903024Z NEXTAUTH_URL: https://chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net
+2025-07-08T12:24:59.041906366Z 🔍 File existence check:
+2025-07-08T12:24:59.070089125Z package.json exists: YES
+2025-07-08T12:24:59.070111257Z prisma/schema.prisma exists: YES
+2025-07-08T12:24:59.070114346Z .next directory exists: YES
+2025-07-08T12:24:59.209814123Z 🔍 Node.js version: v18.20.8
+2025-07-08T12:25:01.248793185Z 🔍 npm version: 10.8.2
+2025-07-08T12:25:01.248825992Z 🔧 Generating Prisma client...
+2025-07-08T12:25:37.629964258Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T12:25:45.825790413Z 
+2025-07-08T12:25:45.825837799Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 342ms
+2025-07-08T12:25:45.825843822Z 
+2025-07-08T12:25:45.825846635Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T12:25:45.825849457Z 
+2025-07-08T12:25:45.825851902Z Tip: Interested in query caching in just a few lines of code? Try Accelerate today! https://pris.ly/tip-3-accelerate
+2025-07-08T12:25:45.825860388Z 
+2025-07-08T12:25:46.148778532Z npm notice
+2025-07-08T12:25:46.148842445Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T12:25:46.148851846Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T12:25:46.148855166Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T12:25:46.148857858Z npm notice
+2025-07-08T12:25:46.189047240Z 🚀 Running database migrations...
+2025-07-08T12:25:54.136415375Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T12:25:54.176693270Z Datasource "db": SQL Server database
+2025-07-08T12:25:54.866670255Z 
+2025-07-08T12:25:54.866719966Z 1 migration found in prisma/migrations
+2025-07-08T12:25:54.868025284Z 
+2025-07-08T12:25:55.400479319Z Error: P3005
+2025-07-08T12:25:55.400516625Z 
+2025-07-08T12:25:55.400520307Z The database schema is not empty. Read more about how to baseline an existing production database: https://pris.ly/d/migrate-baseline
+2025-07-08T12:25:55.400543116Z 
+2025-07-08T12:25:55.518958835Z npm notice
+2025-07-08T12:25:55.518989987Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T12:25:55.518993574Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T12:25:55.518996773Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T12:25:55.518999306Z npm notice
+2025-07-08T12:25:55.609428081Z ⚠ migrate failed (ignoring and continuing)
+2025-07-08T12:25:55.618421774Z 🌐 Starting Next.js application on port 8080...
+2025-07-08T12:25:55.619161918Z Available files in current directory:
+2025-07-08T12:25:55.657481063Z total 292
+2025-07-08T12:25:55.657501361Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 12:18 .
+2025-07-08T12:25:55.657504784Z drwxr-xr-x 1 root   root     4096 Jul  8 12:24 ..
+2025-07-08T12:25:55.657528080Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 12:18 .next
+2025-07-08T12:25:55.657531030Z -rw-r--r-- 1 nextjs nodejs    405 Jul  7 04:18 next.config.js
+2025-07-08T12:25:55.657533836Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 12:18 node_modules
+2025-07-08T12:25:55.657536475Z -rw-r--r-- 1 nextjs nodejs 244074 Jul  8 11:38 package-lock.json
+2025-07-08T12:25:55.657539029Z -rw-r--r-- 1 nextjs nodejs    986 Jul  8 12:18 package.json
+2025-07-08T12:25:55.657541549Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 10:28 prisma
+2025-07-08T12:25:55.657544093Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  7 03:41 public
+2025-07-08T12:25:55.657546473Z -rw-r--r-- 1 nextjs nodejs   4575 Jul  8 12:18 server.js
+2025-07-08T12:25:55.657549119Z -rwxr-xr-x 1 nextjs nodejs   1927 Jul  8 10:54 start.sh
+2025-07-08T12:25:55.669667133Z Starting with: node server.js
+2025-07-08T12:25:57.836766594Z   ▲ Next.js 14.2.5
+2025-07-08T12:25:57.837342001Z   - Local:        http://06bf0a55add6:8080
+2025-07-08T12:25:57.837526719Z   - Network:      http://169.254.130.2:8080
+2025-07-08T12:25:57.844616361Z 
+2025-07-08T12:25:57.844867083Z  ✓ Starting...
+2025-07-08T12:25:58.732444893Z  ✓ Ready in 925ms
+
+2025-07-08T12:30:21.485224195Z ゲストユーザー作成APIが呼び出されました
+2025-07-08T12:30:22.066877995Z 既存のゲストユーザーを使用します: {
+2025-07-08T12:30:22.066922549Z   id: 'c4e808a5-1d25-4e44-b89a-7d60d85d5c4b',
+2025-07-08T12:30:22.066926383Z   email: null,
+2025-07-08T12:30:22.066929035Z   name: 'ゲストユーザー_1751688459764',
+2025-07-08T12:30:22.066931741Z   image: null,
+2025-07-08T12:30:22.066934347Z   isGuest: true,
+2025-07-08T12:30:22.066936725Z   guestToken: 'guest_1751688459764_6341sfdrs',
+2025-07-08T12:30:22.066939326Z   createdAt: 2025-07-05T04:07:39.765Z,
+2025-07-08T12:30:22.066956436Z   updatedAt: 2025-07-05T04:07:39.765Z
+2025-07-08T12:30:22.066959299Z }
+
+2025-07-08T12:49:24.476555586Z 🚀 Starting Azure App Service deployment...
+2025-07-08T12:49:24.485490726Z Environment: production
+2025-07-08T12:49:24.485494938Z Port: 8080
+2025-07-08T12:49:24.485497597Z Working directory: /app
+2025-07-08T12:49:24.486272733Z User: nextjs
+2025-07-08T12:49:24.495975735Z 🔍 Environment variables check:
+2025-07-08T12:49:24.496694291Z DATABASE_URL: sqlserver://chatbot-sqlserver.database.windows.net...
+2025-07-08T12:49:24.496702186Z OPENAI_API_KEY: SET
+2025-07-08T12:49:24.496704832Z NEXTAUTH_SECRET: SET
+2025-07-08T12:49:24.496707389Z NEXTAUTH_URL: https://chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net
+2025-07-08T12:49:24.496710437Z 🔍 File existence check:
+2025-07-08T12:49:24.496714612Z package.json exists: YES
+2025-07-08T12:49:24.497544335Z prisma/schema.prisma exists: YES
+2025-07-08T12:49:24.505908398Z .next directory exists: YES
+2025-07-08T12:49:24.967770814Z 🔍 Node.js version: v18.20.8
+2025-07-08T12:49:26.496654373Z 🔍 npm version: 10.8.2
+2025-07-08T12:49:26.497678587Z 🔧 Generating Prisma client...
+2025-07-08T12:49:33.071012513Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T12:49:35.500559536Z 
+2025-07-08T12:49:35.507606323Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 765ms
+2025-07-08T12:49:35.538491806Z 
+2025-07-08T12:49:35.538506253Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T12:49:35.538509338Z 
+2025-07-08T12:49:35.538511914Z Help us improve the Prisma ORM for everyone. Share your feedback in a short 2-min survey: https://pris.ly/orm/survey/release-5-22
+2025-07-08T12:49:35.538514773Z 
+2025-07-08T12:49:35.811496601Z npm notice
+2025-07-08T12:49:35.811573166Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T12:49:35.811577346Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T12:49:35.811580276Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T12:49:35.811583256Z npm notice
+2025-07-08T12:49:35.850074934Z 🚀 Running database migrations...
+2025-07-08T12:49:41.159109798Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T12:49:41.189331791Z Datasource "db": SQL Server database
+2025-07-08T12:49:41.884158415Z 
+2025-07-08T12:49:41.884209532Z 1 migration found in prisma/migrations
+2025-07-08T12:49:41.884679031Z 
+2025-07-08T12:49:42.416465676Z Error: P3005
+2025-07-08T12:49:42.416522933Z 
+2025-07-08T12:49:42.416526525Z The database schema is not empty. Read more about how to baseline an existing production database: https://pris.ly/d/migrate-baseline
+2025-07-08T12:49:42.416542401Z 
+2025-07-08T12:49:42.475905169Z npm notice
+2025-07-08T12:49:42.475961042Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T12:49:42.475965100Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T12:49:42.475968067Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T12:49:42.475970776Z npm notice
+2025-07-08T12:49:42.536458791Z ⚠ migrate failed (ignoring and continuing)
+2025-07-08T12:49:42.537442651Z 🌐 Starting Next.js application on port 8080...
+2025-07-08T12:49:42.547163839Z Available files in current directory:
+2025-07-08T12:49:42.567446608Z total 292
+2025-07-08T12:49:42.567466925Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 12:42 .
+2025-07-08T12:49:42.567488258Z drwxr-xr-x 1 root   root     4096 Jul  8 12:49 ..
+2025-07-08T12:49:42.567491056Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 12:42 .next
+2025-07-08T12:49:42.567493679Z -rw-r--r-- 1 nextjs nodejs    405 Jul  7 04:18 next.config.js
+2025-07-08T12:49:42.567496182Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 12:41 node_modules
+2025-07-08T12:49:42.567498780Z -rw-r--r-- 1 nextjs nodejs 244074 Jul  8 11:38 package-lock.json
+2025-07-08T12:49:42.567501310Z -rw-r--r-- 1 nextjs nodejs    986 Jul  8 12:41 package.json
+2025-07-08T12:49:42.567503733Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 12:39 prisma
+2025-07-08T12:49:42.567506115Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  7 03:41 public
+2025-07-08T12:49:42.567508405Z -rw-r--r-- 1 nextjs nodejs   4575 Jul  8 12:41 server.js
+2025-07-08T12:49:42.567510889Z -rwxr-xr-x 1 nextjs nodejs   1927 Jul  8 12:29 start.sh
+2025-07-08T12:49:42.577435554Z Starting with: node server.js
+2025-07-08T12:49:43.851784116Z   ▲ Next.js 14.2.5
+2025-07-08T12:49:43.851816062Z   - Local:        http://ca8807d270d2:8080
+2025-07-08T12:49:43.851819511Z   - Network:      http://169.254.130.3:8080
+2025-07-08T12:49:43.851822368Z 
+2025-07-08T12:49:43.851824827Z  ✓ Starting...
+2025-07-08T12:49:44.715169875Z  ✓ Ready in 903ms
+
+2025-07-08T12:54:15.589347846Z 🚀 Starting Azure App Service deployment...
+2025-07-08T12:54:15.589398802Z Environment: production
+2025-07-08T12:54:15.589402648Z Port: 8080
+2025-07-08T12:54:15.589405188Z Working directory: /app
+2025-07-08T12:54:15.609949768Z User: nextjs
+2025-07-08T12:54:15.617976652Z 🔍 Environment variables check:
+2025-07-08T12:54:15.617988497Z DATABASE_URL: sqlserver://chatbot-sqlserver.database.windows.net...
+2025-07-08T12:54:15.617991925Z OPENAI_API_KEY: SET
+2025-07-08T12:54:15.627099959Z NEXTAUTH_SECRET: SET
+2025-07-08T12:54:15.627151331Z NEXTAUTH_URL: https://chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net
+2025-07-08T12:54:15.627161208Z 🔍 File existence check:
+2025-07-08T12:54:15.627169431Z package.json exists: YES
+2025-07-08T12:54:15.627176463Z prisma/schema.prisma exists: YES
+2025-07-08T12:54:15.627184237Z .next directory exists: YES
+2025-07-08T12:54:16.109327675Z 🔍 Node.js version: v18.20.8
+2025-07-08T12:54:18.779972646Z 🔍 npm version: 10.8.2
+2025-07-08T12:54:18.787798364Z 🔧 Generating Prisma client...
+2025-07-08T12:54:35.179770475Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T12:54:39.971445812Z 
+2025-07-08T12:54:39.971480669Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 1.66s
+2025-07-08T12:54:39.971491378Z 
+2025-07-08T12:54:39.971493962Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-08T12:54:39.971496685Z 
+2025-07-08T12:54:39.971499130Z Tip: Easily identify and fix slow SQL queries in your app. Optimize helps you enhance your visibility: https://pris.ly/--optimize
+2025-07-08T12:54:39.971502213Z 
+2025-07-08T12:54:40.334348255Z npm notice
+2025-07-08T12:54:40.334409792Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T12:54:40.334413547Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T12:54:40.334416883Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T12:54:40.334419483Z npm notice
+2025-07-08T12:54:40.378146253Z 🚀 Running database migrations...
+2025-07-08T12:54:46.342378849Z Prisma schema loaded from prisma/schema.prisma
+2025-07-08T12:54:46.370706540Z Datasource "db": SQL Server database
+2025-07-08T12:54:46.935877936Z 
+2025-07-08T12:54:46.935930316Z 1 migration found in prisma/migrations
+2025-07-08T12:54:46.937259877Z 
+2025-07-08T12:54:47.247721724Z Error: P3005
+2025-07-08T12:54:47.247755780Z 
+2025-07-08T12:54:47.247759142Z The database schema is not empty. Read more about how to baseline an existing production database: https://pris.ly/d/migrate-baseline
+2025-07-08T12:54:47.247779432Z 
+2025-07-08T12:54:47.305742131Z npm notice
+2025-07-08T12:54:47.305792655Z npm notice New major version of npm available! 10.8.2 -> 11.4.2
+2025-07-08T12:54:47.305797350Z npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+2025-07-08T12:54:47.305800759Z npm notice To update run: npm install -g npm@11.4.2
+2025-07-08T12:54:47.305803321Z npm notice
+2025-07-08T12:54:47.347277522Z ⚠ migrate failed (ignoring and continuing)
+2025-07-08T12:54:47.348099573Z 🌐 Starting Next.js application on port 8080...
+2025-07-08T12:54:47.355055373Z Available files in current directory:
+2025-07-08T12:54:47.395573922Z total 292
+2025-07-08T12:54:47.395597251Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 12:42 .
+2025-07-08T12:54:47.395600481Z drwxr-xr-x 1 root   root     4096 Jul  8 12:54 ..
+2025-07-08T12:54:47.395603054Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 12:42 .next
+2025-07-08T12:54:47.395605671Z -rw-r--r-- 1 nextjs nodejs    405 Jul  7 04:18 next.config.js
+2025-07-08T12:54:47.395608227Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 12:41 node_modules
+2025-07-08T12:54:47.395610570Z -rw-r--r-- 1 nextjs nodejs 244074 Jul  8 11:38 package-lock.json
+2025-07-08T12:54:47.395613141Z -rw-r--r-- 1 nextjs nodejs    986 Jul  8 12:41 package.json
+2025-07-08T12:54:47.395615622Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  8 12:39 prisma
+2025-07-08T12:54:47.395617992Z drwxr-xr-x 1 nextjs nodejs   4096 Jul  7 03:41 public
+2025-07-08T12:54:47.395620420Z -rw-r--r-- 1 nextjs nodejs   4575 Jul  8 12:41 server.js
+2025-07-08T12:54:47.395622764Z -rwxr-xr-x 1 nextjs nodejs   1927 Jul  8 12:29 start.sh
+2025-07-08T12:54:47.416440293Z Starting with: node server.js
+2025-07-08T12:54:48.727664791Z   ▲ Next.js 14.2.5
+2025-07-08T12:54:48.744508698Z   - Local:        http://304264bf61ed:8080
+2025-07-08T12:54:48.744524348Z   - Network:      http://169.254.130.2:8080
+2025-07-08T12:54:48.744527686Z 
+2025-07-08T12:54:48.744530318Z  ✓ Starting...
+2025-07-08T12:54:49.551677232Z  ✓ Ready in 874ms
+
+2025-07-08T12:55:36.100666208Z ゲストユーザー作成APIが呼び出されました
+2025-07-08T12:55:36.753056098Z 既存のゲストユーザーを使用します: {
+2025-07-08T12:55:36.753113788Z   id: 'c4e808a5-1d25-4e44-b89a-7d60d85d5c4b',
+2025-07-08T12:55:36.753117470Z   email: null,
+2025-07-08T12:55:36.753120437Z   name: 'ゲストユーザー_1751688459764',
+2025-07-08T12:55:36.753123361Z   image: null,
+2025-07-08T12:55:36.753125732Z   isGuest: true,
+2025-07-08T12:55:36.753128596Z   guestToken: 'guest_1751688459764_6341sfdrs',
+2025-07-08T12:55:36.753131035Z   createdAt: 2025-07-05T04:07:39.765Z,
+2025-07-08T12:55:36.799904364Z   updatedAt: 2025-07-05T04:07:39.765Z
+2025-07-08T12:55:36.799929977Z }
+

@@ -1,0 +1,1385 @@
+2025-07-10T04:08:56.4936037Z Container start method called.
+2025-07-10T04:08:56.5732658Z Establishing network.
+2025-07-10T04:08:56.5922779Z Pulling image: index.docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T04:11:07.8128721Z Image index.docker.io/ayumu277/chatbot-app:latest is pulled from registry index.docker.io
+2025-07-10T04:11:07.9319909Z Container is starting.
+2025-07-10T04:11:07.9325782Z Establishing user namespace if not established already.
+2025-07-10T04:11:07.9330004Z Establishing network if not established already.
+2025-07-10T04:11:07.9334462Z Mounting volumes.
+2025-07-10T04:11:07.9617760Z Nested mountpoint volatile/logs
+2025-07-10T04:11:07.9919456Z Nested mountpoint 
+2025-07-10T04:11:08.1937284Z Creating container.
+2025-07-10T04:11:08.1942906Z Creating pipes for streaming container io.
+2025-07-10T04:11:08.1948680Z Creating stdout named pipe at /podr/container/pipe/3e47dda166aa_chatbot-app-container/stdout_18346c905f1246b7bda29ecc606661d4.
+2025-07-10T04:11:08.2029071Z Successfully created stdout named pipe at: /podr/container/pipe/3e47dda166aa_chatbot-app-container/stdout_18346c905f1246b7bda29ecc606661d4.
+2025-07-10T04:11:08.2034679Z Opening named pipe /podr/container/pipe/3e47dda166aa_chatbot-app-container/stdout_18346c905f1246b7bda29ecc606661d4 for reading in non-blocking mode.
+2025-07-10T04:11:08.2040331Z Successfully opened named pipe: /podr/container/pipe/3e47dda166aa_chatbot-app-container/stdout_18346c905f1246b7bda29ecc606661d4.
+2025-07-10T04:11:08.2045799Z Successfully removed non-blocking flag from /podr/container/pipe/3e47dda166aa_chatbot-app-container/stdout_18346c905f1246b7bda29ecc606661d4.
+2025-07-10T04:11:08.2118876Z Creating stderr named pipe at /podr/container/pipe/3e47dda166aa_chatbot-app-container/stderr_56aec15d70a840cfb2ed71db21278640.
+2025-07-10T04:11:08.2124635Z Successfully created stderr named pipe at: /podr/container/pipe/3e47dda166aa_chatbot-app-container/stderr_56aec15d70a840cfb2ed71db21278640.
+2025-07-10T04:11:08.2128036Z Opening named pipe /podr/container/pipe/3e47dda166aa_chatbot-app-container/stderr_56aec15d70a840cfb2ed71db21278640 for reading in non-blocking mode.
+2025-07-10T04:11:08.2132066Z Successfully opened named pipe: /podr/container/pipe/3e47dda166aa_chatbot-app-container/stderr_56aec15d70a840cfb2ed71db21278640.
+2025-07-10T04:11:08.2135920Z Successfully removed non-blocking flag from /podr/container/pipe/3e47dda166aa_chatbot-app-container/stderr_56aec15d70a840cfb2ed71db21278640.
+2025-07-10T04:11:08.2140251Z Creating container with image: index.docker.io/ayumu277/chatbot-app:latest from registry: index.docker.io and fully qualified image name: index.docker.io/ayumu277/chatbot-app:latest
+2025-07-10T04:11:09.0542940Z Starting container: 3e47dda166aa_chatbot-app-container.
+2025-07-10T04:11:09.1911129Z Starting watchers and probes.
+2025-07-10T04:11:09.2317829Z Starting metrics collection.
+2025-07-10T04:11:09.2820822Z Container is running.
+2025-07-10T04:11:10.3525497Z Container start method finished after 133830 ms.
+2025-07-10T04:11:25.5290913Z Site startup probe succeeded after 15.1377883 seconds.
+2025-07-10T04:11:25.6089355Z Site started.
+2025-07-10T04:11:25.6782204Z Site is running with deployment version: a805472c0312edb21b8d08ca517a9b4e8cefc7931752064127789
+2025-07-10T05:38:32.9286359Z Container start method called.
+2025-07-10T05:38:32.9666281Z Establishing network.
+2025-07-10T05:38:32.9686536Z Pulling image: docker.io/library/chatbot-app:latest.
+2025-07-10T05:38:40.4101603Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T05:38:40.4526357Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T05:38:40.4725418Z Container spec TerminationMessagePolicy  path 
+2025-07-10T05:38:40.4920678Z Container is terminated. Total time elapsed: 21 ms.
+2025-07-10T05:38:40.5024102Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T05:38:40.5408570Z Failed to start site. Revert by stopping site.
+2025-07-10T05:38:40.5704523Z Site: chatbot-app-container stopped.
+2025-07-10T05:39:01.5008004Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T05:39:01.5655561Z Stop and delete container. Retry count = 0
+2025-07-10T05:39:01.5743610Z Stopping container: 3e47dda166aa_chatbot-app-container.
+2025-07-10T05:39:02.4096208Z Deleting container: 3e47dda166aa_chatbot-app-container. Retry count = 0
+2025-07-10T05:39:02.7585798Z Container spec TerminationMessagePolicy  path 
+2025-07-10T05:39:02.7612740Z Container is terminated. Total time elapsed: 1259 ms.
+2025-07-10T05:39:02.7688392Z Site: chatbot-app-container stopped.
+2025-07-10T05:39:25.0688046Z Container start method called.
+2025-07-10T05:39:25.0691521Z Establishing network.
+2025-07-10T05:39:25.0695608Z Pulling image: docker.io/library/chatbot-app:latest.
+2025-07-10T05:39:30.9241822Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T05:39:30.9323963Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T05:39:30.9330810Z Container spec TerminationMessagePolicy  path 
+2025-07-10T05:39:30.9336639Z Container is terminated. Total time elapsed: 0 ms.
+2025-07-10T05:39:30.9412854Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T05:39:30.9629436Z Failed to start site. Revert by stopping site.
+2025-07-10T05:39:30.9643932Z Site: chatbot-app-container stopped.
+2025-07-10T05:39:35.438Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T05:39:37.825Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T05:39:37.826Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T05:39:40.048Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T05:39:40.057Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T05:39:40.066Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T05:39:40.142Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T05:40:57.809Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T05:40:59.967Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T05:40:59.969Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T05:41:02.214Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T05:41:02.216Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T05:41:02.231Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T05:41:02.250Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T05:41:08.253Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T05:41:10.409Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T05:41:10.416Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T05:41:12.509Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T05:41:12.510Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T05:41:12.514Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T05:41:12.524Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T05:42:21.226Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T05:42:23.527Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T05:42:23.536Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T05:42:25.770Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T05:42:25.782Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T05:42:25.849Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T05:42:25.901Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T05:49:10.817Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T05:49:13.073Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T05:49:13.074Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T05:49:15.234Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T05:49:15.235Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T05:49:15.239Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T05:49:15.260Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T06:24:12.630Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T06:24:14.796Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T06:24:14.799Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T06:24:16.901Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T06:24:16.920Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T06:24:16.924Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T06:24:16.940Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T06:28:55.612Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T06:28:57.732Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T06:28:57.734Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T06:28:59.860Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T06:28:59.862Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T06:28:59.945Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T06:28:59.966Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T06:50:14.216Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T06:50:16.479Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T06:50:16.481Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T06:50:18.562Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T06:50:18.564Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T06:50:18.579Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T06:50:18.599Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T07:21:05.658Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T07:21:07.900Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T07:21:07.908Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T07:21:10.131Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T07:21:10.133Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T07:21:10.140Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T07:21:10.153Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T07:30:13.443Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T07:30:16.010Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T07:30:16.011Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T07:30:18.118Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T07:30:18.120Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T07:30:18.124Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T07:30:18.134Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T08:01:07.008Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T08:01:09.297Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T08:01:09.299Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T08:01:11.424Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T08:01:11.436Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T08:01:11.456Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T08:01:11.559Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T08:36:08.462Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T08:36:10.630Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T08:36:10.632Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T08:36:12.779Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T08:36:12.799Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T08:36:12.811Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T08:36:12.840Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T09:11:09.617Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T09:11:11.790Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T09:11:11.791Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T09:11:13.897Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T09:11:13.899Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T09:11:13.903Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T09:11:13.930Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T09:41:02.129Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T09:41:04.258Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T09:41:04.260Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T09:41:06.350Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T09:41:06.351Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T09:41:06.355Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T09:41:06.383Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T09:49:21.879Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T09:49:23.947Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T09:49:23.949Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T09:49:26.033Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T09:49:26.035Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T09:49:26.038Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T09:49:26.042Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T10:07:07.628Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T10:07:09.785Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T10:07:09.787Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T10:07:12.040Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T10:07:12.042Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T10:07:12.051Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T10:07:12.062Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T10:32:31.140Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T10:32:33.295Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T10:32:33.296Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T10:32:35.361Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T10:32:35.364Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T10:32:35.370Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T10:32:35.410Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T10:41:20.526Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T10:41:22.676Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T10:41:22.678Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T10:41:24.765Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T10:41:24.767Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T10:41:24.778Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T10:41:24.791Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T10:46:35.658Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T10:46:37.779Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T10:46:37.781Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T10:46:39.887Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T10:46:39.888Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T10:46:39.908Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T10:46:39.918Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T10:51:04.615Z INFO  - Pulling image: chatbot-app:latest
+2025-07-10T10:51:06.840Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T10:51:06.843Z ERROR - Pulling docker image chatbot-app:latest failed:
+2025-07-10T10:51:08.983Z ERROR - DockerApiException: Docker API responded with status code=NotFound, response={"message":"pull access denied for chatbot-app, repository does not exist or may require 'docker login': denied: requested access to the resource is denied"}
+
+2025-07-10T10:51:08.985Z WARN  - Image pull failed. Defaulting to local copy if present.
+2025-07-10T10:51:08.989Z ERROR - Image pull failed: Verify docker image configuration and credentials (if using private repository)
+2025-07-10T10:51:08.999Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T11:13:33.700Z INFO  - Pulling image: docker.io/ayumu277/chatbot-app:latest
+2025-07-10T11:13:36.694Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T11:13:37.501Z INFO  - f18232174bc9 Pulling fs layer
+2025-07-10T11:13:37.504Z INFO  - dd71dde834b5 Pulling fs layer
+2025-07-10T11:13:37.511Z INFO  - 1e5a4c89cee5 Pulling fs layer
+2025-07-10T11:13:37.514Z INFO  - 25ff2da83641 Pulling fs layer
+2025-07-10T11:13:37.522Z INFO  - bd58d20f1c5e Pulling fs layer
+2025-07-10T11:13:37.523Z INFO  - e7f7583ab3bc Pulling fs layer
+2025-07-10T11:13:37.525Z INFO  - 8e7f4ed7466f Pulling fs layer
+2025-07-10T11:13:37.531Z INFO  - 4bceff1357df Pulling fs layer
+2025-07-10T11:13:37.565Z INFO  - 7c995ac3cef7 Pulling fs layer
+2025-07-10T11:13:37.572Z INFO  - 0f4d795ed791 Pulling fs layer
+2025-07-10T11:13:37.575Z INFO  - e356a97deceb Pulling fs layer
+2025-07-10T11:13:37.582Z INFO  - bb2f1055de63 Pulling fs layer
+2025-07-10T11:13:37.645Z INFO  - cb9180ee31ea Pulling fs layer
+2025-07-10T11:13:37.653Z INFO  - 5c3d08bcde77 Pulling fs layer
+2025-07-10T11:13:37.655Z INFO  - 65d64269dfe2 Pulling fs layer
+2025-07-10T11:13:37.662Z INFO  - 4f4fb700ef54 Pulling fs layer
+2025-07-10T11:13:37.664Z INFO  - cb2bbac61497 Pulling fs layer
+2025-07-10T11:13:38.557Z INFO  - 8e7f4ed7466f Downloading 462B / 462B
+2025-07-10T11:13:38.559Z INFO  - e7f7583ab3bc Downloading 93B / 93B
+2025-07-10T11:13:38.567Z INFO  - 25ff2da83641 Downloading 446B / 446B
+2025-07-10T11:13:38.569Z INFO  - 8e7f4ed7466f Verifying Checksum
+2025-07-10T11:13:38.589Z INFO  - 8e7f4ed7466f Download complete
+2025-07-10T11:13:38.599Z INFO  - e7f7583ab3bc Verifying Checksum
+2025-07-10T11:13:38.607Z INFO  - e7f7583ab3bc Download complete
+2025-07-10T11:13:38.609Z INFO  - 25ff2da83641 Verifying Checksum
+2025-07-10T11:13:38.617Z INFO  - 25ff2da83641 Download complete
+2025-07-10T11:13:38.698Z INFO  - 7c995ac3cef7 Downloading 58KB / 65KB
+2025-07-10T11:13:38.801Z INFO  - 7c995ac3cef7 Downloading 62KB / 65KB
+2025-07-10T11:13:38.809Z INFO  - f18232174bc9 Downloading 75KB / 3MB
+2025-07-10T11:13:38.839Z INFO  - 7c995ac3cef7 Downloading 65KB / 65KB
+2025-07-10T11:13:38.841Z INFO  - 7c995ac3cef7 Verifying Checksum
+2025-07-10T11:13:38.859Z INFO  - 7c995ac3cef7 Download complete
+2025-07-10T11:13:38.890Z INFO  - 1e5a4c89cee5 Downloading 223KB / 1MB
+2025-07-10T11:13:38.950Z INFO  - f18232174bc9 Downloading 926KB / 3MB
+2025-07-10T11:13:38.979Z INFO  - 4bceff1357df Downloading 977B / 977B
+2025-07-10T11:13:38.981Z INFO  - 4bceff1357df Verifying Checksum
+2025-07-10T11:13:38.990Z INFO  - 4bceff1357df Download complete
+2025-07-10T11:13:38.999Z INFO  - 1e5a4c89cee5 Verifying Checksum
+2025-07-10T11:13:39.001Z INFO  - 1e5a4c89cee5 Download complete
+2025-07-10T11:13:39.030Z INFO  - f18232174bc9 Downloading 2MB / 3MB
+2025-07-10T11:13:39.049Z INFO  - 4f4fb700ef54 Downloading 32B / 32B
+2025-07-10T11:13:39.061Z INFO  - 4f4fb700ef54 Verifying Checksum
+2025-07-10T11:13:39.069Z INFO  - 4f4fb700ef54 Download complete
+2025-07-10T11:13:39.073Z INFO  - f18232174bc9 Verifying Checksum
+2025-07-10T11:13:39.079Z INFO  - f18232174bc9 Download complete
+2025-07-10T11:13:39.081Z INFO  - dd71dde834b5 Downloading 4MB / 38MB
+2025-07-10T11:13:39.264Z INFO  - dd71dde834b5 Downloading 5MB / 38MB
+2025-07-10T11:13:39.529Z INFO  - dd71dde834b5 Downloading 8MB / 38MB
+2025-07-10T11:13:39.597Z INFO  - f18232174bc9 Extracting 512KB / 3MB
+2025-07-10T11:13:39.698Z INFO  - f18232174bc9 Extracting 576KB / 3MB
+2025-07-10T11:13:39.840Z INFO  - f18232174bc9 Extracting 1MB / 3MB
+2025-07-10T11:13:39.928Z INFO  - f18232174bc9 Extracting 1MB / 3MB
+2025-07-10T11:13:40.102Z INFO  - dd71dde834b5 Downloading 10MB / 38MB
+2025-07-10T11:13:40.120Z INFO  - f18232174bc9 Extracting 1MB / 3MB
+2025-07-10T11:13:40.211Z INFO  - dd71dde834b5 Downloading 12MB / 38MB
+2025-07-10T11:13:40.532Z INFO  - 65d64269dfe2 Downloading 1009B / 1KB
+2025-07-10T11:13:40.533Z INFO  - f18232174bc9 Extracting 1MB / 3MB
+2025-07-10T11:13:40.541Z INFO  - e356a97deceb Downloading 1009B / 2KB
+2025-07-10T11:13:40.542Z INFO  - 5c3d08bcde77 Downloading 958B / 958B
+2025-07-10T11:13:40.542Z INFO  - 65d64269dfe2 Downloading 1KB / 1KB
+2025-07-10T11:13:40.543Z INFO  - f18232174bc9 Extracting 2MB / 3MB
+2025-07-10T11:13:40.563Z INFO  - e356a97deceb Downloading 2KB / 2KB
+2025-07-10T11:13:40.664Z INFO  - 5c3d08bcde77 Verifying Checksum
+2025-07-10T11:13:40.664Z INFO  - 5c3d08bcde77 Download complete
+2025-07-10T11:13:40.703Z INFO  - bb2f1055de63 Downloading 2KB / 2KB
+2025-07-10T11:13:40.703Z INFO  - 65d64269dfe2 Verifying Checksum
+2025-07-10T11:13:40.704Z INFO  - 65d64269dfe2 Download complete
+2025-07-10T11:13:40.733Z INFO  - e356a97deceb Verifying Checksum
+2025-07-10T11:13:40.733Z INFO  - e356a97deceb Download complete
+2025-07-10T11:13:40.733Z INFO  - f18232174bc9 Extracting 3MB / 3MB
+2025-07-10T11:13:40.814Z INFO  - bb2f1055de63 Verifying Checksum
+2025-07-10T11:13:40.823Z INFO  - bb2f1055de63 Download complete
+2025-07-10T11:13:40.823Z INFO  - f18232174bc9 Extracting 3MB / 3MB
+2025-07-10T11:13:40.853Z INFO  - bd58d20f1c5e Downloading 88KB / 1MB
+2025-07-10T11:13:40.955Z INFO  - bd58d20f1c5e Downloading 256KB / 1MB
+2025-07-10T11:13:41.014Z INFO  - f18232174bc9 Pull complete
+2025-07-10T11:13:41.054Z INFO  - dd71dde834b5 Downloading 17MB / 38MB
+2025-07-10T11:13:41.096Z INFO  - bd58d20f1c5e Verifying Checksum
+2025-07-10T11:13:41.096Z INFO  - bd58d20f1c5e Download complete
+2025-07-10T11:13:41.287Z INFO  - dd71dde834b5 Downloading 24MB / 38MB
+2025-07-10T11:13:41.396Z INFO  - dd71dde834b5 Downloading 26MB / 38MB
+2025-07-10T11:13:41.496Z INFO  - dd71dde834b5 Downloading 29MB / 38MB
+2025-07-10T11:13:41.727Z INFO  - dd71dde834b5 Downloading 35MB / 38MB
+2025-07-10T11:13:41.759Z INFO  - dd71dde834b5 Downloading 38MB / 38MB
+2025-07-10T11:13:41.767Z INFO  - dd71dde834b5 Verifying Checksum
+2025-07-10T11:13:41.768Z INFO  - dd71dde834b5 Download complete
+2025-07-10T11:13:41.769Z INFO  - cb2bbac61497 Downloading 513KB / 206MB
+2025-07-10T11:13:41.870Z INFO  - cb9180ee31ea Downloading 513KB / 199MB
+2025-07-10T11:13:41.897Z INFO  - 0f4d795ed791 Downloading 320KB / 7MB
+2025-07-10T11:13:42.200Z INFO  - cb9180ee31ea Downloading 1MB / 199MB
+2025-07-10T11:13:42.201Z INFO  - dd71dde834b5 Extracting 2MB / 38MB
+2025-07-10T11:13:42.392Z INFO  - dd71dde834b5 Extracting 3MB / 38MB
+2025-07-10T11:13:42.482Z INFO  - cb2bbac61497 Downloading 1MB / 206MB
+2025-07-10T11:13:42.483Z INFO  - 0f4d795ed791 Downloading 480KB / 7MB
+2025-07-10T11:13:42.644Z INFO  - cb2bbac61497 Downloading 1MB / 206MB
+2025-07-10T11:13:42.824Z INFO  - cb2bbac61497 Downloading 2MB / 206MB
+2025-07-10T11:13:42.825Z INFO  - 0f4d795ed791 Downloading 640KB / 7MB
+2025-07-10T11:13:43.136Z INFO  - dd71dde834b5 Extracting 7MB / 38MB
+2025-07-10T11:13:43.268Z INFO  - cb9180ee31ea Downloading 4MB / 199MB
+2025-07-10T11:13:43.285Z INFO  - dd71dde834b5 Extracting 8MB / 38MB
+2025-07-10T11:13:43.387Z INFO  - dd71dde834b5 Extracting 9MB / 38MB
+2025-07-10T11:13:43.457Z INFO  - cb9180ee31ea Downloading 4MB / 199MB
+2025-07-10T11:13:43.577Z INFO  - cb9180ee31ea Downloading 5MB / 199MB
+2025-07-10T11:13:43.697Z INFO  - cb9180ee31ea Downloading 5MB / 199MB
+2025-07-10T11:13:43.770Z INFO  - cb2bbac61497 Downloading 4MB / 206MB
+2025-07-10T11:13:43.901Z INFO  - dd71dde834b5 Extracting 13MB / 38MB
+2025-07-10T11:13:43.990Z INFO  - cb2bbac61497 Downloading 5MB / 206MB
+2025-07-10T11:13:43.992Z INFO  - dd71dde834b5 Extracting 13MB / 38MB
+2025-07-10T11:13:44.261Z INFO  - 0f4d795ed791 Downloading 960KB / 7MB
+2025-07-10T11:13:44.262Z INFO  - cb2bbac61497 Downloading 6MB / 206MB
+2025-07-10T11:13:44.774Z INFO  - dd71dde834b5 Extracting 17MB / 38MB
+2025-07-10T11:13:44.904Z INFO  - cb2bbac61497 Downloading 9MB / 206MB
+2025-07-10T11:13:44.904Z INFO  - dd71dde834b5 Extracting 18MB / 38MB
+2025-07-10T11:13:45.047Z INFO  - 0f4d795ed791 Downloading 1MB / 7MB
+2025-07-10T11:13:45.085Z INFO  - cb9180ee31ea Downloading 8MB / 199MB
+2025-07-10T11:13:45.228Z INFO  - cb2bbac61497 Downloading 9MB / 206MB
+2025-07-10T11:13:45.328Z INFO  - cb2bbac61497 Downloading 10MB / 206MB
+2025-07-10T11:13:45.328Z INFO  - dd71dde834b5 Extracting 22MB / 38MB
+2025-07-10T11:13:45.470Z INFO  - dd71dde834b5 Extracting 23MB / 38MB
+2025-07-10T11:13:45.608Z INFO  - dd71dde834b5 Extracting 23MB / 38MB
+2025-07-10T11:13:45.679Z INFO  - 0f4d795ed791 Downloading 1MB / 7MB
+2025-07-10T11:13:45.700Z INFO  - dd71dde834b5 Extracting 24MB / 38MB
+2025-07-10T11:13:45.931Z INFO  - cb9180ee31ea Downloading 12MB / 199MB
+2025-07-10T11:13:46.092Z INFO  - cb9180ee31ea Downloading 12MB / 199MB
+2025-07-10T11:13:46.112Z INFO  - cb2bbac61497 Downloading 13MB / 206MB
+2025-07-10T11:13:46.123Z INFO  - dd71dde834b5 Extracting 27MB / 38MB
+2025-07-10T11:13:46.352Z INFO  - cb9180ee31ea Downloading 16MB / 199MB
+2025-07-10T11:13:46.352Z INFO  - dd71dde834b5 Extracting 28MB / 38MB
+2025-07-10T11:13:46.475Z INFO  - cb9180ee31ea Downloading 16MB / 199MB
+2025-07-10T11:13:46.676Z INFO  - 0f4d795ed791 Downloading 1MB / 7MB
+2025-07-10T11:13:47.007Z INFO  - dd71dde834b5 Extracting 32MB / 38MB
+2025-07-10T11:13:47.116Z INFO  - dd71dde834b5 Extracting 32MB / 38MB
+2025-07-10T11:13:47.176Z INFO  - cb2bbac61497 Downloading 17MB / 206MB
+2025-07-10T11:13:47.288Z INFO  - dd71dde834b5 Extracting 33MB / 38MB
+2025-07-10T11:13:47.469Z INFO  - cb9180ee31ea Downloading 20MB / 199MB
+2025-07-10T11:13:47.530Z INFO  - 0f4d795ed791 Downloading 1MB / 7MB
+2025-07-10T11:13:47.722Z INFO  - cb9180ee31ea Downloading 21MB / 199MB
+2025-07-10T11:13:47.750Z INFO  - cb2bbac61497 Downloading 21MB / 206MB
+2025-07-10T11:13:47.901Z INFO  - cb2bbac61497 Downloading 22MB / 206MB
+2025-07-10T11:13:47.991Z INFO  - cb9180ee31ea Downloading 24MB / 199MB
+2025-07-10T11:13:48.141Z INFO  - cb9180ee31ea Downloading 24MB / 199MB
+2025-07-10T11:13:48.142Z INFO  - dd71dde834b5 Extracting 35MB / 38MB
+2025-07-10T11:13:48.203Z INFO  - cb2bbac61497 Downloading 24MB / 206MB
+2025-07-10T11:13:48.325Z INFO  - cb2bbac61497 Downloading 25MB / 206MB
+2025-07-10T11:13:48.343Z INFO  - cb9180ee31ea Downloading 28MB / 199MB
+2025-07-10T11:13:48.526Z INFO  - cb2bbac61497 Downloading 31MB / 206MB
+2025-07-10T11:13:48.917Z INFO  - cb9180ee31ea Downloading 31MB / 199MB
+2025-07-10T11:13:48.917Z INFO  - dd71dde834b5 Extracting 36MB / 38MB
+2025-07-10T11:13:48.976Z INFO  - cb2bbac61497 Downloading 34MB / 206MB
+2025-07-10T11:13:49.058Z INFO  - cb9180ee31ea Downloading 32MB / 199MB
+2025-07-10T11:13:49.189Z INFO  - cb2bbac61497 Downloading 38MB / 206MB
+2025-07-10T11:13:49.502Z INFO  - cb9180ee31ea Downloading 36MB / 199MB
+2025-07-10T11:13:49.680Z INFO  - cb9180ee31ea Downloading 37MB / 199MB
+2025-07-10T11:13:49.984Z INFO  - 0f4d795ed791 Downloading 1MB / 7MB
+2025-07-10T11:13:50.054Z INFO  - cb2bbac61497 Downloading 45MB / 206MB
+2025-07-10T11:13:50.084Z INFO  - cb9180ee31ea Downloading 40MB / 199MB
+2025-07-10T11:13:50.153Z INFO  - dd71dde834b5 Extracting 36MB / 38MB
+2025-07-10T11:13:50.154Z INFO  - cb2bbac61497 Downloading 46MB / 206MB
+2025-07-10T11:13:50.426Z INFO  - cb9180ee31ea Downloading 44MB / 199MB
+2025-07-10T11:13:50.485Z INFO  - cb2bbac61497 Downloading 49MB / 206MB
+2025-07-10T11:13:50.527Z INFO  - cb9180ee31ea Downloading 45MB / 199MB
+2025-07-10T11:13:50.585Z INFO  - cb2bbac61497 Downloading 51MB / 206MB
+2025-07-10T11:13:50.928Z INFO  - cb2bbac61497 Downloading 54MB / 206MB
+2025-07-10T11:13:50.967Z INFO  - cb9180ee31ea Downloading 49MB / 199MB
+2025-07-10T11:13:51.179Z INFO  - cb2bbac61497 Downloading 58MB / 206MB
+2025-07-10T11:13:51.321Z INFO  - cb2bbac61497 Downloading 60MB / 206MB
+2025-07-10T11:13:51.481Z INFO  - cb9180ee31ea Downloading 52MB / 199MB
+2025-07-10T11:13:51.540Z INFO  - cb2bbac61497 Downloading 64MB / 206MB
+2025-07-10T11:13:51.560Z INFO  - dd71dde834b5 Extracting 38MB / 38MB
+2025-07-10T11:13:51.650Z INFO  - cb9180ee31ea Downloading 53MB / 199MB
+2025-07-10T11:13:51.861Z INFO  - cb2bbac61497 Downloading 66MB / 206MB
+2025-07-10T11:13:51.892Z INFO  - cb9180ee31ea Downloading 56MB / 199MB
+2025-07-10T11:13:51.994Z INFO  - dd71dde834b5 Pull complete
+2025-07-10T11:13:52.003Z INFO  - 1e5a4c89cee5 Extracting 32KB / 1MB
+2025-07-10T11:13:52.139Z INFO  - cb2bbac61497 Downloading 71MB / 206MB
+2025-07-10T11:13:52.145Z INFO  - cb9180ee31ea Downloading 56MB / 199MB
+2025-07-10T11:13:52.146Z INFO  - 0f4d795ed791 Downloading 1MB / 7MB
+2025-07-10T11:13:52.267Z INFO  - cb2bbac61497 Downloading 72MB / 206MB
+2025-07-10T11:13:52.277Z INFO  - cb9180ee31ea Downloading 57MB / 199MB
+2025-07-10T11:13:52.416Z INFO  - 1e5a4c89cee5 Extracting 768KB / 1MB
+2025-07-10T11:13:52.426Z INFO  - 1e5a4c89cee5 Extracting 1MB / 1MB
+2025-07-10T11:13:52.438Z INFO  - 1e5a4c89cee5 Pull complete
+2025-07-10T11:13:52.447Z INFO  - 25ff2da83641 Extracting 446B / 446B
+2025-07-10T11:13:52.478Z INFO  - 25ff2da83641 Extracting 446B / 446B
+2025-07-10T11:13:52.497Z INFO  - cb9180ee31ea Downloading 59MB / 199MB
+2025-07-10T11:13:52.527Z INFO  - 25ff2da83641 Pull complete
+2025-07-10T11:13:52.698Z INFO  - cb9180ee31ea Downloading 60MB / 199MB
+2025-07-10T11:13:52.778Z INFO  - cb2bbac61497 Downloading 74MB / 206MB
+2025-07-10T11:13:52.829Z INFO  - bd58d20f1c5e Extracting 64KB / 1MB
+2025-07-10T11:13:52.850Z INFO  - cb9180ee31ea Downloading 61MB / 199MB
+2025-07-10T11:13:52.929Z INFO  - cb2bbac61497 Downloading 76MB / 206MB
+2025-07-10T11:13:53.031Z INFO  - bd58d20f1c5e Extracting 704KB / 1MB
+2025-07-10T11:13:53.070Z INFO  - cb2bbac61497 Downloading 78MB / 206MB
+2025-07-10T11:13:53.140Z INFO  - bd58d20f1c5e Extracting 832KB / 1MB
+2025-07-10T11:13:53.292Z INFO  - bd58d20f1c5e Extracting 1MB / 1MB
+2025-07-10T11:13:53.321Z INFO  - cb2bbac61497 Downloading 82MB / 206MB
+2025-07-10T11:13:53.363Z INFO  - bd58d20f1c5e Extracting 1MB / 1MB
+2025-07-10T11:13:53.543Z INFO  - cb2bbac61497 Downloading 86MB / 206MB
+2025-07-10T11:13:53.552Z INFO  - bd58d20f1c5e Pull complete
+2025-07-10T11:13:53.624Z INFO  - e7f7583ab3bc Extracting 93B / 93B
+2025-07-10T11:13:53.635Z INFO  - e7f7583ab3bc Extracting 93B / 93B
+2025-07-10T11:13:53.646Z INFO  - e7f7583ab3bc Pull complete
+2025-07-10T11:13:53.648Z INFO  - 8e7f4ed7466f Extracting 462B / 462B
+2025-07-10T11:13:53.653Z INFO  - cb2bbac61497 Downloading 88MB / 206MB
+2025-07-10T11:13:53.662Z INFO  - 8e7f4ed7466f Extracting 462B / 462B
+2025-07-10T11:13:53.666Z INFO  - 8e7f4ed7466f Pull complete
+2025-07-10T11:13:53.679Z INFO  - 4bceff1357df Extracting 977B / 977B
+2025-07-10T11:13:53.684Z INFO  - 4bceff1357df Extracting 977B / 977B
+2025-07-10T11:13:53.703Z INFO  - 4bceff1357df Pull complete
+2025-07-10T11:13:53.714Z INFO  - 7c995ac3cef7 Extracting 32KB / 65KB
+2025-07-10T11:13:53.734Z INFO  - 7c995ac3cef7 Extracting 65KB / 65KB
+2025-07-10T11:13:53.772Z INFO  - 7c995ac3cef7 Pull complete
+2025-07-10T11:13:53.844Z INFO  - cb9180ee31ea Downloading 63MB / 199MB
+2025-07-10T11:13:53.889Z INFO  - cb2bbac61497 Downloading 91MB / 206MB
+2025-07-10T11:13:54.082Z INFO  - cb9180ee31ea Downloading 65MB / 199MB
+2025-07-10T11:13:54.226Z INFO  - 0f4d795ed791 Downloading 1MB / 7MB
+2025-07-10T11:13:54.260Z INFO  - cb2bbac61497 Downloading 97MB / 206MB
+2025-07-10T11:13:54.342Z INFO  - cb9180ee31ea Downloading 65MB / 199MB
+2025-07-10T11:13:54.496Z INFO  - cb2bbac61497 Downloading 100MB / 206MB
+2025-07-10T11:13:54.709Z INFO  - cb2bbac61497 Downloading 103MB / 206MB
+2025-07-10T11:13:54.834Z INFO  - cb2bbac61497 Downloading 105MB / 206MB
+2025-07-10T11:13:54.866Z INFO  - cb9180ee31ea Downloading 68MB / 199MB
+2025-07-10T11:13:55.034Z INFO  - cb9180ee31ea Downloading 68MB / 199MB
+2025-07-10T11:13:55.136Z INFO  - cb9180ee31ea Downloading 69MB / 199MB
+2025-07-10T11:13:55.364Z INFO  - cb2bbac61497 Downloading 113MB / 206MB
+2025-07-10T11:13:55.423Z INFO  - 0f4d795ed791 Downloading 2MB / 7MB
+2025-07-10T11:13:55.571Z INFO  - cb2bbac61497 Downloading 116MB / 206MB
+2025-07-10T11:13:55.643Z INFO  - cb9180ee31ea Downloading 72MB / 199MB
+2025-07-10T11:13:55.682Z INFO  - cb2bbac61497 Downloading 117MB / 206MB
+2025-07-10T11:13:55.758Z INFO  - cb9180ee31ea Downloading 73MB / 199MB
+2025-07-10T11:13:55.994Z INFO  - cb2bbac61497 Downloading 120MB / 206MB
+2025-07-10T11:13:56.103Z INFO  - cb9180ee31ea Downloading 76MB / 199MB
+2025-07-10T11:13:56.228Z INFO  - cb9180ee31ea Downloading 77MB / 199MB
+2025-07-10T11:13:56.229Z INFO  - cb2bbac61497 Downloading 126MB / 206MB
+2025-07-10T11:13:56.620Z INFO  - cb2bbac61497 Downloading 132MB / 206MB
+2025-07-10T11:13:56.642Z INFO  - cb9180ee31ea Downloading 80MB / 199MB
+2025-07-10T11:13:56.804Z INFO  - cb9180ee31ea Downloading 81MB / 199MB
+2025-07-10T11:13:56.842Z INFO  - cb2bbac61497 Downloading 137MB / 206MB
+2025-07-10T11:13:57.118Z INFO  - 0f4d795ed791 Downloading 2MB / 7MB
+2025-07-10T11:13:57.255Z INFO  - cb9180ee31ea Downloading 84MB / 199MB
+2025-07-10T11:13:57.341Z INFO  - cb2bbac61497 Downloading 141MB / 206MB
+2025-07-10T11:13:57.369Z INFO  - cb9180ee31ea Downloading 85MB / 199MB
+2025-07-10T11:13:57.573Z INFO  - cb2bbac61497 Downloading 146MB / 206MB
+2025-07-10T11:13:57.623Z INFO  - cb9180ee31ea Downloading 87MB / 199MB
+2025-07-10T11:13:57.695Z INFO  - cb2bbac61497 Downloading 149MB / 206MB
+2025-07-10T11:13:57.777Z INFO  - cb9180ee31ea Downloading 89MB / 199MB
+2025-07-10T11:13:57.978Z INFO  - cb2bbac61497 Downloading 153MB / 206MB
+2025-07-10T11:13:58.230Z INFO  - cb9180ee31ea Downloading 92MB / 199MB
+2025-07-10T11:13:58.334Z INFO  - cb9180ee31ea Downloading 92MB / 199MB
+2025-07-10T11:13:58.526Z INFO  - cb2bbac61497 Downloading 166MB / 206MB
+2025-07-10T11:13:58.707Z INFO  - cb9180ee31ea Downloading 95MB / 199MB
+2025-07-10T11:13:58.802Z INFO  - cb2bbac61497 Downloading 170MB / 206MB
+2025-07-10T11:13:58.918Z INFO  - cb9180ee31ea Downloading 96MB / 199MB
+2025-07-10T11:13:59.018Z INFO  - cb2bbac61497 Downloading 175MB / 206MB
+2025-07-10T11:13:59.056Z INFO  - 0f4d795ed791 Downloading 2MB / 7MB
+2025-07-10T11:13:59.311Z INFO  - cb9180ee31ea Downloading 100MB / 199MB
+2025-07-10T11:13:59.367Z INFO  - cb2bbac61497 Downloading 182MB / 206MB
+2025-07-10T11:13:59.487Z INFO  - cb9180ee31ea Downloading 101MB / 199MB
+2025-07-10T11:13:59.568Z INFO  - cb2bbac61497 Downloading 187MB / 206MB
+2025-07-10T11:13:59.753Z INFO  - cb9180ee31ea Downloading 104MB / 199MB
+2025-07-10T11:13:59.795Z INFO  - cb2bbac61497 Downloading 192MB / 206MB
+2025-07-10T11:13:59.916Z INFO  - cb2bbac61497 Downloading 194MB / 206MB
+2025-07-10T11:14:00.147Z INFO  - cb9180ee31ea Downloading 109MB / 199MB
+2025-07-10T11:14:00.401Z INFO  - cb2bbac61497 Downloading 204MB / 206MB
+2025-07-10T11:14:00.582Z INFO  - cb2bbac61497 Verifying Checksum
+2025-07-10T11:14:00.583Z INFO  - cb2bbac61497 Download complete
+2025-07-10T11:14:00.619Z INFO  - cb9180ee31ea Downloading 112MB / 199MB
+2025-07-10T11:14:00.768Z INFO  - cb9180ee31ea Downloading 113MB / 199MB
+2025-07-10T11:14:01.215Z INFO  - cb9180ee31ea Downloading 116MB / 199MB
+2025-07-10T11:14:01.318Z INFO  - cb9180ee31ea Downloading 116MB / 199MB
+2025-07-10T11:14:01.424Z INFO  - cb9180ee31ea Downloading 117MB / 199MB
+2025-07-10T11:14:02.078Z INFO  - cb9180ee31ea Downloading 119MB / 199MB
+2025-07-10T11:14:02.218Z INFO  - cb9180ee31ea Downloading 120MB / 199MB
+2025-07-10T11:14:02.420Z INFO  - cb9180ee31ea Downloading 124MB / 199MB
+2025-07-10T11:14:02.560Z INFO  - cb9180ee31ea Downloading 125MB / 199MB
+2025-07-10T11:14:02.801Z INFO  - cb9180ee31ea Downloading 127MB / 199MB
+2025-07-10T11:14:02.913Z INFO  - cb9180ee31ea Downloading 128MB / 199MB
+2025-07-10T11:14:03.302Z INFO  - cb9180ee31ea Downloading 132MB / 199MB
+2025-07-10T11:14:03.788Z INFO  - cb9180ee31ea Downloading 136MB / 199MB
+2025-07-10T11:14:04.197Z INFO  - cb9180ee31ea Downloading 140MB / 199MB
+2025-07-10T11:14:04.206Z INFO  - 0f4d795ed791 Downloading 2MB / 7MB
+2025-07-10T11:14:04.338Z INFO  - cb9180ee31ea Downloading 141MB / 199MB
+2025-07-10T11:14:04.632Z INFO  - cb9180ee31ea Downloading 144MB / 199MB
+2025-07-10T11:14:05.069Z INFO  - cb9180ee31ea Downloading 147MB / 199MB
+2025-07-10T11:14:05.192Z INFO  - cb9180ee31ea Downloading 149MB / 199MB
+2025-07-10T11:14:05.531Z INFO  - cb9180ee31ea Downloading 151MB / 199MB
+2025-07-10T11:14:05.850Z INFO  - cb9180ee31ea Downloading 152MB / 199MB
+2025-07-10T11:14:05.889Z INFO  - 0f4d795ed791 Downloading 2MB / 7MB
+2025-07-10T11:14:06.265Z INFO  - cb9180ee31ea Downloading 156MB / 199MB
+2025-07-10T11:14:06.814Z INFO  - cb9180ee31ea Downloading 159MB / 199MB
+2025-07-10T11:14:06.924Z INFO  - cb9180ee31ea Downloading 160MB / 199MB
+2025-07-10T11:14:07.109Z INFO  - cb9180ee31ea Downloading 160MB / 199MB
+2025-07-10T11:14:07.211Z INFO  - cb9180ee31ea Downloading 161MB / 199MB
+2025-07-10T11:14:07.920Z INFO  - cb9180ee31ea Downloading 163MB / 199MB
+2025-07-10T11:14:08.109Z INFO  - cb9180ee31ea Downloading 164MB / 199MB
+2025-07-10T11:14:08.220Z INFO  - cb9180ee31ea Downloading 165MB / 199MB
+2025-07-10T11:14:08.504Z INFO  - cb9180ee31ea Downloading 168MB / 199MB
+2025-07-10T11:14:08.634Z INFO  - cb9180ee31ea Downloading 169MB / 199MB
+2025-07-10T11:14:09.151Z INFO  - cb9180ee31ea Downloading 172MB / 199MB
+2025-07-10T11:14:09.365Z INFO  - 0f4d795ed791 Downloading 2MB / 7MB
+2025-07-10T11:14:09.557Z INFO  - cb9180ee31ea Downloading 175MB / 199MB
+2025-07-10T11:14:09.732Z INFO  - cb9180ee31ea Downloading 177MB / 199MB
+2025-07-10T11:14:10.149Z INFO  - cb9180ee31ea Downloading 179MB / 199MB
+2025-07-10T11:14:10.361Z INFO  - cb9180ee31ea Downloading 180MB / 199MB
+2025-07-10T11:14:10.511Z INFO  - cb9180ee31ea Downloading 181MB / 199MB
+2025-07-10T11:14:10.830Z INFO  - cb9180ee31ea Downloading 183MB / 199MB
+2025-07-10T11:14:10.949Z INFO  - cb9180ee31ea Downloading 184MB / 199MB
+2025-07-10T11:14:11.123Z INFO  - cb9180ee31ea Downloading 185MB / 199MB
+2025-07-10T11:14:11.648Z INFO  - cb9180ee31ea Downloading 188MB / 199MB
+2025-07-10T11:14:12.176Z INFO  - cb9180ee31ea Downloading 193MB / 199MB
+2025-07-10T11:14:12.537Z INFO  - 0f4d795ed791 Downloading 3MB / 7MB
+2025-07-10T11:14:12.627Z INFO  - cb9180ee31ea Downloading 197MB / 199MB
+2025-07-10T11:14:12.699Z INFO  - cb9180ee31ea Verifying Checksum
+2025-07-10T11:14:12.699Z INFO  - cb9180ee31ea Download complete
+2025-07-10T11:14:17.115Z INFO  - 0f4d795ed791 Downloading 3MB / 7MB
+2025-07-10T11:14:20.619Z INFO  - 0f4d795ed791 Downloading 3MB / 7MB
+2025-07-10T11:14:25.373Z INFO  - 0f4d795ed791 Downloading 3MB / 7MB
+2025-07-10T11:14:27.781Z INFO  - 0f4d795ed791 Downloading 3MB / 7MB
+2025-07-10T11:14:31.874Z INFO  - 0f4d795ed791 Downloading 3MB / 7MB
+2025-07-10T11:14:36.469Z INFO  - 0f4d795ed791 Downloading 4MB / 7MB
+2025-07-10T11:14:38.141Z INFO  - 0f4d795ed791 Downloading 4MB / 7MB
+2025-07-10T11:14:39.346Z INFO  - 0f4d795ed791 Downloading 4MB / 7MB
+2025-07-10T11:14:40.076Z INFO  - 0f4d795ed791 Downloading 4MB / 7MB
+2025-07-10T11:14:42.312Z INFO  - 0f4d795ed791 Downloading 4MB / 7MB
+2025-07-10T11:14:42.721Z INFO  - 0f4d795ed791 Downloading 4MB / 7MB
+2025-07-10T11:14:45.855Z INFO  - 0f4d795ed791 Downloading 5MB / 7MB
+2025-07-10T11:14:47.782Z INFO  - 0f4d795ed791 Downloading 5MB / 7MB
+2025-07-10T11:14:49.232Z INFO  - 0f4d795ed791 Downloading 5MB / 7MB
+2025-07-10T11:14:50.680Z INFO  - 0f4d795ed791 Downloading 5MB / 7MB
+2025-07-10T11:14:51.657Z INFO  - 0f4d795ed791 Downloading 5MB / 7MB
+2025-07-10T11:14:53.591Z INFO  - 0f4d795ed791 Downloading 5MB / 7MB
+2025-07-10T11:14:56.462Z INFO  - 0f4d795ed791 Downloading 6MB / 7MB
+2025-07-10T11:15:00.100Z INFO  - 0f4d795ed791 Downloading 6MB / 7MB
+2025-07-10T11:15:02.485Z INFO  - 0f4d795ed791 Downloading 6MB / 7MB
+2025-07-10T11:15:07.075Z INFO  - 0f4d795ed791 Downloading 6MB / 7MB
+2025-07-10T11:15:10.242Z INFO  - 0f4d795ed791 Downloading 6MB / 7MB
+2025-07-10T11:15:14.341Z INFO  - 0f4d795ed791 Downloading 6MB / 7MB
+2025-07-10T11:15:19.796Z INFO  - 0f4d795ed791 Downloading 7MB / 7MB
+2025-07-10T11:15:21.000Z INFO  - 0f4d795ed791 Downloading 7MB / 7MB
+2025-07-10T11:15:21.000Z INFO  - 0f4d795ed791 Verifying Checksum
+2025-07-10T11:15:21.000Z INFO  - 0f4d795ed791 Download complete
+2025-07-10T11:15:21.352Z INFO  - 0f4d795ed791 Extracting 672KB / 7MB
+2025-07-10T11:15:21.592Z INFO  - 0f4d795ed791 Extracting 1MB / 7MB
+2025-07-10T11:15:21.636Z INFO  - 0f4d795ed791 Extracting 1MB / 7MB
+2025-07-10T11:15:22.296Z INFO  - 0f4d795ed791 Extracting 4MB / 7MB
+2025-07-10T11:15:22.781Z INFO  - 0f4d795ed791 Extracting 6MB / 7MB
+2025-07-10T11:15:23.070Z INFO  - 0f4d795ed791 Extracting 7MB / 7MB
+2025-07-10T11:15:23.111Z INFO  - 0f4d795ed791 Extracting 7MB / 7MB
+2025-07-10T11:15:23.120Z INFO  - 0f4d795ed791 Pull complete
+2025-07-10T11:15:23.131Z INFO  - e356a97deceb Extracting 2KB / 2KB
+2025-07-10T11:15:23.131Z INFO  - e356a97deceb Extracting 2KB / 2KB
+2025-07-10T11:15:23.135Z INFO  - e356a97deceb Pull complete
+2025-07-10T11:15:23.141Z INFO  - bb2f1055de63 Extracting 2KB / 2KB
+2025-07-10T11:15:23.143Z INFO  - bb2f1055de63 Extracting 2KB / 2KB
+2025-07-10T11:15:23.154Z INFO  - bb2f1055de63 Pull complete
+2025-07-10T11:15:23.595Z INFO  - cb9180ee31ea Extracting 1MB / 199MB
+2025-07-10T11:15:23.855Z INFO  - cb9180ee31ea Extracting 5MB / 199MB
+2025-07-10T11:15:24.339Z INFO  - cb9180ee31ea Extracting 9MB / 199MB
+2025-07-10T11:15:26.874Z INFO  - cb9180ee31ea Extracting 16MB / 199MB
+2025-07-10T11:15:29.640Z INFO  - cb9180ee31ea Extracting 17MB / 199MB
+2025-07-10T11:15:30.545Z INFO  - cb9180ee31ea Extracting 20MB / 199MB
+2025-07-10T11:15:31.892Z INFO  - cb9180ee31ea Extracting 28MB / 199MB
+2025-07-10T11:15:32.849Z INFO  - cb9180ee31ea Extracting 36MB / 199MB
+2025-07-10T11:15:33.823Z INFO  - cb9180ee31ea Extracting 44MB / 199MB
+2025-07-10T11:15:34.529Z INFO  - cb9180ee31ea Extracting 48MB / 199MB
+2025-07-10T11:15:35.099Z INFO  - cb9180ee31ea Extracting 53MB / 199MB
+2025-07-10T11:15:35.918Z INFO  - cb9180ee31ea Extracting 56MB / 199MB
+2025-07-10T11:15:36.267Z INFO  - cb9180ee31ea Extracting 60MB / 199MB
+2025-07-10T11:15:37.065Z INFO  - cb9180ee31ea Extracting 64MB / 199MB
+2025-07-10T11:15:37.718Z INFO  - cb9180ee31ea Extracting 68MB / 199MB
+2025-07-10T11:15:38.299Z INFO  - cb9180ee31ea Extracting 73MB / 199MB
+2025-07-10T11:15:39.056Z INFO  - cb9180ee31ea Extracting 77MB / 199MB
+2025-07-10T11:15:39.559Z INFO  - cb9180ee31ea Extracting 81MB / 199MB
+2025-07-10T11:15:40.072Z INFO  - cb9180ee31ea Extracting 84MB / 199MB
+2025-07-10T11:15:40.465Z INFO  - cb9180ee31ea Extracting 88MB / 199MB
+2025-07-10T11:15:40.646Z INFO  - cb9180ee31ea Extracting 89MB / 199MB
+2025-07-10T11:15:40.987Z INFO  - cb9180ee31ea Extracting 92MB / 199MB
+2025-07-10T11:15:41.138Z INFO  - cb9180ee31ea Extracting 93MB / 199MB
+2025-07-10T11:15:41.572Z INFO  - cb9180ee31ea Extracting 96MB / 199MB
+2025-07-10T11:15:41.673Z INFO  - cb9180ee31ea Extracting 96MB / 199MB
+2025-07-10T11:15:41.822Z INFO  - cb9180ee31ea Extracting 97MB / 199MB
+2025-07-10T11:15:42.094Z INFO  - cb9180ee31ea Extracting 99MB / 199MB
+2025-07-10T11:15:42.254Z INFO  - cb9180ee31ea Extracting 100MB / 199MB
+2025-07-10T11:15:42.659Z INFO  - cb9180ee31ea Extracting 104MB / 199MB
+2025-07-10T11:15:43.270Z INFO  - cb9180ee31ea Extracting 105MB / 199MB
+2025-07-10T11:15:43.725Z INFO  - cb9180ee31ea Extracting 108MB / 199MB
+2025-07-10T11:15:43.984Z INFO  - cb9180ee31ea Extracting 112MB / 199MB
+2025-07-10T11:15:44.317Z INFO  - cb9180ee31ea Extracting 115MB / 199MB
+2025-07-10T11:15:45.100Z INFO  - cb9180ee31ea Extracting 120MB / 199MB
+2025-07-10T11:15:45.100Z INFO  - cb9180ee31ea Extracting 121MB / 199MB
+2025-07-10T11:15:45.462Z INFO  - cb9180ee31ea Extracting 123MB / 199MB
+2025-07-10T11:15:45.998Z INFO  - cb9180ee31ea Extracting 128MB / 199MB
+2025-07-10T11:15:46.439Z INFO  - cb9180ee31ea Extracting 132MB / 199MB
+2025-07-10T11:15:46.439Z INFO  - cb9180ee31ea Extracting 133MB / 199MB
+2025-07-10T11:15:48.182Z INFO  - cb9180ee31ea Extracting 140MB / 199MB
+2025-07-10T11:15:48.234Z INFO  - cb9180ee31ea Extracting 141MB / 199MB
+2025-07-10T11:15:50.315Z INFO  - cb9180ee31ea Extracting 143MB / 199MB
+2025-07-10T11:15:50.404Z INFO  - cb9180ee31ea Extracting 144MB / 199MB
+2025-07-10T11:15:51.533Z INFO  - cb9180ee31ea Extracting 145MB / 199MB
+2025-07-10T11:15:52.194Z INFO  - cb9180ee31ea Extracting 145MB / 199MB
+2025-07-10T11:15:53.736Z INFO  - cb9180ee31ea Extracting 147MB / 199MB
+2025-07-10T11:15:54.177Z INFO  - cb9180ee31ea Extracting 148MB / 199MB
+2025-07-10T11:15:54.437Z INFO  - cb9180ee31ea Extracting 148MB / 199MB
+2025-07-10T11:15:54.750Z INFO  - cb9180ee31ea Extracting 149MB / 199MB
+2025-07-10T11:15:56.851Z INFO  - cb9180ee31ea Extracting 152MB / 199MB
+2025-07-10T11:15:56.851Z INFO  - cb9180ee31ea Extracting 153MB / 199MB
+2025-07-10T11:15:56.851Z INFO  - cb9180ee31ea Extracting 153MB / 199MB
+2025-07-10T11:15:57.024Z INFO  - cb9180ee31ea Extracting 155MB / 199MB
+2025-07-10T11:15:57.194Z INFO  - cb9180ee31ea Extracting 156MB / 199MB
+2025-07-10T11:15:57.306Z INFO  - cb9180ee31ea Extracting 156MB / 199MB
+2025-07-10T11:15:57.436Z INFO  - cb9180ee31ea Extracting 157MB / 199MB
+2025-07-10T11:15:58.030Z INFO  - cb9180ee31ea Extracting 159MB / 199MB
+2025-07-10T11:15:58.182Z INFO  - cb9180ee31ea Extracting 160MB / 199MB
+2025-07-10T11:15:59.871Z INFO  - cb9180ee31ea Extracting 163MB / 199MB
+2025-07-10T11:15:59.872Z INFO  - cb9180ee31ea Extracting 165MB / 199MB
+2025-07-10T11:16:02.004Z INFO  - cb9180ee31ea Extracting 168MB / 199MB
+2025-07-10T11:16:02.557Z INFO  - cb9180ee31ea Extracting 169MB / 199MB
+2025-07-10T11:16:05.703Z INFO  - cb9180ee31ea Extracting 172MB / 199MB
+2025-07-10T11:16:06.447Z INFO  - cb9180ee31ea Extracting 176MB / 199MB
+2025-07-10T11:16:07.062Z INFO  - cb9180ee31ea Extracting 181MB / 199MB
+2025-07-10T11:16:07.322Z INFO  - cb9180ee31ea Extracting 183MB / 199MB
+2025-07-10T11:16:07.634Z INFO  - cb9180ee31ea Extracting 185MB / 199MB
+2025-07-10T11:16:08.801Z INFO  - cb9180ee31ea Extracting 191MB / 199MB
+2025-07-10T11:16:08.802Z INFO  - cb9180ee31ea Extracting 192MB / 199MB
+2025-07-10T11:16:09.333Z INFO  - cb9180ee31ea Extracting 192MB / 199MB
+2025-07-10T11:16:10.361Z INFO  - cb9180ee31ea Extracting 196MB / 199MB
+2025-07-10T11:16:11.246Z INFO  - cb9180ee31ea Extracting 199MB / 199MB
+2025-07-10T11:16:12.508Z INFO  - cb9180ee31ea Pull complete
+2025-07-10T11:16:12.518Z INFO  - 5c3d08bcde77 Extracting 958B / 958B
+2025-07-10T11:16:12.534Z INFO  - 5c3d08bcde77 Extracting 958B / 958B
+2025-07-10T11:16:12.543Z INFO  - 5c3d08bcde77 Pull complete
+2025-07-10T11:16:12.547Z INFO  - 65d64269dfe2 Extracting 1KB / 1KB
+2025-07-10T11:16:12.554Z INFO  - 65d64269dfe2 Extracting 1KB / 1KB
+2025-07-10T11:16:12.562Z INFO  - 65d64269dfe2 Pull complete
+2025-07-10T11:16:12.564Z INFO  - 4f4fb700ef54 Extracting 32B / 32B
+2025-07-10T11:16:12.572Z INFO  - 4f4fb700ef54 Extracting 32B / 32B
+2025-07-10T11:16:12.594Z INFO  - 4f4fb700ef54 Pull complete
+2025-07-10T11:16:13.408Z INFO  - cb2bbac61497 Extracting 1MB / 206MB
+2025-07-10T11:16:13.792Z INFO  - cb2bbac61497 Extracting 4MB / 206MB
+2025-07-10T11:16:14.856Z INFO  - cb2bbac61497 Extracting 9MB / 206MB
+2025-07-10T11:16:15.037Z INFO  - cb2bbac61497 Extracting 12MB / 206MB
+2025-07-10T11:16:15.741Z INFO  - cb2bbac61497 Extracting 17MB / 206MB
+2025-07-10T11:16:16.292Z INFO  - cb2bbac61497 Extracting 21MB / 206MB
+2025-07-10T11:16:16.738Z INFO  - cb2bbac61497 Extracting 22MB / 206MB
+2025-07-10T11:16:21.056Z INFO  - cb2bbac61497 Extracting 24MB / 206MB
+2025-07-10T11:16:21.375Z INFO  - cb2bbac61497 Extracting 26MB / 206MB
+2025-07-10T11:16:21.792Z INFO  - cb2bbac61497 Extracting 30MB / 206MB
+2025-07-10T11:16:22.051Z INFO  - cb2bbac61497 Extracting 33MB / 206MB
+2025-07-10T11:16:22.193Z INFO  - cb2bbac61497 Extracting 34MB / 206MB
+2025-07-10T11:16:22.332Z INFO  - cb2bbac61497 Extracting 35MB / 206MB
+2025-07-10T11:16:22.725Z INFO  - cb2bbac61497 Extracting 37MB / 206MB
+2025-07-10T11:16:23.119Z INFO  - cb2bbac61497 Extracting 39MB / 206MB
+2025-07-10T11:16:23.770Z INFO  - cb2bbac61497 Extracting 43MB / 206MB
+2025-07-10T11:16:23.923Z INFO  - cb2bbac61497 Extracting 46MB / 206MB
+2025-07-10T11:16:24.063Z INFO  - cb2bbac61497 Extracting 47MB / 206MB
+2025-07-10T11:16:24.454Z INFO  - cb2bbac61497 Extracting 50MB / 206MB
+2025-07-10T11:16:24.577Z INFO  - cb2bbac61497 Extracting 51MB / 206MB
+2025-07-10T11:16:24.980Z INFO  - cb2bbac61497 Extracting 54MB / 206MB
+2025-07-10T11:16:25.805Z INFO  - cb2bbac61497 Extracting 58MB / 206MB
+2025-07-10T11:16:26.207Z INFO  - cb2bbac61497 Extracting 62MB / 206MB
+2025-07-10T11:16:26.448Z INFO  - cb2bbac61497 Extracting 63MB / 206MB
+2025-07-10T11:16:27.222Z INFO  - cb2bbac61497 Extracting 67MB / 206MB
+2025-07-10T11:16:27.755Z INFO  - cb2bbac61497 Extracting 71MB / 206MB
+2025-07-10T11:16:28.137Z INFO  - cb2bbac61497 Extracting 75MB / 206MB
+2025-07-10T11:16:28.821Z INFO  - cb2bbac61497 Extracting 79MB / 206MB
+2025-07-10T11:16:28.962Z INFO  - cb2bbac61497 Extracting 79MB / 206MB
+2025-07-10T11:16:29.434Z INFO  - cb2bbac61497 Extracting 82MB / 206MB
+2025-07-10T11:16:29.600Z INFO  - cb2bbac61497 Extracting 83MB / 206MB
+2025-07-10T11:16:30.123Z INFO  - cb2bbac61497 Extracting 87MB / 206MB
+2025-07-10T11:16:30.243Z INFO  - cb2bbac61497 Extracting 88MB / 206MB
+2025-07-10T11:16:30.857Z INFO  - cb2bbac61497 Extracting 91MB / 206MB
+2025-07-10T11:16:31.382Z INFO  - cb2bbac61497 Extracting 96MB / 206MB
+2025-07-10T11:16:31.864Z INFO  - cb2bbac61497 Extracting 100MB / 206MB
+2025-07-10T11:16:32.065Z INFO  - cb2bbac61497 Extracting 103MB / 206MB
+2025-07-10T11:16:32.174Z INFO  - cb2bbac61497 Extracting 104MB / 206MB
+2025-07-10T11:16:32.597Z INFO  - cb2bbac61497 Extracting 107MB / 206MB
+2025-07-10T11:16:32.740Z INFO  - cb2bbac61497 Extracting 108MB / 206MB
+2025-07-10T11:16:33.160Z INFO  - cb2bbac61497 Extracting 112MB / 206MB
+2025-07-10T11:16:33.290Z INFO  - cb2bbac61497 Extracting 112MB / 206MB
+2025-07-10T11:16:33.531Z INFO  - cb2bbac61497 Extracting 113MB / 206MB
+2025-07-10T11:16:33.944Z INFO  - cb2bbac61497 Extracting 116MB / 206MB
+2025-07-10T11:16:34.127Z INFO  - cb2bbac61497 Extracting 117MB / 206MB
+2025-07-10T11:16:35.083Z INFO  - cb2bbac61497 Extracting 124MB / 206MB
+2025-07-10T11:16:35.100Z INFO  - cb2bbac61497 Extracting 125MB / 206MB
+2025-07-10T11:16:35.787Z INFO  - cb2bbac61497 Extracting 129MB / 206MB
+2025-07-10T11:16:36.269Z INFO  - cb2bbac61497 Extracting 133MB / 206MB
+2025-07-10T11:16:36.760Z INFO  - cb2bbac61497 Extracting 137MB / 206MB
+2025-07-10T11:16:37.045Z INFO  - cb2bbac61497 Extracting 137MB / 206MB
+2025-07-10T11:16:37.082Z INFO  - cb2bbac61497 Extracting 138MB / 206MB
+2025-07-10T11:16:37.982Z INFO  - cb2bbac61497 Extracting 140MB / 206MB
+2025-07-10T11:16:38.839Z INFO  - cb2bbac61497 Extracting 145MB / 206MB
+2025-07-10T11:16:38.846Z INFO  - cb2bbac61497 Extracting 146MB / 206MB
+2025-07-10T11:16:39.120Z INFO  - cb2bbac61497 Extracting 146MB / 206MB
+2025-07-10T11:16:40.869Z INFO  - cb2bbac61497 Extracting 150MB / 206MB
+2025-07-10T11:16:41.504Z INFO  - cb2bbac61497 Extracting 150MB / 206MB
+2025-07-10T11:16:44.440Z INFO  - cb2bbac61497 Extracting 153MB / 206MB
+2025-07-10T11:16:44.831Z INFO  - cb2bbac61497 Extracting 154MB / 206MB
+2025-07-10T11:16:45.084Z INFO  - cb2bbac61497 Extracting 154MB / 206MB
+2025-07-10T11:16:45.608Z INFO  - cb2bbac61497 Extracting 155MB / 206MB
+2025-07-10T11:16:47.358Z INFO  - cb2bbac61497 Extracting 157MB / 206MB
+2025-07-10T11:16:48.252Z INFO  - cb2bbac61497 Extracting 162MB / 206MB
+2025-07-10T11:16:49.006Z INFO  - cb2bbac61497 Extracting 166MB / 206MB
+2025-07-10T11:16:50.082Z INFO  - cb2bbac61497 Extracting 170MB / 206MB
+2025-07-10T11:16:50.365Z INFO  - cb2bbac61497 Extracting 171MB / 206MB
+2025-07-10T11:16:50.382Z INFO  - cb2bbac61497 Extracting 171MB / 206MB
+2025-07-10T11:16:51.923Z INFO  - cb2bbac61497 Extracting 174MB / 206MB
+2025-07-10T11:16:52.296Z INFO  - cb2bbac61497 Extracting 174MB / 206MB
+2025-07-10T11:16:56.634Z INFO  - cb2bbac61497 Extracting 178MB / 206MB
+2025-07-10T11:16:58.082Z INFO  - cb2bbac61497 Extracting 179MB / 206MB
+2025-07-10T11:16:58.092Z INFO  - cb2bbac61497 Extracting 179MB / 206MB
+2025-07-10T11:16:58.769Z INFO  - cb2bbac61497 Extracting 182MB / 206MB
+2025-07-10T11:16:59.179Z INFO  - cb2bbac61497 Extracting 186MB / 206MB
+2025-07-10T11:16:59.611Z INFO  - cb2bbac61497 Extracting 190MB / 206MB
+2025-07-10T11:16:59.745Z INFO  - cb2bbac61497 Extracting 191MB / 206MB
+2025-07-10T11:17:00.114Z INFO  - cb2bbac61497 Extracting 194MB / 206MB
+2025-07-10T11:17:00.246Z INFO  - cb2bbac61497 Extracting 196MB / 206MB
+2025-07-10T11:17:00.780Z INFO  - cb2bbac61497 Extracting 198MB / 206MB
+2025-07-10T11:17:01.181Z INFO  - cb2bbac61497 Extracting 199MB / 206MB
+2025-07-10T11:17:03.644Z INFO  - cb2bbac61497 Extracting 203MB / 206MB
+2025-07-10T11:17:03.644Z INFO  - cb2bbac61497 Extracting 204MB / 206MB
+2025-07-10T11:17:04.531Z INFO  - cb2bbac61497 Extracting 206MB / 206MB
+2025-07-10T11:17:05.270Z INFO  - cb2bbac61497 Pull complete
+2025-07-10T11:17:05.315Z INFO  -  Digest: sha256:8ecb12c1c64ce956b8f5570013bfba41964ea33fa4083e33b655637d56cc125b
+2025-07-10T11:17:05.318Z INFO  -  Status: Downloaded newer image for ayumu277/chatbot-app:latest
+2025-07-10T11:17:05.365Z INFO  - Pull Image successful, Time taken: 211 Seconds
+2025-07-10T11:17:05.475Z INFO  - Starting container for site
+2025-07-10T11:17:05.475Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_0_882d162f -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e DOCKER_CUSTOM_IMAGE_NAME=ayumu277/chatbot-app:latest -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=d9fa23bab1bae3444918e0beb211c6c2d95730b25457dd5fed306f4f2e1a4c11 -e HTTP_LOGGING_ENABLED=1 docker.io/ayumu277/chatbot-app:latest 
+2025-07-10T11:17:06.872Z INFO  - Initiating warmup request to container chatbot-app-container_0_882d162f for site chatbot-app-container
+2025-07-10T11:17:07.053Z ERROR - Container chatbot-app-container_0_882d162f for site chatbot-app-container has exited, failing site start
+2025-07-10T11:17:07.098Z ERROR - Container chatbot-app-container_0_882d162f didn't respond to HTTP pings on port: 8080. Failing site start. See container logs for debugging.
+2025-07-10T11:17:07.139Z INFO  - Stopping site chatbot-app-container because it failed during startup.
+2025-07-10T11:21:46.426Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T11:21:48.727Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T11:21:49.340Z INFO  - f18232174bc9 Already exists
+2025-07-10T11:21:49.347Z INFO  - dd71dde834b5 Already exists
+2025-07-10T11:21:49.348Z INFO  - 1e5a4c89cee5 Already exists
+2025-07-10T11:21:49.351Z INFO  - 25ff2da83641 Already exists
+2025-07-10T11:21:49.352Z INFO  - 6ab05c065f18 Pulling fs layer
+2025-07-10T11:21:49.354Z INFO  - 259952843c0a Pulling fs layer
+2025-07-10T11:21:49.355Z INFO  - c37f03cd7ef9 Pulling fs layer
+2025-07-10T11:21:49.357Z INFO  - a27406b9c11b Pulling fs layer
+2025-07-10T11:21:49.359Z INFO  - 62ee74e295d7 Pulling fs layer
+2025-07-10T11:21:49.368Z INFO  - fbea24f79420 Pulling fs layer
+2025-07-10T11:21:49.370Z INFO  - cbdc2903dd7d Pulling fs layer
+2025-07-10T11:21:49.376Z INFO  - 06cfc5a4afa8 Pulling fs layer
+2025-07-10T11:21:49.378Z INFO  - 1b543962ed7b Pulling fs layer
+2025-07-10T11:21:49.388Z INFO  - 51fb88db30d4 Pulling fs layer
+2025-07-10T11:21:49.397Z INFO  - 4f4fb700ef54 Pulling fs layer
+2025-07-10T11:21:49.398Z INFO  - a3aaad772e66 Pulling fs layer
+2025-07-10T11:21:49.400Z INFO  - 1c29ad92e280 Pulling fs layer
+2025-07-10T11:21:49.921Z INFO  - 259952843c0a Downloading 93B / 93B
+2025-07-10T11:21:49.923Z INFO  - 259952843c0a Verifying Checksum
+2025-07-10T11:21:49.925Z INFO  - 259952843c0a Download complete
+2025-07-10T11:21:50.056Z INFO  - 6ab05c065f18 Downloading 1MB / 1MB
+2025-07-10T11:21:50.058Z INFO  - 6ab05c065f18 Verifying Checksum
+2025-07-10T11:21:50.059Z INFO  - 6ab05c065f18 Download complete
+2025-07-10T11:21:50.209Z INFO  - 6ab05c065f18 Extracting 448KB / 1MB
+2025-07-10T11:21:50.780Z INFO  - 62ee74e295d7 Downloading 65KB / 65KB
+2025-07-10T11:21:50.782Z INFO  - c37f03cd7ef9 Downloading 460B / 460B
+2025-07-10T11:21:50.783Z INFO  - a27406b9c11b Downloading 976B / 976B
+2025-07-10T11:21:50.785Z INFO  - 4f4fb700ef54 Downloading 32B / 32B
+2025-07-10T11:21:50.790Z INFO  - 62ee74e295d7 Verifying Checksum
+2025-07-10T11:21:50.792Z INFO  - 62ee74e295d7 Download complete
+2025-07-10T11:21:50.800Z INFO  - c37f03cd7ef9 Verifying Checksum
+2025-07-10T11:21:50.802Z INFO  - c37f03cd7ef9 Download complete
+2025-07-10T11:21:50.802Z INFO  - a27406b9c11b Verifying Checksum
+2025-07-10T11:21:50.802Z INFO  - a27406b9c11b Download complete
+2025-07-10T11:21:50.802Z INFO  - 6ab05c065f18 Extracting 1MB / 1MB
+2025-07-10T11:21:50.802Z INFO  - 4f4fb700ef54 Verifying Checksum
+2025-07-10T11:21:50.802Z INFO  - 4f4fb700ef54 Download complete
+2025-07-10T11:21:50.802Z INFO  - 6ab05c065f18 Extracting 1MB / 1MB
+2025-07-10T11:21:50.802Z INFO  - 6ab05c065f18 Pull complete
+2025-07-10T11:21:50.802Z INFO  - 259952843c0a Extracting 93B / 93B
+2025-07-10T11:21:50.802Z INFO  - 259952843c0a Extracting 93B / 93B
+2025-07-10T11:21:50.802Z INFO  - 259952843c0a Pull complete
+2025-07-10T11:21:50.802Z INFO  - c37f03cd7ef9 Extracting 460B / 460B
+2025-07-10T11:21:50.802Z INFO  - c37f03cd7ef9 Extracting 460B / 460B
+2025-07-10T11:21:50.802Z INFO  - c37f03cd7ef9 Pull complete
+2025-07-10T11:21:50.802Z INFO  - a27406b9c11b Extracting 976B / 976B
+2025-07-10T11:21:50.802Z INFO  - a27406b9c11b Extracting 976B / 976B
+2025-07-10T11:21:50.802Z INFO  - a27406b9c11b Pull complete
+2025-07-10T11:21:50.802Z INFO  - 62ee74e295d7 Extracting 32KB / 65KB
+2025-07-10T11:21:50.802Z INFO  - 62ee74e295d7 Extracting 65KB / 65KB
+2025-07-10T11:21:50.829Z INFO  - 62ee74e295d7 Pull complete
+2025-07-10T11:21:51.484Z INFO  - a3aaad772e66 Downloading 1009B / 1KB
+2025-07-10T11:21:51.485Z INFO  - a3aaad772e66 Downloading 1KB / 1KB
+2025-07-10T11:21:51.485Z INFO  - a3aaad772e66 Verifying Checksum
+2025-07-10T11:21:51.485Z INFO  - a3aaad772e66 Download complete
+2025-07-10T11:21:51.503Z INFO  - cbdc2903dd7d Downloading 1009B / 2KB
+2025-07-10T11:21:51.503Z INFO  - cbdc2903dd7d Downloading 2KB / 2KB
+2025-07-10T11:21:51.504Z INFO  - cbdc2903dd7d Verifying Checksum
+2025-07-10T11:21:51.504Z INFO  - cbdc2903dd7d Download complete
+2025-07-10T11:21:51.539Z INFO  - 51fb88db30d4 Downloading 1009B / 1KB
+2025-07-10T11:21:51.540Z INFO  - 51fb88db30d4 Downloading 1KB / 1KB
+2025-07-10T11:21:51.540Z INFO  - 51fb88db30d4 Verifying Checksum
+2025-07-10T11:21:51.540Z INFO  - 51fb88db30d4 Download complete
+2025-07-10T11:21:52.280Z INFO  - 06cfc5a4afa8 Downloading 1009B / 2KB
+2025-07-10T11:21:52.280Z INFO  - 06cfc5a4afa8 Downloading 2KB / 2KB
+2025-07-10T11:21:52.280Z INFO  - 06cfc5a4afa8 Verifying Checksum
+2025-07-10T11:21:52.280Z INFO  - 06cfc5a4afa8 Download complete
+2025-07-10T11:21:53.282Z INFO  - 1c29ad92e280 Downloading 522KB / 213MB
+2025-07-10T11:21:53.282Z INFO  - 1b543962ed7b Downloading 514KB / 206MB
+2025-07-10T11:21:53.282Z INFO  - 1c29ad92e280 Downloading 1MB / 213MB
+2025-07-10T11:21:53.282Z INFO  - 1b543962ed7b Downloading 1MB / 206MB
+2025-07-10T11:21:54.292Z INFO  - 1c29ad92e280 Downloading 2MB / 213MB
+2025-07-10T11:21:54.292Z INFO  - 1b543962ed7b Downloading 1MB / 206MB
+2025-07-10T11:21:54.292Z INFO  - fbea24f79420 Downloading 3MB / 7MB
+2025-07-10T11:21:54.292Z INFO  - 1b543962ed7b Downloading 5MB / 206MB
+2025-07-10T11:21:54.292Z INFO  - 1c29ad92e280 Downloading 9MB / 213MB
+2025-07-10T11:21:54.292Z INFO  - fbea24f79420 Downloading 5MB / 7MB
+2025-07-10T11:21:54.292Z INFO  - 1b543962ed7b Downloading 6MB / 206MB
+2025-07-10T11:21:54.292Z INFO  - fbea24f79420 Verifying Checksum
+2025-07-10T11:21:54.292Z INFO  - fbea24f79420 Download complete
+2025-07-10T11:21:54.292Z INFO  - 1c29ad92e280 Downloading 14MB / 213MB
+2025-07-10T11:21:54.292Z INFO  - 1c29ad92e280 Downloading 14MB / 213MB
+2025-07-10T11:21:54.292Z INFO  - 1b543962ed7b Downloading 8MB / 206MB
+2025-07-10T11:21:54.292Z INFO  - fbea24f79420 Extracting 480KB / 7MB
+2025-07-10T11:21:54.334Z INFO  - 1b543962ed7b Downloading 10MB / 206MB
+2025-07-10T11:21:54.574Z INFO  - 1c29ad92e280 Downloading 17MB / 213MB
+2025-07-10T11:21:54.978Z INFO  - fbea24f79420 Extracting 1MB / 7MB
+2025-07-10T11:21:55.288Z INFO  - fbea24f79420 Extracting 3MB / 7MB
+2025-07-10T11:21:55.288Z INFO  - 1b543962ed7b Downloading 13MB / 206MB
+2025-07-10T11:21:55.429Z INFO  - 1c29ad92e280 Downloading 21MB / 213MB
+2025-07-10T11:21:55.518Z INFO  - 1b543962ed7b Downloading 14MB / 206MB
+2025-07-10T11:21:55.620Z INFO  - 1c29ad92e280 Downloading 22MB / 213MB
+2025-07-10T11:21:55.639Z INFO  - fbea24f79420 Extracting 4MB / 7MB
+2025-07-10T11:21:55.841Z INFO  - 1c29ad92e280 Downloading 23MB / 213MB
+2025-07-10T11:21:56.052Z INFO  - 1b543962ed7b Downloading 17MB / 206MB
+2025-07-10T11:21:56.052Z INFO  - fbea24f79420 Extracting 6MB / 7MB
+2025-07-10T11:21:56.185Z INFO  - 1b543962ed7b Downloading 18MB / 206MB
+2025-07-10T11:21:56.303Z INFO  - fbea24f79420 Extracting 6MB / 7MB
+2025-07-10T11:21:56.303Z INFO  - 1c29ad92e280 Downloading 25MB / 213MB
+2025-07-10T11:21:56.746Z INFO  - 1c29ad92e280 Downloading 26MB / 213MB
+2025-07-10T11:21:56.766Z INFO  - fbea24f79420 Extracting 7MB / 7MB
+2025-07-10T11:21:57.066Z INFO  - fbea24f79420 Extracting 7MB / 7MB
+2025-07-10T11:21:57.099Z INFO  - 1b543962ed7b Downloading 21MB / 206MB
+2025-07-10T11:21:57.197Z INFO  - 1b543962ed7b Downloading 22MB / 206MB
+2025-07-10T11:21:57.308Z INFO  - 1c29ad92e280 Downloading 29MB / 213MB
+2025-07-10T11:21:57.328Z INFO  - fbea24f79420 Pull complete
+2025-07-10T11:21:57.370Z INFO  - 1c29ad92e280 Downloading 31MB / 213MB
+2025-07-10T11:21:57.438Z INFO  - cbdc2903dd7d Extracting 2KB / 2KB
+2025-07-10T11:21:57.500Z INFO  - 1b543962ed7b Downloading 25MB / 206MB
+2025-07-10T11:21:57.500Z INFO  - 1c29ad92e280 Downloading 31MB / 213MB
+2025-07-10T11:21:57.581Z INFO  - 1b543962ed7b Downloading 26MB / 206MB
+2025-07-10T11:21:57.621Z INFO  - cbdc2903dd7d Extracting 2KB / 2KB
+2025-07-10T11:21:57.702Z INFO  - 1c29ad92e280 Downloading 35MB / 213MB
+2025-07-10T11:21:57.742Z INFO  - cbdc2903dd7d Pull complete
+2025-07-10T11:21:57.811Z INFO  - 1b543962ed7b Downloading 29MB / 206MB
+2025-07-10T11:21:57.821Z INFO  - 06cfc5a4afa8 Extracting 2KB / 2KB
+2025-07-10T11:21:58.061Z INFO  - 1b543962ed7b Downloading 30MB / 206MB
+2025-07-10T11:21:58.061Z INFO  - 1c29ad92e280 Downloading 39MB / 213MB
+2025-07-10T11:21:58.110Z INFO  - 06cfc5a4afa8 Extracting 2KB / 2KB
+2025-07-10T11:21:58.262Z INFO  - 06cfc5a4afa8 Pull complete
+2025-07-10T11:21:58.362Z INFO  - 1b543962ed7b Downloading 33MB / 206MB
+2025-07-10T11:21:58.374Z INFO  - 1c29ad92e280 Downloading 44MB / 213MB
+2025-07-10T11:21:58.865Z INFO  - 1c29ad92e280 Downloading 52MB / 213MB
+2025-07-10T11:21:58.987Z INFO  - 1b543962ed7b Downloading 43MB / 206MB
+2025-07-10T11:21:59.158Z INFO  - 1c29ad92e280 Downloading 60MB / 213MB
+2025-07-10T11:21:59.237Z INFO  - 1b543962ed7b Downloading 46MB / 206MB
+2025-07-10T11:21:59.377Z INFO  - 1c29ad92e280 Downloading 65MB / 213MB
+2025-07-10T11:21:59.489Z INFO  - 1b543962ed7b Downloading 50MB / 206MB
+2025-07-10T11:21:59.568Z INFO  - 1c29ad92e280 Downloading 68MB / 213MB
+2025-07-10T11:21:59.719Z INFO  - 1b543962ed7b Downloading 51MB / 206MB
+2025-07-10T11:21:59.991Z INFO  - 1c29ad92e280 Downloading 74MB / 213MB
+2025-07-10T11:22:00.061Z INFO  - 1b543962ed7b Downloading 54MB / 206MB
+2025-07-10T11:22:00.202Z INFO  - 1b543962ed7b Downloading 55MB / 206MB
+2025-07-10T11:22:00.213Z INFO  - 1c29ad92e280 Downloading 77MB / 213MB
+2025-07-10T11:22:00.432Z INFO  - 1c29ad92e280 Downloading 82MB / 213MB
+2025-07-10T11:22:00.544Z INFO  - 1b543962ed7b Downloading 58MB / 206MB
+2025-07-10T11:22:00.654Z INFO  - 1b543962ed7b Downloading 59MB / 206MB
+2025-07-10T11:22:00.736Z INFO  - 1c29ad92e280 Downloading 90MB / 213MB
+2025-07-10T11:22:01.056Z INFO  - 1c29ad92e280 Downloading 94MB / 213MB
+2025-07-10T11:22:01.112Z INFO  - 1b543962ed7b Downloading 61MB / 206MB
+2025-07-10T11:22:01.232Z INFO  - 1b543962ed7b Downloading 62MB / 206MB
+2025-07-10T11:22:01.355Z INFO  - 1b543962ed7b Downloading 63MB / 206MB
+2025-07-10T11:22:01.397Z INFO  - 1c29ad92e280 Downloading 99MB / 213MB
+2025-07-10T11:22:01.579Z INFO  - 1b543962ed7b Downloading 66MB / 206MB
+2025-07-10T11:22:01.768Z INFO  - 1c29ad92e280 Downloading 102MB / 213MB
+2025-07-10T11:22:01.843Z INFO  - 1b543962ed7b Downloading 68MB / 206MB
+2025-07-10T11:22:01.889Z INFO  - 1c29ad92e280 Downloading 104MB / 213MB
+2025-07-10T11:22:02.163Z INFO  - 1c29ad92e280 Downloading 107MB / 213MB
+2025-07-10T11:22:02.204Z INFO  - 1b543962ed7b Downloading 70MB / 206MB
+2025-07-10T11:22:02.253Z INFO  - 1c29ad92e280 Downloading 108MB / 213MB
+2025-07-10T11:22:02.345Z INFO  - 1b543962ed7b Downloading 71MB / 206MB
+2025-07-10T11:22:02.696Z INFO  - 1c29ad92e280 Downloading 111MB / 213MB
+2025-07-10T11:22:02.796Z INFO  - 1b543962ed7b Downloading 75MB / 206MB
+2025-07-10T11:22:02.836Z INFO  - 1c29ad92e280 Downloading 112MB / 213MB
+2025-07-10T11:22:03.280Z INFO  - 1b543962ed7b Downloading 79MB / 206MB
+2025-07-10T11:22:03.349Z INFO  - 1c29ad92e280 Downloading 115MB / 213MB
+2025-07-10T11:22:03.422Z INFO  - 1b543962ed7b Downloading 80MB / 206MB
+2025-07-10T11:22:03.442Z INFO  - 1c29ad92e280 Downloading 116MB / 213MB
+2025-07-10T11:22:03.581Z INFO  - 1c29ad92e280 Downloading 117MB / 213MB
+2025-07-10T11:22:03.683Z INFO  - 1b543962ed7b Downloading 82MB / 206MB
+2025-07-10T11:22:03.742Z INFO  - 1b543962ed7b Downloading 83MB / 206MB
+2025-07-10T11:22:03.943Z INFO  - 1c29ad92e280 Downloading 120MB / 213MB
+2025-07-10T11:22:04.224Z INFO  - 1b543962ed7b Downloading 87MB / 206MB
+2025-07-10T11:22:04.436Z INFO  - 1c29ad92e280 Downloading 124MB / 213MB
+2025-07-10T11:22:04.504Z INFO  - 1b543962ed7b Downloading 92MB / 206MB
+2025-07-10T11:22:04.716Z INFO  - 1b543962ed7b Downloading 95MB / 206MB
+2025-07-10T11:22:04.727Z INFO  - 1c29ad92e280 Downloading 128MB / 213MB
+2025-07-10T11:22:04.989Z INFO  - 1c29ad92e280 Downloading 133MB / 213MB
+2025-07-10T11:22:05.069Z INFO  - 1b543962ed7b Downloading 100MB / 206MB
+2025-07-10T11:22:05.439Z INFO  - 1b543962ed7b Downloading 104MB / 206MB
+2025-07-10T11:22:05.462Z INFO  - 1c29ad92e280 Downloading 137MB / 213MB
+2025-07-10T11:22:05.522Z INFO  - 1b543962ed7b Downloading 105MB / 206MB
+2025-07-10T11:22:05.532Z INFO  - 1c29ad92e280 Downloading 138MB / 213MB
+2025-07-10T11:22:05.743Z INFO  - 1b543962ed7b Downloading 107MB / 206MB
+2025-07-10T11:22:05.881Z INFO  - 1b543962ed7b Downloading 109MB / 206MB
+2025-07-10T11:22:05.975Z INFO  - 1c29ad92e280 Downloading 141MB / 213MB
+2025-07-10T11:22:06.154Z INFO  - 1b543962ed7b Downloading 112MB / 206MB
+2025-07-10T11:22:06.265Z INFO  - 1c29ad92e280 Downloading 145MB / 213MB
+2025-07-10T11:22:06.676Z INFO  - 1b543962ed7b Downloading 116MB / 206MB
+2025-07-10T11:22:06.748Z INFO  - 1c29ad92e280 Downloading 151MB / 213MB
+2025-07-10T11:22:06.980Z INFO  - 1c29ad92e280 Downloading 155MB / 213MB
+2025-07-10T11:22:07.088Z INFO  - 1b543962ed7b Downloading 124MB / 206MB
+2025-07-10T11:22:07.281Z INFO  - 1b543962ed7b Downloading 128MB / 206MB
+2025-07-10T11:22:07.480Z INFO  - 1c29ad92e280 Downloading 168MB / 213MB
+2025-07-10T11:22:07.601Z INFO  - 1b543962ed7b Downloading 131MB / 206MB
+2025-07-10T11:22:07.672Z INFO  - 1c29ad92e280 Downloading 172MB / 213MB
+2025-07-10T11:22:07.778Z INFO  - 1c29ad92e280 Downloading 175MB / 213MB
+2025-07-10T11:22:07.827Z INFO  - 1b543962ed7b Downloading 137MB / 206MB
+2025-07-10T11:22:07.937Z INFO  - 1b543962ed7b Downloading 137MB / 206MB
+2025-07-10T11:22:08.247Z INFO  - 1c29ad92e280 Downloading 180MB / 213MB
+2025-07-10T11:22:08.429Z INFO  - 1b543962ed7b Downloading 141MB / 206MB
+2025-07-10T11:22:08.507Z INFO  - 1c29ad92e280 Downloading 183MB / 213MB
+2025-07-10T11:22:08.628Z INFO  - 1c29ad92e280 Downloading 185MB / 213MB
+2025-07-10T11:22:08.821Z INFO  - 1b543962ed7b Downloading 145MB / 206MB
+2025-07-10T11:22:09.020Z INFO  - 1c29ad92e280 Downloading 188MB / 213MB
+2025-07-10T11:22:09.100Z INFO  - 1b543962ed7b Downloading 148MB / 206MB
+2025-07-10T11:22:09.101Z INFO  - 1c29ad92e280 Downloading 189MB / 213MB
+2025-07-10T11:22:09.221Z INFO  - 1b543962ed7b Downloading 149MB / 206MB
+2025-07-10T11:22:09.432Z INFO  - 1c29ad92e280 Downloading 193MB / 213MB
+2025-07-10T11:22:09.433Z INFO  - 1b543962ed7b Downloading 153MB / 206MB
+2025-07-10T11:22:09.633Z INFO  - 1c29ad92e280 Downloading 198MB / 213MB
+2025-07-10T11:22:09.807Z INFO  - 1b543962ed7b Downloading 157MB / 206MB
+2025-07-10T11:22:09.807Z INFO  - 1c29ad92e280 Downloading 201MB / 213MB
+2025-07-10T11:22:10.067Z INFO  - 1b543962ed7b Downloading 162MB / 206MB
+2025-07-10T11:22:10.186Z INFO  - 1c29ad92e280 Downloading 211MB / 213MB
+2025-07-10T11:22:10.276Z INFO  - 1c29ad92e280 Verifying Checksum
+2025-07-10T11:22:10.276Z INFO  - 1c29ad92e280 Download complete
+2025-07-10T11:22:10.287Z INFO  - 1b543962ed7b Downloading 165MB / 206MB
+2025-07-10T11:22:10.430Z INFO  - 1b543962ed7b Downloading 166MB / 206MB
+2025-07-10T11:22:10.966Z INFO  - 1b543962ed7b Downloading 169MB / 206MB
+2025-07-10T11:22:11.146Z INFO  - 1b543962ed7b Downloading 171MB / 206MB
+2025-07-10T11:22:11.536Z INFO  - 1b543962ed7b Downloading 173MB / 206MB
+2025-07-10T11:22:11.719Z INFO  - 1b543962ed7b Downloading 174MB / 206MB
+2025-07-10T11:22:12.112Z INFO  - 1b543962ed7b Downloading 178MB / 206MB
+2025-07-10T11:22:12.568Z INFO  - 1b543962ed7b Downloading 182MB / 206MB
+2025-07-10T11:22:13.108Z INFO  - 1b543962ed7b Downloading 186MB / 206MB
+2025-07-10T11:22:13.320Z INFO  - 1b543962ed7b Downloading 187MB / 206MB
+2025-07-10T11:22:13.682Z INFO  - 1b543962ed7b Downloading 190MB / 206MB
+2025-07-10T11:22:13.808Z INFO  - 1b543962ed7b Downloading 191MB / 206MB
+2025-07-10T11:22:14.052Z INFO  - 1b543962ed7b Downloading 193MB / 206MB
+2025-07-10T11:22:14.413Z INFO  - 1b543962ed7b Downloading 198MB / 206MB
+2025-07-10T11:22:14.544Z INFO  - 1b543962ed7b Downloading 200MB / 206MB
+2025-07-10T11:22:14.808Z INFO  - 1b543962ed7b Downloading 204MB / 206MB
+2025-07-10T11:22:14.921Z INFO  - 1b543962ed7b Verifying Checksum
+2025-07-10T11:22:14.921Z INFO  - 1b543962ed7b Download complete
+2025-07-10T11:22:15.093Z INFO  - 1b543962ed7b Extracting 544KB / 206MB
+2025-07-10T11:22:15.283Z INFO  - 1b543962ed7b Extracting 1MB / 206MB
+2025-07-10T11:22:15.684Z INFO  - 1b543962ed7b Extracting 4MB / 206MB
+2025-07-10T11:22:15.794Z INFO  - 1b543962ed7b Extracting 5MB / 206MB
+2025-07-10T11:22:16.370Z INFO  - 1b543962ed7b Extracting 9MB / 206MB
+2025-07-10T11:22:16.488Z INFO  - 1b543962ed7b Extracting 10MB / 206MB
+2025-07-10T11:22:16.930Z INFO  - 1b543962ed7b Extracting 13MB / 206MB
+2025-07-10T11:22:17.092Z INFO  - 1b543962ed7b Extracting 13MB / 206MB
+2025-07-10T11:22:17.345Z INFO  - 1b543962ed7b Extracting 14MB / 206MB
+2025-07-10T11:22:29.414Z INFO  - 1b543962ed7b Extracting 17MB / 206MB
+2025-07-10T11:22:29.654Z INFO  - 1b543962ed7b Extracting 17MB / 206MB
+2025-07-10T11:22:29.977Z INFO  - 1b543962ed7b Extracting 18MB / 206MB
+2025-07-10T11:22:31.277Z INFO  - 1b543962ed7b Extracting 20MB / 206MB
+2025-07-10T11:22:31.456Z INFO  - 1b543962ed7b Extracting 21MB / 206MB
+2025-07-10T11:22:32.199Z INFO  - 1b543962ed7b Extracting 24MB / 206MB
+2025-07-10T11:22:32.614Z INFO  - 1b543962ed7b Extracting 29MB / 206MB
+2025-07-10T11:22:33.466Z INFO  - 1b543962ed7b Extracting 33MB / 206MB
+2025-07-10T11:22:33.939Z INFO  - 1b543962ed7b Extracting 37MB / 206MB
+2025-07-10T11:22:34.040Z INFO  - 1b543962ed7b Extracting 37MB / 206MB
+2025-07-10T11:22:34.140Z INFO  - 1b543962ed7b Extracting 38MB / 206MB
+2025-07-10T11:22:34.261Z INFO  - 1b543962ed7b Extracting 38MB / 206MB
+2025-07-10T11:22:35.015Z INFO  - 1b543962ed7b Extracting 41MB / 206MB
+2025-07-10T11:22:35.127Z INFO  - 1b543962ed7b Extracting 42MB / 206MB
+2025-07-10T11:22:35.919Z INFO  - 1b543962ed7b Extracting 45MB / 206MB
+2025-07-10T11:22:36.323Z INFO  - 1b543962ed7b Extracting 49MB / 206MB
+2025-07-10T11:22:36.494Z INFO  - 1b543962ed7b Extracting 50MB / 206MB
+2025-07-10T11:22:36.637Z INFO  - 1b543962ed7b Extracting 51MB / 206MB
+2025-07-10T11:22:36.937Z INFO  - 1b543962ed7b Extracting 53MB / 206MB
+2025-07-10T11:22:37.138Z INFO  - 1b543962ed7b Extracting 54MB / 206MB
+2025-07-10T11:22:37.611Z INFO  - 1b543962ed7b Extracting 57MB / 206MB
+2025-07-10T11:22:37.743Z INFO  - 1b543962ed7b Extracting 58MB / 206MB
+2025-07-10T11:22:37.843Z INFO  - 1b543962ed7b Extracting 58MB / 206MB
+2025-07-10T11:22:38.025Z INFO  - 1b543962ed7b Extracting 59MB / 206MB
+2025-07-10T11:22:39.001Z INFO  - 1b543962ed7b Extracting 62MB / 206MB
+2025-07-10T11:22:39.139Z INFO  - 1b543962ed7b Extracting 63MB / 206MB
+2025-07-10T11:22:39.934Z INFO  - 1b543962ed7b Extracting 66MB / 206MB
+2025-07-10T11:22:40.229Z INFO  - 1b543962ed7b Extracting 70MB / 206MB
+2025-07-10T11:22:40.378Z INFO  - 1b543962ed7b Extracting 71MB / 206MB
+2025-07-10T11:22:40.617Z INFO  - 1b543962ed7b Extracting 71MB / 206MB
+2025-07-10T11:22:41.225Z INFO  - 1b543962ed7b Extracting 75MB / 206MB
+2025-07-10T11:22:41.456Z INFO  - 1b543962ed7b Extracting 79MB / 206MB
+2025-07-10T11:22:41.545Z INFO  - 1b543962ed7b Extracting 79MB / 206MB
+2025-07-10T11:22:41.899Z INFO  - 1b543962ed7b Extracting 82MB / 206MB
+2025-07-10T11:22:42.029Z INFO  - 1b543962ed7b Extracting 83MB / 206MB
+2025-07-10T11:22:42.554Z INFO  - 1b543962ed7b Extracting 87MB / 206MB
+2025-07-10T11:22:42.655Z INFO  - 1b543962ed7b Extracting 88MB / 206MB
+2025-07-10T11:22:43.188Z INFO  - 1b543962ed7b Extracting 90MB / 206MB
+2025-07-10T11:22:43.288Z INFO  - 1b543962ed7b Extracting 92MB / 206MB
+2025-07-10T11:22:44.243Z INFO  - 1b543962ed7b Extracting 95MB / 206MB
+2025-07-10T11:22:44.969Z INFO  - 1b543962ed7b Extracting 99MB / 206MB
+2025-07-10T11:22:45.511Z INFO  - 1b543962ed7b Extracting 104MB / 206MB
+2025-07-10T11:22:46.297Z INFO  - 1b543962ed7b Extracting 111MB / 206MB
+2025-07-10T11:22:46.901Z INFO  - 1b543962ed7b Extracting 117MB / 206MB
+2025-07-10T11:22:47.343Z INFO  - 1b543962ed7b Extracting 121MB / 206MB
+2025-07-10T11:22:47.525Z INFO  - 1b543962ed7b Extracting 123MB / 206MB
+2025-07-10T11:22:47.525Z INFO  - 1b543962ed7b Extracting 124MB / 206MB
+2025-07-10T11:22:47.916Z INFO  - 1b543962ed7b Extracting 128MB / 206MB
+2025-07-10T11:22:48.854Z INFO  - 1b543962ed7b Extracting 133MB / 206MB
+2025-07-10T11:22:49.064Z INFO  - 1b543962ed7b Extracting 137MB / 206MB
+2025-07-10T11:22:49.165Z INFO  - 1b543962ed7b Extracting 138MB / 206MB
+2025-07-10T11:22:49.487Z INFO  - 1b543962ed7b Extracting 140MB / 206MB
+2025-07-10T11:22:49.617Z INFO  - 1b543962ed7b Extracting 141MB / 206MB
+2025-07-10T11:22:50.041Z INFO  - 1b543962ed7b Extracting 144MB / 206MB
+2025-07-10T11:22:50.172Z INFO  - 1b543962ed7b Extracting 145MB / 206MB
+2025-07-10T11:22:50.444Z INFO  - 1b543962ed7b Extracting 146MB / 206MB
+2025-07-10T11:22:51.749Z INFO  - 1b543962ed7b Extracting 149MB / 206MB
+2025-07-10T11:22:52.192Z INFO  - 1b543962ed7b Extracting 149MB / 206MB
+2025-07-10T11:22:52.786Z INFO  - 1b543962ed7b Extracting 150MB / 206MB
+2025-07-10T11:22:55.323Z INFO  - 1b543962ed7b Extracting 153MB / 206MB
+2025-07-10T11:22:55.562Z INFO  - 1b543962ed7b Extracting 153MB / 206MB
+2025-07-10T11:22:55.986Z INFO  - 1b543962ed7b Extracting 154MB / 206MB
+2025-07-10T11:22:56.368Z INFO  - 1b543962ed7b Extracting 154MB / 206MB
+2025-07-10T11:22:58.500Z INFO  - 1b543962ed7b Extracting 157MB / 206MB
+2025-07-10T11:22:58.733Z INFO  - 1b543962ed7b Extracting 157MB / 206MB
+2025-07-10T11:22:59.426Z INFO  - 1b543962ed7b Extracting 160MB / 206MB
+2025-07-10T11:22:59.538Z INFO  - 1b543962ed7b Extracting 161MB / 206MB
+2025-07-10T11:22:59.709Z INFO  - 1b543962ed7b Extracting 162MB / 206MB
+2025-07-10T11:23:00.342Z INFO  - 1b543962ed7b Extracting 165MB / 206MB
+2025-07-10T11:23:00.452Z INFO  - 1b543962ed7b Extracting 165MB / 206MB
+2025-07-10T11:23:00.634Z INFO  - 1b543962ed7b Extracting 166MB / 206MB
+2025-07-10T11:23:01.448Z INFO  - 1b543962ed7b Extracting 169MB / 206MB
+2025-07-10T11:23:01.921Z INFO  - 1b543962ed7b Extracting 170MB / 206MB
+2025-07-10T11:23:03.471Z INFO  - 1b543962ed7b Extracting 173MB / 206MB
+2025-07-10T11:23:03.752Z INFO  - 1b543962ed7b Extracting 174MB / 206MB
+2025-07-10T11:23:05.088Z INFO  - 1b543962ed7b Extracting 177MB / 206MB
+2025-07-10T11:23:05.594Z INFO  - 1b543962ed7b Extracting 177MB / 206MB
+2025-07-10T11:23:06.025Z INFO  - 1b543962ed7b Extracting 178MB / 206MB
+2025-07-10T11:23:06.267Z INFO  - 1b543962ed7b Extracting 179MB / 206MB
+2025-07-10T11:23:07.705Z INFO  - 1b543962ed7b Extracting 181MB / 206MB
+2025-07-10T11:23:07.978Z INFO  - 1b543962ed7b Extracting 183MB / 206MB
+2025-07-10T11:23:09.174Z INFO  - 1b543962ed7b Extracting 186MB / 206MB
+2025-07-10T11:23:09.355Z INFO  - 1b543962ed7b Extracting 187MB / 206MB
+2025-07-10T11:23:10.079Z INFO  - 1b543962ed7b Extracting 190MB / 206MB
+2025-07-10T11:23:10.189Z INFO  - 1b543962ed7b Extracting 190MB / 206MB
+2025-07-10T11:23:11.104Z INFO  - 1b543962ed7b Extracting 194MB / 206MB
+2025-07-10T11:23:11.384Z INFO  - 1b543962ed7b Extracting 195MB / 206MB
+2025-07-10T11:23:12.673Z INFO  - 1b543962ed7b Extracting 198MB / 206MB
+2025-07-10T11:23:13.125Z INFO  - 1b543962ed7b Extracting 199MB / 206MB
+2025-07-10T11:23:14.426Z INFO  - 1b543962ed7b Extracting 202MB / 206MB
+2025-07-10T11:23:14.455Z INFO  - 1b543962ed7b Extracting 202MB / 206MB
+2025-07-10T11:23:14.636Z INFO  - 1b543962ed7b Extracting 203MB / 206MB
+2025-07-10T11:23:15.469Z INFO  - 1b543962ed7b Extracting 204MB / 206MB
+2025-07-10T11:23:15.541Z INFO  - 1b543962ed7b Extracting 206MB / 206MB
+2025-07-10T11:23:17.071Z INFO  - 1b543962ed7b Pull complete
+2025-07-10T11:23:17.080Z INFO  - 51fb88db30d4 Extracting 1KB / 1KB
+2025-07-10T11:23:17.109Z INFO  - 51fb88db30d4 Extracting 1KB / 1KB
+2025-07-10T11:23:17.130Z INFO  - 51fb88db30d4 Pull complete
+2025-07-10T11:23:17.159Z INFO  - 4f4fb700ef54 Extracting 32B / 32B
+2025-07-10T11:23:17.189Z INFO  - 4f4fb700ef54 Extracting 32B / 32B
+2025-07-10T11:23:17.210Z INFO  - 4f4fb700ef54 Pull complete
+2025-07-10T11:23:17.459Z INFO  - a3aaad772e66 Extracting 1KB / 1KB
+2025-07-10T11:23:17.482Z INFO  - a3aaad772e66 Extracting 1KB / 1KB
+2025-07-10T11:23:17.504Z INFO  - a3aaad772e66 Pull complete
+2025-07-10T11:23:17.918Z INFO  - 1c29ad92e280 Extracting 1MB / 213MB
+2025-07-10T11:23:18.029Z INFO  - 1c29ad92e280 Extracting 2MB / 213MB
+2025-07-10T11:23:18.957Z INFO  - 1c29ad92e280 Extracting 4MB / 213MB
+2025-07-10T11:23:19.156Z INFO  - 1c29ad92e280 Extracting 5MB / 213MB
+2025-07-10T11:23:19.369Z INFO  - 1c29ad92e280 Extracting 6MB / 213MB
+2025-07-10T11:23:20.204Z INFO  - 1c29ad92e280 Extracting 9MB / 213MB
+2025-07-10T11:23:20.515Z INFO  - 1c29ad92e280 Extracting 14MB / 213MB
+2025-07-10T11:23:21.260Z INFO  - 1c29ad92e280 Extracting 18MB / 213MB
+2025-07-10T11:23:21.692Z INFO  - 1c29ad92e280 Extracting 21MB / 213MB
+2025-07-10T11:23:22.002Z INFO  - 1c29ad92e280 Extracting 22MB / 213MB
+2025-07-10T11:23:22.497Z INFO  - 1c29ad92e280 Extracting 22MB / 213MB
+2025-07-10T11:23:22.709Z INFO  - 1c29ad92e280 Extracting 23MB / 213MB
+2025-07-10T11:23:27.553Z INFO  - 1c29ad92e280 Extracting 26MB / 213MB
+2025-07-10T11:23:27.695Z INFO  - 1c29ad92e280 Extracting 27MB / 213MB
+2025-07-10T11:23:28.281Z INFO  - 1c29ad92e280 Extracting 30MB / 213MB
+2025-07-10T11:23:28.392Z INFO  - 1c29ad92e280 Extracting 31MB / 213MB
+2025-07-10T11:23:29.126Z INFO  - 1c29ad92e280 Extracting 34MB / 213MB
+2025-07-10T11:23:29.980Z INFO  - 1c29ad92e280 Extracting 38MB / 213MB
+2025-07-10T11:23:30.100Z INFO  - 1c29ad92e280 Extracting 40MB / 213MB
+2025-07-10T11:23:30.957Z INFO  - 1c29ad92e280 Extracting 44MB / 213MB
+2025-07-10T11:23:31.409Z INFO  - 1c29ad92e280 Extracting 48MB / 213MB
+2025-07-10T11:23:31.842Z INFO  - 1c29ad92e280 Extracting 51MB / 213MB
+2025-07-10T11:23:31.842Z INFO  - 1c29ad92e280 Extracting 52MB / 213MB
+2025-07-10T11:23:31.872Z INFO  - 1c29ad92e280 Extracting 53MB / 213MB
+2025-07-10T11:23:32.627Z INFO  - 1c29ad92e280 Extracting 56MB / 213MB
+2025-07-10T11:23:32.838Z INFO  - 1c29ad92e280 Extracting 60MB / 213MB
+2025-07-10T11:23:33.312Z INFO  - 1c29ad92e280 Extracting 61MB / 213MB
+2025-07-10T11:23:33.704Z INFO  - 1c29ad92e280 Extracting 65MB / 213MB
+2025-07-10T11:23:34.336Z INFO  - 1c29ad92e280 Extracting 69MB / 213MB
+2025-07-10T11:23:34.740Z INFO  - 1c29ad92e280 Extracting 72MB / 213MB
+2025-07-10T11:23:35.083Z INFO  - 1c29ad92e280 Extracting 77MB / 213MB
+2025-07-10T11:23:35.908Z INFO  - 1c29ad92e280 Extracting 81MB / 213MB
+2025-07-10T11:23:36.358Z INFO  - 1c29ad92e280 Extracting 85MB / 213MB
+2025-07-10T11:23:36.359Z INFO  - 1c29ad92e280 Extracting 86MB / 213MB
+2025-07-10T11:23:36.479Z INFO  - 1c29ad92e280 Extracting 87MB / 213MB
+2025-07-10T11:23:36.810Z INFO  - 1c29ad92e280 Extracting 90MB / 213MB
+2025-07-10T11:23:36.913Z INFO  - 1c29ad92e280 Extracting 90MB / 213MB
+2025-07-10T11:23:37.517Z INFO  - 1c29ad92e280 Extracting 94MB / 213MB
+2025-07-10T11:23:37.785Z INFO  - 1c29ad92e280 Extracting 94MB / 213MB
+2025-07-10T11:23:37.857Z INFO  - 1c29ad92e280 Extracting 95MB / 213MB
+2025-07-10T11:23:37.969Z INFO  - 1c29ad92e280 Extracting 95MB / 213MB
+2025-07-10T11:23:38.812Z INFO  - 1c29ad92e280 Extracting 98MB / 213MB
+2025-07-10T11:23:39.243Z INFO  - 1c29ad92e280 Extracting 99MB / 213MB
+2025-07-10T11:23:39.244Z INFO  - 1c29ad92e280 Extracting 99MB / 213MB
+2025-07-10T11:23:39.536Z INFO  - 1c29ad92e280 Extracting 100MB / 213MB
+2025-07-10T11:23:40.571Z INFO  - 1c29ad92e280 Extracting 103MB / 213MB
+2025-07-10T11:23:40.571Z INFO  - 1c29ad92e280 Extracting 104MB / 213MB
+2025-07-10T11:23:41.415Z INFO  - 1c29ad92e280 Extracting 107MB / 213MB
+2025-07-10T11:23:42.473Z INFO  - 1c29ad92e280 Extracting 116MB / 213MB
+2025-07-10T11:23:42.784Z INFO  - 1c29ad92e280 Extracting 120MB / 213MB
+2025-07-10T11:23:42.904Z INFO  - 1c29ad92e280 Extracting 121MB / 213MB
+2025-07-10T11:23:43.610Z INFO  - 1c29ad92e280 Extracting 124MB / 213MB
+2025-07-10T11:23:43.919Z INFO  - 1c29ad92e280 Extracting 128MB / 213MB
+2025-07-10T11:23:44.414Z INFO  - 1c29ad92e280 Extracting 132MB / 213MB
+2025-07-10T11:23:44.524Z INFO  - 1c29ad92e280 Extracting 133MB / 213MB
+2025-07-10T11:23:44.916Z INFO  - 1c29ad92e280 Extracting 137MB / 213MB
+2025-07-10T11:23:45.068Z INFO  - 1c29ad92e280 Extracting 138MB / 213MB
+2025-07-10T11:23:46.113Z INFO  - 1c29ad92e280 Extracting 146MB / 213MB
+2025-07-10T11:23:46.618Z INFO  - 1c29ad92e280 Extracting 150MB / 213MB
+2025-07-10T11:23:47.653Z INFO  - 1c29ad92e280 Extracting 154MB / 213MB
+2025-07-10T11:23:47.925Z INFO  - 1c29ad92e280 Extracting 154MB / 213MB
+2025-07-10T11:23:48.198Z INFO  - 1c29ad92e280 Extracting 155MB / 213MB
+2025-07-10T11:23:50.038Z INFO  - 1c29ad92e280 Extracting 158MB / 213MB
+2025-07-10T11:23:50.439Z INFO  - 1c29ad92e280 Extracting 158MB / 213MB
+2025-07-10T11:23:51.022Z INFO  - 1c29ad92e280 Extracting 159MB / 213MB
+2025-07-10T11:23:53.891Z INFO  - 1c29ad92e280 Extracting 162MB / 213MB
+2025-07-10T11:23:54.322Z INFO  - 1c29ad92e280 Extracting 163MB / 213MB
+2025-07-10T11:23:54.665Z INFO  - 1c29ad92e280 Extracting 163MB / 213MB
+2025-07-10T11:23:55.077Z INFO  - 1c29ad92e280 Extracting 164MB / 213MB
+2025-07-10T11:23:56.053Z INFO  - 1c29ad92e280 Extracting 166MB / 213MB
+2025-07-10T11:23:56.192Z INFO  - 1c29ad92e280 Extracting 167MB / 213MB
+2025-07-10T11:23:56.463Z INFO  - 1c29ad92e280 Extracting 168MB / 213MB
+2025-07-10T11:23:56.917Z INFO  - 1c29ad92e280 Extracting 171MB / 213MB
+2025-07-10T11:23:57.116Z INFO  - 1c29ad92e280 Extracting 172MB / 213MB
+2025-07-10T11:23:57.803Z INFO  - 1c29ad92e280 Extracting 175MB / 213MB
+2025-07-10T11:23:57.972Z INFO  - 1c29ad92e280 Extracting 175MB / 213MB
+2025-07-10T11:23:58.123Z INFO  - 1c29ad92e280 Extracting 176MB / 213MB
+2025-07-10T11:23:59.138Z INFO  - 1c29ad92e280 Extracting 179MB / 213MB
+2025-07-10T11:23:59.480Z INFO  - 1c29ad92e280 Extracting 180MB / 213MB
+2025-07-10T11:23:59.785Z INFO  - 1c29ad92e280 Extracting 180MB / 213MB
+2025-07-10T11:24:00.186Z INFO  - 1c29ad92e280 Extracting 181MB / 213MB
+2025-07-10T11:24:01.753Z INFO  - 1c29ad92e280 Extracting 184MB / 213MB
+2025-07-10T11:24:02.770Z INFO  - 1c29ad92e280 Extracting 184MB / 213MB
+2025-07-10T11:24:03.815Z INFO  - 1c29ad92e280 Extracting 185MB / 213MB
+2025-07-10T11:24:06.158Z INFO  - 1c29ad92e280 Extracting 188MB / 213MB
+2025-07-10T11:24:06.562Z INFO  - 1c29ad92e280 Extracting 192MB / 213MB
+2025-07-10T11:24:07.246Z INFO  - 1c29ad92e280 Extracting 197MB / 213MB
+2025-07-10T11:24:07.648Z INFO  - 1c29ad92e280 Extracting 201MB / 213MB
+2025-07-10T11:24:08.211Z INFO  - 1c29ad92e280 Extracting 206MB / 213MB
+2025-07-10T11:24:08.886Z INFO  - 1c29ad92e280 Extracting 206MB / 213MB
+2025-07-10T11:24:10.241Z INFO  - 1c29ad92e280 Extracting 209MB / 213MB
+2025-07-10T11:24:10.895Z INFO  - 1c29ad92e280 Extracting 213MB / 213MB
+2025-07-10T11:24:11.988Z INFO  - 1c29ad92e280 Pull complete
+2025-07-10T11:24:11.988Z INFO  -  Digest: sha256:16dd793b2101d31460e4838ff69c65d1cd80253f32cb9f8e6a3b83ebe7b1be77
+2025-07-10T11:24:11.988Z INFO  -  Status: Downloaded newer image for ayumu277/chatbot-app:latest
+2025-07-10T11:24:12.017Z INFO  - Pull Image successful, Time taken: 145 Seconds
+2025-07-10T11:24:13.009Z INFO  - Starting container for site
+2025-07-10T11:24:13.009Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_0_b24c675b -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e DOCKER_CUSTOM_IMAGE_NAME=ayumu277/chatbot-app:latest -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=d9fa23bab1bae3444918e0beb211c6c2d95730b25457dd5fed306f4f2e1a4c11 -e HTTP_LOGGING_ENABLED=1 ayumu277/chatbot-app:latest 
+2025-07-10T11:24:15.640Z INFO  - Initiating warmup request to container chatbot-app-container_0_b24c675b for site chatbot-app-container
+2025-07-10T11:24:30.074Z INFO  - Container chatbot-app-container_0_b24c675b for site chatbot-app-container initialized successfully and is ready to serve requests.
+2025-07-10T11:24:50.448Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T11:24:53.290Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T11:24:53.292Z INFO  -  Digest: sha256:16dd793b2101d31460e4838ff69c65d1cd80253f32cb9f8e6a3b83ebe7b1be77
+2025-07-10T11:24:53.300Z INFO  -  Status: Image is up to date for ayumu277/chatbot-app:latest
+2025-07-10T11:24:53.331Z INFO  - Pull Image successful, Time taken: 2 Seconds
+2025-07-10T11:24:53.593Z INFO  - Starting container for site
+2025-07-10T11:24:53.602Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_1_67007036 -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e DOCKER_CUSTOM_IMAGE_NAME=ayumu277/chatbot-app:latest -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=d9fa23bab1bae3444918e0beb211c6c2d95730b25457dd5fed306f4f2e1a4c11 -e HTTP_LOGGING_ENABLED=1 ayumu277/chatbot-app:latest 
+2025-07-10T11:24:56.198Z INFO  - Initiating warmup request to container chatbot-app-container_1_67007036 for site chatbot-app-container
+2025-07-10T11:25:22.153Z INFO  - Container chatbot-app-container_1_67007036 for site chatbot-app-container initialized successfully and is ready to serve requests.
+/ayumu277/chatbot-app:latest.
+2025-07-10T11:25:22.798Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T11:25:24.991Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T11:25:25.091Z INFO  -  Digest: sha256:16dd793b2101d31460e4838ff69c65d1cd80253f32cb9f8e6a3b83ebe7b1be77
+2025-07-10T11:25:25.093Z INFO  -  Status: Image is up to date for ayumu277/chatbot-app:latest
+2025-07-10T11:25:25.113Z INFO  - Pull Image successful, Time taken: 2 Seconds
+2025-07-10T11:25:26.048Z INFO  - Starting container for site
+2025-07-10T11:25:26.056Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_2_cd57c84e -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e DOCKER_CUSTOM_IMAGE_NAME=ayumu277/chatbot-app:latest -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=d9fa23bab1bae3444918e0beb211c6c2d95730b25457dd5fed306f4f2e1a4c11 -e HTTP_LOGGING_ENABLED=1 ayumu277/chatbot-app:latest 
+2025-07-10T11:25:30.762Z INFO  - Initiating warmup request to container chatbot-app-container_2_cd57c84e for site chatbot-app-container
+2025-07-10T11:25:48.067Z INFO  - Waiting for response to warmup request for container chatbot-app-container_2_cd57c84e. Elapsed time = 17.3048265 sec
+2025-07-10T11:26:10.515Z INFO  - Container chatbot-app-container_2_cd57c84e for site chatbot-app-container initialized successfully and is ready to serve requests.
+2025-07-10T11:26:11.690Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T11:26:14.213Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T11:26:14.326Z INFO  -  Digest: sha256:16dd793b2101d31460e4838ff69c65d1cd80253f32cb9f8e6a3b83ebe7b1be77
+2025-07-10T11:26:14.336Z INFO  -  Status: Image is up to date for ayumu277/chatbot-app:latest
+2025-07-10T11:26:14.465Z INFO  - Pull Image successful, Time taken: 2 Seconds
+2025-07-10T11:26:14.869Z INFO  - Starting container for site
+2025-07-10T11:26:14.889Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_3_83fe6304 -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e DOCKER_CUSTOM_IMAGE_NAME=ayumu277/chatbot-app:latest -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=d9fa23bab1bae3444918e0beb211c6c2d95730b25457dd5fed306f4f2e1a4c11 -e HTTP_LOGGING_ENABLED=1 ayumu277/chatbot-app:latest 
+2025-07-10T11:26:22.490Z INFO  - Initiating warmup request to container chatbot-app-container_3_83fe6304 for site chatbot-app-container
+2025-07-10T11:26:40.449Z INFO  - Waiting for response to warmup request for container chatbot-app-container_3_83fe6304. Elapsed time = 17.9594505 sec
+2025-07-10T11:26:53.162Z INFO  - Container chatbot-app-container_3_83fe6304 for site chatbot-app-container initialized successfully and is ready to serve requests.
+2025-07-10T11:26:57.081Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T11:27:02.400Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T11:27:02.921Z INFO  -  Digest: sha256:16dd793b2101d31460e4838ff69c65d1cd80253f32cb9f8e6a3b83ebe7b1be77
+2025-07-10T11:27:02.924Z INFO  -  Status: Image is up to date for ayumu277/chatbot-app:latest
+2025-07-10T11:27:03.023Z INFO  - Pull Image successful, Time taken: 5 Seconds
+2025-07-10T11:27:03.435Z INFO  - Starting container for site
+2025-07-10T11:27:03.437Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_4_654ecf41 -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e DOCKER_CUSTOM_IMAGE_NAME=ayumu277/chatbot-app:latest -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=d9fa23bab1bae3444918e0beb211c6c2d95730b25457dd5fed306f4f2e1a4c11 -e HTTP_LOGGING_ENABLED=1 ayumu277/chatbot-app:latest 
+2025-07-10T11:27:09.489Z INFO  - Initiating warmup request to container chatbot-app-container_4_654ecf41 for site chatbot-app-container
+2025-07-10T11:28:00.391Z INFO  - Container chatbot-app-container_4_654ecf41 for site chatbot-app-container initialized successfully and is ready to serve requests.
+2025-07-10T11:28:02.974Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T11:28:05.903Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T11:28:06.948Z INFO  -  Digest: sha256:16dd793b2101d31460e4838ff69c65d1cd80253f32cb9f8e6a3b83ebe7b1be77
+2025-07-10T11:28:06.958Z INFO  -  Status: Image is up to date for ayumu277/chatbot-app:latest
+2025-07-10T11:28:07.784Z INFO  - Pull Image successful, Time taken: 4 Seconds
+2025-07-10T11:28:08.899Z INFO  - Starting container for site
+2025-07-10T11:28:08.918Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_5_c0b57327 -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e DOCKER_CUSTOM_IMAGE_NAME=ayumu277/chatbot-app:latest -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=d9fa23bab1bae3444918e0beb211c6c2d95730b25457dd5fed306f4f2e1a4c11 -e HTTP_LOGGING_ENABLED=1 ayumu277/chatbot-app:latest 
+2025-07-10T11:28:14.441Z INFO  - Initiating warmup request to container chatbot-app-container_5_c0b57327 for site chatbot-app-container
+2025-07-10T11:28:49.867Z INFO  - Container chatbot-app-container_5_c0b57327 for site chatbot-app-container initialized successfully and is ready to serve requests.
+2025-07-10T11:28:51.398Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T11:28:55.311Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T11:28:55.681Z INFO  -  Digest: sha256:16dd793b2101d31460e4838ff69c65d1cd80253f32cb9f8e6a3b83ebe7b1be77
+2025-07-10T11:28:55.702Z INFO  -  Status: Image is up to date for ayumu277/chatbot-app:latest
+2025-07-10T11:28:55.843Z INFO  - Pull Image successful, Time taken: 4 Seconds
+2025-07-10T11:28:56.487Z INFO  - Starting container for site
+2025-07-10T11:28:56.496Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_6_f4102f6b -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e DOCKER_CUSTOM_IMAGE_NAME=ayumu277/chatbot-app:latest -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=d9fa23bab1bae3444918e0beb211c6c2d95730b25457dd5fed306f4f2e1a4c11 -e HTTP_LOGGING_ENABLED=1 ayumu277/chatbot-app:latest 
+2025-07-10T11:29:02.834Z INFO  - Initiating warmup request to container chatbot-app-container_6_f4102f6b for site chatbot-app-container
+2025-07-10T11:29:37.562Z INFO  - Container chatbot-app-container_6_f4102f6b for site chatbot-app-container initialized successfully and is ready to serve requests.
+07-10T11:29:26.3691778Z Establishing user namespace if not established already.
+2025-07-10T11:29:26.4391875Z Establishing network if not established already.
+2025-07-10T11:29:26.4606605Z Mounting volumes.
+2025-07-10T11:29:26.5505880Z Nested mountpoint volatile/logs
+2025-07-10T11:29:26.7016391Z Nested mountpoint 
+2025-07-10T11:29:26.9614671Z Creating container.
+2025-07-10T11:29:26.9629837Z Creating pipes for streaming container io.
+2025-07-10T11:29:27.0014352Z Creating stdout named pipe at /podr/container/pipe/c4c7ebf80919_chatbot-app-container/stdout_e6d2f84532b94e60857edc0f56736ee1.
+2025-07-10T11:29:27.0034032Z Successfully created stdout named pipe at: /podr/container/pipe/c4c7ebf80919_chatbot-app-container/stdout_e6d2f84532b94e60857edc0f56736ee1.
+2025-07-10T11:29:27.0214347Z Opening named pipe /podr/container/pipe/c4c7ebf80919_chatbot-app-container/stdout_e6d2f84532b94e60857edc0f56736ee1 for reading in non-blocking mode.
+2025-07-10T11:29:27.0228764Z Successfully opened named pipe: /podr/container/pipe/c4c7ebf80919_chatbot-app-container/stdout_e6d2f84532b94e60857edc0f56736ee1.
+2025-07-10T11:29:27.0309335Z Successfully removed non-blocking flag from /podr/container/pipe/c4c7ebf80919_chatbot-app-container/stdout_e6d2f84532b94e60857edc0f56736ee1.
+2025-07-10T11:29:27.0314206Z Creating stderr named pipe at /podr/container/pipe/c4c7ebf80919_chatbot-app-container/stderr_6a9c7cf198a2450d855892bd198cbcfd.
+2025-07-10T11:29:27.0321164Z Successfully created stderr named pipe at: /podr/container/pipe/c4c7ebf80919_chatbot-app-container/stderr_6a9c7cf198a2450d855892bd198cbcfd.
+2025-07-10T11:29:27.0329294Z Opening named pipe /podr/container/pipe/c4c7ebf80919_chatbot-app-container/stderr_6a9c7cf198a2450d855892bd198cbcfd for reading in non-blocking mode.
+2025-07-10T11:29:27.0330337Z Successfully opened named pipe: /podr/container/pipe/c4c7ebf80919_chatbot-app-container/stderr_6a9c7cf198a2450d855892bd198cbcfd.
+2025-07-10T11:29:27.0331061Z Successfully removed non-blocking flag from /podr/container/pipe/c4c7ebf80919_chatbot-app-container/stderr_6a9c7cf198a2450d855892bd198cbcfd.
+2025-07-10T11:29:27.0430067Z Creating container with image: docker.io/ayumu277/chatbot-app:latest from registry: docker.io and fully qualified image name: docker.io/ayumu277/chatbot-app:latest
+2025-07-10T11:29:31.1449513Z Container get mounts received unexpected exception.
+2025-07-10T11:29:31.1561546Z Container get mounts received unexpected exception.
+2025-07-10T11:29:31.3266172Z Container get processes received unexpected exception.
+2025-07-10T11:29:31.3581615Z Container get processes received unexpected exception.
+2025-07-10T11:29:34.9792571Z Starting container: c4c7ebf80919_chatbot-app-container.
+2025-07-10T11:29:35.5136336Z Starting watchers and probes.
+2025-07-10T11:29:35.5615521Z Starting metrics collection.
+2025-07-10T11:29:35.6037186Z Container is running.
+2025-07-10T11:29:35.9359859Z Container start method finished after 259050 ms.
+2025-07-10T11:29:38.307Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T11:29:41.346Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T11:29:42.130Z INFO  -  Digest: sha256:16dd793b2101d31460e4838ff69c65d1cd80253f32cb9f8e6a3b83ebe7b1be77
+2025-07-10T11:29:42.150Z INFO  -  Status: Image is up to date for ayumu277/chatbot-app:latest
+2025-07-10T11:29:42.281Z INFO  - Pull Image successful, Time taken: 3 Seconds
+2025-07-10T11:29:43.186Z INFO  - Starting container for site
+2025-07-10T11:29:43.187Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_7_48e62d1c -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e DOCKER_CUSTOM_IMAGE_NAME=ayumu277/chatbot-app:latest -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=d9fa23bab1bae3444918e0beb211c6c2d95730b25457dd5fed306f4f2e1a4c11 -e HTTP_LOGGING_ENABLED=1 ayumu277/chatbot-app:latest 
+2025-07-10T11:29:50.748Z INFO  - Initiating warmup request to container chatbot-app-container_7_48e62d1c for site chatbot-app-container
+2025-07-10T11:30:51.428Z INFO  - Container chatbot-app-container_7_48e62d1c for site chatbot-app-container initialized successfully and is ready to serve requests.
+running with deployment version: 69e666c846b4ea87d2f44667dc0c25e166c2c5b21752146253909
+2025-07-10T11:47:14.1772817Z Container start method called.
+2025-07-10T11:47:14.1793714Z Establishing network.
+2025-07-10T11:47:14.1796497Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T11:47:32.2982103Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T11:47:32.3390587Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T11:47:32.3476474Z Container spec TerminationMessagePolicy  path 
+2025-07-10T11:47:32.3493416Z Container is terminated. Total time elapsed: 9 ms.
+2025-07-10T11:47:32.3881604Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T11:47:32.5392059Z Failed to start site. Revert by stopping site.
+2025-07-10T11:47:32.5685748Z Site: chatbot-app-container stopped.
+2025-07-10T11:47:54.0331372Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T11:47:54.0774783Z Stop and delete container. Retry count = 0
+2025-07-10T11:47:54.0782139Z Stopping container: c4c7ebf80919_chatbot-app-container.
+2025-07-10T11:47:54.4046417Z Deleting container: c4c7ebf80919_chatbot-app-container. Retry count = 0
+2025-07-10T11:47:55.2208429Z Container spec TerminationMessagePolicy  path 
+2025-07-10T11:47:55.2209630Z Container is terminated. Total time elapsed: 1187 ms.
+2025-07-10T11:47:55.2220527Z Site: chatbot-app-container stopped.
+2025-07-10T11:49:26.1803207Z Container start method called.
+2025-07-10T11:49:26.1809853Z Establishing network.
+2025-07-10T11:49:26.1811977Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T11:49:26.5928645Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T11:49:26.5940548Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T11:49:26.6024091Z Container spec TerminationMessagePolicy  path 
+2025-07-10T11:49:26.6034392Z Container is terminated. Total time elapsed: 1 ms.
+2025-07-10T11:49:26.6112135Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T11:49:26.6328711Z Failed to start site. Revert by stopping site.
+2025-07-10T11:49:26.6417686Z Site: chatbot-app-container stopped.
+2025-07-10T11:49:26.9942393Z Site: chatbot-app-container will be blocked for 1 minutes till 07/10/2025 11:50:26
+2025-07-10T11:49:39.3653219Z Start site prohibitted because the site is being blocked.
+2025-07-10T11:50:27.0019958Z Site: chatbot-app-container is unblocked.
+2025-07-10T11:52:06.6486531Z Container start method called.
+2025-07-10T11:52:06.6560184Z Establishing network.
+2025-07-10T11:52:06.6564189Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T11:52:06.7387174Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T11:52:06.7472306Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T11:52:06.7477857Z Container spec TerminationMessagePolicy  path 
+2025-07-10T11:52:06.7482897Z Container is terminated. Total time elapsed: 0 ms.
+2025-07-10T11:52:06.7487111Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T11:52:06.7870657Z Failed to start site. Revert by stopping site.
+2025-07-10T11:52:06.7887581Z Site: chatbot-app-container stopped.
+2025-07-10T11:52:07.2111999Z Site: chatbot-app-container will be blocked for 1 minutes till 07/10/2025 11:53:07
+2025-07-10T11:53:07.2154419Z Site: chatbot-app-container is unblocked.
+2025-07-10T11:54:18.0656513Z Container start method called.
+2025-07-10T11:54:18.0661175Z Establishing network.
+2025-07-10T11:54:18.0664982Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T11:54:18.1747645Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T11:54:18.1756866Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T11:54:18.1762882Z Container spec TerminationMessagePolicy  path 
+2025-07-10T11:54:18.1768099Z Container is terminated. Total time elapsed: 0 ms.
+2025-07-10T11:54:18.1773851Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T11:54:18.2081777Z Failed to start site. Revert by stopping site.
+2025-07-10T11:54:18.2153283Z Site: chatbot-app-container stopped.
+2025-07-10T11:54:44.9952594Z Container start method called.
+2025-07-10T11:54:44.9957756Z Establishing network.
+2025-07-10T11:54:44.9966513Z Pulling image: docker.io/ayumu277/chatbot-app:latest.
+2025-07-10T11:54:45.1476517Z Container pull image failed with reason: ImagePullFailure. Revert by terminate.
+2025-07-10T11:54:45.1552376Z Container is terminating. Grace period: 5 seconds.
+2025-07-10T11:54:45.1559445Z Container spec TerminationMessagePolicy  path 
+2025-07-10T11:54:45.1566547Z Container is terminated. Total time elapsed: 0 ms.
+2025-07-10T11:54:45.1574536Z Site container: chatbot-app-container terminated during site startup.
+2025-07-10T11:54:45.2468009Z Failed to start site. Revert by stopping site.
+2025-07-10T11:54:45.2781552Z Site: chatbot-app-container stopped.
+2025-07-10T11:59:24.957Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T11:59:27.390Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T11:59:27.449Z INFO  -  
+2025-07-10T11:59:27.451Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T11:59:27.470Z INFO  - Pull Image successful, Time taken: 2 Seconds
+2025-07-10T11:59:28.190Z INFO  - Starting container for site
+2025-07-10T11:59:28.191Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_0_ebb98672 -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e DOCKER_CUSTOM_IMAGE_NAME=ayumu277/chatbot-app:latest -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=d9fa23bab1bae3444918e0beb211c6c2d95730b25457dd5fed306f4f2e1a4c11 -e HTTP_LOGGING_ENABLED=1 ayumu277/chatbot-app:latest 
+2025-07-10T11:59:29.907Z INFO  - Initiating warmup request to container chatbot-app-container_0_ebb98672 for site chatbot-app-container
+2025-07-10T11:59:43.822Z INFO  - Container chatbot-app-container_0_ebb98672 for site chatbot-app-container initialized successfully and is ready to serve requests.
+2025-07-10T12:00:01.761Z INFO  - Pulling image: ayumu277/chatbot-app:latest
+2025-07-10T12:00:08.106Z INFO  - latest Pulling from ayumu277/chatbot-app
+2025-07-10T12:00:08.146Z INFO  -  
+2025-07-10T12:00:08.154Z ERROR - no matching manifest for linux/amd64 in the manifest list entriesErr: 0, Message: no matching manifest for linux/amd64 in the manifest list entries
+2025-07-10T12:00:08.247Z INFO  - Pull Image successful, Time taken: 6 Seconds
+2025-07-10T12:00:08.678Z INFO  - Starting container for site
+2025-07-10T12:00:08.686Z INFO  - docker run -d --expose=8080 --name chatbot-app-container_1_f5ea9f7e -e WEBSITE_USE_DIAGNOSTIC_SERVER=false -e DOCKER_CUSTOM_IMAGE_NAME=ayumu277/chatbot-app:latest -e PORT=8080 -e WEBSITES_ENABLE_APP_SERVICE_STORAGE=false -e WEBSITES_PORT=8080 -e WEBSITE_SITE_NAME=chatbot-app-container -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net -e WEBSITE_INSTANCE_ID=d9fa23bab1bae3444918e0beb211c6c2d95730b25457dd5fed306f4f2e1a4c11 -e HTTP_LOGGING_ENABLED=1 ayumu277/chatbot-app:latest 
+2025-07-10T12:00:13.112Z INFO  - Initiating warmup request to container chatbot-app-container_1_f5ea9f7e for site chatbot-app-container
+2025-07-10T12:00:33.284Z INFO  - Container chatbot-app-container_1_f5ea9f7e for site chatbot-app-container initialized successfully and is ready to serve requests.

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<deployment>
+  <id>81337521981b91cceb7e4bb90272487153a30c461752172228542</id>
+  <author>Ayumu277</author>
+  <deployer>GitHub</deployer>
+  <authorEmail />
+  <message>{"type":"Deployment","sha":"81337521981b91cceb7e4bb90272487153a30c46","repoName":"Ayumu277/first-chatbot","actor":"Ayumu277","slotName":"production"}</message>
+  <progress />
+  <status>Success</status>
+  <statusText />
+  <lastSuccessEndTime>2025-07-10T18:30:30.4158556Z</lastSuccessEndTime>
+  <receivedTime>2025-07-10T18:30:30.4158556Z</receivedTime>
+  <startTime>2025-07-10T18:30:30.4158556Z</startTime>
+  <endTime>2025-07-10T18:30:30.4158556Z</endTime>
+  <complete>True</complete>
+  <is_temp>False</is_temp>
+  <is_readonly>True</is_readonly>
+  <buildSummary />
+</deployment>
