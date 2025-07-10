@@ -13,8 +13,8 @@ pnpm-debug.log*
 yarn.lock
 pnpm-lock.yaml
 
-# Next.js Build Output
-.next/
+# Next.js Build Output (keep standalone and static for Docker)
+# .next/
 out/
 build/
 dist/

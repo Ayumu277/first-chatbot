@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
-
+console.log("📦 DATABASE_URL is:", process.env.DATABASE_URL);
 const prisma = new PrismaClient()
 
 const handler = NextAuth({

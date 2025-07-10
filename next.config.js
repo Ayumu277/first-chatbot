@@ -14,6 +14,11 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['@prisma/client', 'prisma'],
   },
+  // Docker standalone output for Azure App Service
+  output: 'standalone',
+  // Azure App ServiceでのCSS/JS読み込み問題を解決
+  trailingSlash: false,
+  poweredByHeader: false,
 
   // コンパイラー設定 - CSS関連の最適化を制限
   compiler: {
@@ -63,8 +68,6 @@ const nextConfig = {
 
   // 静的ファイルの配信設定
   assetPrefix: '',
-  trailingSlash: false,
-  poweredByHeader: false,
 
   // サーバー設定
   serverRuntimeConfig: {
