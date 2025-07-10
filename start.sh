@@ -1,6 +1,6 @@
 #!/bin/bash
 PORT=${PORT:-8080}
-echo "Using PORT $PORT"
+exec node .next/standalone/server.js
 
 # Set Prisma environment variables for Azure
 export PRISMA_CLI_QUERY_ENGINE_TYPE=binary
