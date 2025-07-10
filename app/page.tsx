@@ -12,42 +12,28 @@ export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const { currentSessionId, selectSession } = useChatStore()
 
-  // クライアントサイドでのマウントを検出
   useEffect(() => {
     setIsClient(true)
 
-    // デスクトップの場合、サイドバーを開く
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setIsSidebarOpen(true)
-      } else {
-        setIsSidebarOpen(false)
-      }
+      setIsSidebarOpen(window.innerWidth >= 768)
     }
 
     handleResize()
     window.addEventListener('resize', handleResize)
 
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // セッション選択ハンドラー
   const handleChatSelect = (sessionId: string | null) => {
-    if (sessionId) {
-      selectSession(sessionId)
-    }
-    // モバイルでサイドバーを閉じる
+    if (sessionId) selectSession(sessionId)
     setIsSidebarOpen(false)
   }
 
-  // サイドバーの開閉
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
   }
 
-  // サイドバーの外側をクリックした時に閉じる
   const handleOverlayClick = () => {
     setIsSidebarOpen(false)
   }
@@ -56,10 +42,7 @@ export default function Home() {
 
   return (
     <AuthWrapper>
-      <div className="flex h-screen bg-dark-theme text-light-theme overflow-hidden" style={{
-        backgroundColor: '#0D1117',
-        color: '#C9D1D9'
-      }}>
+      <div className="flex h-screen bg-[#0D1117] text-white overflow-hidden">
         {/* モバイル用ハンバーガーボタン */}
         <button
           onClick={toggleSidebar}
@@ -76,7 +59,7 @@ export default function Home() {
           )}
         </button>
 
-        {/* モバイル用オーバーレイ */}
+        {/* オーバーレイ */}
         {isSidebarOpen && (
           <div
             className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
@@ -85,20 +68,20 @@ export default function Home() {
         )}
 
         {/* サイドバー */}
-        <div className={`
-          ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-          md:translate-x-0 fixed md:static inset-y-0 left-0 z-30
-          w-64 transition-transform duration-300 ease-in-out
-        `}>
+        <div
+          className={`${
+            isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          } md:translate-x-0 fixed md:static inset-y-0 left-0 z-30 w-64 transition-transform duration-300 ease-in-out`}
+        >
           <Sidebar
             selectedChatId={displaySessionId}
             onChatSelect={handleChatSelect}
           />
         </div>
 
-        {/* メインコンテンツ */}
+        {/* メイン */}
         <main className="flex-1 flex flex-col min-w-0">
-              <ChatWindow chatId={displaySessionId} />
+          <ChatWindow chatId={displaySessionId} />
         </main>
       </div>
     </AuthWrapper>
