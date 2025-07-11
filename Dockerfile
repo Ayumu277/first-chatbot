@@ -22,13 +22,13 @@ ENV CI=true
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# ビルド用のダミー環境変数を設定
-ENV DATABASE_URL="sqlserver://localhost:1433;database=dummy;user=dummy;password=dummy;encrypt=true"
-ENV NEXTAUTH_SECRET="dummy-secret-for-build"
-ENV NEXTAUTH_URL="http://localhost:8080"
-ENV OPENAI_API_KEY="dummy-key-for-build"
-ENV EMAIL_USER="dummy@example.com"
-ENV GMAIL_APP_PASSWORD="dummy-password"
+# ビルド用の安全な環境変数を設定（実際のシークレットは含まない）
+ENV DATABASE_URL="file:./build.db"
+ENV NEXTAUTH_SECRET="build-time-secret"
+ENV NEXTAUTH_URL="http://localhost:3000"
+ENV OPENAI_API_KEY="sk-build-time-key"
+ENV EMAIL_USER="build@example.com"
+ENV EMAIL_PASSWORD="build-password"
 
 # デバッグ：Node.jsとnpmのバージョン確認
 RUN echo "Node.js version: $(node --version)" && \
@@ -36,29 +36,26 @@ RUN echo "Node.js version: $(node --version)" && \
     echo "Available memory: $(free -h)" && \
     echo "Platform: $TARGETPLATFORM"
 
-# ビルドに必要な全ての依存関係をインストール（--omit=devを削除）
-RUN npm ci --verbose
+# 全ての依存関係をインストール
+RUN npm ci
 
 # アプリケーションソースをコピー
 COPY . .
 
-# デバッグ：Prisma生成前の状況確認
-RUN echo "Generating Prisma client..." && \
+# Prismaクライアント生成（ビルド用データベースファイルを使用）
+RUN echo "Generating Prisma client for build..." && \
+    touch build.db && \
+    npx prisma db push --force-reset --accept-data-loss || echo "DB push failed, continuing..." && \
     npx prisma generate && \
     echo "Prisma client generated successfully"
 
-# デバッグ：ビルド前の状況確認
-RUN echo "Starting Next.js build..." && \
-    echo "NODE_ENV: $NODE_ENV" && \
-    echo "NODE_OPTIONS: $NODE_OPTIONS" && \
-    ls -la .next 2>/dev/null || echo "No .next directory yet"
-
 # Next.jsアプリケーションをビルド
-RUN npm run build
+RUN echo "Starting Next.js build..." && \
+    npm run build && \
+    echo "✅ Build completed successfully"
 
 # ビルド完了確認
-RUN echo "✅ Build completed successfully" && \
-    ls -la .next/ && \
+RUN ls -la .next/ && \
     echo "📦 Build artifacts ready for production"
 
 # ============ PRODUCTION STAGE ========================================
