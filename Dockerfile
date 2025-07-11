@@ -23,6 +23,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV DATABASE_URL="file:./dev.db"
 ENV NEXTAUTH_URL="https://chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net"
 ENV NEXTAUTH_SECRET="fallback-secret-for-build"
+ENV RESEND_API_KEY="fallback-resend-key-for-build"
 
 # package.json と package-lock.json をコピー
 COPY package*.json ./
