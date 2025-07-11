@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
-import { sendVerificationEmail } from '@/app/lib/email'
+import { sendVerificationEmail } from '../../../lib/email'
 import crypto from 'crypto'
 
 const prisma = new PrismaClient()

@@ -1,6 +1,6 @@
 # ===== NEXT.JS CHATBOT APPLICATION - PRODUCTION BUILD =====
-# Build timestamp: 2025-01-11-18:30
-# Version: 0.1.1 - Force cache bust
+# Build timestamp: 2025-01-11-19:00
+# Version: 0.1.2 - Fix build dependencies
 FROM node:18-alpine
 
 WORKDIR /app
@@ -28,26 +28,35 @@ ENV RESEND_API_KEY="fallback-resend-key-for-build"
 # package.json と package-lock.json をコピー
 COPY package*.json ./
 
-# 依存関係をインストール
-RUN npm ci --only=production && npm cache clean --force
+# 依存関係をインストール（devDependenciesも含める - ビルドに必要）
+RUN echo "📦 Installing dependencies..." && \
+    npm ci && \
+    npm cache clean --force && \
+    echo "✅ Dependencies installed successfully"
 
 # Prismaスキーマをコピー
 COPY prisma ./prisma/
 
 # Prismaクライアント生成（Alpineバイナリ指定）
-RUN npx prisma generate --generator client
+RUN echo "🔧 Generating Prisma client..." && \
+    npx prisma generate --generator client && \
+    echo "✅ Prisma client generated successfully"
 
 # アプリケーションコードをコピー
 COPY . .
 
-# Next.js設定を修正（動的ルート対応）
-RUN echo 'module.exports = { output: "standalone", experimental: { appDir: true } }' > next.config.temp.js
-
-# Next.jsアプリケーションをビルド（静的生成無効）
-RUN SKIP_ENV_VALIDATION=true npm run build
+# Next.jsアプリケーションをビルド（詳細ログ付き）
+RUN echo "🚀 Building Next.js application..." && \
+    SKIP_ENV_VALIDATION=true npm run build && \
+    echo "✅ Next.js build completed successfully"
 
 # start.sh スクリプトに実行権限付与
 RUN chmod +x start.sh
+
+# 本番用依存関係のみ残す（ビルド後なので安全）
+RUN echo "🧹 Cleaning up dev dependencies..." && \
+    npm prune --production && \
+    echo "✅ Dev dependencies removed"
 
 # ヘルスチェック
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
