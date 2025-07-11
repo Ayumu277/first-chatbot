@@ -86,14 +86,16 @@ WORKDIR /app
 RUN groupadd --gid 1001 nodejs && \
     useradd --uid 1001 --gid nodejs --shell /bin/bash --create-home nextjs
 
-# 全ての依存関係をインストール（Prisma、TypeScript型定義なども含む）
+# package.jsonとprismaディレクトリを先にコピー（postinstall用）
 COPY --from=builder /app/package*.json ./
+COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
+
+# 全ての依存関係をインストール（postinstallでprisma generateが実行される）
 RUN npm ci && npm cache clean --force
 
 # ビルド成果物をコピー
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 COPY --from=builder --chown=nextjs:nodejs /app/next.config.js ./
 
 # Prismaクライアントをコピー
