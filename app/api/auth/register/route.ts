@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
-import bcrypt from 'bcryptjs'
+import { sendVerificationEmail } from '@/app/lib/email'
 import crypto from 'crypto'
-import { sendVerificationEmail } from '../../../lib/email'
 
 const prisma = new PrismaClient()
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('📧 メール登録APIが呼び出されました')
+
     const { name, email } = await request.json()
 
-    // バリデーション
     if (!name || !email) {
       return NextResponse.json(
         { error: '名前とメールアドレスは必須です' },
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     if (existingUser) {
       return NextResponse.json(
         { error: 'このメールアドレスは既に登録されています' },
-        { status: 409 }
+        { status: 400 }
       )
     }
 
@@ -59,10 +59,14 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    // 認証メールを送信
-    const emailResult = await sendVerificationEmail(email, name, token)
+    console.log('認証トークンが作成されました:', token)
 
-    if (!emailResult.success) {
+    // 確認メール送信
+    try {
+      await sendVerificationEmail(email, name, token)
+      console.log('確認メールが送信されました')
+    } catch (emailError) {
+      console.error('確認メール送信エラー:', emailError)
       return NextResponse.json(
         { error: 'メール送信に失敗しました。しばらく後にお試しください。' },
         { status: 500 }
@@ -70,14 +74,24 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({
-      message: '認証メールを送信しました。メールを確認してアカウント作成を完了してください。',
+      success: true,
+      message: '登録が完了しました！確認メールをお送りしましたので、メールボックスをご確認ください。',
       email
     })
 
   } catch (error) {
     console.error('Registration error:', error)
+
+    let errorMessage = 'アカウント登録に失敗しました'
+    if (error instanceof Error) {
+      errorMessage = error.message
+    }
+
     return NextResponse.json(
-      { error: '登録処理に失敗しました' },
+      {
+        error: errorMessage,
+        details: error instanceof Error ? error.message : '不明なエラー'
+      },
       { status: 500 }
     )
   }

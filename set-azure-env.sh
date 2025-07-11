@@ -20,7 +20,7 @@ az webapp config appsettings set \
     OPENAI_API_KEY="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" \
     NEXTAUTH_SECRET="UurOCE1PlzTaWZt5BsQ5NolPHMF/DgY/3qITk8OCh2w=" \
     NEXTAUTH_URL="https://chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net/" \
-    RESEND_API_KEY="re_PLACEHOLDER_RESEND_API_KEY_HERE" \
+    RESEND_API_KEY="re_b5tqTN8t_LHgMssDnmQeXZC5egKjB39Tq" \
     WEBSITES_PORT=8080 \
     NODE_ENV=production \
     PORT=8080
