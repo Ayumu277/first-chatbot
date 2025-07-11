@@ -82,8 +82,8 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     return (
       <div className="flex h-screen bg-[#0D1117] text-white items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1E90FF] mx-auto mb-4"></div>
-          <p className="text-gray-300 font-medium">読み込み中...</p>
+          <div className="animate-spin rounded-full h-14 w-14 border-b-2 border-[#1E90FF] mx-auto mb-6"></div>
+          <p className="text-gray-300 font-semibold text-lg">読み込み中...</p>
         </div>
       </div>
     )
@@ -97,42 +97,42 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
   // ログイン画面
   return (
     <div className="flex h-screen bg-[#0D1117] text-white">
-      <div className="flex-1 flex items-center justify-center">
-        <div className="max-w-md w-full mx-4">
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-[#1E90FF] rounded-full flex items-center justify-center mx-auto mb-4">
-              <UserIcon className="w-8 h-8 text-white" />
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="max-w-lg w-full">
+          <div className="text-center mb-10">
+            <div className="w-20 h-20 bg-[#1E90FF] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+              <UserIcon className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-white mb-2">
+            <h1 className="text-4xl font-black text-white mb-4">
               chatbot
             </h1>
-            <p className="text-gray-300">
+            <p className="text-gray-300 text-lg font-medium">
               ログインまたはゲストモードでチャットを始めましょう
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-5">
             {/* ゲストモードボタン */}
             <button
               onClick={handleGuestMode}
-              className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-[#1E90FF] hover:bg-blue-600 text-white rounded-lg transition-colors font-bold"
+              className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-[#1E90FF] hover:bg-blue-600 text-white rounded-xl transition-all duration-300 font-black text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
             >
-              <GlobeAltIcon className="w-5 h-5" />
+              <GlobeAltIcon className="w-6 h-6" />
               ゲストとして始める
             </button>
 
             {/* ログインボタン（将来の拡張用） */}
             <button
               disabled
-              className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-gray-600 text-gray-400 rounded-lg cursor-not-allowed font-medium"
+              className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-gray-600 text-gray-400 rounded-xl cursor-not-allowed font-black text-lg"
             >
-              <UserIcon className="w-5 h-5" />
+              <UserIcon className="w-6 h-6" />
               ログイン（準備中）
             </button>
           </div>
 
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-400">
+          <div className="mt-10 text-center">
+            <p className="text-gray-400 font-medium">
               ゲストモードでは、データはブラウザに一時的に保存されます
             </p>
           </div>
