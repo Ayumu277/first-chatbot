@@ -3,13 +3,18 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// 明示的なベースURL
+const BASE_URL = process.env.NEXTAUTH_URL || 'https://chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net'
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const token = searchParams.get('token')
 
+    console.log('📧 メール認証リクエスト受信:', { token: token?.substring(0, 10) + '...' })
+
     if (!token) {
-      return NextResponse.redirect(new URL('/?error=invalid_token', request.url))
+      return NextResponse.redirect(`${BASE_URL}/?error=invalid_token`)
     }
 
     // トークンを検索
@@ -18,20 +23,23 @@ export async function GET(request: NextRequest) {
     })
 
     if (!verificationToken) {
-      return NextResponse.redirect(new URL('/?error=invalid_token', request.url))
+      console.log('❌ 無効なトークン')
+      return NextResponse.redirect(`${BASE_URL}/?error=invalid_token`)
     }
 
     // トークンの期限チェック
     if (verificationToken.expires < new Date()) {
+      console.log('❌ 期限切れトークン')
       await prisma.emailVerificationToken.delete({
         where: { token }
       })
-      return NextResponse.redirect(new URL('/?error=expired_token', request.url))
+      return NextResponse.redirect(`${BASE_URL}/?error=expired_token`)
     }
 
     // 既に使用済みかチェック
     if (verificationToken.used) {
-      return NextResponse.redirect(new URL('/?error=already_used', request.url))
+      console.log('❌ 使用済みトークン')
+      return NextResponse.redirect(`${BASE_URL}/?error=already_used`)
     }
 
     // 既存ユーザーのチェック（念のため）
@@ -40,11 +48,12 @@ export async function GET(request: NextRequest) {
     })
 
     if (existingUser) {
+      console.log('⚠️ ユーザーが既に存在:', verificationToken.email)
       // トークンを削除
       await prisma.emailVerificationToken.delete({
         where: { token }
       })
-      return NextResponse.redirect(new URL('/?error=user_exists', request.url))
+      return NextResponse.redirect(`${BASE_URL}/?error=user_exists`)
     }
 
     // ユーザー作成
@@ -63,14 +72,14 @@ export async function GET(request: NextRequest) {
       data: { used: true }
     })
 
-    console.log('✅ User created successfully:', newUser.email)
+    console.log('✅ ユーザー作成成功:', newUser.email)
 
-    // 登録完了ページにリダイレクト
-    return NextResponse.redirect(new URL('/?verified=true', request.url))
+    // 明示的なAzure URLにリダイレクト
+    return NextResponse.redirect(`${BASE_URL}/?verified=true&email=${encodeURIComponent(newUser.email)}`)
 
   } catch (error) {
-    console.error('Email verification error:', error)
-    return NextResponse.redirect(new URL('/?error=verification_failed', request.url))
+    console.error('❌ Email verification error:', error)
+    return NextResponse.redirect(`${BASE_URL}/?error=verification_failed`)
   }
 }
 
