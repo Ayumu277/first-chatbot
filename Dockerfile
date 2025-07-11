@@ -19,6 +19,16 @@ ENV OPENSSL_CONF=/etc/ssl/openssl.cnf
 # Node.js環境設定
 ENV NODE_OPTIONS="--max_old_space_size=2048"
 ENV CI=true
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# ビルド用のダミー環境変数を設定
+ENV DATABASE_URL="sqlserver://localhost:1433;database=dummy;user=dummy;password=dummy;encrypt=true"
+ENV NEXTAUTH_SECRET="dummy-secret-for-build"
+ENV NEXTAUTH_URL="http://localhost:8080"
+ENV OPENAI_API_KEY="dummy-key-for-build"
+ENV EMAIL_USER="dummy@example.com"
+ENV GMAIL_APP_PASSWORD="dummy-password"
 
 # デバッグ：Node.jsとnpmのバージョン確認
 RUN echo "Node.js version: $(node --version)" && \
@@ -26,17 +36,10 @@ RUN echo "Node.js version: $(node --version)" && \
     echo "Available memory: $(free -h)" && \
     echo "Platform: $TARGETPLATFORM"
 
-RUN npm ci --verbose
+RUN npm ci --omit=dev --verbose
 
 # アプリケーションソースをコピー
 COPY . .
-
-# 環境変数設定
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-
-# ビルド時用のダミーDATABASE_URLでPrismaクライアント生成
-ENV DATABASE_URL="sqlserver://localhost:1433;database=dummy;user=dummy;password=dummy;encrypt=true"
 
 # デバッグ：Prisma生成前の状況確認
 RUN echo "Generating Prisma client..." && \
@@ -47,10 +50,10 @@ RUN echo "Generating Prisma client..." && \
 RUN echo "Starting Next.js build..." && \
     echo "NODE_ENV: $NODE_ENV" && \
     echo "NODE_OPTIONS: $NODE_OPTIONS" && \
-    ls -la
+    ls -la .next 2>/dev/null || echo "No .next directory yet"
 
-# Next.jsアプリケーションをビルド（verbose出力）
-RUN npm run build && echo "Build completed successfully"
+# Next.jsアプリケーションをビルド（verbose出力と詳細エラー）
+RUN npm run build 2>&1 | tee build.log && echo "Build completed successfully"
 
 # ============ PRODUCTION STAGE ========================================
 FROM node:18-bullseye AS runner
