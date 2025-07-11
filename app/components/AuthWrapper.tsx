@@ -12,7 +12,6 @@ interface AuthWrapperProps {
 export default function AuthWrapper({ children }: AuthWrapperProps) {
   const { data: session, status } = useSession()
   const [isLoading, setIsLoading] = useState(true)
-  const [showSignUpGuide, setShowSignUpGuide] = useState(false)
   const {
     currentUser,
     isGuest,
@@ -24,13 +23,17 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
 
   useEffect(() => {
     const initializeUser = async () => {
+      console.log('🔧 AuthWrapper: initializeUser called', { status, session })
+
       if (status === 'loading') {
+        console.log('⏳ AuthWrapper: Still loading...')
         return
       }
 
       setIsLoading(true)
 
       if (session?.user) {
+        console.log('✅ AuthWrapper: User session found', session.user)
         // 認証されたユーザー
         const authenticatedUser = {
           id: session.user.id,
@@ -39,14 +42,24 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
           image: session.user.image,
           isGuest: false
         }
+        console.log('👤 AuthWrapper: Setting authenticated user', authenticatedUser)
         setUser(authenticatedUser)
         setGuest(false)
-        await loadSessions()
+
+        console.log('📚 AuthWrapper: Loading sessions for user', authenticatedUser.id)
+        try {
+          await loadSessions()
+          console.log('✅ AuthWrapper: Sessions loaded successfully')
+        } catch (error) {
+          console.error('❌ AuthWrapper: Failed to load sessions', error)
+        }
       } else {
+        console.log('❌ AuthWrapper: No user session found')
         // 認証されていない場合は何もしない（ログイン画面を表示）
       }
 
       setIsLoading(false)
+      console.log('🔧 AuthWrapper: initializeUser completed')
     }
 
     initializeUser()
@@ -85,14 +98,7 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
   }
 
   const handleSignUp = () => {
-    setShowSignUpGuide(true)
-  }
-
-  const startSignUpFlow = () => {
-    setShowSignUpGuide(false)
-    signIn('google', {
-      prompt: 'select_account'
-    })
+    signIn('google')
   }
 
   // ローディング中
@@ -154,60 +160,18 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
               className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all duration-300 font-black text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
             >
               <UserPlusIcon className="w-6 h-6" />
-              新規アカウント作成手順
+              Googleでサインアップ
             </button>
           </div>
 
           <div className="mt-10 text-center">
             <p className="text-gray-400 font-medium">
               ゲストモードでは、データはブラウザに一時的に保存されます<br />
-              ログイン・サインアップでは、チャット履歴が永続保存されます<br />
-              <span className="text-green-400 font-semibold mt-2 block">新規の方は「新規アカウント作成手順」をクリックしてください</span>
+              ログイン・サインアップでは、チャット履歴が永続保存されます
             </p>
           </div>
         </div>
       </div>
-
-      {/* サインアップガイドモーダル */}
-      {showSignUpGuide && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
-          <div className="bg-[#1E1E1E] rounded-xl p-8 max-w-md w-full border border-gray-600">
-            <h3 className="text-2xl font-black text-white mb-6 text-center">新規アカウント作成手順</h3>
-            <div className="space-y-4 text-gray-300 mb-8">
-              <div className="flex items-start gap-3">
-                <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm flex-shrink-0 mt-0.5">1</span>
-                <p>下の「認証を開始」ボタンをクリック</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm flex-shrink-0 mt-0.5">2</span>
-                <p>アカウント選択画面で「別のアカウントを使用」をクリック</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm flex-shrink-0 mt-0.5">3</span>
-                <p>「アカウントを作成」を選択</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm flex-shrink-0 mt-0.5">4</span>
-                <p>必要な情報を入力してアカウントを作成</p>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowSignUpGuide(false)}
-                className="flex-1 py-3 px-4 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold transition-colors"
-              >
-                キャンセル
-              </button>
-              <button
-                onClick={startSignUpFlow}
-                className="flex-1 py-3 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors"
-              >
-                認証を開始
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
