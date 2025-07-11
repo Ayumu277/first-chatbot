@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer'
 
 // メール送信設定
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
   secure: false,
