@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import OpenAI from 'openai'
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,17 +8,12 @@ export async function POST(request: NextRequest) {
     if (!process.env.OPENAI_API_KEY) {
       console.error('❌ OPENAI_API_KEY not found')
       return NextResponse.json(
-        { error: 'OpenAI APIキーが設定されていません' },
+        { error: 'DEEPSEEK APIキーが設定されていません' },
         { status: 500 }
       )
     }
 
-    console.log('✅ OPENAI_API_KEY found:', process.env.OPENAI_API_KEY.substring(0, 20) + '...')
-
-    // OpenAIクライアントをリクエスト時に初期化
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    })
+    console.log('✅ DEEPSEEK API KEY found:', process.env.OPENAI_API_KEY.substring(0, 20) + '...')
 
     const { message, conversationHistory = [], imageBase64, imageMimeType } = await request.json()
 
@@ -57,19 +51,33 @@ export async function POST(request: NextRequest) {
       }
     ]
 
-    console.log('🔄 Calling OpenAI API...')
+    console.log('🔄 Calling DEEPSEEK API...')
 
-    // OpenAI API呼び出し（画像がある場合はGPT-4 Vision使用）
-    const completion = await openai.chat.completions.create({
-      model: imageBase64 ? 'gpt-4o' : 'gpt-3.5-turbo',
-      messages: messages as any,
-      max_tokens: 1000,
-      temperature: 0.7,
-      stream: false,
+    // DEEPSEEK API呼び出し
+    const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'deepseek-chat',
+        messages: messages,
+        max_tokens: 1000,
+        temperature: 0.7,
+        stream: false,
+      }),
     })
 
-    console.log('✅ OpenAI API response received')
+    console.log('✅ DEEPSEEK API response received, status:', response.status)
 
+    if (!response.ok) {
+      const errorData = await response.text()
+      console.error('❌ DEEPSEEK API error:', errorData)
+      throw new Error(`DEEPSEEK API error: ${response.status} - ${errorData}`)
+    }
+
+    const completion = await response.json()
     const assistantMessage = completion.choices[0]?.message?.content
 
     if (!assistantMessage) {
@@ -97,7 +105,7 @@ export async function POST(request: NextRequest) {
         stack: error.stack?.substring(0, 200)
       })
 
-      // OpenAI API エラーの詳細表示
+      // DEEPSEEK API エラーの詳細表示
       if (error.message.includes('insufficient_quota')) {
         return NextResponse.json(
           { error: 'API利用制限に達しました。しばらく時間をおいて再試行してください。' },

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { PaperAirplaneIcon, PaperClipIcon, PencilIcon, XMarkIcon, PhotoIcon } from '@heroicons/react/24/outline'
+import { PaperAirplaneIcon, PaperClipIcon, PencilIcon, XMarkIcon, PhotoIcon, HomeIcon } from '@heroicons/react/24/outline'
 import { UserIcon, CpuChipIcon } from '@heroicons/react/24/solid'
 import { useChatStore } from '../store/chat-store'
 
@@ -29,7 +29,10 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     addMessage,
     updateMessage,
     isLoading,
-    setLoading
+    setLoading,
+    setUser,
+    clearSessions,
+    isGuest
   } = useChatStore()
 
   const currentSession = isClient ? getCurrentSession() : null
@@ -102,6 +105,15 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   // 画像削除
   const handleImageRemove = () => {
     setUploadedImage(null)
+  }
+
+  const handleGoHome = () => {
+    // ゲストトークンをクリア
+    localStorage.removeItem('guestToken')
+    // ユーザー状態をリセット
+    setUser(null)
+    // セッションをクリア
+    clearSessions()
   }
 
   // ドラッグ＆ドロップハンドラー
@@ -333,10 +345,19 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   return (
     <div className="flex flex-col h-full">
       {/* チャットヘッダー */}
-      <div className="flex-shrink-0 border-b border-gray-700 p-4">
-        <h1 className="text-lg font-semibold text-white text-center md:text-left">
+      <div className="flex-shrink-0 border-b border-gray-700 p-4 flex items-center justify-between">
+        <h1 className="text-lg font-semibold text-white">
           {currentSession.title}
         </h1>
+        {isGuest && (
+          <button
+            onClick={handleGoHome}
+            className="flex items-center gap-2 px-3 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors text-sm font-medium"
+          >
+            <HomeIcon className="w-4 h-4" />
+            ホームに戻る
+          </button>
+        )}
       </div>
 
       {/* メッセージエリア */}

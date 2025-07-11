@@ -4,7 +4,7 @@ import { InlineStyles } from './styles/inline-styles'
 import './styles/globals.css'
 
 export const metadata: Metadata = {
-  title: 'ChatGPT風チャットアプリ',
+  title: 'chatbot',
   description: 'Next.js + TypeScriptで作成したChatGPT風チャットアプリケーション',
 }
 
