@@ -1,39 +1,46 @@
-# ===== GUARANTEED HTTP 200 - ABSOLUTE FINAL SOLUTION =====
+# ===== NEXT.JS CHATBOT APPLICATION - PRODUCTION BUILD =====
 FROM node:18-alpine
 
 WORKDIR /app
 
-# 基本パッケージのみ
-RUN apk add --no-cache curl
+# 基本パッケージ
+RUN apk add --no-cache \
+    curl \
+    bash \
+    libc6-compat
 
 # 環境変数
 ENV PORT=8080
 ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# 最も確実なサーバーファイルを作成
-RUN echo 'const http = require("http");' > index.js && \
-    echo 'const server = http.createServer((req, res) => {' >> index.js && \
-    echo '  console.log(new Date().toISOString() + " " + req.method + " " + req.url);' >> index.js && \
-    echo '  if (req.url === "/health") {' >> index.js && \
-    echo '    res.writeHead(200, {"Content-Type": "application/json"});' >> index.js && \
-    echo '    res.end("{\"status\":\"healthy\"}");' >> index.js && \
-    echo '    return;' >> index.js && \
-    echo '  }' >> index.js && \
-    echo '  res.writeHead(200, {"Content-Type": "text/html"});' >> index.js && \
-    echo '  res.end("<h1>🎉 CHATBOT FINALLY WORKING!</h1><p>✅ HTTP 200 SUCCESS! No more errors!</p><p>📧 Registration system ready!</p>");' >> index.js && \
-    echo '});' >> index.js && \
-    echo 'const PORT = process.env.PORT || 8080;' >> index.js && \
-    echo 'server.listen(PORT, "0.0.0.0", () => {' >> index.js && \
-    echo '  console.log("🚀 CHATBOT SERVER STARTED ON PORT " + PORT);' >> index.js && \
-    echo '  console.log("✅ HTTP 200 GUARANTEED!");' >> index.js && \
-    echo '});' >> index.js
+# package.json と package-lock.json をコピー
+COPY package*.json ./
+
+# 依存関係をインストール
+RUN npm ci --only=production && npm cache clean --force
+
+# Prismaスキーマをコピー
+COPY prisma ./prisma/
+
+# Prismaクライアント生成
+RUN npx prisma generate
+
+# アプリケーションコードをコピー
+COPY . .
+
+# Next.jsアプリケーションをビルド
+RUN npm run build
+
+# start.sh スクリプトに実行権限付与
+RUN chmod +x start.sh
 
 # ヘルスチェック
-HEALTHCHECK --interval=15s --timeout=10s --start-period=30s --retries=3 \
-    CMD curl -f http://localhost:8080/health || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8080 || exit 1
 
 # ポート公開
 EXPOSE 8080
 
-# 直接起動（シェルスクリプト不使用）
-CMD ["node", "index.js"]
+# アプリケーション起動
+CMD ["./start.sh"]

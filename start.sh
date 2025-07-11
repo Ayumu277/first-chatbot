@@ -52,4 +52,6 @@ if command -v netstat >/dev/null 2>&1; then
     netstat -tuln | grep ":${PORT:-8080}" && echo "⚠️  Port ${PORT:-8080} already in use"
 fi
 
-exec node server.js
+# Next.jsアプリケーションを起動
+echo "🚀 Starting Next.js Chatbot Application..."
+exec npm start
