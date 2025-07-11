@@ -54,21 +54,12 @@ RUN echo "Starting Next.js build..." && \
     ls -la .next 2>/dev/null || echo "No .next directory yet"
 
 # Next.jsアプリケーションをビルド
-RUN npm run build 2>&1 | tee build.log
+RUN npm run build
 
-# ビルド後の確認とフォールバック処理
-RUN echo "Checking build artifacts..." && \
+# ビルド完了確認
+RUN echo "✅ Build completed successfully" && \
     ls -la .next/ && \
-    if [ -d .next/standalone ]; then \
-        echo "✅ Standalone build successful" && \
-        echo "STANDALONE_BUILD=true" > /tmp/build_type; \
-    else \
-        echo "⚠️  Standalone build not found, using traditional Next.js build" && \
-        echo "STANDALONE_BUILD=false" > /tmp/build_type && \
-        echo "Creating server.js for traditional build..." && \
-        echo 'const { createServer } = require("http"); const { parse } = require("url"); const next = require("next"); const dev = process.env.NODE_ENV !== "production"; const hostname = "0.0.0.0"; const port = process.env.PORT || 8080; const app = next({ dev, hostname, port }); const handle = app.getRequestHandler(); app.prepare().then(() => { createServer(async (req, res) => { try { const parsedUrl = parse(req.url, true); await handle(req, res, parsedUrl); } catch (err) { console.error("Error occurred handling", req.url, err); res.statusCode = 500; res.end("internal server error"); } }).listen(port, (err) => { if (err) throw err; console.log(`> Ready on http://${hostname}:${port}`); }); });' > server.js; \
-    fi && \
-    echo "Build completed successfully"
+    echo "📦 Build artifacts ready for production"
 
 # ============ PRODUCTION STAGE ========================================
 FROM node:18-bullseye-slim AS runner
@@ -78,6 +69,7 @@ RUN apt-get update && apt-get install -y \
     openssl \
     ca-certificates \
     dumb-init \
+    netstat-nat \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -98,48 +90,15 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/next.config.js ./
 
+# 改善されたスクリプトファイルをコピー
+COPY --from=builder --chown=nextjs:nodejs /app/start.sh ./start.sh
+COPY --from=builder --chown=nextjs:nodejs /app/server.js ./server.js
+
 # Prismaクライアントをコピー
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules/@prisma ./node_modules/@prisma
 
-# カスタムサーバーファイルを作成
-RUN echo 'const { createServer } = require("http"); \
-const { parse } = require("url"); \
-const next = require("next"); \
-const dev = process.env.NODE_ENV !== "production"; \
-const hostname = "0.0.0.0"; \
-const port = process.env.PORT || 8080; \
-const app = next({ dev, hostname, port }); \
-const handle = app.getRequestHandler(); \
-app.prepare().then(() => { \
-  createServer(async (req, res) => { \
-    try { \
-      const parsedUrl = parse(req.url, true); \
-      await handle(req, res, parsedUrl); \
-    } catch (err) { \
-      console.error("Error occurred handling", req.url, err); \
-      res.statusCode = 500; \
-      res.end("internal server error"); \
-    } \
-  }).listen(port, (err) => { \
-    if (err) throw err; \
-    console.log(`> Ready on http://${hostname}:${port}`); \
-  }); \
-});' > server.js
-
-# start.shを修正してカスタムサーバーを使用
-RUN echo '#!/bin/bash\n\
-echo "🚀 Starting Chatbot application..."\n\
-\n\
-echo "🔧 Generating Prisma client..."\n\
-npx prisma generate\n\
-\n\
-echo "🗄️ Running database migrations..."\n\
-npx prisma migrate deploy\n\
-\n\
-echo "🎯 Starting Next.js application..."\n\
-exec node server.js' > start.sh
-
+# 実行権限設定
 RUN chmod +x start.sh && chown nextjs:nodejs start.sh server.js
 
 USER nextjs
