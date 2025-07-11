@@ -1,1 +1,0 @@
-2025-07-05T10:48:20  Startup Request, url: /api/logstream/, method: GET, type: request, pid: 772,1,5, ScmType: GitHubAction

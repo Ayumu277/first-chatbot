@@ -1,9 +1,0 @@
-<step title="Incoming Request" date="2025-07-05T07:25:20.726" instance="1e8efd" url="/api/deployments/latest?deployer=OneDeploy&amp;time=2025-07-05_07-22-02Z" method="GET" type="request" pid="769,1,15" Host="chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_a0df8406eba08ee99bc38a6d5057acdb099dc770371e38ab0add4e46d3f0b63d" Authorization="Bea..." Content-Type="application/json; charset=utf-8" Cookie="ARRAffinity=1e8efd81b4645970fd27ae231faa7a976d2adeebc5d7764486e814ccf9926957;Path=/;HttpOnly;Secure;Domain=chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net; ARRAffinitySameSite=1e8efd81b4645970fd27ae231faa7a976d2adeebc5d7764486e814ccf9926957;Path=/;HttpOnly;SameSite=None;Secure;Domain=chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net" Content-Length="0" X-ARR-LOG-ID="0b148bb5-4172-4507-aeb3-8b8d50331177" CLIENT-IP="52.176.138.153:35017" X-SITE-DEPLOYMENT-ID="chatbot-app-new" WAS-DEFAULT-HOSTNAME="chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest?deployer=OneDeploy&amp;time=2025-07-05_07-22-02Z" X-Client-IP="52.176.138.153" X-Client-Port="35017" >
-  <step title="Cleanup Xml Logs" date="2025-07-05T07:25:20.745" /><!-- duration: 33ms -->
-  <step title="DeploymentService.GetResult" date="2025-07-05T07:25:20.817" >
-    <step title="DeploymentService.GetLatestDeployment" date="2025-07-05T07:25:20.828" >
-      <step title="DeploymentManager.GetResults" date="2025-07-05T07:25:20.838" /><!-- duration: 379ms -->
-    </step><!-- duration: 401ms -->
-  </step><!-- duration: 433ms -->
-  <step title="Outgoing response" date="2025-07-05T07:25:21.280" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 28ms -->
-</step><!-- duration: 591ms -->

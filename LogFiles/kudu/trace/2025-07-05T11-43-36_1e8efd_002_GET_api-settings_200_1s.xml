@@ -1,6 +1,0 @@
-<step title="Incoming Request" date="2025-07-05T11:43:36.721" instance="1e8efd" url="/api/settings" method="GET" type="request" pid="769,1,15" Host="chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_a0df8406eba08ee99bc38a6d5057acdb099dc770371e38ab0add4e46d3f0b63d" Authorization="Bea..." Content-Type="application/json; charset=utf-8" Content-Length="0" X-ARR-LOG-ID="52d6ec1f-9817-4af6-bd6e-0dadbd4be978" CLIENT-IP="40.83.3.130:25664" X-SITE-DEPLOYMENT-ID="chatbot-app-new" WAS-DEFAULT-HOSTNAME="chatbot-app-new-g6f0csebbndkajgn.scm.japaneast-01.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/settings" X-Client-IP="40.83.3.130" X-Client-Port="25664" >
-  <step title="Cleanup Xml Logs" date="2025-07-05T11:43:36.727" >
-    <step title="Cleanup Infos" date="2025-07-05T11:43:36.756" totalFiles="625" totalCleanup="465" /><!-- duration: 10ms -->
-  </step><!-- duration: 45ms -->
-  <step title="Outgoing response" date="2025-07-05T11:43:37.365" type="response" statusCode="200" statusText="OK" /><!-- duration: 6ms -->
-</step><!-- duration: 656ms -->

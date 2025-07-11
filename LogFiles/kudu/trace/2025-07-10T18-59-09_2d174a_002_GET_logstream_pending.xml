@@ -1,5 +1,0 @@
-<step title="Incoming Request" date="2025-07-10T18:59:09.979" instance="2d174a" url="/logstream" method="GET" type="request" pid="769,1,3" Host="chatbot-app-container-fse7g9cnf8hfgpej.scm.japaneast-01.azurewebsites.net" User-Agent="AZURECLI/2.75.0 (HOMEBREW)" Accept-Encoding="identity" Authorization="Bea..." x-ms-client-request-id="f47dd59e-5dbf-11f0-9f0f-52db202025ba" X-ARR-LOG-ID="f47dd59e-5dbf-11f0-9f0f-52db202025ba" CLIENT-IP="153.243.2.15:34916" X-SITE-DEPLOYMENT-ID="chatbot-app-container" WAS-DEFAULT-HOSTNAME="chatbot-app-container-fse7g9cnf8hfgpej.scm.japaneast-01.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/logstream" X-Client-IP="153.243.2.15" X-Client-Port="34916" >
-  <step title="Cleanup Xml Logs" date="2025-07-10T18:59:09.984" >
-    <step title="Cleanup Infos" date="2025-07-10T18:59:10.000" totalFiles="217" totalCleanup="57" /><!-- duration: 5ms -->
-  </step><!-- duration: 25ms -->
-  <step title="LogStreamHandlerMiddleware.Invoke" date="2025-07-10T18:59:10.023" /><!-- duration: 485ms -->

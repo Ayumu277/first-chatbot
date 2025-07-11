@@ -1,3 +1,0 @@
-<step title="Startup Request" date="2025-07-08T12:25:40.785" instance="b2fccf" url="/api/logstream/" method="GET" type="request" pid="771,1,5" ScmType="None" >
-  <step title="Cleanup Xml Logs" date="2025-07-08T12:25:40.817" /><!-- duration: 50ms -->
-</step><!-- duration: 142ms -->
