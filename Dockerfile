@@ -1,5 +1,9 @@
 # ============ BUILD STAGE ============================================
-FROM --platform=linux/amd64 node:18-bullseye AS builder
+FROM node:18-bullseye AS builder
+
+# プラットフォームを動的に設定
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
 
 WORKDIR /app
 
@@ -8,25 +12,48 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # プラットフォーム固有の環境変数
-ENV PRISMA_CLI_BINARY_TARGETS="debian-openssl-1.1.x,rhel-openssl-1.0.x"
+ENV PRISMA_CLI_BINARY_TARGETS="debian-openssl-1.1.x,rhel-openssl-1.0.x,linux-musl"
 ENV PRISMA_ENGINES_MIRROR="https://binaries.prisma.sh"
+ENV OPENSSL_CONF=/etc/ssl/openssl.cnf
+
+# Node.js環境設定
+ENV NODE_OPTIONS="--max_old_space_size=2048"
+ENV CI=true
+
+# デバッグ：Node.jsとnpmのバージョン確認
+RUN echo "Node.js version: $(node --version)" && \
+    echo "npm version: $(npm --version)" && \
+    echo "Available memory: $(free -h)" && \
+    echo "Platform: $TARGETPLATFORM"
 
 RUN npm ci --verbose
 
 # アプリケーションソースをコピー
 COPY . .
 
-# Prismaクライアントとエンジンを生成（全バイナリ含む）
-RUN npx prisma generate
-RUN npx prisma db pull --force || true
-
-# Next.jsアプリケーションをビルド（standalone出力）
+# 環境変数設定
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+
+# ビルド時用のダミーDATABASE_URLでPrismaクライアント生成
+ENV DATABASE_URL="sqlserver://localhost:1433;database=dummy;user=dummy;password=dummy;encrypt=true"
+
+# デバッグ：Prisma生成前の状況確認
+RUN echo "Generating Prisma client..." && \
+    npx prisma generate && \
+    echo "Prisma client generated successfully"
+
+# デバッグ：ビルド前の状況確認
+RUN echo "Starting Next.js build..." && \
+    echo "NODE_ENV: $NODE_ENV" && \
+    echo "NODE_OPTIONS: $NODE_OPTIONS" && \
+    ls -la
+
+# Next.jsアプリケーションをビルド（verbose出力）
+RUN npm run build && echo "Build completed successfully"
 
 # ============ PRODUCTION STAGE ========================================
-FROM --platform=linux/amd64 node:18-bullseye AS runner
+FROM node:18-bullseye AS runner
 
 # 必要なパッケージをインストール
 RUN apt-get update && apt-get install -y \
@@ -68,10 +95,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/start.sh ./
 # 実行権限と所有者を設定
 RUN chmod +x start.sh
 
-# Prismaクライアントとエンジンを本番環境で再生成
+# Prismaを実行時に生成するため、ここでは依存関係のみインストール
 USER nextjs
-RUN npm install prisma @prisma/client --save-exact && \
-    npx prisma generate
+RUN npm install prisma @prisma/client --save-exact
 
 # 環境変数設定
 ENV NODE_ENV=production

@@ -8,10 +8,11 @@
   },
   "scripts": {
     "dev": "next dev -p 8080",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start -p 8080",
     "start-test": "node test-server.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
@@ -21,7 +22,7 @@
     "cssnano": "^6.0.0",
     "express": "^4.18.2",
     "next": "14.2.5",
-    "next-auth": "^4.24.8",
+    "next-auth": "^4.24.11",
     "openai": "^4.67.1",
     "postcss": "^8.4.49",
     "prisma": "^5.22.0",
