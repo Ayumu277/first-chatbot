@@ -3,7 +3,7 @@
 import { useSession, signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useChatStore } from '../store/chat-store'
-import { UserIcon, GlobeAltIcon } from '@heroicons/react/24/outline'
+import { UserIcon, GlobeAltIcon, UserPlusIcon } from '@heroicons/react/24/outline'
 
 interface AuthWrapperProps {
   children: React.ReactNode
@@ -81,6 +81,10 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     signIn('google')
   }
 
+  const handleSignUp = () => {
+    signIn('google')
+  }
+
   // ローディング中
   if (isLoading || status === 'loading') {
     return (
@@ -133,11 +137,21 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
               <UserIcon className="w-6 h-6" />
               Googleでログイン
             </button>
+
+            {/* Googleサインアップボタン */}
+            <button
+              onClick={handleSignUp}
+              className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all duration-300 font-black text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+            >
+              <UserPlusIcon className="w-6 h-6" />
+              Googleでサインアップ
+            </button>
           </div>
 
           <div className="mt-10 text-center">
             <p className="text-gray-400 font-medium">
-              ゲストモードでは、データはブラウザに一時的に保存されます
+              ゲストモードでは、データはブラウザに一時的に保存されます<br />
+              ログイン・サインアップでは、チャット履歴が永続保存されます
             </p>
           </div>
         </div>
