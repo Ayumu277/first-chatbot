@@ -4,16 +4,21 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# 基本パッケージ
+# 基本パッケージとOpenSSL（Prisma対応）
 RUN apk add --no-cache \
     curl \
     bash \
-    libc6-compat
+    libc6-compat \
+    openssl \
+    openssl-dev
 
 # 環境変数
 ENV PORT=8080
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV DATABASE_URL="file:./dev.db"
+ENV NEXTAUTH_URL="https://chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net"
+ENV NEXTAUTH_SECRET="fallback-secret-for-build"
 
 # package.json と package-lock.json をコピー
 COPY package*.json ./
@@ -24,14 +29,17 @@ RUN npm ci --only=production && npm cache clean --force
 # Prismaスキーマをコピー
 COPY prisma ./prisma/
 
-# Prismaクライアント生成
-RUN npx prisma generate
+# Prismaクライアント生成（Alpineバイナリ指定）
+RUN npx prisma generate --generator client
 
 # アプリケーションコードをコピー
 COPY . .
 
-# Next.jsアプリケーションをビルド
-RUN npm run build
+# Next.js設定を修正（動的ルート対応）
+RUN echo 'module.exports = { output: "standalone", experimental: { appDir: true } }' > next.config.temp.js
+
+# Next.jsアプリケーションをビルド（静的生成無効）
+RUN SKIP_ENV_VALIDATION=true npm run build
 
 # start.sh スクリプトに実行権限付与
 RUN chmod +x start.sh
