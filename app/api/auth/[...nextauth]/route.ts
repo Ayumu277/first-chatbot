@@ -25,34 +25,40 @@ const handler = NextAuth({
     async signIn({ user, account, profile }) {
       console.log("🔐 SignIn callback:", { user, account, profile })
 
-      // Googleプロバイダーの場合のみ処理
-      if (account?.provider === 'google' && profile?.email) {
-        try {
-          // ユーザーが存在するかチェック
-          const existingUser = await prisma.user.findUnique({
-            where: { email: profile.email }
-          })
-
-          if (!existingUser) {
-            console.log("👤 Creating new user in database:", profile.email)
-            const newUser = await prisma.user.create({
-              data: {
-                email: profile.email,
-                name: profile.name || null,
-                image: (profile as any).picture || null,
-                emailVerified: null
-              }
-            })
-            console.log("✅ New user created:", newUser)
-          } else {
-            console.log("👤 Existing user found:", existingUser.email)
-          }
-        } catch (error) {
-          console.error("❌ Error handling user in signIn:", error)
-          // エラーが発生してもサインインは続行
-        }
+      // emailが存在することを確認
+      if (!user.email) {
+        console.error("❌ No email provided in user object")
+        return false
       }
 
+      try {
+        // Prismaでemailベースでユーザーを検索
+        const existingUser = await prisma.user.findUnique({
+          where: { email: user.email },
+        })
+
+        if (!existingUser) {
+          console.log("👤 Creating new user in database:", user.email)
+          // その場でprisma.user.create()により登録処理を行う
+          await prisma.user.create({
+            data: {
+              email: user.email,
+              name: user.name ?? null,
+              image: user.image ?? null,
+              emailVerified: null
+            },
+          })
+          console.log("✅ New user created successfully")
+        } else {
+          console.log("👤 Existing user found:", existingUser.email)
+        }
+      } catch (error) {
+        console.error("❌ Error in signIn callback:", error)
+        // エラーが発生した場合でも認証を続行（デバッグ用）
+        // 本番環境では return false にすることを検討
+      }
+
+      // 認証を許可
       return true
     },
     async session({ session, user }) {
