@@ -13,11 +13,17 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
   const { data: session, status } = useSession()
   const [isLoading, setIsLoading] = useState(true)
   const [showSignUpForm, setShowSignUpForm] = useState(false)
+  const [showLoginForm, setShowLoginForm] = useState(false)
   const [signUpData, setSignUpData] = useState({
     name: '',
-    email: '',
-    useGoogleAccount: false
+    email: ''
   })
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: ''
+  })
+  const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
   const {
     currentUser,
     isGuest,
@@ -37,6 +43,28 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
       }
 
       setIsLoading(true)
+
+      // URLパラメータをチェック
+      const urlParams = new URLSearchParams(window.location.search)
+      const successParam = urlParams.get('success')
+      const errorParam = urlParams.get('error')
+
+      if (successParam === 'registration_complete') {
+        setMessage('✅ アカウント作成が完了しました！ログインしてください。')
+        // URLからパラメータを削除
+        window.history.replaceState({}, '', window.location.pathname)
+      } else if (errorParam) {
+        const errorMessages: { [key: string]: string } = {
+          'invalid_token': '❌ 無効な認証トークンです。',
+          'expired_token': '❌ 認証トークンの期限が切れています。',
+          'already_used': '❌ この認証トークンは既に使用済みです。',
+          'user_exists': '❌ このメールアドレスは既に登録されています。',
+          'verification_failed': '❌ メール認証に失敗しました。'
+        }
+        setError(errorMessages[errorParam] || '❌ エラーが発生しました。')
+        // URLからパラメータを削除
+        window.history.replaceState({}, '', window.location.pathname)
+      }
 
       if (session?.user) {
         console.log('✅ AuthWrapper: User session found', session.user)
@@ -97,28 +125,52 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     }
   }
 
-  const handleLogin = () => {
+  const handleGoogleLogin = () => {
     signIn('google', {
       prompt: 'select_account'
     })
   }
 
   const handleSignUpFormOpen = () => {
+    setError('')
+    setMessage('')
     setShowSignUpForm(true)
+  }
+
+  const handleLoginFormOpen = () => {
+    setError('')
+    setMessage('')
+    setShowLoginForm(true)
   }
 
   const handleSignUpSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError('')
+    setMessage('')
+    setIsLoading(true)
 
-    if (signUpData.useGoogleAccount) {
-      // Googleアカウントでサインアップ
-      signIn('google', {
-        prompt: 'consent select_account',
-        callbackUrl: '/?signup=true'
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(signUpData)
       })
-    } else {
-      // 独自のアカウント作成処理（将来的に実装）
-      alert('独自アカウント作成は今後実装予定です。現在はGoogleアカウントをご利用ください。')
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setMessage('✅ ' + data.message)
+        setShowSignUpForm(false)
+        setSignUpData({ name: '', email: '' })
+      } else {
+        setError('❌ ' + data.error)
+      }
+    } catch (error) {
+      setError('❌ 登録処理に失敗しました')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -156,6 +208,20 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
             </p>
           </div>
 
+          {/* メッセージ表示 */}
+          {message && (
+            <div className="mb-6 p-4 bg-green-900 border border-green-600 rounded-lg text-green-200">
+              {message}
+            </div>
+          )}
+
+          {/* エラー表示 */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-900 border border-red-600 rounded-lg text-red-200">
+              {error}
+            </div>
+          )}
+
           <div className="space-y-5">
             {/* ゲストモードボタン */}
             <button
@@ -166,9 +232,18 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
               ゲストとして始める
             </button>
 
+            {/* メールログインボタン */}
+            <button
+              onClick={handleLoginFormOpen}
+              className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-purple-600 hover:bg-purple-700 text-white rounded-xl transition-all duration-300 font-black text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+            >
+              <UserIcon className="w-6 h-6" />
+              メールでログイン
+            </button>
+
             {/* Googleログインボタン */}
             <button
-              onClick={handleLogin}
+              onClick={handleGoogleLogin}
               className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-all duration-300 font-black text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
             >
               <UserIcon className="w-6 h-6" />
@@ -188,7 +263,7 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
           <div className="mt-10 text-center">
             <p className="text-gray-400 font-medium">
               ゲストモードでは、データはブラウザに一時的に保存されます<br />
-              ログイン・サインアップでは、チャット履歴が永続保存されます
+              アカウント登録では、チャット履歴が永続保存されます
             </p>
           </div>
         </div>
@@ -211,10 +286,11 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
             <form onSubmit={handleSignUpSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  お名前
+                  お名前 *
                 </label>
                 <input
                   type="text"
+                  required
                   value={signUpData.name}
                   onChange={(e) => setSignUpData({...signUpData, name: e.target.value})}
                   className="w-full px-4 py-3 bg-[#2A2A2A] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
@@ -224,10 +300,11 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
 
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  メールアドレス
+                  メールアドレス *
                 </label>
                 <input
                   type="email"
+                  required
                   value={signUpData.email}
                   onChange={(e) => setSignUpData({...signUpData, email: e.target.value})}
                   className="w-full px-4 py-3 bg-[#2A2A2A] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
@@ -235,17 +312,8 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
                 />
               </div>
 
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  id="useGoogleAccount"
-                  checked={signUpData.useGoogleAccount}
-                  onChange={(e) => setSignUpData({...signUpData, useGoogleAccount: e.target.checked})}
-                  className="mr-3 w-4 h-4 text-blue-600 bg-[#2A2A2A] border-gray-600 rounded focus:ring-blue-500"
-                />
-                <label htmlFor="useGoogleAccount" className="text-sm text-gray-300">
-                  Googleアカウントでサインアップ
-                </label>
+              <div className="text-sm text-gray-400">
+                📧 入力したメールアドレスに認証リンクが送信されます。
               </div>
 
               <div className="flex gap-3">
@@ -258,9 +326,10 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-3 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors"
+                  disabled={isLoading}
+                  className="flex-1 py-3 px-4 bg-green-600 hover:bg-green-700 disabled:bg-green-800 text-white rounded-lg font-semibold transition-colors"
                 >
-                  アカウント作成
+                  {isLoading ? '送信中...' : '認証メール送信'}
                 </button>
               </div>
             </form>

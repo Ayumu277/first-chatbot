@@ -1,68 +1,15 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/bash
 
-# AzureのPORT指定
-PORT=${PORT:-8080}
+echo "🚀 Starting Chatbot application..."
 
-echo "🚀 Starting Next.js chatbot application..."
-echo "📍 Port: $PORT"
-echo "🔧 Environment: ${NODE_ENV:-production}"
-echo "🏗️ Platform: $(uname -m)"
-
-# 環境変数の確認ログ
-echo "🔍 DATABASE_URL: ${DATABASE_URL:0:50}..."
-echo "🔍 OPENAI_API_KEY: ${OPENAI_API_KEY:+SET}"
-echo "🔍 NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:+SET}"
-echo "🔍 NEXTAUTH_URL: $NEXTAUTH_URL"
-
-# DB接続チェック
-if [ -z "$DATABASE_URL" ]; then
-    echo "❌ ERROR: DATABASE_URL not set"
-    env | grep DATABASE || echo "No DATABASE environment variables found"
-    exit 1
-fi
-
-# Prismaエンジンの診断
-echo "🔧 Prisma engine diagnostics..."
-echo "- Prisma client location: $(find /app -name "*.prisma" -type f 2>/dev/null | head -3)"
-echo "- Query engines: $(find /app -name "*query*engine*" -type f 2>/dev/null | head -3)"
-echo "- Schema engines: $(find /app -name "*schema*engine*" -type f 2>/dev/null | head -3)"
-echo "- OpenSSL version: $(openssl version 2>/dev/null || echo 'OpenSSL not found')"
-
-# Prismaエンジンの存在確認
-echo "🔍 Checking Prisma binaries..."
-ls -la /app/node_modules/@prisma/engines/ 2>/dev/null || echo "Engines directory not found"
-ls -la /app/node_modules/.prisma/client/ 2>/dev/null || echo "Client directory not found"
-
-# Prisma Clientの生成（本番環境でも実行）
+# Prismaクライアント生成
 echo "🔧 Generating Prisma client..."
-if npx prisma generate; then
-    echo "✅ Prisma client generated successfully"
-else
-    echo "❌ Prisma generate failed"
-    exit 1
-fi
+npx prisma generate
 
-# マイグレーションの適用（本番環境）
-echo "🚀 Running migrations..."
-if npx prisma migrate deploy; then
-    echo "✅ Migrations applied successfully"
-else
-    echo "⚠️ Migration failed, trying direct database access..."
-    # データベース接続テスト
-    if npx prisma db execute --stdin <<< "SELECT 1 as test"; then
-        echo "✅ Database connection successful"
-    else
-        echo "❌ Database connection failed"
-    fi
-fi
+# データベースマイグレーション実行
+echo "🗄️ Running database migrations..."
+npx prisma migrate deploy
 
-# ファイル確認
-echo "📁 Checking required files..."
-echo "- server.js: $(test -f server.js && echo '✅ Found' || echo '❌ Missing')"
-echo "- .next directory: $(test -d .next && echo '✅ Found' || echo '❌ Missing')"
-echo "- node_modules: $(test -d node_modules && echo '✅ Found' || echo '❌ Missing')"
-
-# Next.jsアプリケーションを起動
-echo "🌐 Starting Next.js app on port $PORT..."
+# アプリケーション起動
+echo "🎯 Starting Next.js application..."
 exec node server.js

@@ -10,17 +10,76 @@ datasource db {
 }
 
 model User {
-  id         String        @id @default(uuid())
-  email      String?       @unique
-  name       String?
-  image      String?
-  isGuest    Boolean       @default(false)
-  guestToken String?       @unique
-  createdAt  DateTime      @default(now())
-  updatedAt  DateTime      @updatedAt
-  sessions   ChatSession[]
+  id            String        @id @default(uuid())
+  email         String?       @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  password      String?       // 独自認証用のパスワード（ハッシュ化）
+  isGuest       Boolean       @default(false)
+  guestToken    String?       @unique
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  // NextAuth関連
+  accounts      Account[]
+  sessions      Session[]
+
+  // チャット関連
+  chatSessions  ChatSession[] @relation("UserChatSessions")
 
   @@map("users")
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.NVarChar(Max)
+  access_token      String? @db.NVarChar(Max)
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.NVarChar(Max)
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+model EmailVerificationToken {
+  id        String   @id @default(uuid())
+  email     String
+  token     String   @unique
+  name      String?  // 登録時の名前を一時保存
+  expires   DateTime
+  createdAt DateTime @default(now())
+  used      Boolean  @default(false)
+
+  @@map("email_verification_tokens")
 }
 
 model ChatSession {
@@ -30,7 +89,7 @@ model ChatSession {
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   messages  ChatMessage[]
-  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User          @relation("UserChatSessions", fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("chat_sessions")
 }

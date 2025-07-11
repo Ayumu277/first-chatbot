@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
       ...conversationHistory,
       {
         role: 'user',
-        content: imageBase64 ? [
+                content: imageBase64 ? [
           { type: 'text', text: message },
           {
             type: 'image_url',
@@ -63,9 +63,9 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: 'deepseek-chat',
         messages: messages,
-        max_tokens: 1000,
-        temperature: 0.7,
-        stream: false,
+      max_tokens: 1000,
+      temperature: 0.7,
+      stream: false,
       }),
     })
 

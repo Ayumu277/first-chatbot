@@ -3,6 +3,22 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+type SessionWithMessages = {
+  id: string;
+  title: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  messages: {
+    id: string;
+    role: string;
+    content: string;
+    timestamp: Date;
+    imageBase64: string | null;
+    imagePreview: string | null;
+  }[];
+}
+
 // GET: 指定されたユーザーのセッションを取得
 export async function GET(request: NextRequest) {
   try {
@@ -33,12 +49,12 @@ export async function GET(request: NextRequest) {
     })
 
     // データベースの形式をフロントエンド用に変換
-    const formattedSessions = sessions.map(session => ({
+    const formattedSessions = sessions.map((session: SessionWithMessages) => ({
       id: session.id,
       title: session.title,
       createdAt: session.createdAt.toISOString(),
       updatedAt: session.updatedAt.toISOString(),
-      messages: session.messages.map(msg => ({
+      messages: session.messages.map((msg: SessionWithMessages['messages'][0]) => ({
         role: msg.role,
         content: msg.content,
         timestamp: msg.timestamp.toLocaleTimeString('ja-JP', {
