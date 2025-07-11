@@ -3,7 +3,7 @@
 import { useSession, signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useChatStore } from '../store/chat-store'
-import { UserIcon, GlobeAltIcon, UserPlusIcon } from '@heroicons/react/24/outline'
+import { UserIcon, GlobeAltIcon, UserPlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 interface AuthWrapperProps {
   children: React.ReactNode
@@ -12,6 +12,12 @@ interface AuthWrapperProps {
 export default function AuthWrapper({ children }: AuthWrapperProps) {
   const { data: session, status } = useSession()
   const [isLoading, setIsLoading] = useState(true)
+  const [showSignUpForm, setShowSignUpForm] = useState(false)
+  const [signUpData, setSignUpData] = useState({
+    name: '',
+    email: '',
+    useGoogleAccount: false
+  })
   const {
     currentUser,
     isGuest,
@@ -97,8 +103,23 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     })
   }
 
-  const handleSignUp = () => {
-    signIn('google')
+  const handleSignUpFormOpen = () => {
+    setShowSignUpForm(true)
+  }
+
+  const handleSignUpSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (signUpData.useGoogleAccount) {
+      // Googleアカウントでサインアップ
+      signIn('google', {
+        prompt: 'consent select_account',
+        callbackUrl: '/?signup=true'
+      })
+    } else {
+      // 独自のアカウント作成処理（将来的に実装）
+      alert('独自アカウント作成は今後実装予定です。現在はGoogleアカウントをご利用ください。')
+    }
   }
 
   // ローディング中
@@ -154,13 +175,13 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
               Googleでログイン
             </button>
 
-            {/* Googleサインアップボタン */}
+            {/* サインアップボタン */}
             <button
-              onClick={handleSignUp}
+              onClick={handleSignUpFormOpen}
               className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all duration-300 font-black text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
             >
               <UserPlusIcon className="w-6 h-6" />
-              Googleでサインアップ
+              新規アカウント作成
             </button>
           </div>
 
@@ -172,6 +193,80 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
           </div>
         </div>
       </div>
+
+      {/* サインアップフォームモーダル */}
+      {showSignUpForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
+          <div className="bg-[#1E1E1E] rounded-xl p-8 max-w-md w-full border border-gray-600">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-black text-white">新規アカウント作成</h3>
+              <button
+                onClick={() => setShowSignUpForm(false)}
+                className="text-gray-400 hover:text-white"
+              >
+                <XMarkIcon className="w-6 h-6" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSignUpSubmit} className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  お名前
+                </label>
+                <input
+                  type="text"
+                  value={signUpData.name}
+                  onChange={(e) => setSignUpData({...signUpData, name: e.target.value})}
+                  className="w-full px-4 py-3 bg-[#2A2A2A] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
+                  placeholder="田中太郎"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  メールアドレス
+                </label>
+                <input
+                  type="email"
+                  value={signUpData.email}
+                  onChange={(e) => setSignUpData({...signUpData, email: e.target.value})}
+                  className="w-full px-4 py-3 bg-[#2A2A2A] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
+                  placeholder="example@gmail.com"
+                />
+              </div>
+
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="useGoogleAccount"
+                  checked={signUpData.useGoogleAccount}
+                  onChange={(e) => setSignUpData({...signUpData, useGoogleAccount: e.target.checked})}
+                  className="mr-3 w-4 h-4 text-blue-600 bg-[#2A2A2A] border-gray-600 rounded focus:ring-blue-500"
+                />
+                <label htmlFor="useGoogleAccount" className="text-sm text-gray-300">
+                  Googleアカウントでサインアップ
+                </label>
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowSignUpForm(false)}
+                  className="flex-1 py-3 px-4 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold transition-colors"
+                >
+                  キャンセル
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 py-3 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors"
+                >
+                  アカウント作成
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
