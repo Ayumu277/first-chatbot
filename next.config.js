@@ -17,9 +17,6 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
 
-  // Prisma関連エラーを防ぐため外部化
-  serverExternalPackages: ['@prisma/client', 'prisma'],
-
   // 静的最適化を最大化
   trailingSlash: false,
   reactStrictMode: false, // ビルド時の警告を削減

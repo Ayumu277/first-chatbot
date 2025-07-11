@@ -1,7 +1,8 @@
 import { Resend } from 'resend'
 
-// Resend設定（より簡単で確実）
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Resend設定（ビルド時のエラーを避けるためフォールバック付き）
+const resendApiKey = process.env.RESEND_API_KEY || 'fallback_key_for_build'
+const resend = new Resend(resendApiKey)
 
 // 認証メール送信
 export async function sendVerificationEmail(
@@ -9,6 +10,12 @@ export async function sendVerificationEmail(
   name: string,
   token: string
 ) {
+  // 実際のAPIキーがない場合はエラーを返す
+  if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 'fallback_key_for_build') {
+    console.error('❌ RESEND_API_KEY not configured')
+    throw new Error('メール送信サービスが設定されていません')
+  }
+
   const verificationUrl = `${process.env.NEXTAUTH_URL}/api/auth/verify-email?token=${token}`
 
   try {
