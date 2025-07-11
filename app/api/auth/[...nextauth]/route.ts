@@ -1,17 +1,18 @@
 import NextAuth from "next-auth"
+import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
+
 console.log("📦 DATABASE_URL is:", process.env.DATABASE_URL);
 const prisma = new PrismaClient()
 
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    // Google プロバイダー（必要に応じて追加）
-    // GoogleProvider({
-    //   clientId: process.env.GOOGLE_CLIENT_ID!,
-    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    // }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
   ],
   pages: {
     signIn: '/auth/signin',

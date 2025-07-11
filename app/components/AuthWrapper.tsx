@@ -1,6 +1,6 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
+import { useSession, signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useChatStore } from '../store/chat-store'
 import { UserIcon, GlobeAltIcon } from '@heroicons/react/24/outline'
@@ -77,6 +77,10 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     }
   }
 
+  const handleLogin = () => {
+    signIn('google')
+  }
+
   // ローディング中
   if (isLoading || status === 'loading') {
     return (
@@ -121,13 +125,13 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
               ゲストとして始める
             </button>
 
-            {/* ログインボタン（将来の拡張用） */}
+            {/* Googleログインボタン */}
             <button
-              disabled
-              className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-gray-600 text-gray-400 rounded-xl cursor-not-allowed font-black text-lg"
+              onClick={handleLogin}
+              className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-all duration-300 font-black text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
             >
               <UserIcon className="w-6 h-6" />
-              ログイン（準備中）
+              Googleでログイン
             </button>
           </div>
 

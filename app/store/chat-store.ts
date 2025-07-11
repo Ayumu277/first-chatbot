@@ -114,7 +114,7 @@ export const useChatStore = create<ChatState>()(
         const newSessionId = `session-${Date.now()}`
         const title = '新しいチャット'
 
-        // データベース接続を試行する前に、ローカルセッションを作成
+        // ローカルセッションを作成
         const newSession: ChatSession = {
           id: newSessionId,
           title,
@@ -123,13 +123,19 @@ export const useChatStore = create<ChatState>()(
           updatedAt: new Date().toISOString()
         }
 
-        // まずローカルストレージに保存
+        // ローカルに保存
         set(prevState => ({
           sessions: [newSession, ...prevState.sessions],
           currentSessionId: newSessionId
         }))
 
-        // バックグラウンドでデータベースに保存を試行
+        // ゲストの場合はローカルのみ、ログインユーザーの場合はデータベースにも保存
+        if (state.isGuest) {
+          console.log('Guest session created locally only')
+          return newSessionId
+        }
+
+        // ログインユーザーの場合はデータベースに保存
         try {
           const dbSession = await dbApi.createSession(title, state.currentUser.id)
           // データベースからのIDでローカルセッションを更新
@@ -154,13 +160,21 @@ export const useChatStore = create<ChatState>()(
       },
 
             deleteSession: async (sessionId: string) => {
-        // まずローカルストレージから削除
+        const state = get()
+
+        // ローカルから削除
         set(state => ({
           sessions: state.sessions.filter(session => session.id !== sessionId),
           currentSessionId: state.currentSessionId === sessionId ? null : state.currentSessionId
         }))
 
-        // バックグラウンドでデータベースから削除を試行
+        // ゲストの場合はローカルのみ、ログインユーザーの場合はデータベースからも削除
+        if (state.isGuest) {
+          console.log('Guest session deleted locally only')
+          return
+        }
+
+        // ログインユーザーの場合はデータベースからも削除
         try {
           await dbApi.deleteSession(sessionId)
           console.log('Session deleted from database successfully')
@@ -170,6 +184,7 @@ export const useChatStore = create<ChatState>()(
       },
 
       addMessage: async (sessionId: string, message: Omit<ChatMessage, 'timestamp'>) => {
+        const state = get()
         const timestamp = new Date().toLocaleTimeString('ja-JP', {
           hour: '2-digit',
           minute: '2-digit'
@@ -180,7 +195,7 @@ export const useChatStore = create<ChatState>()(
           timestamp
         }
 
-        // まずローカルストレージに保存
+        // ローカルに保存
         set(state => ({
           sessions: state.sessions.map(session => {
             if (session.id === sessionId) {
@@ -202,7 +217,13 @@ export const useChatStore = create<ChatState>()(
           })
         }))
 
-        // バックグラウンドでデータベースに保存を試行
+        // ゲストの場合はローカルのみ、ログインユーザーの場合はデータベースにも保存
+        if (state.isGuest) {
+          console.log('Guest message saved locally only')
+          return
+        }
+
+        // ログインユーザーの場合はデータベースに保存
         try {
           await dbApi.addMessage(sessionId, newMessage)
           console.log('Message saved to database successfully')
@@ -279,6 +300,13 @@ export const useChatStore = create<ChatState>()(
           return
         }
 
+        // ゲストの場合はローカルのみ（データベースからロードしない）
+        if (state.isGuest) {
+          console.log('Guest mode: sessions remain local only')
+          return
+        }
+
+        // ログインユーザーの場合のみデータベースからロード
         try {
           const sessions = await dbApi.getSessions(state.currentUser.id)
           // データベースからのセッションにmessages配列があることを確認
@@ -300,37 +328,27 @@ export const useChatStore = create<ChatState>()(
 
             createGuestUser: async () => {
         try {
-          console.log('Storeでゲストユーザー作成を開始')
-          const response = await fetch('/api/users/guest', {
-            method: 'POST'
+          console.log('ローカルゲストユーザー作成を開始')
+
+          // ローカルのみでゲストユーザーを作成（データベースに保存しない）
+          const timestamp = Date.now()
+          const randomId = Math.random().toString(36).substr(2, 9)
+          const guestUser = {
+            id: `guest_${timestamp}_${randomId}`,
+            name: `ゲストユーザー_${timestamp}`,
+            isGuest: true,
+            guestToken: `guest_token_${timestamp}_${randomId}`
+          }
+
+          console.log('ローカルゲストユーザーを作成:', guestUser)
+          set({
+            currentUser: guestUser,
+            isGuest: true
           })
-          console.log('API応答のステータス:', response.status)
-
-          // レスポンスが正常なJSONかチェック
-          const contentType = response.headers.get('content-type')
-          if (!contentType || !contentType.includes('application/json')) {
-            const textResponse = await response.text()
-            console.error('JSONではないレスポンス:', textResponse)
-            throw new Error('サーバーからの応答が正しくありません')
-          }
-
-          const data = await response.json()
-          console.log('API応答のデータ:', data)
-
-          if (response.ok && data.success) {
-            console.log('ゲストユーザーをStoreに設定中:', data.user)
-            set({
-              currentUser: data.user,
-              isGuest: true
-            })
-            console.log('ゲストユーザーがStoreに設定されました')
-            return data.user
-          } else {
-            console.error('API応答でエラー:', data.error || 'Unknown error')
-            throw new Error(data.error || data.details || 'ゲストユーザーの作成に失敗しました')
-          }
+          console.log('ゲストユーザーがStoreに設定されました（ローカルのみ）')
+          return guestUser
         } catch (error) {
-          console.error('Failed to create guest user:', error)
+          console.error('Failed to create local guest user:', error)
           throw error
         }
       },
@@ -341,17 +359,32 @@ export const useChatStore = create<ChatState>()(
     }),
     {
       name: 'chat-sessions',
-      partialize: (state) => ({
-        sessions: state.sessions.map(session => ({
-          ...session,
-          messages: (session.messages || []).map(message => ({
-            ...message,
-            imageBase64: undefined,
-            imagePreview: undefined
-          }))
-        })),
-        currentSessionId: state.currentSessionId
-      })
+      partialize: (state) => {
+        // ゲストモードの場合は永続化しない（次回アクセス時にリセット）
+        if (state.isGuest) {
+          return {
+            sessions: [],
+            currentSessionId: null,
+            currentUser: null,
+            isGuest: false
+          }
+        }
+
+        // ログインユーザーの場合のみ永続化
+        return {
+          sessions: state.sessions.map(session => ({
+            ...session,
+            messages: (session.messages || []).map(message => ({
+              ...message,
+              imageBase64: undefined,
+              imagePreview: undefined
+            }))
+          })),
+          currentSessionId: state.currentSessionId,
+          currentUser: state.currentUser,
+          isGuest: state.isGuest
+        }
+      }
     }
   )
 )
