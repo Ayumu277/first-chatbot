@@ -36,7 +36,8 @@ RUN echo "Node.js version: $(node --version)" && \
     echo "Available memory: $(free -h)" && \
     echo "Platform: $TARGETPLATFORM"
 
-RUN npm ci --omit=dev --verbose
+# ビルドに必要な全ての依存関係をインストール（--omit=devを削除）
+RUN npm ci --verbose
 
 # アプリケーションソースをコピー
 COPY . .
@@ -52,8 +53,16 @@ RUN echo "Starting Next.js build..." && \
     echo "NODE_OPTIONS: $NODE_OPTIONS" && \
     ls -la .next 2>/dev/null || echo "No .next directory yet"
 
-# Next.jsアプリケーションをビルド（verbose出力と詳細エラー）
-RUN npm run build 2>&1 | tee build.log && echo "Build completed successfully"
+# Next.jsアプリケーションをビルド（エラーハンドリング改善）
+RUN set -e && npm run build 2>&1 | tee build.log
+
+# ビルド後の確認
+RUN echo "Checking build artifacts..." && \
+    ls -la .next/ && \
+    ls -la .next/standalone/ && \
+    echo "Standalone build directory contents:" && \
+    find .next/standalone -type f | head -10 && \
+    echo "Build completed successfully"
 
 # ============ PRODUCTION STAGE ========================================
 FROM node:18-bullseye AS runner
