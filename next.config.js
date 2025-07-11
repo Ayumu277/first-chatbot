@@ -3,7 +3,7 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['@prisma/client', 'prisma']
   },
-  output: 'standalone',
+  // output: 'standalone', // Docker環境での問題を解決するため削除
   poweredByHeader: false,
   compress: true,
   generateEtags: false,
