@@ -597,3 +597,292 @@
 2025-07-10T19:05:41.7617175Z 
 2025-07-10T19:05:41.7617205Z  ✓ Starting...
 2025-07-10T19:05:42.9368522Z  ✓ Ready in 1217ms
+2025-07-10T19:25:43.6430034Z 🚀 Starting Next.js chatbot application...
+2025-07-10T19:25:43.6619224Z 📍 Port: 8080
+2025-07-10T19:25:43.6619451Z 🔧 Environment: production
+2025-07-10T19:25:43.6619479Z 🏗️ Platform: x86_64
+2025-07-10T19:25:43.6619515Z 🔍 DATABASE_URL: sqlserver://chatbot-sqlserver.database.windows.net...
+2025-07-10T19:25:43.6619539Z 🔍 OPENAI_API_KEY: SET
+2025-07-10T19:25:43.6619581Z 🔍 NEXTAUTH_SECRET: SET
+2025-07-10T19:25:43.6619607Z 🔍 NEXTAUTH_URL: https://chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net/
+2025-07-10T19:25:43.6619647Z 🔧 Prisma engine diagnostics...
+2025-07-10T19:25:44.1444349Z - Prisma client location: /app/node_modules/.prisma/client/schema.prisma
+2025-07-10T19:25:44.1448622Z /app/prisma/schema.prisma
+2025-07-10T19:25:44.4724648Z - Query engines: /app/node_modules/.prisma/client/libquery_engine-debian-openssl-1.1.x.so.node
+2025-07-10T19:25:44.4725357Z /app/node_modules/.prisma/client/libquery_engine-linux-musl.so.node
+2025-07-10T19:25:44.4731688Z /app/node_modules/.prisma/client/libquery_engine-rhel-openssl-1.0.x.so.node
+2025-07-10T19:25:44.7449767Z - Schema engines: /app/node_modules/@prisma/engines/schema-engine-rhel-openssl-1.0.x
+2025-07-10T19:25:44.7532203Z /app/node_modules/@prisma/engines/schema-engine-debian-openssl-1.1.x
+2025-07-10T19:25:44.8027307Z - OpenSSL version: OpenSSL 1.1.1w  11 Sep 2023
+2025-07-10T19:25:44.8037635Z 🔍 Checking Prisma binaries...
+2025-07-10T19:25:44.8216320Z total 76164
+2025-07-10T19:25:44.8216647Z drwxr-xr-x 4 nextjs nodejs     4096 Jul 10 19:18 .
+2025-07-10T19:25:44.8216676Z drwxr-xr-x 1 nextjs nodejs     4096 Jul 10 19:18 ..
+2025-07-10T19:25:44.8216697Z -rw-r--r-- 1 nextjs nodejs    11357 Jul 10 19:18 LICENSE
+2025-07-10T19:25:44.8216717Z -rw-r--r-- 1 nextjs nodejs      740 Jul 10 19:18 README.md
+2025-07-10T19:25:44.8216737Z drwxr-xr-x 3 nextjs nodejs     4096 Jul 10 19:18 dist
+2025-07-10T19:25:44.8216758Z -rwxr-xr-x 1 nextjs nodejs 16161048 Jul 10 19:18 libquery_engine-debian-openssl-1.1.x.so.node
+2025-07-10T19:25:44.8216795Z -rwxr-xr-x 1 nextjs nodejs 19904080 Jul 10 19:18 libquery_engine-rhel-openssl-1.0.x.so.node
+2025-07-10T19:25:44.8216816Z -rw-r--r-- 1 nextjs nodejs     1088 Jul 10 19:18 package.json
+2025-07-10T19:25:44.8216860Z -rwxr-xr-x 1 nextjs nodejs 18802752 Jul 10 19:18 schema-engine-debian-openssl-1.1.x
+2025-07-10T19:25:44.8216882Z -rwxr-xr-x 1 nextjs nodejs 23079912 Jul 10 19:18 schema-engine-rhel-openssl-1.0.x
+2025-07-10T19:25:44.8216902Z drwxr-xr-x 2 nextjs nodejs     4096 Jul 10 19:18 scripts
+2025-07-10T19:25:44.8404212Z total 51240
+2025-07-10T19:25:44.8404574Z drwxr-xr-x 1 nextjs nodejs     4096 Jul 10 19:19 .
+2025-07-10T19:25:44.8404610Z drwxr-xr-x 1 nextjs nodejs     4096 Jul 10 19:18 ..
+2025-07-10T19:25:44.8404634Z -rw-r--r-- 1 nextjs nodejs       23 Jul 10 19:19 default.d.ts
+2025-07-10T19:25:44.8404657Z -rw-r--r-- 1 nextjs nodejs       36 Jul 10 19:19 default.js
+2025-07-10T19:25:44.8404682Z drwxr-xr-x 2 nextjs nodejs     4096 Jul 10 19:18 deno
+2025-07-10T19:25:44.8404732Z -rw-r--r-- 1 nextjs nodejs       25 Jul 10 19:19 edge.d.ts
+2025-07-10T19:25:44.8404755Z -rw-r--r-- 1 nextjs nodejs    13084 Jul 10 19:19 edge.js
+2025-07-10T19:25:44.8404779Z -rw-r--r-- 1 nextjs nodejs     7060 Jul 10 19:19 index-browser.js
+2025-07-10T19:25:44.8404820Z -rw-r--r-- 1 nextjs nodejs   177636 Jul 10 19:19 index.d.ts
+2025-07-10T19:25:44.8404842Z -rw-r--r-- 1 nextjs nodejs    14227 Jul 10 19:19 index.js
+2025-07-10T19:25:44.8404866Z -rwxr-xr-x 1 nextjs nodejs 16161048 Jul 10 19:19 libquery_engine-debian-openssl-1.1.x.so.node
+2025-07-10T19:25:44.8404904Z -rwxr-xr-x 1 nextjs nodejs 16132392 Jul 10 19:19 libquery_engine-linux-musl.so.node
+2025-07-10T19:25:44.8404928Z -rwxr-xr-x 1 nextjs nodejs 19904080 Jul 10 19:19 libquery_engine-rhel-openssl-1.0.x.so.node
+2025-07-10T19:25:44.8404951Z -rw-r--r-- 1 nextjs nodejs     2601 Jul 10 19:19 package.json
+2025-07-10T19:25:44.8404973Z -rw-r--r-- 1 nextjs nodejs     1380 Jul 10 19:19 schema.prisma
+2025-07-10T19:25:44.8404996Z -rw-r--r-- 1 nextjs nodejs       23 Jul 10 19:19 wasm.d.ts
+2025-07-10T19:25:44.8405036Z -rw-r--r-- 1 nextjs nodejs     7060 Jul 10 19:19 wasm.js
+2025-07-10T19:25:44.8583462Z 🔧 Generating Prisma client...
+2025-07-10T19:25:52.3071564Z Prisma schema loaded from prisma/schema.prisma
+2025-07-10T19:25:57.9969849Z 
+2025-07-10T19:25:57.9970437Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 602ms
+2025-07-10T19:25:57.9970483Z 
+2025-07-10T19:25:57.9970557Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-10T19:25:57.9970580Z 
+2025-07-10T19:25:57.9970605Z Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
+2025-07-10T19:25:57.9970625Z 
+2025-07-10T19:25:58.4997856Z ✅ Prisma client generated successfully
+2025-07-10T19:25:58.5171304Z 🚀 Running migrations...
+2025-07-10T19:26:06.1784267Z Prisma schema loaded from prisma/schema.prisma
+2025-07-10T19:26:06.1897046Z Datasource "db": SQL Server database
+2025-07-10T19:26:06.5087638Z 
+2025-07-10T19:26:06.5097719Z 2 migrations found in prisma/migrations
+2025-07-10T19:26:06.5104890Z 
+2025-07-10T19:26:06.7126148Z Applying migration `20250710052054_init`
+2025-07-10T19:26:06.7322243Z Error: P3018
+2025-07-10T19:26:06.7322744Z 
+2025-07-10T19:26:06.7322797Z A migration failed to apply. New migrations cannot be applied before the error is recovered from. Read more about how to resolve migration issues in a production database: https://pris.ly/d/migrate-resolve
+2025-07-10T19:26:06.7322829Z 
+2025-07-10T19:26:06.7322915Z Migration name: 20250710052054_init
+2025-07-10T19:26:06.7322937Z 
+2025-07-10T19:26:06.7322958Z Database error code: 2714
+2025-07-10T19:26:06.7322976Z 
+2025-07-10T19:26:06.7322995Z Database error:
+2025-07-10T19:26:06.7323018Z There is already an object named 'users' in the database.
+2025-07-10T19:26:06.7323037Z 
+2025-07-10T19:26:06.7323055Z 
+2025-07-10T19:26:06.8229119Z ⚠️ Migration failed, trying direct database access...
+2025-07-10T19:26:12.6542114Z Script executed successfully.
+2025-07-10T19:26:12.8635425Z ┌─────────────────────────────────────────────────────────┐
+2025-07-10T19:26:12.8636860Z │  Update available 5.22.0 -> 6.11.1                      │
+2025-07-10T19:26:12.8636912Z │                                                         │
+2025-07-10T19:26:12.8636937Z │  This is a major update - please follow the guide at    │
+2025-07-10T19:26:12.8636962Z │  https://pris.ly/d/major-version-upgrade                │
+2025-07-10T19:26:12.8636984Z │                                                         │
+2025-07-10T19:26:12.8637030Z │  Run the following to update                            │
+2025-07-10T19:26:12.8637055Z │    npm i --save-dev prisma@latest                       │
+2025-07-10T19:26:12.8637078Z │    npm i @prisma/client@latest                          │
+2025-07-10T19:26:12.8637110Z └─────────────────────────────────────────────────────────┘
+2025-07-10T19:26:13.0814915Z ✅ Database connection successful
+2025-07-10T19:26:13.0826139Z 📁 Checking required files...
+2025-07-10T19:26:13.0841373Z - server.js: ✅ Found
+2025-07-10T19:26:13.1132117Z - .next directory: ✅ Found
+2025-07-10T19:26:13.1322084Z - node_modules: ✅ Found
+2025-07-10T19:26:13.1327511Z 🌐 Starting Next.js app on port 8080...
+2025-07-10T19:26:14.7092914Z   ▲ Next.js 14.2.5
+2025-07-10T19:26:14.7100959Z   - Local:        http://chatbot-ap-248ed32f:8080
+2025-07-10T19:26:14.7105441Z   - Network:      http://169.254.129.2:8080
+2025-07-10T19:26:14.7109979Z 
+2025-07-10T19:26:14.7195225Z  ✓ Starting...
+2025-07-10T19:26:15.4695124Z  ✓ Ready in 788ms
+2025-07-10T19:29:40.7925850Z 🚀 Starting Next.js chatbot application...
+2025-07-10T19:29:40.7927368Z 📍 Port: 8080
+2025-07-10T19:29:40.7927422Z 🔧 Environment: production
+2025-07-10T19:29:40.7927469Z 🏗️ Platform: x86_64
+2025-07-10T19:29:40.7927500Z 🔍 DATABASE_URL: sqlserver://chatbot-sqlserver.database.windows.net...
+2025-07-10T19:29:40.7927530Z 🔍 OPENAI_API_KEY: SET
+2025-07-10T19:29:40.7927552Z 🔍 NEXTAUTH_SECRET: SET
+2025-07-10T19:29:40.7927577Z 🔍 NEXTAUTH_URL: https://chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net/
+2025-07-10T19:29:40.7927600Z 🔧 Prisma engine diagnostics...
+2025-07-10T19:29:41.4516852Z - Prisma client location: /app/node_modules/.prisma/client/schema.prisma
+2025-07-10T19:29:41.4598220Z /app/prisma/schema.prisma
+2025-07-10T19:29:41.7522820Z - Query engines: /app/node_modules/.prisma/client/libquery_engine-debian-openssl-1.1.x.so.node
+2025-07-10T19:29:41.7523434Z /app/node_modules/.prisma/client/libquery_engine-linux-musl.so.node
+2025-07-10T19:29:41.7529195Z /app/node_modules/.prisma/client/libquery_engine-rhel-openssl-1.0.x.so.node
+2025-07-10T19:29:42.1524742Z - Schema engines: /app/node_modules/@prisma/engines/schema-engine-rhel-openssl-1.0.x
+2025-07-10T19:29:42.1525231Z /app/node_modules/@prisma/engines/schema-engine-debian-openssl-1.1.x
+2025-07-10T19:29:42.1937026Z - OpenSSL version: OpenSSL 1.1.1w  11 Sep 2023
+2025-07-10T19:29:42.1942969Z 🔍 Checking Prisma binaries...
+2025-07-10T19:29:42.2150931Z total 76164
+2025-07-10T19:29:42.2151648Z drwxr-xr-x 4 nextjs nodejs     4096 Jul 10 19:18 .
+2025-07-10T19:29:42.2151688Z drwxr-xr-x 1 nextjs nodejs     4096 Jul 10 19:18 ..
+2025-07-10T19:29:42.2151712Z -rw-r--r-- 1 nextjs nodejs    11357 Jul 10 19:18 LICENSE
+2025-07-10T19:29:42.2151735Z -rw-r--r-- 1 nextjs nodejs      740 Jul 10 19:18 README.md
+2025-07-10T19:29:42.2151757Z drwxr-xr-x 3 nextjs nodejs     4096 Jul 10 19:18 dist
+2025-07-10T19:29:42.2151781Z -rwxr-xr-x 1 nextjs nodejs 16161048 Jul 10 19:18 libquery_engine-debian-openssl-1.1.x.so.node
+2025-07-10T19:29:42.2151824Z -rwxr-xr-x 1 nextjs nodejs 19904080 Jul 10 19:18 libquery_engine-rhel-openssl-1.0.x.so.node
+2025-07-10T19:29:42.2151877Z -rw-r--r-- 1 nextjs nodejs     1088 Jul 10 19:18 package.json
+2025-07-10T19:29:42.2151900Z -rwxr-xr-x 1 nextjs nodejs 18802752 Jul 10 19:18 schema-engine-debian-openssl-1.1.x
+2025-07-10T19:29:42.2151923Z -rwxr-xr-x 1 nextjs nodejs 23079912 Jul 10 19:18 schema-engine-rhel-openssl-1.0.x
+2025-07-10T19:29:42.2151945Z drwxr-xr-x 2 nextjs nodejs     4096 Jul 10 19:18 scripts
+2025-07-10T19:29:42.2344152Z total 51240
+2025-07-10T19:29:42.2344827Z drwxr-xr-x 1 nextjs nodejs     4096 Jul 10 19:19 .
+2025-07-10T19:29:42.2344865Z drwxr-xr-x 1 nextjs nodejs     4096 Jul 10 19:18 ..
+2025-07-10T19:29:42.2344890Z -rw-r--r-- 1 nextjs nodejs       23 Jul 10 19:19 default.d.ts
+2025-07-10T19:29:42.2344924Z -rw-r--r-- 1 nextjs nodejs       36 Jul 10 19:19 default.js
+2025-07-10T19:29:42.2344946Z drwxr-xr-x 2 nextjs nodejs     4096 Jul 10 19:18 deno
+2025-07-10T19:29:42.2345028Z -rw-r--r-- 1 nextjs nodejs       25 Jul 10 19:19 edge.d.ts
+2025-07-10T19:29:42.2345094Z -rw-r--r-- 1 nextjs nodejs    13084 Jul 10 19:19 edge.js
+2025-07-10T19:29:42.2345118Z -rw-r--r-- 1 nextjs nodejs     7060 Jul 10 19:19 index-browser.js
+2025-07-10T19:29:42.2345139Z -rw-r--r-- 1 nextjs nodejs   177636 Jul 10 19:19 index.d.ts
+2025-07-10T19:29:42.2345161Z -rw-r--r-- 1 nextjs nodejs    14227 Jul 10 19:19 index.js
+2025-07-10T19:29:42.2345185Z -rwxr-xr-x 1 nextjs nodejs 16161048 Jul 10 19:19 libquery_engine-debian-openssl-1.1.x.so.node
+2025-07-10T19:29:42.2345228Z -rwxr-xr-x 1 nextjs nodejs 16132392 Jul 10 19:19 libquery_engine-linux-musl.so.node
+2025-07-10T19:29:42.2345252Z -rwxr-xr-x 1 nextjs nodejs 19904080 Jul 10 19:19 libquery_engine-rhel-openssl-1.0.x.so.node
+2025-07-10T19:29:42.2345274Z -rw-r--r-- 1 nextjs nodejs     2601 Jul 10 19:19 package.json
+2025-07-10T19:29:42.2345297Z -rw-r--r-- 1 nextjs nodejs     1380 Jul 10 19:19 schema.prisma
+2025-07-10T19:29:42.2345319Z -rw-r--r-- 1 nextjs nodejs       23 Jul 10 19:19 wasm.d.ts
+2025-07-10T19:29:42.2345359Z -rw-r--r-- 1 nextjs nodejs     7060 Jul 10 19:19 wasm.js
+2025-07-10T19:29:42.2622220Z 🔧 Generating Prisma client...
+2025-07-10T19:29:49.0078301Z Prisma schema loaded from prisma/schema.prisma
+2025-07-10T19:29:54.9730009Z 
+2025-07-10T19:29:54.9730807Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 926ms
+2025-07-10T19:29:54.9730856Z 
+2025-07-10T19:29:54.9730971Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-10T19:29:54.9730993Z 
+2025-07-10T19:29:54.9731024Z Tip: Easily identify and fix slow SQL queries in your app. Optimize helps you enhance your visibility: https://pris.ly/--optimize
+2025-07-10T19:29:54.9731044Z 
+2025-07-10T19:29:55.6798850Z ✅ Prisma client generated successfully
+2025-07-10T19:29:55.6974011Z 🚀 Running migrations...
+2025-07-10T19:30:01.8520776Z Prisma schema loaded from prisma/schema.prisma
+2025-07-10T19:30:02.5697529Z Datasource "db": SQL Server database
+2025-07-10T19:30:03.2044522Z 
+2025-07-10T19:30:03.2046643Z 2 migrations found in prisma/migrations
+2025-07-10T19:30:03.2047132Z 
+2025-07-10T19:30:03.4840865Z Error: P3009
+2025-07-10T19:30:03.4841371Z 
+2025-07-10T19:30:03.4841426Z migrate found failed migrations in the target database, new migrations will not be applied. Read more about how to resolve migration issues in a production database: https://pris.ly/d/migrate-resolve
+2025-07-10T19:30:03.4841467Z The `20250710052054_init` migration started at 2025-07-10 19:26:06.706497900 UTC failed
+2025-07-10T19:30:03.4841488Z 
+2025-07-10T19:30:03.4841585Z 
+2025-07-10T19:30:03.6344508Z ⚠️ Migration failed, trying direct database access...
+2025-07-10T19:30:15.6253583Z Script executed successfully.
+2025-07-10T19:30:15.8746348Z ┌─────────────────────────────────────────────────────────┐
+2025-07-10T19:30:15.8746989Z │  Update available 5.22.0 -> 6.11.1                      │
+2025-07-10T19:30:15.8747024Z │                                                         │
+2025-07-10T19:30:15.8747048Z │  This is a major update - please follow the guide at    │
+2025-07-10T19:30:15.8747071Z │  https://pris.ly/d/major-version-upgrade                │
+2025-07-10T19:30:15.8747098Z │                                                         │
+2025-07-10T19:30:15.8747148Z │  Run the following to update                            │
+2025-07-10T19:30:15.8747172Z │    npm i --save-dev prisma@latest                       │
+2025-07-10T19:30:15.8747195Z │    npm i @prisma/client@latest                          │
+2025-07-10T19:30:15.8747226Z └─────────────────────────────────────────────────────────┘
+2025-07-10T19:30:16.1140982Z ✅ Database connection successful
+2025-07-10T19:30:16.1160916Z 📁 Checking required files...
+2025-07-10T19:30:16.2047233Z - server.js: ✅ Found
+2025-07-10T19:30:16.2061611Z - .next directory: ✅ Found
+2025-07-10T19:30:16.2161661Z - node_modules: ✅ Found
+2025-07-10T19:30:16.2173263Z 🌐 Starting Next.js app on port 8080...
+2025-07-10T19:30:17.7153685Z   ▲ Next.js 14.2.5
+2025-07-10T19:30:17.7322896Z   - Local:        http://chatbot-ap-545902a3:8080
+2025-07-10T19:30:17.7323289Z   - Network:      http://169.254.129.2:8080
+2025-07-10T19:30:17.7323335Z 
+2025-07-10T19:30:17.7323415Z  ✓ Starting...
+2025-07-10T19:30:19.2305274Z  ✓ Ready in 1587ms
+2025-07-10T19:30:54.9323350Z 🚀 Starting Next.js chatbot application...
+2025-07-10T19:30:54.9324851Z 📍 Port: 8080
+2025-07-10T19:30:54.9324911Z 🔧 Environment: production
+2025-07-10T19:30:54.9324935Z 🏗️ Platform: x86_64
+2025-07-10T19:30:54.9324964Z 🔍 DATABASE_URL: sqlserver://chatbot-sqlserver.database.windows.net...
+2025-07-10T19:30:54.9324998Z 🔍 OPENAI_API_KEY: SET
+2025-07-10T19:30:54.9325020Z 🔍 NEXTAUTH_SECRET: SET
+2025-07-10T19:30:54.9325065Z 🔍 NEXTAUTH_URL: https://chatbot-app-container-fse7g9cnf8hfgpej.japaneast-01.azurewebsites.net/
+2025-07-10T19:30:54.9325089Z 🔧 Prisma engine diagnostics...
+2025-07-10T19:31:01.4392889Z - Prisma client location: /app/node_modules/.prisma/client/schema.prisma
+2025-07-10T19:31:01.4393488Z /app/prisma/schema.prisma
+2025-07-10T19:31:02.6137831Z - Query engines: /app/node_modules/.prisma/client/libquery_engine-debian-openssl-1.1.x.so.node
+2025-07-10T19:31:02.6138423Z /app/node_modules/.prisma/client/libquery_engine-linux-musl.so.node
+2025-07-10T19:31:02.6144739Z /app/node_modules/.prisma/client/libquery_engine-rhel-openssl-1.0.x.so.node
+2025-07-10T19:31:03.3325908Z - Schema engines: /app/node_modules/@prisma/engines/schema-engine-rhel-openssl-1.0.x
+2025-07-10T19:31:03.3636978Z /app/node_modules/@prisma/engines/schema-engine-debian-openssl-1.1.x
+2025-07-10T19:31:03.4308866Z - OpenSSL version: OpenSSL 1.1.1w  11 Sep 2023
+2025-07-10T19:31:03.4309286Z 🔍 Checking Prisma binaries...
+2025-07-10T19:31:03.4339236Z total 76164
+2025-07-10T19:31:03.4339453Z drwxr-xr-x 4 nextjs nodejs     4096 Jul 10 19:18 .
+2025-07-10T19:31:03.4339537Z drwxr-xr-x 1 nextjs nodejs     4096 Jul 10 19:18 ..
+2025-07-10T19:31:03.4339563Z -rw-r--r-- 1 nextjs nodejs    11357 Jul 10 19:18 LICENSE
+2025-07-10T19:31:03.4339585Z -rw-r--r-- 1 nextjs nodejs      740 Jul 10 19:18 README.md
+2025-07-10T19:31:03.4339607Z drwxr-xr-x 3 nextjs nodejs     4096 Jul 10 19:18 dist
+2025-07-10T19:31:03.4339632Z -rwxr-xr-x 1 nextjs nodejs 16161048 Jul 10 19:18 libquery_engine-debian-openssl-1.1.x.so.node
+2025-07-10T19:31:03.4339658Z -rwxr-xr-x 1 nextjs nodejs 19904080 Jul 10 19:18 libquery_engine-rhel-openssl-1.0.x.so.node
+2025-07-10T19:31:03.4339771Z -rw-r--r-- 1 nextjs nodejs     1088 Jul 10 19:18 package.json
+2025-07-10T19:31:03.4339798Z -rwxr-xr-x 1 nextjs nodejs 18802752 Jul 10 19:18 schema-engine-debian-openssl-1.1.x
+2025-07-10T19:31:03.4339823Z -rwxr-xr-x 1 nextjs nodejs 23079912 Jul 10 19:18 schema-engine-rhel-openssl-1.0.x
+2025-07-10T19:31:03.4339845Z drwxr-xr-x 2 nextjs nodejs     4096 Jul 10 19:18 scripts
+2025-07-10T19:31:03.4615742Z total 51240
+2025-07-10T19:31:03.4616008Z drwxr-xr-x 1 nextjs nodejs     4096 Jul 10 19:19 .
+2025-07-10T19:31:03.4616079Z drwxr-xr-x 1 nextjs nodejs     4096 Jul 10 19:18 ..
+2025-07-10T19:31:03.4616120Z -rw-r--r-- 1 nextjs nodejs       23 Jul 10 19:19 default.d.ts
+2025-07-10T19:31:03.4616228Z -rw-r--r-- 1 nextjs nodejs       36 Jul 10 19:19 default.js
+2025-07-10T19:31:03.4616251Z drwxr-xr-x 2 nextjs nodejs     4096 Jul 10 19:18 deno
+2025-07-10T19:31:03.4616273Z -rw-r--r-- 1 nextjs nodejs       25 Jul 10 19:19 edge.d.ts
+2025-07-10T19:31:03.4616311Z -rw-r--r-- 1 nextjs nodejs    13084 Jul 10 19:19 edge.js
+2025-07-10T19:31:03.4616333Z -rw-r--r-- 1 nextjs nodejs     7060 Jul 10 19:19 index-browser.js
+2025-07-10T19:31:03.4616366Z -rw-r--r-- 1 nextjs nodejs   177636 Jul 10 19:19 index.d.ts
+2025-07-10T19:31:03.4616387Z -rw-r--r-- 1 nextjs nodejs    14227 Jul 10 19:19 index.js
+2025-07-10T19:31:03.4616411Z -rwxr-xr-x 1 nextjs nodejs 16161048 Jul 10 19:19 libquery_engine-debian-openssl-1.1.x.so.node
+2025-07-10T19:31:03.4616435Z -rwxr-xr-x 1 nextjs nodejs 16132392 Jul 10 19:19 libquery_engine-linux-musl.so.node
+2025-07-10T19:31:03.4616480Z -rwxr-xr-x 1 nextjs nodejs 19904080 Jul 10 19:19 libquery_engine-rhel-openssl-1.0.x.so.node
+2025-07-10T19:31:03.4616503Z -rw-r--r-- 1 nextjs nodejs     2601 Jul 10 19:19 package.json
+2025-07-10T19:31:03.4616525Z -rw-r--r-- 1 nextjs nodejs     1380 Jul 10 19:19 schema.prisma
+2025-07-10T19:31:03.4616547Z -rw-r--r-- 1 nextjs nodejs       23 Jul 10 19:19 wasm.d.ts
+2025-07-10T19:31:03.4616568Z -rw-r--r-- 1 nextjs nodejs     7060 Jul 10 19:19 wasm.js
+2025-07-10T19:31:03.4622358Z 🔧 Generating Prisma client...
+2025-07-10T19:31:18.2116030Z Prisma schema loaded from prisma/schema.prisma
+2025-07-10T19:31:24.4084116Z 
+2025-07-10T19:31:24.4084653Z ✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 835ms
+2025-07-10T19:31:24.4084696Z 
+2025-07-10T19:31:24.4084766Z Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+2025-07-10T19:31:24.4084788Z 
+2025-07-10T19:31:24.4084814Z Tip: Want real-time updates to your database without manual polling? Discover how with Pulse: https://pris.ly/tip-0-pulse
+2025-07-10T19:31:24.4084834Z 
+2025-07-10T19:31:25.2633377Z ✅ Prisma client generated successfully
+2025-07-10T19:31:26.2177563Z 🚀 Running migrations...
+2025-07-10T19:31:33.0052693Z Prisma schema loaded from prisma/schema.prisma
+2025-07-10T19:31:33.0341155Z Datasource "db": SQL Server database
+2025-07-10T19:31:33.5115700Z 
+2025-07-10T19:31:33.5220746Z 2 migrations found in prisma/migrations
+2025-07-10T19:31:33.5226207Z 
+2025-07-10T19:31:33.6747426Z Error: P3009
+2025-07-10T19:31:33.6748071Z 
+2025-07-10T19:31:33.6748126Z migrate found failed migrations in the target database, new migrations will not be applied. Read more about how to resolve migration issues in a production database: https://pris.ly/d/migrate-resolve
+2025-07-10T19:31:33.6748163Z The `20250710052054_init` migration started at 2025-07-10 19:26:06.706497900 UTC failed
+2025-07-10T19:31:33.6748188Z 
+2025-07-10T19:31:33.6748207Z 
+2025-07-10T19:31:33.7629646Z ⚠️ Migration failed, trying direct database access...
+2025-07-10T19:31:46.5762999Z Script executed successfully.
+2025-07-10T19:31:46.8064741Z ┌─────────────────────────────────────────────────────────┐
+2025-07-10T19:31:46.8065441Z │  Update available 5.22.0 -> 6.11.1                      │
+2025-07-10T19:31:46.8065474Z │                                                         │
+2025-07-10T19:31:46.8065498Z │  This is a major update - please follow the guide at    │
+2025-07-10T19:31:46.8065524Z │  https://pris.ly/d/major-version-upgrade                │
+2025-07-10T19:31:46.8065547Z │                                                         │
+2025-07-10T19:31:46.8065641Z │  Run the following to update                            │
+2025-07-10T19:31:46.8065664Z │    npm i --save-dev prisma@latest                       │
+2025-07-10T19:31:46.8065686Z │    npm i @prisma/client@latest                          │
+2025-07-10T19:31:46.8065718Z └─────────────────────────────────────────────────────────┘
+2025-07-10T19:31:46.9391522Z ✅ Database connection successful
+2025-07-10T19:31:46.9567127Z 📁 Checking required files...
+2025-07-10T19:31:47.0173938Z - server.js: ✅ Found
+2025-07-10T19:31:47.0191499Z - .next directory: ✅ Found
+2025-07-10T19:31:47.0374312Z - node_modules: ✅ Found
+2025-07-10T19:31:47.0382917Z 🌐 Starting Next.js app on port 8080...
+2025-07-10T19:31:48.5386824Z   ▲ Next.js 14.2.5
+2025-07-10T19:31:48.5395867Z   - Local:        http://chatbot-ap-2b866a6f:8080
+2025-07-10T19:31:48.5489055Z   - Network:      http://169.254.129.4:8080
+2025-07-10T19:31:48.5489266Z 
+2025-07-10T19:31:48.5489303Z  ✓ Starting...
+2025-07-10T19:31:49.2730568Z  ✓ Ready in 765ms
