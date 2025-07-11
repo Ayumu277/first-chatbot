@@ -59,7 +59,9 @@ jobs:
           file: Dockerfile
           push: true
           platforms: linux/amd64
-          tags: docker.io/${{ env.DOCKER_HUB_IMAGE }}:latest
+          tags: |
+            docker.io/${{ env.DOCKER_HUB_IMAGE }}:latest
+            docker.io/${{ env.DOCKER_HUB_IMAGE }}:${{ github.sha }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
@@ -83,7 +85,7 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          images: docker.io/${{ env.DOCKER_HUB_IMAGE }}:latest
+          images: docker.io/${{ env.DOCKER_HUB_IMAGE }}:${{ github.sha }}
 
   health-check:
     runs-on: ubuntu-latest

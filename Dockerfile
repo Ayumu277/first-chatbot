@@ -1,8 +1,12 @@
 # ===== NEXT.JS CHATBOT APPLICATION - PRODUCTION BUILD =====
-# Build timestamp: 2025-01-11
+# Build timestamp: 2025-01-11-18:30
+# Version: 0.1.1 - Force cache bust
 FROM node:18-alpine
 
 WORKDIR /app
+
+# Force cache invalidation
+RUN echo "Build time: $(date)" > /tmp/build_time.txt
 
 # 基本パッケージとOpenSSL（Prisma対応）
 RUN apk add --no-cache \
