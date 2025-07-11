@@ -78,11 +78,16 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
   }
 
   const handleLogin = () => {
-    signIn('google')
+    signIn('google', {
+      prompt: 'select_account'
+    })
   }
 
   const handleSignUp = () => {
-    signIn('google')
+    signIn('google', {
+      prompt: 'select_account consent',
+      login_hint: 'Choose an account or create a new one'
+    })
   }
 
   // ローディング中
