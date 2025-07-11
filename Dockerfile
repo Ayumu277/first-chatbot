@@ -1,4 +1,5 @@
 # ===== NEXT.JS CHATBOT APPLICATION - PRODUCTION BUILD =====
+# Build timestamp: 2025-01-11
 FROM node:18-alpine
 
 WORKDIR /app
