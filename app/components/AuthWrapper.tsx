@@ -92,7 +92,49 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
         }
       } else {
         console.log('❌ AuthWrapper: No user session found')
-        // 認証されていない場合は何もしない（ログイン画面を表示）
+
+        // ゲストトークンが存在する場合、ゲストユーザーを復元
+        const guestToken = localStorage.getItem('guestToken')
+        if (guestToken) {
+          console.log('🔑 AuthWrapper: Guest token found, restoring guest user')
+          try {
+            // ゲストユーザーを復元
+            const response = await fetch('/api/users/guest', {
+              method: 'GET',
+              headers: {
+                'Authorization': `Bearer ${guestToken}`
+              }
+            })
+
+            if (response.ok) {
+              const result = await response.json()
+              if (result.success && result.user) {
+                console.log('✅ AuthWrapper: Guest user restored', result.user)
+                setUser(result.user)
+                setGuest(true)
+
+                // セッションをロード
+                try {
+                  await loadSessions()
+                  console.log('✅ AuthWrapper: Guest sessions loaded successfully')
+                } catch (error) {
+                  console.error('❌ AuthWrapper: Failed to load guest sessions', error)
+                }
+              } else {
+                console.log('❌ AuthWrapper: Failed to restore guest user, clearing token')
+                localStorage.removeItem('guestToken')
+              }
+            } else {
+              console.log('❌ AuthWrapper: Guest token invalid, clearing token')
+              localStorage.removeItem('guestToken')
+            }
+          } catch (error) {
+            console.error('❌ AuthWrapper: Error restoring guest user:', error)
+            localStorage.removeItem('guestToken')
+          }
+        } else {
+          console.log('❌ AuthWrapper: No guest token found')
+        }
       }
 
       setIsLoading(false)

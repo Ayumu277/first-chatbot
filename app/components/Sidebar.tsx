@@ -19,7 +19,8 @@ export default function Sidebar({ selectedChatId, onChatSelect }: SidebarProps) 
     createSession,
     selectSession,
     deleteSession,
-    currentSessionId
+    currentSessionId,
+    isGuest
   } = useChatStore()
 
   // クライアントサイドでのマウントを検出
@@ -156,6 +157,24 @@ export default function Sidebar({ selectedChatId, onChatSelect }: SidebarProps) 
 
       {/* フッター */}
       <div className="flex-shrink-0 p-4 border-t border-gray-700">
+        {/* ゲストユーザーの場合：全履歴削除ボタン */}
+        {isGuest && displaySessions.length > 0 && (
+          <button
+            onClick={() => {
+              if (confirm('全てのチャット履歴を削除しますか？この操作は取り消せません。')) {
+                displaySessions.forEach(session => {
+                  deleteSession(session.id)
+                })
+                onChatSelect(null)
+              }
+            }}
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 mb-3 rounded-lg bg-red-600 hover:bg-red-700 text-white transition-colors text-sm font-medium"
+          >
+            <TrashIcon className="h-4 w-4" />
+            全履歴削除
+          </button>
+        )}
+
         <div className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer">
           <div className="w-8 h-8 rounded-full bg-[#1E90FF] flex items-center justify-center">
             <span className="text-white text-sm font-medium">U</span>
