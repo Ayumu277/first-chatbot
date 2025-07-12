@@ -1,11 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '../../../lib/prisma'
+import { prisma, testDatabaseConnection } from '../../../lib/prisma'
 import { sendVerificationEmail } from '../../../lib/email'
 import crypto from 'crypto'
 
 export async function POST(request: NextRequest) {
   try {
     console.log('📧 メール登録APIが呼び出されました')
+
+    // Prisma接続テスト
+    console.log('🔍 Prisma接続テストを実行中...')
+    const isConnected = await testDatabaseConnection()
+    if (!isConnected) {
+      return NextResponse.json(
+        { error: 'データベース接続に失敗しました。しばらく後にお試しください。' },
+        { status: 500 }
+      )
+    }
 
     const { name, email } = await request.json()
 
@@ -25,10 +35,25 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    console.log('🔍 既存ユーザーをチェック中...', email)
+
     // 既存ユーザーのチェック（認証済みユーザー）
-    const existingUser = await prisma.user.findUnique({
-      where: { email }
-    })
+    let existingUser
+    try {
+      existingUser = await prisma.users.findUnique({
+        where: { email }
+      })
+      console.log('✅ 既存ユーザーチェック完了')
+    } catch (dbError) {
+      console.error('❌ データベースクエリエラー:', dbError)
+      return NextResponse.json(
+        {
+          error: 'データベースアクセスでエラーが発生しました',
+          details: dbError instanceof Error ? dbError.message : 'Unknown DB error'
+        },
+        { status: 500 }
+      )
+    }
 
     if (existingUser && existingUser.emailVerified) {
       console.log('⚠️ 既に認証済みのユーザー:', email)
@@ -41,9 +66,14 @@ export async function POST(request: NextRequest) {
     // 未認証のユーザーがいる場合、削除して再登録を許可
     if (existingUser && !existingUser.emailVerified) {
       console.log('🔄 未認証ユーザーを削除して再登録を許可:', email)
-      await prisma.user.delete({
-        where: { email }
-      })
+      try {
+        await prisma.users.delete({
+          where: { email }
+        })
+        console.log('✅ 未認証ユーザー削除完了')
+      } catch (deleteError) {
+        console.error('❌ ユーザー削除エラー:', deleteError)
+      }
     }
 
     // 認証トークンの生成
@@ -51,20 +81,42 @@ export async function POST(request: NextRequest) {
     const expires = new Date()
     expires.setHours(expires.getHours() + 24) // 24時間後に期限切れ
 
+    console.log('🗑️ 既存の認証トークンを削除中...')
+
     // 既存の認証トークンを削除（同じメールアドレス）
-    await prisma.emailVerificationToken.deleteMany({
-      where: { email }
-    })
+    try {
+      await prisma.email_verification_tokens.deleteMany({
+        where: { email }
+      })
+      console.log('✅ 既存トークン削除完了')
+    } catch (tokenDeleteError) {
+      console.error('⚠️ 既存トークン削除エラー:', tokenDeleteError)
+      // 削除エラーは致命的ではないので続行
+    }
+
+    console.log('🎫 新しい認証トークンを作成中...')
 
     // 新しい認証トークンを保存
-    await prisma.emailVerificationToken.create({
-      data: {
-        email,
-        name,
-        token,
-        expires
-      }
-    })
+    try {
+      await prisma.email_verification_tokens.create({
+        data: {
+          email,
+          name,
+          token,
+          expires
+        }
+      })
+      console.log('✅ 認証トークン作成完了')
+    } catch (tokenCreateError) {
+      console.error('❌ 認証トークン作成エラー:', tokenCreateError)
+      return NextResponse.json(
+        {
+          error: '認証トークンの作成に失敗しました',
+          details: tokenCreateError instanceof Error ? tokenCreateError.message : 'Unknown token error'
+        },
+        { status: 500 }
+      )
+    }
 
     console.log('✅ 認証トークンが作成されました:', {
       email,
@@ -91,9 +143,14 @@ export async function POST(request: NextRequest) {
       console.error('❌ 確認メール送信エラー:', emailError)
 
       // メール送信に失敗した場合、作成したトークンを削除
-      await prisma.emailVerificationToken.delete({
-        where: { token }
-      })
+      try {
+        await prisma.emailVerificationToken.delete({
+          where: { token }
+        })
+        console.log('✅ エラー時のトークン削除完了')
+      } catch (cleanupError) {
+        console.error('⚠️ エラー時のトークン削除に失敗:', cleanupError)
+      }
 
       return NextResponse.json(
         {
@@ -106,6 +163,7 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('❌ Registration error:', error)
+    console.error('❌ Error stack:', error instanceof Error ? error.stack : 'No stack trace')
 
     let errorMessage = 'アカウント登録に失敗しました'
     if (error instanceof Error) {
@@ -115,7 +173,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: errorMessage,
-        details: error instanceof Error ? error.message : '不明なエラー'
+        details: error instanceof Error ? error.message : '不明なエラー',
+        type: error instanceof Error ? error.constructor.name : 'Unknown'
       },
       { status: 500 }
     )

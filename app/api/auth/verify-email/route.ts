@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
 
     // トークンを検索
     console.log('🔍 トークンを検索中:', token)
-    const verificationToken = await prisma.emailVerificationToken.findUnique({
+    const verificationToken = await prisma.email_verification_tokens.findUnique({
       where: { token }
     })
 
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
 
     if (verificationToken.expires < now) {
       console.log('❌ 期限切れトークン')
-      await prisma.emailVerificationToken.delete({
+      await prisma.email_verification_tokens.delete({
         where: { token }
       })
       return NextResponse.redirect(`${BASE_URL}/?error=expired_token`)
@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
 
     // 既存ユーザーのチェック（念のため）
     console.log('🔍 既存ユーザーチェック:', verificationToken.email)
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await prisma.users.findUnique({
       where: { email: verificationToken.email }
     })
 
@@ -70,7 +70,7 @@ export async function GET(request: NextRequest) {
     if (existingUser) {
       console.log('⚠️ ユーザーが既に存在:', verificationToken.email)
       // トークンを削除
-      await prisma.emailVerificationToken.delete({
+      await prisma.email_verification_tokens.delete({
         where: { token }
       })
       return NextResponse.redirect(`${BASE_URL}/?error=user_exists`)
@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
       name: verificationToken.name
     })
 
-    const newUser = await prisma.user.create({
+    const newUser = await prisma.users.create({
       data: {
         email: verificationToken.email,
         name: verificationToken.name,
@@ -98,7 +98,7 @@ export async function GET(request: NextRequest) {
 
     // トークンを使用済みに更新
     console.log('🔄 トークンを使用済みに更新')
-    await prisma.emailVerificationToken.update({
+    await prisma.email_verification_tokens.update({
       where: { token },
       data: { used: true }
     })
