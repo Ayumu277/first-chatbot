@@ -171,9 +171,6 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
               CHATBOT
             </h1>
             <div className="h-1 w-24 bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-auto mb-8"></div>
-            <p className="text-gray-300 text-2xl font-light tracking-wide">
-              未来のAI体験を始めましょう
-            </p>
           </div>
 
           {/* メッセージ表示 */}
