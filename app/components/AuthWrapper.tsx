@@ -117,6 +117,14 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
                   try {
                     await loadSessions()
                     console.log('✅ AuthWrapper: Guest sessions loaded successfully')
+
+                    // セッション読み込み後、最新のセッションがあれば選択
+                    const currentStore = useChatStore.getState()
+                    if (currentStore.sessions.length > 0 && !currentStore.currentSessionId) {
+                      const latestSession = currentStore.sessions[0]
+                      useChatStore.getState().selectSession(latestSession.id)
+                      console.log('✅ AuthWrapper: Auto-selected latest session:', latestSession.id)
+                    }
                   } catch (error) {
                     console.error('❌ AuthWrapper: Failed to load guest sessions', error)
                   }
@@ -192,6 +200,14 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
       try {
         await loadSessions()
         console.log('セッションの読み込みが完了しました')
+
+        // セッション読み込み後、最新のセッションがあれば選択
+        const currentStore = useChatStore.getState()
+        if (currentStore.sessions.length > 0 && !currentStore.currentSessionId) {
+          const latestSession = currentStore.sessions[0]
+          useChatStore.getState().selectSession(latestSession.id)
+          console.log('✅ handleGuestMode: Auto-selected latest session:', latestSession.id)
+        }
       } catch (sessionError) {
         console.warn('セッション読み込みエラー（続行します）:', sessionError)
         // セッション読み込みエラーは無視してアプリを開始

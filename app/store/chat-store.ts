@@ -284,14 +284,52 @@ export const useChatStore = create<ChatState>()(
         // ゲストユーザーでもデータベースからロードするように変更
         try {
           const sessions = await dbApi.getSessions(state.currentUser.id)
-          // データベースからのセッションにmessages配列があることを確認
-          const validatedSessions = sessions.map(session => ({
-            ...session,
-            messages: session.messages || []
+          console.log('Raw sessions from database:', sessions)
+
+          // データベースからのセッションをフロントエンド形式に変換
+          const validatedSessions = sessions.map((session: any) => ({
+            id: session.id,
+            title: session.title,
+            createdAt: session.createdAt,
+            updatedAt: session.updatedAt,
+            messages: (session.chat_messages || []).map((msg: any) => ({
+              role: msg.role as 'user' | 'assistant',
+              content: msg.content,
+              timestamp: new Date(msg.timestamp).toLocaleTimeString('ja-JP', {
+                hour: '2-digit',
+                minute: '2-digit'
+              }),
+              imageBase64: msg.imageBase64 || undefined,
+              imagePreview: msg.imagePreview || undefined
+            }))
           }))
+
+          console.log('Converted sessions:', validatedSessions)
+
+          // currentSessionIdの設定ロジック
+          let newCurrentSessionId = state.currentSessionId
+
+          // 現在選択されているセッションが存在するかチェック
+          const currentSessionExists = state.currentSessionId &&
+            validatedSessions.some(s => s.id === state.currentSessionId)
+
+          // 現在のセッションが存在しない場合、最新のセッションを選択
+          if (!currentSessionExists && validatedSessions.length > 0) {
+            newCurrentSessionId = validatedSessions[0].id
+            console.log('Auto-selecting latest session:', newCurrentSessionId)
+          }
+
           // データベースからのデータでLocalStorageを上書き
-          set({ sessions: validatedSessions })
-          console.log('Sessions loaded from database:', validatedSessions.length)
+          set({
+            sessions: validatedSessions,
+            currentSessionId: newCurrentSessionId
+          })
+
+          console.log('Sessions loaded from database:', {
+            sessionsCount: validatedSessions.length,
+            currentSessionId: newCurrentSessionId,
+            sessionsWithMessages: validatedSessions.filter(s => s.messages.length > 0).length
+          })
         } catch (error) {
           console.error('Failed to load sessions from database:', error)
         }
