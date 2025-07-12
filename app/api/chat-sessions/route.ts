@@ -1,25 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../../lib/prisma'
 
-const prisma = new PrismaClient()
-
-type SessionWithMessages = {
-  id: string;
-  title: string;
-  userId: string;
-  createdAt: Date;
-  updatedAt: Date;
-  messages: {
-    id: string;
-    role: string;
-    content: string;
-    timestamp: Date;
-    imageBase64: string | null;
-    imagePreview: string | null;
-  }[];
-}
-
-// GET: 指定されたユーザーのセッションを取得
+// GET: ユーザーのチャットセッション一覧を取得
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
@@ -27,7 +9,7 @@ export async function GET(request: NextRequest) {
 
     if (!userId) {
       return NextResponse.json(
-        { error: 'userId is required' },
+        { error: 'ユーザーIDが必要です' },
         { status: 400 }
       )
     }
@@ -48,25 +30,7 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    // データベースの形式をフロントエンド用に変換
-    const formattedSessions = sessions.map((session: SessionWithMessages) => ({
-      id: session.id,
-      title: session.title,
-      createdAt: session.createdAt.toISOString(),
-      updatedAt: session.updatedAt.toISOString(),
-      messages: session.messages.map((msg: SessionWithMessages['messages'][0]) => ({
-        role: msg.role,
-        content: msg.content,
-        timestamp: msg.timestamp.toLocaleTimeString('ja-JP', {
-          hour: '2-digit',
-          minute: '2-digit'
-        }),
-        imageBase64: msg.imageBase64,
-        imagePreview: msg.imagePreview
-      }))
-    }))
-
-    return NextResponse.json(formattedSessions)
+    return NextResponse.json(sessions)
   } catch (error) {
     console.error('Failed to fetch sessions:', error)
     return NextResponse.json(
@@ -76,37 +40,26 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST: 新しいセッションを作成
+// POST: 新しいチャットセッションを作成
 export async function POST(request: NextRequest) {
   try {
     const { title, userId } = await request.json()
 
     if (!userId) {
       return NextResponse.json(
-        { error: 'userId is required' },
+        { error: 'ユーザーIDが必要です' },
         { status: 400 }
       )
     }
 
-    const session = await prisma.chatSession.create({
+    const newSession = await prisma.chatSession.create({
       data: {
         title: title || '新しいチャット',
         userId: userId
-      },
-      include: {
-        messages: true
       }
     })
 
-    const formattedSession = {
-      id: session.id,
-      title: session.title,
-      createdAt: session.createdAt.toISOString(),
-      updatedAt: session.updatedAt.toISOString(),
-      messages: []
-    }
-
-    return NextResponse.json(formattedSession)
+    return NextResponse.json(newSession)
   } catch (error) {
     console.error('Failed to create session:', error)
     return NextResponse.json(

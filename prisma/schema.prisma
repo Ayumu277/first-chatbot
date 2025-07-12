@@ -1,38 +1,16 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "debian-openssl-1.1.x", "rhel-openssl-1.0.x", "linux-musl"]
 }
 
 datasource db {
-  provider = "sqlserver"
-  url      = env("DATABASE_URL")
+  provider          = "sqlserver"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model User {
-  id            String        @id @default(uuid())
-  email         String?       @unique
-  emailVerified DateTime?
-  name          String?
-  image         String?
-  password      String?       // 独自認証用のパスワード（ハッシュ化）
-  isGuest       Boolean       @default(false)
-  guestToken    String?       @unique
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-
-  // NextAuth関連
-  accounts      Account[]
-  sessions      Session[]
-
-  // チャット関連
-  chatSessions  ChatSession[] @relation("UserChatSessions")
-
-  @@map("users")
-}
-
-model Account {
-  id                String  @id @default(uuid())
+model accounts {
+  id                String  @id
   userId            String
   type              String
   provider          String
@@ -44,65 +22,70 @@ model Account {
   scope             String?
   id_token          String? @db.NVarChar(Max)
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users             users   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@map("accounts")
 }
 
-model Session {
-  id           String   @id @default(uuid())
+model chat_messages {
+  id            String        @id
+  sessionId     String
+  role          String
+  content       String        @db.NVarChar(Max)
+  timestamp     DateTime      @default(now())
+  imageBase64   String?       @db.NVarChar(Max)
+  imagePreview  String?       @db.NVarChar(Max)
+  chat_sessions chat_sessions @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model chat_sessions {
+  id            String          @id
+  title         String
+  userId        String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime
+  chat_messages chat_messages[]
+  users         users           @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model email_verification_tokens {
+  id        String   @id
+  email     String
+  token     String   @unique
+  name      String?
+  expires   DateTime
+  createdAt DateTime @default(now())
+  used      Boolean  @default(false)
+}
+
+model sessions {
+  id           String   @id
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("sessions")
+  users        users    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model VerificationToken {
+model users {
+  id            String          @id
+  email         String?         @unique
+  name          String?
+  image         String?
+  isGuest       Boolean         @default(false)
+  guestToken    String?         @unique
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime
+  emailVerified DateTime?
+  password      String?
+  accounts      accounts[]
+  chat_sessions chat_sessions[]
+  sessions      sessions[]
+}
+
+model verificationtokens {
   identifier String
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
-  @@map("verificationtokens")
-}
-
-model EmailVerificationToken {
-  id        String   @id @default(uuid())
-  email     String
-  token     String   @unique
-  name      String?  // 登録時の名前を一時保存
-  expires   DateTime
-  createdAt DateTime @default(now())
-  used      Boolean  @default(false)
-
-  @@map("email_verification_tokens")
-}
-
-model ChatSession {
-  id        String        @id @default(uuid())
-  title     String
-  userId    String
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-  messages  ChatMessage[]
-  user      User          @relation("UserChatSessions", fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("chat_sessions")
-}
-
-model ChatMessage {
-  id           String      @id @default(uuid())
-  sessionId    String
-  role         String
-  content      String      @db.NVarChar(Max)
-  timestamp    DateTime    @default(now())
-  imageBase64  String?     @db.NVarChar(Max)
-  imagePreview String?     @db.NVarChar(Max)
-  session      ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-
-  @@map("chat_messages")
 }

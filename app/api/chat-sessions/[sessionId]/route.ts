@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { prisma } from '../../../lib/prisma'
 
 // DELETE: セッションを削除
 export async function DELETE(
@@ -10,6 +8,15 @@ export async function DELETE(
 ) {
   try {
     const { sessionId } = await params
+
+    // まずメッセージを削除
+    await prisma.chatMessage.deleteMany({
+      where: {
+        sessionId: sessionId
+      }
+    })
+
+    // セッションを削除
     await prisma.chatSession.delete({
       where: {
         id: sessionId
@@ -21,6 +28,44 @@ export async function DELETE(
     console.error('Failed to delete session:', error)
     return NextResponse.json(
       { error: 'セッションの削除に失敗しました' },
+      { status: 500 }
+    )
+  }
+}
+
+// GET: セッションの詳細を取得
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ sessionId: string }> }
+) {
+  try {
+    const { sessionId } = await params
+
+    const session = await prisma.chatSession.findUnique({
+      where: {
+        id: sessionId
+      },
+      include: {
+        messages: {
+          orderBy: {
+            timestamp: 'asc'
+          }
+        }
+      }
+    })
+
+    if (!session) {
+      return NextResponse.json(
+        { error: 'セッションが見つかりません' },
+        { status: 404 }
+      )
+    }
+
+    return NextResponse.json(session)
+  } catch (error) {
+    console.error('Failed to fetch session:', error)
+    return NextResponse.json(
+      { error: 'セッションの取得に失敗しました' },
       { status: 500 }
     )
   }

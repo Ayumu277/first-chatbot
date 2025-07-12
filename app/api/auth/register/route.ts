@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../../../lib/prisma'
 import { sendVerificationEmail } from '../../../lib/email'
 import crypto from 'crypto'
-
-const prisma = new PrismaClient()
 
 export async function POST(request: NextRequest) {
   try {
@@ -27,16 +25,25 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 既存ユーザーのチェック
+    // 既存ユーザーのチェック（認証済みユーザー）
     const existingUser = await prisma.user.findUnique({
       where: { email }
     })
 
-    if (existingUser) {
+    if (existingUser && existingUser.emailVerified) {
+      console.log('⚠️ 既に認証済みのユーザー:', email)
       return NextResponse.json(
         { error: 'このメールアドレスは既に登録されています' },
         { status: 400 }
       )
+    }
+
+    // 未認証のユーザーがいる場合、削除して再登録を許可
+    if (existingUser && !existingUser.emailVerified) {
+      console.log('🔄 未認証ユーザーを削除して再登録を許可:', email)
+      await prisma.user.delete({
+        where: { email }
+      })
     }
 
     // 認証トークンの生成
@@ -59,28 +66,46 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    console.log('認証トークンが作成されました:', token)
+    console.log('✅ 認証トークンが作成されました:', {
+      email,
+      token: token.substring(0, 10) + '...',
+      expires: expires.toISOString()
+    })
 
     // 確認メール送信
     try {
       await sendVerificationEmail(email, name, token)
-      console.log('確認メールが送信されました')
+      console.log('✅ 確認メールが送信されました:', email)
+
+      return NextResponse.json({
+        success: true,
+        message: '登録が完了しました！確認メールをお送りしましたので、メールボックスをご確認ください。',
+        email,
+        debug: {
+          tokenCreated: true,
+          emailSent: true,
+          verificationUrl: `${process.env.NEXTAUTH_URL}/api/auth/verify-email?token=${token}`
+        }
+      })
     } catch (emailError) {
-      console.error('確認メール送信エラー:', emailError)
+      console.error('❌ 確認メール送信エラー:', emailError)
+
+      // メール送信に失敗した場合、作成したトークンを削除
+      await prisma.emailVerificationToken.delete({
+        where: { token }
+      })
+
       return NextResponse.json(
-        { error: 'メール送信に失敗しました。しばらく後にお試しください。' },
+        {
+          error: 'メール送信に失敗しました。しばらく後にお試しください。',
+          details: emailError instanceof Error ? emailError.message : 'メール送信エラー'
+        },
         { status: 500 }
       )
     }
 
-    return NextResponse.json({
-      success: true,
-      message: '登録が完了しました！確認メールをお送りしましたので、メールボックスをご確認ください。',
-      email
-    })
-
   } catch (error) {
-    console.error('Registration error:', error)
+    console.error('❌ Registration error:', error)
 
     let errorMessage = 'アカウント登録に失敗しました'
     if (error instanceof Error) {

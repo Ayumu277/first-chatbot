@@ -1,10 +1,9 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "../../../lib/prisma"
 
 console.log("📦 DATABASE_URL is:", process.env.DATABASE_URL);
-const prisma = new PrismaClient()
 
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -32,62 +31,49 @@ const handler = NextAuth({
       }
 
       try {
-        // Prismaでemailベースでユーザーを検索
+        // データベースでユーザーを確認
         const existingUser = await prisma.user.findUnique({
-          where: { email: user.email },
+          where: { email: user.email }
         })
 
-        if (!existingUser) {
-          console.log("👤 Creating new user in database:", user.email)
-          // その場でprisma.user.create()により登録処理を行う
-          await prisma.user.create({
-            data: {
-              email: user.email,
-              name: user.name ?? null,
-              image: user.image ?? null,
-              emailVerified: null
-            },
-          })
-          console.log("✅ New user created successfully")
+        if (existingUser) {
+          console.log("✅ User found in database:", existingUser.email)
+          // ユーザーが存在する場合、サインインを許可
+          return true
         } else {
-          console.log("👤 Existing user found:", existingUser.email)
+          console.log("❌ User not found in database:", user.email)
+          console.log("🛑 Account registration required")
+          // ユーザーが存在しない場合、サインインを拒否
+          return false
         }
       } catch (error) {
-        console.error("❌ Error in signIn callback:", error)
-        // エラーが発生した場合でも認証を続行（デバッグ用）
-        // 本番環境では return false にすることを検討
+        console.error("❌ Database query error:", error)
+        return false
       }
-
-      // 認証を許可
-      return true
     },
     async session({ session, user }) {
-      console.log("👤 Session callback:", { session, user })
-      if (session.user) {
-        session.user.id = user.id
+      console.log("🔐 Session callback:", { session, user })
+      // セッションにユーザーIDを追加
+      if (session?.user?.email) {
+        try {
+          const dbUser = await prisma.user.findUnique({
+            where: { email: session.user.email }
+          })
+          if (dbUser) {
+            session.user.id = dbUser.id
+          }
+        } catch (error) {
+          console.error("❌ Session callback error:", error)
+        }
       }
       return session
     },
-    async jwt({ token, user, account }) {
-      console.log("🎫 JWT callback:", { token, user, account })
-      return token
-    }
   },
-  session: {
-    strategy: "database",
+  pages: {
+    signIn: '/', // カスタムサインインページ
+    error: '/?error=auth_error'
   },
   debug: process.env.NODE_ENV === 'development',
-  logger: {
-    error(code, metadata) {
-      console.error("❌ NextAuth Error:", code, metadata)
-    },
-    warn(code) {
-      console.warn("⚠️ NextAuth Warning:", code)
-    },
-    debug(code, metadata) {
-      console.log("🐛 NextAuth Debug:", code, metadata)
-    }
-  }
 })
 
 export { handler as GET, handler as POST }

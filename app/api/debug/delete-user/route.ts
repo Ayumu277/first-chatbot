@@ -1,97 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { prisma } from '../../../lib/prisma'
 
 export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json()
 
     if (!email) {
-      return NextResponse.json(
-        { error: 'メールアドレスが必要です' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Email is required' }, { status: 400 })
     }
 
-    console.log('🗑️ ユーザー削除要求:', email)
-
-    // 関連データを先に削除
-    await prisma.account.deleteMany({
-      where: {
-        user: {
-          email: email
-        }
-      }
-    })
-
-    await prisma.session.deleteMany({
-      where: {
-        user: {
-          email: email
-        }
-      }
-    })
-
-    await prisma.chatMessage.deleteMany({
-      where: {
-        session: {
-          user: {
-            email: email
-          }
-        }
-      }
-    })
-
-    await prisma.chatSession.deleteMany({
-      where: {
-        user: {
-          email: email
-        }
-      }
-    })
-
-    // メール認証トークンも削除
-    await prisma.emailVerificationToken.deleteMany({
-      where: {
-        email: email
-      }
-    })
-
-    // ユーザー削除
+    // ユーザーの削除（カスケード削除によりセッションとメッセージも削除される）
     const deletedUser = await prisma.user.delete({
-      where: {
-        email: email
-      }
+      where: { email }
     })
 
-    console.log('✅ ユーザーが削除されました:', deletedUser.email)
+    console.log('User deleted:', deletedUser)
 
     return NextResponse.json({
       success: true,
-      message: `ユーザー ${email} が正常に削除されました`,
-      deletedUser: {
-        id: deletedUser.id,
-        email: deletedUser.email,
-        name: deletedUser.name
-      }
+      message: `User ${email} deleted successfully`
     })
-
-  } catch (error: any) {
-    console.error('❌ ユーザー削除エラー:', error)
-
-    if (error.code === 'P2025') {
-      return NextResponse.json(
-        { error: '指定されたユーザーが見つかりません' },
-        { status: 404 }
-      )
-    }
-
+  } catch (error) {
+    console.error('Delete user error:', error)
     return NextResponse.json(
-      {
-        error: 'ユーザー削除に失敗しました',
-        details: error.message
-      },
+      { error: 'Failed to delete user' },
       { status: 500 }
     )
   }

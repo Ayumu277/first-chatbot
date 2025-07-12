@@ -2,12 +2,16 @@ import { NextRequest, NextResponse } from 'next/server'
 
 // フォールバック応答の配列
 const fallbackResponses = [
-  'こんにちは！チャットボットです。今日はどのようなお手伝いができますか？',
-  'ご質問ありがとうございます。現在、システムの調整中ですが、お手伝いできるよう最善を尽くします。',
-  'お話しできて嬉しいです！何かご不明な点があればお気軽にお聞きください。',
+  'こんにちは！AIチャットボットです。今日はどのようなお手伝いができますか？🤖',
+  'ご質問ありがとうございます。現在、AIサービスが一時的に利用できませんが、お答えできるよう最善を尽くします。',
+  'お話しできて嬉しいです！何かご不明な点があればお気軽にお聞きください。✨',
   'チャットボットサービスをご利用いただき、ありがとうございます。どのようなことでお困りですか？',
-  'こんにちは！今日の調子はいかがですか？何かお手伝いできることがあれば教えてください。'
+  'こんにちは！今日の調子はいかがですか？何かお手伝いできることがあれば教えてください。😊'
 ]
+
+// DeepSeek APIクライアントの設定
+const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions'
+const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,10 +22,11 @@ export async function POST(request: NextRequest) {
     console.log('📨 Received message:', {
       messageLength: message?.length,
       historyLength: conversationHistory?.length,
-      hasImage: !!imageBase64
+      hasImage: !!imageBase64,
+      timestamp: new Date().toISOString()
     })
 
-    if (!message) {
+    if (!message || !message.trim()) {
       return NextResponse.json({
         message: 'メッセージを入力してください。どのようなことでお手伝いできますか？',
         success: true,
@@ -29,9 +34,9 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // API key のチェック
-    if (!process.env.OPENAI_API_KEY) {
-      console.error('❌ OPENAI_API_KEY not found')
+    // DeepSeek API keyのチェック
+    if (!DEEPSEEK_API_KEY) {
+      console.error('❌ DEEPSEEK_API_KEY not found')
       const randomResponse = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]
       return NextResponse.json({
         message: randomResponse,
@@ -40,74 +45,106 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    console.log('✅ OpenAI API KEY found:', process.env.OPENAI_API_KEY.substring(0, 20) + '...')
+    console.log('✅ DeepSeek API KEY found:', DEEPSEEK_API_KEY.substring(0, 20) + '...')
 
-    // 会話履歴を構築
+    // 会話履歴を構築（最新の10件のみ使用してコンテキストを管理）
+    const recentHistory = conversationHistory.slice(-10)
     const messages = [
       {
         role: 'system',
-        content: 'あなたは親切で知識豊富なAIアシスタントです。ユーザーの質問に丁寧に日本語で回答してください。'
+        content: `あなたは親切で知識豊富なAIアシスタントです。以下のガイドラインに従って日本語で回答してください：
+
+1. 丁寧で親しみやすい口調で回答する
+2. 質問に対して具体的で役立つ情報を提供する
+3. 不明な点がある場合は、「わからない」と正直に答える
+4. 危険な行為や違法行為に関する質問には適切に対処する
+5. 適切な絵文字を使用して親しみやすさを演出する
+
+現在の日時: ${new Date().toLocaleString('ja-JP')}
+`
       },
-      ...conversationHistory,
+      ...recentHistory,
       {
         role: 'user',
-        content: imageBase64 ? [
-          { type: 'text', text: message },
-          {
-            type: 'image_url',
-            image_url: {
-              url: `data:${imageMimeType || 'image/jpeg'};base64,${imageBase64}`
-            }
-          }
-        ] : message
+        content: message // 画像は現在サポートしていないため、テキストのみ
       }
     ]
 
-    console.log('🔄 Calling OpenAI API...')
+    console.log('🤖 Sending request to DeepSeek API with', messages.length, 'messages')
 
-    // OpenAI API呼び出し (短めのタイムアウト設定)
-    const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 15000) // 15秒タイムアウト
+    // DeepSeek API呼び出し
+    const response = await fetch(DEEPSEEK_API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${DEEPSEEK_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'deepseek-chat',
+        messages: messages,
+        max_tokens: 1000,
+        temperature: 0.7,
+        stream: false
+      })
+    })
 
-    try {
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'gpt-3.5-turbo',
-          messages: messages,
-          max_tokens: 1000,
-          temperature: 0.7,
-          stream: false,
-        }),
-        signal: controller.signal
+    if (!response.ok) {
+      const errorText = await response.text()
+      console.error('❌ DeepSeek API error:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorText
       })
 
-      clearTimeout(timeoutId)
+      const randomResponse = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]
+      return NextResponse.json({
+        message: randomResponse,
+        success: true,
+        fallback: true
+      })
+    }
 
-      console.log('✅ OpenAI API response received, status:', response.status)
+    const completion = await response.json()
+    const assistantMessage = completion.choices[0]?.message?.content
 
-      if (!response.ok) {
-        const errorData = await response.text()
-        console.error('❌ OpenAI API error:', errorData)
+    if (!assistantMessage) {
+      console.error('❌ Empty response from DeepSeek API')
+      const randomResponse = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]
+      return NextResponse.json({
+        message: randomResponse,
+        success: true,
+        fallback: true
+      })
+    }
 
-        // API エラーでもフォールバック応答を返す
-        const randomResponse = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]
+    console.log('✅ DeepSeek API response received:', {
+      responseLength: assistantMessage.length,
+      model: completion.model,
+      usage: completion.usage
+    })
+
+    return NextResponse.json({
+      message: assistantMessage,
+      success: true,
+      fallback: false,
+      usage: completion.usage
+    })
+
+  } catch (error) {
+    console.error('❌ Chat API error:', error)
+
+    // DeepSeek API固有のエラーをチェック
+    if (error instanceof Error) {
+      if (error.message.includes('rate limit') || error.message.includes('quota')) {
         return NextResponse.json({
-          message: randomResponse + ' (現在AIサービスの調整中です)',
+          message: '申し訳ございません。現在AIサービスの利用制限に達しています。しばらく時間をおいてからお試しください。',
           success: true,
           fallback: true
         })
       }
 
-      const completion = await response.json()
-      const assistantMessage = completion.choices[0]?.message?.content
-
-      if (!assistantMessage) {
-        console.error('❌ No assistant message in response')
+      if (error.message.includes('invalid_api_key') || error.message.includes('unauthorized')) {
+        console.error('❌ Invalid DeepSeek API key')
         const randomResponse = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]
         return NextResponse.json({
           message: randomResponse,
@@ -115,50 +152,10 @@ export async function POST(request: NextRequest) {
           fallback: true
         })
       }
-
-      console.log('✅ Successfully generated response')
-
-      return NextResponse.json({
-        message: assistantMessage,
-        success: true
-      })
-
-    } catch (fetchError) {
-      clearTimeout(timeoutId)
-      throw fetchError
     }
 
-  } catch (error) {
-    console.error('❌ Chat API error:', error)
-
-    // どんなエラーでも必ずフレンドリーなフォールバック応答を返す
+    // 汎用的なエラーハンドリング
     const randomResponse = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]
-
-    if (error instanceof Error) {
-      console.error('Error details:', {
-        name: error.name,
-        message: error.message
-      })
-
-      // エラータイプに応じたメッセージの調整
-      if (error.name === 'AbortError') {
-        return NextResponse.json({
-          message: randomResponse + ' (接続の調整中です)',
-          success: true,
-          fallback: true
-        })
-      }
-
-      if (error.message.includes('insufficient_quota') || error.message.includes('rate_limit')) {
-        return NextResponse.json({
-          message: 'しばらく時間をおいて再度お試しください。' + randomResponse,
-          success: true,
-          fallback: true
-        })
-      }
-    }
-
-    // デフォルトのフォールバック応答
     return NextResponse.json({
       message: randomResponse,
       success: true,
