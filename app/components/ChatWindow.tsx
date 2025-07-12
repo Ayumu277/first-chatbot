@@ -111,15 +111,15 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
 
   const handleGoHome = () => {
     // ゲストユーザーの場合：ユーザー状態をクリアしてホーム画面に戻る
-    // ただし、ゲストトークンは保持して次回復元できるようにする
+    // チャット履歴は削除せず、ゲストトークンも保持して次回復元できるようにする
     if (isGuest) {
       setUser(null)
       setGuest(false)
-      clearSessions()
+      // clearSessions()は呼び出さない - 履歴を保持
       return
     }
 
-    // 通常のユーザーの場合：従来通りクリア
+    // 通常のユーザーの場合：従来通り完全にクリア
     localStorage.removeItem('guestToken')
     setUser(null)
     clearSessions()
