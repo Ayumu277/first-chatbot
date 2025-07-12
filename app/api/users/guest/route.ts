@@ -10,30 +10,42 @@ export async function POST() {
   try {
     console.log('ゲストユーザー作成APIが呼び出されました')
 
-    // 共通のゲストユーザーが存在するかチェック
-    let guestUser = await prisma.users.findUnique({
+    // まず、既存の古いゲストユーザーをクリーンアップ
+    try {
+      const deletedCount = await prisma.users.deleteMany({
+        where: {
+          isGuest: true,
+          NOT: {
+            id: SHARED_GUEST_USER_ID
+          }
+        }
+      })
+      console.log(`既存のゲストユーザー ${deletedCount.count} 件をクリーンアップしました`)
+    } catch (cleanupError) {
+      console.warn('ゲストユーザークリーンアップ中にエラー:', cleanupError)
+    }
+
+    // upsert操作で共通ゲストユーザーを作成または取得
+    const guestUser = await prisma.users.upsert({
       where: {
         id: SHARED_GUEST_USER_ID
+      },
+      update: {
+        // 既存の場合は何も更新しない（そのまま使用）
+        updatedAt: new Date()
+      },
+      create: {
+        id: SHARED_GUEST_USER_ID,
+        name: 'ゲストユーザー',
+        email: null,
+        isGuest: true,
+        guestToken: SHARED_GUEST_TOKEN,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     })
 
-    if (!guestUser) {
-      console.log('共通ゲストユーザーを新規作成します')
-
-      // 共通ゲストユーザーを作成
-      guestUser = await prisma.users.create({
-        data: {
-          id: SHARED_GUEST_USER_ID,
-          name: 'ゲストユーザー',
-          isGuest: true,
-          guestToken: SHARED_GUEST_TOKEN,
-          updatedAt: new Date()
-        }
-      })
-      console.log('共通ゲストユーザーが作成されました:', guestUser)
-    } else {
-      console.log('既存の共通ゲストユーザーを使用します:', guestUser)
-    }
+    console.log('共通ゲストユーザーを取得/作成しました:', guestUser)
 
     const response = {
       success: true,

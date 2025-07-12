@@ -164,13 +164,17 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
         headers: { 'Content-Type': 'application/json' }
       })
 
-      if (!response.ok) {
-        throw new Error('Failed to create guest user')
-      }
+      console.log('API レスポンス状態:', response.status)
 
       const result = await response.json()
+      console.log('API レスポンス内容:', result)
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${result.error || 'Unknown error'}`)
+      }
+
       if (!result.success) {
-        throw new Error(result.error || 'Failed to create guest user')
+        throw new Error(result.error || 'ゲストユーザーの作成に失敗しました')
       }
 
       const guestUser = result.user
@@ -185,14 +189,28 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
       setGuest(true)
 
       // セッションをロード
-      await loadSessions()
+      try {
+        await loadSessions()
+        console.log('セッションの読み込みが完了しました')
+      } catch (sessionError) {
+        console.warn('セッション読み込みエラー（続行します）:', sessionError)
+        // セッション読み込みエラーは無視してアプリを開始
+      }
 
       setIsLoading(false)
       console.log('共通ゲストユーザーのセットアップが完了しました')
     } catch (error) {
       console.error('Failed to create guest user:', error)
-      alert('ゲストユーザーの作成に失敗しました: ' + (error instanceof Error ? error.message : '不明なエラー'))
       setIsLoading(false)
+
+      // より詳細なエラーメッセージを表示
+      let errorMessage = 'ゲストユーザーでの開始に失敗しました。'
+      if (error instanceof Error) {
+        errorMessage += `\n詳細: ${error.message}`
+      }
+      errorMessage += '\n\nページを再読み込みして、もう一度お試しください。'
+
+      alert(errorMessage)
     }
   }
 
