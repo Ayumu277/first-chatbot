@@ -150,60 +150,53 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     <div className="flex h-screen bg-[#0D1117] text-white">
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="max-w-lg w-full">
-          <div className="text-center mb-10">
-            <div className="w-20 h-20 bg-[#1E90FF] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-              <UserIcon className="w-10 h-10 text-white" />
+          <div className="text-center mb-16">
+            <div className="w-24 h-24 bg-[#1E90FF] rounded-xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+              <UserIcon className="w-12 h-12 text-white" />
             </div>
-            <h1 className="text-4xl font-black text-white mb-4">
+            <h1 className="text-5xl font-black text-white mb-6">
               chatbot
             </h1>
-            <p className="text-gray-300 text-lg font-medium">
-              ログインまたはゲストモードでチャットを始めましょう
+            <p className="text-gray-300 text-xl font-bold">
+              AIチャットを始めましょう
             </p>
           </div>
 
           {/* メッセージ表示 */}
           {message && (
-            <div className="mb-6 p-4 bg-green-900 border border-green-600 rounded-lg text-green-200">
+            <div className="mb-8 p-4 bg-green-900 border border-green-600 rounded-lg text-green-200">
               {message}
             </div>
           )}
 
           {/* エラー表示 */}
           {error && (
-            <div className="mb-6 p-4 bg-red-900 border border-red-600 rounded-lg text-red-200">
+            <div className="mb-8 p-4 bg-red-900 border border-red-600 rounded-lg text-red-200">
               {error}
             </div>
           )}
 
-          <div className="space-y-6">
+          <div className="space-y-8">
             {/* ゲストモードボタン */}
             <button
               onClick={handleGuestMode}
-              className="w-full flex items-center justify-center gap-4 px-8 py-8 bg-gradient-to-r from-[#1E90FF] to-[#00BFFF] hover:from-[#1873CC] hover:to-[#0099CC] text-white rounded-2xl transition-all duration-300 font-black text-xl shadow-2xl hover:shadow-blue-500/25 transform hover:scale-[1.02] hover:-translate-y-1"
+              className="w-full flex items-center justify-center gap-6 px-12 py-16 bg-gradient-to-r from-[#1E90FF] to-[#00BFFF] hover:from-[#1873CC] hover:to-[#0099CC] text-white rounded-lg transition-all duration-300 font-bold text-2xl shadow-2xl hover:shadow-blue-500/30 transform hover:scale-[1.02] hover:-translate-y-2"
             >
-              <GlobeAltIcon className="w-8 h-8" />
+              <GlobeAltIcon className="w-10 h-10" />
               ゲストとして始める
             </button>
 
             {/* Googleログインボタン（準備中） */}
             <button
               disabled
-              className="w-full flex items-center justify-center gap-4 px-8 py-8 bg-gradient-to-r from-gray-600 to-gray-700 text-gray-400 rounded-2xl font-black text-xl shadow-2xl cursor-not-allowed opacity-70"
+              className="w-full flex items-center justify-center gap-6 px-12 py-12 bg-gradient-to-r from-gray-700 to-gray-800 text-gray-500 rounded-lg font-bold text-xl shadow-xl cursor-not-allowed opacity-60"
             >
               <UserIcon className="w-8 h-8" />
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <span>Googleでログイン</span>
-                <span className="text-sm bg-gray-800 px-3 py-1 rounded-full">準備中</span>
+                <span className="text-sm bg-gray-900 px-3 py-1 rounded-md font-medium">準備中</span>
               </div>
             </button>
-          </div>
-
-          <div className="mt-10 text-center">
-            <p className="text-gray-400 font-medium text-lg">
-              ゲストモードでは、データはAzure SQL Serverに永続保存されます<br />
-              <span className="text-blue-400 font-semibold">いつでも安心してご利用ください</span>
-            </p>
           </div>
         </div>
       </div>
