@@ -33,7 +33,8 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     setUser,
     clearSessions,
     isGuest,
-    currentUser
+    currentUser,
+    setGuest
   } = useChatStore()
 
   const currentSession = isClient ? getCurrentSession() : null
@@ -109,14 +110,16 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   }
 
   const handleGoHome = () => {
-    // ゲストユーザーの場合は状態をクリアしない（永続化）
+    // ゲストユーザーの場合：ユーザー状態をクリアしてホーム画面に戻る
+    // ただし、ゲストトークンは保持して次回復元できるようにする
     if (isGuest) {
-      // チャットセッションの選択を解除してホーム画面に戻る
-      useChatStore.setState({ currentSessionId: null })
+      setUser(null)
+      setGuest(false)
+      clearSessions()
       return
     }
 
-    // 通常のユーザーの場合は従来通り
+    // 通常のユーザーの場合：従来通りクリア
     localStorage.removeItem('guestToken')
     setUser(null)
     clearSessions()
