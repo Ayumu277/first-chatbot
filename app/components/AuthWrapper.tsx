@@ -148,9 +148,42 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     try {
       console.log('ゲストモードボタンがクリックされました')
       setIsLoading(true)
-      console.log('ゲストユーザーを作成中...')
+
+      // まず、既存のゲストトークンをチェック
+      const existingGuestToken = localStorage.getItem('guestToken')
+
+      if (existingGuestToken) {
+        console.log('既存のゲストトークンが見つかりました。復元を試みます')
+
+        // 既存のゲストユーザーを復元
+        const response = await fetch('/api/users/guest', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${existingGuestToken}`
+          }
+        })
+
+        if (response.ok) {
+          const result = await response.json()
+          if (result.success && result.user) {
+            console.log('既存のゲストユーザーを復元しました:', result.user)
+            setUser(result.user)
+            setGuest(true)
+            await loadSessions()
+            setIsLoading(false)
+            return
+          }
+        }
+
+        // 復元に失敗した場合は古いトークンを削除
+        console.log('既存のゲストトークンが無効です。削除します')
+        localStorage.removeItem('guestToken')
+      }
+
+      // 新しいゲストユーザーを作成
+      console.log('新しいゲストユーザーを作成中...')
       const guestUser = await createGuestUser()
-      console.log('ゲストユーザーが作成されました:', guestUser)
+      console.log('新しいゲストユーザーが作成されました:', guestUser)
       localStorage.setItem('guestToken', guestUser.guestToken!)
       console.log('ゲストトークンをローカルストレージに保存しました')
 

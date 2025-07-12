@@ -6,26 +6,6 @@ export async function POST() {
   try {
     console.log('ゲストユーザー作成APIが呼び出されました')
 
-    // 既存のゲストユーザーがあるかチェック
-    const existingGuest = await prisma.users.findFirst({
-      where: {
-        isGuest: true
-      }
-    })
-
-    if (existingGuest) {
-      console.log('既存のゲストユーザーを使用します:', existingGuest)
-      return NextResponse.json({
-        success: true,
-        user: {
-          id: existingGuest.id,
-          name: existingGuest.name,
-          isGuest: existingGuest.isGuest,
-          guestToken: existingGuest.guestToken
-        }
-      })
-    }
-
     // 新しいゲストユーザーを作成
     const timestamp = Date.now()
     const randomId = Math.random().toString(36).substr(2, 9)
