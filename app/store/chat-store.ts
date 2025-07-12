@@ -45,7 +45,6 @@ interface ChatState {
   setLoading: (loading: boolean) => void
   loadSessions: () => Promise<void>
   setUser: (user: User | null) => void
-  createGuestUser: () => Promise<User>
   setGuest: (isGuest: boolean) => void
 }
 
@@ -300,40 +299,6 @@ export const useChatStore = create<ChatState>()(
 
       setUser: (user: User | null) => {
         set({ currentUser: user })
-      },
-
-      createGuestUser: async () => {
-        try {
-          console.log('データベースゲストユーザー作成を開始')
-
-          // データベースにゲストユーザーを作成
-          const response = await fetch('/api/users/guest', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-          })
-
-          if (!response.ok) {
-            throw new Error('Failed to create guest user in database')
-          }
-
-          const result = await response.json()
-          if (!result.success) {
-            throw new Error(result.error || 'Failed to create guest user')
-          }
-
-          const guestUser = result.user
-
-          console.log('データベースゲストユーザーを作成:', guestUser)
-          set({
-            currentUser: guestUser,
-            isGuest: true
-          })
-          console.log('ゲストユーザーがStoreに設定されました（データベース保存済み）')
-          return guestUser
-        } catch (error) {
-          console.error('Failed to create database guest user:', error)
-          throw error
-        }
       },
 
       setGuest: (isGuest: boolean) => {

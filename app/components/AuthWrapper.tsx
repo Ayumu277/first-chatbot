@@ -18,7 +18,6 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     currentUser,
     isGuest,
     setUser,
-    createGuestUser,
     setGuest,
     loadSessions
   } = useChatStore()
@@ -97,39 +96,45 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
         const guestToken = localStorage.getItem('guestToken')
         if (guestToken) {
           console.log('🔑 AuthWrapper: Guest token found, restoring guest user')
-          try {
-            // ゲストユーザーを復元
-            const response = await fetch('/api/users/guest', {
-              method: 'GET',
-              headers: {
-                'Authorization': `Bearer ${guestToken}`
-              }
-            })
 
-            if (response.ok) {
-              const result = await response.json()
-              if (result.success && result.user) {
-                console.log('✅ AuthWrapper: Guest user restored', result.user)
-                setUser(result.user)
-                setGuest(true)
+          // 固定の共通ゲストトークンをチェック
+          if (guestToken === 'shared_guest_token') {
+            try {
+              // 共通ゲストユーザーを取得
+              const response = await fetch('/api/users/guest', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+              })
 
-                // セッションをロード
-                try {
-                  await loadSessions()
-                  console.log('✅ AuthWrapper: Guest sessions loaded successfully')
-                } catch (error) {
-                  console.error('❌ AuthWrapper: Failed to load guest sessions', error)
+              if (response.ok) {
+                const result = await response.json()
+                if (result.success && result.user) {
+                  console.log('✅ AuthWrapper: Shared guest user restored', result.user)
+                  setUser(result.user)
+                  setGuest(true)
+
+                  // セッションをロード
+                  try {
+                    await loadSessions()
+                    console.log('✅ AuthWrapper: Guest sessions loaded successfully')
+                  } catch (error) {
+                    console.error('❌ AuthWrapper: Failed to load guest sessions', error)
+                  }
+                } else {
+                  console.log('❌ AuthWrapper: Failed to restore guest user')
+                  localStorage.removeItem('guestToken')
                 }
               } else {
-                console.log('❌ AuthWrapper: Failed to restore guest user, clearing token')
+                console.log('❌ AuthWrapper: Failed to fetch guest user')
                 localStorage.removeItem('guestToken')
               }
-            } else {
-              console.log('❌ AuthWrapper: Guest token invalid, clearing token')
+            } catch (error) {
+              console.error('❌ AuthWrapper: Error restoring guest user:', error)
               localStorage.removeItem('guestToken')
             }
-          } catch (error) {
-            console.error('❌ AuthWrapper: Error restoring guest user:', error)
+          } else {
+            // 古いトークンの場合は削除
+            console.log('❌ AuthWrapper: Old guest token found, removing')
             localStorage.removeItem('guestToken')
           }
         } else {
@@ -149,45 +154,33 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
       console.log('ゲストモードボタンがクリックされました')
       setIsLoading(true)
 
-      // まず、既存のゲストトークンをチェック
-      const existingGuestToken = localStorage.getItem('guestToken')
+      // 固定の共通ゲストトークン
+      const SHARED_GUEST_TOKEN = 'shared_guest_token'
 
-      if (existingGuestToken) {
-        console.log('既存のゲストトークンが見つかりました。復元を試みます')
+      // 共通ゲストユーザーを作成または取得
+      console.log('共通ゲストユーザーを作成または取得中...')
+      const response = await fetch('/api/users/guest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      })
 
-        // 既存のゲストユーザーを復元
-        const response = await fetch('/api/users/guest', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${existingGuestToken}`
-          }
-        })
-
-        if (response.ok) {
-          const result = await response.json()
-          if (result.success && result.user) {
-            console.log('既存のゲストユーザーを復元しました:', result.user)
-            setUser(result.user)
-            setGuest(true)
-            await loadSessions()
-            setIsLoading(false)
-            return
-          }
-        }
-
-        // 復元に失敗した場合は古いトークンを削除
-        console.log('既存のゲストトークンが無効です。削除します')
-        localStorage.removeItem('guestToken')
+      if (!response.ok) {
+        throw new Error('Failed to create guest user')
       }
 
-      // 新しいゲストユーザーを作成
-      console.log('新しいゲストユーザーを作成中...')
-      const guestUser = await createGuestUser()
-      console.log('新しいゲストユーザーが作成されました:', guestUser)
-      localStorage.setItem('guestToken', guestUser.guestToken!)
-      console.log('ゲストトークンをローカルストレージに保存しました')
+      const result = await response.json()
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to create guest user')
+      }
 
-      // ゲストユーザーの状態を明示的に設定
+      const guestUser = result.user
+      console.log('共通ゲストユーザーを取得しました:', guestUser)
+
+      // 固定トークンをローカルストレージに保存
+      localStorage.setItem('guestToken', SHARED_GUEST_TOKEN)
+      console.log('共通ゲストトークンをローカルストレージに保存しました')
+
+      // ゲストユーザーの状態を設定
       setUser(guestUser)
       setGuest(true)
 
@@ -195,7 +188,7 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
       await loadSessions()
 
       setIsLoading(false)
-      console.log('ゲストユーザーのセットアップが完了しました')
+      console.log('共通ゲストユーザーのセットアップが完了しました')
     } catch (error) {
       console.error('Failed to create guest user:', error)
       alert('ゲストユーザーの作成に失敗しました: ' + (error instanceof Error ? error.message : '不明なエラー'))
