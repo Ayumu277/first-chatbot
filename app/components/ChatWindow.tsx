@@ -32,7 +32,8 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     setLoading,
     setUser,
     clearSessions,
-    isGuest
+    isGuest,
+    currentUser
   } = useChatStore()
 
   const currentSession = isClient ? getCurrentSession() : null
@@ -154,7 +155,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   }, [chatId, currentSession?.id])
 
   const handleSendMessage = async () => {
-    if (!inputMessage.trim() || !currentSession || isApiLoading) return
+    if (!inputMessage.trim() || !currentSession || isApiLoading || !currentUser) return
 
     const userMessage = {
       role: 'user' as const,
@@ -168,9 +169,6 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     const currentImageMimeType = uploadedImage?.mimeType
     setInputMessage('')
     setIsApiLoading(true)
-
-    // ユーザーメッセージを追加
-    await addMessage(currentSession.id, userMessage)
 
     // 画像をクリア
     if (uploadedImage) {
@@ -187,7 +185,9 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       console.log('API呼び出し開始:', {
         message: currentMessage,
         hasImage: !!currentImageBase64,
-        historyLength: conversationHistory.length
+        historyLength: conversationHistory.length,
+        userId: currentUser.id,
+        sessionId: currentSession.id
       })
 
       const response = await fetch('/api/chat', {
@@ -199,7 +199,9 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
           message: currentMessage,
           conversationHistory,
           imageBase64: currentImageBase64,
-          imageMimeType: currentImageMimeType
+          imageMimeType: currentImageMimeType,
+          userId: currentUser.id,
+          sessionId: currentSession.id
         }),
       })
 
@@ -216,6 +218,16 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       }
 
       console.log('API応答成功:', data)
+
+      // セッションIDが返された場合、ローカルセッションを更新
+      if (data.sessionId && data.sessionId !== currentSession.id) {
+        console.log('セッションIDが更新されました:', data.sessionId)
+        // 必要に応じてセッションIDを更新する処理をここに追加
+      }
+
+      // メッセージの追加はチャットAPIで既にデータベースに保存されているため
+      // ローカルストレージの更新のみ行う
+      await addMessage(currentSession.id, userMessage)
 
       // AIの応答を追加
       const aiMessage = {
@@ -258,7 +270,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   }
 
   const handleResendMessage = async () => {
-    if (!currentSession || !editingContent.trim() || editingMessageIndex === null) return
+    if (!currentSession || !editingContent.trim() || editingMessageIndex === null || !currentUser) return
 
     setIsApiLoading(true)
 
@@ -279,18 +291,20 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         content: msg.content
       }))
 
-      // OpenAI APIに再送信
+      // チャットAPIに再送信
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-                  body: JSON.stringify({
-            message: editingContent.trim(),
-            conversationHistory: conversationHistory.slice(0, -1), // 最後のメッセージは除く
-            imageBase64: originalMessage.imageBase64,
-            imageMimeType: 'image/jpeg' // 再送信時はデフォルト値
-          }),
+        body: JSON.stringify({
+          message: editingContent.trim(),
+          conversationHistory: conversationHistory.slice(0, -1), // 最後のメッセージは除く
+          imageBase64: originalMessage.imageBase64,
+          imageMimeType: 'image/jpeg', // 再送信時はデフォルト値
+          userId: currentUser.id,
+          sessionId: currentSession.id
+        }),
       })
 
       const data = await response.json()

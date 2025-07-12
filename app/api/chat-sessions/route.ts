@@ -14,12 +14,12 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    const sessions = await prisma.chatSession.findMany({
+    const sessions = await prisma.chat_sessions.findMany({
       where: {
         userId: userId
       },
       include: {
-        messages: {
+        chat_messages: {
           orderBy: {
             timestamp: 'asc'
           }
@@ -52,10 +52,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const newSession = await prisma.chatSession.create({
+    const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+
+    const newSession = await prisma.chat_sessions.create({
       data: {
+        id: sessionId,
         title: title || '新しいチャット',
-        userId: userId
+        userId: userId,
+        updatedAt: new Date()
       }
     })
 

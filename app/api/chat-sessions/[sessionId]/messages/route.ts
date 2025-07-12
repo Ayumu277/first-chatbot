@@ -10,8 +10,11 @@ export async function POST(
     const { sessionId } = await params
     const message = await request.json()
 
-    await prisma.chatMessage.create({
+    const messageId = `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+
+    await prisma.chat_messages.create({
       data: {
+        id: messageId,
         sessionId: sessionId,
         role: message.role,
         content: message.content,
@@ -21,7 +24,7 @@ export async function POST(
     })
 
     // セッションの更新日時を更新
-    await prisma.chatSession.update({
+    await prisma.chat_sessions.update({
       where: {
         id: sessionId
       },

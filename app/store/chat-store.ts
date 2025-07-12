@@ -105,7 +105,7 @@ export const useChatStore = create<ChatState>()(
       currentUser: null,
       isGuest: false,
 
-                  createSession: async () => {
+      createSession: async () => {
         const state = get()
         if (!state.currentUser) {
           throw new Error('User not authenticated')
@@ -129,13 +129,7 @@ export const useChatStore = create<ChatState>()(
           currentSessionId: newSessionId
         }))
 
-        // ゲストの場合はローカルのみ、ログインユーザーの場合はデータベースにも保存
-        if (state.isGuest) {
-          console.log('Guest session created locally only')
-          return newSessionId
-        }
-
-        // ログインユーザーの場合はデータベースに保存
+        // ゲストユーザーでもデータベースに保存するように変更
         try {
           const dbSession = await dbApi.createSession(title, state.currentUser.id)
           // データベースからのIDでローカルセッションを更新
@@ -159,7 +153,7 @@ export const useChatStore = create<ChatState>()(
         set({ currentSessionId: sessionId })
       },
 
-            deleteSession: async (sessionId: string) => {
+      deleteSession: async (sessionId: string) => {
         const state = get()
 
         // ローカルから削除
@@ -168,13 +162,7 @@ export const useChatStore = create<ChatState>()(
           currentSessionId: state.currentSessionId === sessionId ? null : state.currentSessionId
         }))
 
-        // ゲストの場合はローカルのみ、ログインユーザーの場合はデータベースからも削除
-        if (state.isGuest) {
-          console.log('Guest session deleted locally only')
-          return
-        }
-
-        // ログインユーザーの場合はデータベースからも削除
+        // ゲストユーザーでもデータベースから削除するように変更
         try {
           await dbApi.deleteSession(sessionId)
           console.log('Session deleted from database successfully')
@@ -217,13 +205,7 @@ export const useChatStore = create<ChatState>()(
           })
         }))
 
-        // ゲストの場合はローカルのみ、ログインユーザーの場合はデータベースにも保存
-        if (state.isGuest) {
-          console.log('Guest message saved locally only')
-          return
-        }
-
-        // ログインユーザーの場合はデータベースに保存
+        // ゲストユーザーでもデータベースに保存するように変更
         try {
           await dbApi.addMessage(sessionId, newMessage)
           console.log('Message saved to database successfully')
@@ -261,7 +243,7 @@ export const useChatStore = create<ChatState>()(
         }))
       },
 
-            updateSessionTitle: async (sessionId: string, title: string) => {
+      updateSessionTitle: async (sessionId: string, title: string) => {
         // まずローカルストレージを更新
         set(state => ({
           sessions: state.sessions.map(session =>
@@ -300,13 +282,7 @@ export const useChatStore = create<ChatState>()(
           return
         }
 
-        // ゲストの場合はローカルのみ（データベースからロードしない）
-        if (state.isGuest) {
-          console.log('Guest mode: sessions remain local only')
-          return
-        }
-
-        // ログインユーザーの場合のみデータベースからロード
+        // ゲストユーザーでもデータベースからロードするように変更
         try {
           const sessions = await dbApi.getSessions(state.currentUser.id)
           // データベースからのセッションにmessages配列があることを確認
@@ -326,29 +302,36 @@ export const useChatStore = create<ChatState>()(
         set({ currentUser: user })
       },
 
-            createGuestUser: async () => {
+      createGuestUser: async () => {
         try {
-          console.log('ローカルゲストユーザー作成を開始')
+          console.log('データベースゲストユーザー作成を開始')
 
-          // ローカルのみでゲストユーザーを作成（データベースに保存しない）
-          const timestamp = Date.now()
-          const randomId = Math.random().toString(36).substr(2, 9)
-          const guestUser = {
-            id: `guest_${timestamp}_${randomId}`,
-            name: `ゲストユーザー_${timestamp}`,
-            isGuest: true,
-            guestToken: `guest_token_${timestamp}_${randomId}`
+          // データベースにゲストユーザーを作成
+          const response = await fetch('/api/users/guest', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+          })
+
+          if (!response.ok) {
+            throw new Error('Failed to create guest user in database')
           }
 
-          console.log('ローカルゲストユーザーを作成:', guestUser)
+          const result = await response.json()
+          if (!result.success) {
+            throw new Error(result.error || 'Failed to create guest user')
+          }
+
+          const guestUser = result.user
+
+          console.log('データベースゲストユーザーを作成:', guestUser)
           set({
             currentUser: guestUser,
             isGuest: true
           })
-          console.log('ゲストユーザーがStoreに設定されました（ローカルのみ）')
+          console.log('ゲストユーザーがStoreに設定されました（データベース保存済み）')
           return guestUser
         } catch (error) {
-          console.error('Failed to create local guest user:', error)
+          console.error('Failed to create database guest user:', error)
           throw error
         }
       },
@@ -360,23 +343,13 @@ export const useChatStore = create<ChatState>()(
     {
       name: 'chat-sessions',
       partialize: (state) => {
-        // ゲストモードの場合は永続化しない（次回アクセス時にリセット）
-        if (state.isGuest) {
-          return {
-            sessions: [],
-            currentSessionId: null,
-            currentUser: null,
-            isGuest: false
-          }
-        }
-
-        // ログインユーザーの場合のみ永続化
+        // ゲストユーザーでもセッションを永続化するように変更
         return {
           sessions: state.sessions.map(session => ({
             ...session,
             messages: (session.messages || []).map(message => ({
               ...message,
-              imageBase64: undefined,
+              imageBase64: undefined, // 画像データは永続化しない
               imagePreview: undefined
             }))
           })),

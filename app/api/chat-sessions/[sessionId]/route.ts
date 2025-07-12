@@ -10,14 +10,14 @@ export async function DELETE(
     const { sessionId } = await params
 
     // まずメッセージを削除
-    await prisma.chatMessage.deleteMany({
+    await prisma.chat_messages.deleteMany({
       where: {
         sessionId: sessionId
       }
     })
 
     // セッションを削除
-    await prisma.chatSession.delete({
+    await prisma.chat_sessions.delete({
       where: {
         id: sessionId
       }
@@ -41,12 +41,12 @@ export async function GET(
   try {
     const { sessionId } = await params
 
-    const session = await prisma.chatSession.findUnique({
+    const session = await prisma.chat_sessions.findUnique({
       where: {
         id: sessionId
       },
       include: {
-        messages: {
+        chat_messages: {
           orderBy: {
             timestamp: 'asc'
           }
@@ -80,12 +80,13 @@ export async function PATCH(
     const { sessionId } = await params
     const { title } = await request.json()
 
-    await prisma.chatSession.update({
+    await prisma.chat_sessions.update({
       where: {
         id: sessionId
       },
       data: {
-        title
+        title,
+        updatedAt: new Date()
       }
     })
 
