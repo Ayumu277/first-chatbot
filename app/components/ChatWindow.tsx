@@ -342,6 +342,23 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   if (!currentSession) {
     return (
       <div className="flex flex-col h-full relative">
+        {/* 右上のホームボタン */}
+        <div className="flex justify-end p-4">
+          <button
+            onClick={handleGoHome}
+            className="group relative flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#00BFFF] hover:from-[#0066ff] hover:to-[#0099ff] text-white rounded-lg transition-all duration-300 text-sm font-bold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transform hover:scale-105 border border-blue-400/30"
+          >
+            <div className="relative">
+              <HomeIcon className="w-4 h-4 relative z-10" />
+              <div className="absolute inset-0 w-4 h-4 bg-white/20 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
+            </div>
+            <span className="tracking-wide">ホーム</span>
+
+            {/* グローエフェクト */}
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-400 to-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-sm"></div>
+          </button>
+        </div>
+
         <div className="flex-1 flex flex-col items-center justify-center px-4">
           <div className="text-center">
             <div className="w-16 h-16 bg-[#161B22] rounded-full flex items-center justify-center mx-auto mb-4">
@@ -353,23 +370,6 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
               新規チャットを開始してください。
             </p>
           </div>
-        </div>
-
-        {/* 左下のホームに戻るボタン */}
-        <div className="absolute bottom-4 left-4">
-          <button
-            onClick={handleGoHome}
-            className="group relative flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-[#1E90FF] to-[#00BFFF] hover:from-[#0066ff] hover:to-[#0099ff] text-white rounded-xl transition-all duration-300 text-sm font-bold shadow-xl shadow-blue-500/40 hover:shadow-blue-500/60 transform hover:scale-110 border border-blue-400/30"
-          >
-            <div className="relative">
-              <HomeIcon className="w-5 h-5 relative z-10" />
-              <div className="absolute inset-0 w-5 h-5 bg-white/30 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
-            </div>
-            <span className="tracking-wide">ホーム</span>
-
-            {/* グローエフェクト */}
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400 to-cyan-400 opacity-0 group-hover:opacity-25 transition-opacity duration-300 blur-sm"></div>
-          </button>
         </div>
       </div>
     )
@@ -616,23 +616,6 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
             </button>
           </div>
         </div>
-      </div>
-
-      {/* 左下のホームに戻るボタン（チャット画面） */}
-      <div className="absolute bottom-20 left-4 z-10">
-        <button
-          onClick={handleGoHome}
-          className="group relative flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-[#1E90FF] to-[#00BFFF] hover:from-[#0066ff] hover:to-[#0099ff] text-white rounded-xl transition-all duration-300 text-sm font-bold shadow-xl shadow-blue-500/40 hover:shadow-blue-500/60 transform hover:scale-110 border border-blue-400/30"
-        >
-          <div className="relative">
-            <HomeIcon className="w-4 h-4 relative z-10" />
-            <div className="absolute inset-0 w-4 h-4 bg-white/30 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
-          </div>
-          <span className="tracking-wide hidden sm:inline">ホーム</span>
-
-          {/* グローエフェクト */}
-          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400 to-cyan-400 opacity-0 group-hover:opacity-25 transition-opacity duration-300 blur-sm"></div>
-        </button>
       </div>
 
       {/* 画像モーダル */}
