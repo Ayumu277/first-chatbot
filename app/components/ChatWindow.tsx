@@ -376,7 +376,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full relative">
       {/* チャットヘッダー */}
       <div className="flex-shrink-0 border-b border-gray-700 p-4 flex items-center justify-between bg-gradient-to-r from-[#0D1117] to-[#161B22]">
         <h1 className="text-lg font-semibold text-white">
@@ -406,7 +406,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
             <p className="text-gray-300 text-sm sm:text-base font-medium">まだメッセージがありません。最初のメッセージを送信してください。</p>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-6 pb-20">
             {currentSession.messages.map((message, index) => (
               <div
                 key={`${currentSession.id}-${index}`}
@@ -562,71 +562,98 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
                 accept="image/*"
                 onChange={handleFileSelect}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                disabled={isApiLoading}
               />
-              <button className="p-2 text-gray-400 hover:text-gray-300 transition-colors cursor-pointer">
+              <button
+                disabled={isApiLoading}
+                className="p-3 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed text-white rounded-lg transition-colors flex-shrink-0"
+                title="画像をアップロード"
+              >
                 <PaperClipIcon className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="flex-1 relative">
+            {/* テキスト入力 */}
+            <div
+              className={`flex-1 relative transition-all duration-300 ${
+                isDragOver ? 'scale-105 ring-2 ring-blue-500' : ''
+              }`}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
               <textarea
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
                 placeholder="メッセージを入力してください..."
-                className={`w-full px-4 py-3 bg-[#161B22] border rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1E90FF] focus:border-transparent resize-none text-sm sm:text-base font-normal transition-colors ${
-                  isDragOver
-                    ? 'border-[#1E90FF] bg-blue-900/10'
-                    : 'border-gray-600'
-                }`}
+                disabled={isApiLoading}
+                className="w-full px-4 py-3 bg-[#161B22] border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#1E90FF] resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                 rows={1}
-                style={{ minHeight: '44px', maxHeight: '120px' }}
+                style={{ minHeight: '48px', maxHeight: '120px' }}
               />
-              {/* ドラッグオーバー時のオーバーレイ */}
               {isDragOver && (
-                <div className="absolute inset-0 border-2 border-[#1E90FF] border-dashed rounded-lg bg-blue-900/20 flex items-center justify-center pointer-events-none">
-                  <div className="text-center">
-                    <PhotoIcon className="w-8 h-8 mx-auto text-[#1E90FF] mb-1" />
-                    <p className="text-sm text-[#1E90FF] font-medium">画像をドロップしてください</p>
+                <div className="absolute inset-0 bg-blue-500 bg-opacity-20 border-2 border-dashed border-blue-500 rounded-lg flex items-center justify-center">
+                  <div className="text-blue-400 font-medium">
+                    <PhotoIcon className="w-8 h-8 mx-auto mb-2" />
+                    画像をドロップしてアップロード
                   </div>
                 </div>
               )}
             </div>
 
+            {/* 送信ボタン */}
             <button
               onClick={handleSendMessage}
               disabled={!inputMessage.trim() || isApiLoading}
-              className="p-2 text-[#1E90FF] hover:text-blue-400 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors"
+              className="p-3 bg-[#1E90FF] hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors flex-shrink-0 shadow-lg"
             >
-              <PaperAirplaneIcon className="w-5 h-5" />
+              {isApiLoading ? (
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              ) : (
+                <PaperAirplaneIcon className="w-5 h-5" />
+              )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* 画像拡大モーダル */}
+      {/* 左下のホームに戻るボタン（チャット画面） */}
+      <div className="absolute bottom-20 left-4 z-10">
+        <button
+          onClick={handleGoHome}
+          className="group relative flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-[#1E90FF] to-[#00BFFF] hover:from-[#0066ff] hover:to-[#0099ff] text-white rounded-xl transition-all duration-300 text-sm font-bold shadow-xl shadow-blue-500/40 hover:shadow-blue-500/60 transform hover:scale-110 border border-blue-400/30"
+        >
+          <div className="relative">
+            <HomeIcon className="w-4 h-4 relative z-10" />
+            <div className="absolute inset-0 w-4 h-4 bg-white/30 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
+          </div>
+          <span className="tracking-wide hidden sm:inline">ホーム</span>
+
+          {/* グローエフェクト */}
+          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400 to-cyan-400 opacity-0 group-hover:opacity-25 transition-opacity duration-300 blur-sm"></div>
+        </button>
+      </div>
+
+      {/* 画像モーダル */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="relative max-w-4xl max-h-full">
+          <div className="max-w-4xl max-h-4xl">
             <img
               src={selectedImage}
-              alt="拡大画像"
+              alt="拡大表示"
               className="max-w-full max-h-full object-contain rounded-lg"
-              onClick={(e) => e.stopPropagation()}
             />
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 w-8 h-8 bg-black bg-opacity-50 hover:bg-opacity-75 rounded-full flex items-center justify-center text-white transition-all"
-            >
-              <XMarkIcon className="w-5 h-5" />
-            </button>
           </div>
+          <button
+            onClick={() => setSelectedImage(null)}
+            className="absolute top-4 right-4 w-10 h-10 bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full flex items-center justify-center text-white transition-colors"
+          >
+            <XMarkIcon className="w-6 h-6" />
+          </button>
         </div>
       )}
     </div>
