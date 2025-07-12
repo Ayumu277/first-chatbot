@@ -3,7 +3,7 @@
 import { useSession, signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useChatStore } from '../store/chat-store'
-import { UserIcon, GlobeAltIcon, UserPlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { UserIcon, GlobeAltIcon } from '@heroicons/react/24/outline'
 
 interface AuthWrapperProps {
   children: React.ReactNode
@@ -12,16 +12,6 @@ interface AuthWrapperProps {
 export default function AuthWrapper({ children }: AuthWrapperProps) {
   const { data: session, status } = useSession()
   const [isLoading, setIsLoading] = useState(true)
-  const [showSignUpForm, setShowSignUpForm] = useState(false)
-  const [showLoginForm, setShowLoginForm] = useState(false)
-  const [signUpData, setSignUpData] = useState({
-    name: '',
-    email: ''
-  })
-  const [loginData, setLoginData] = useState({
-    email: '',
-    password: ''
-  })
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const {
@@ -138,89 +128,6 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     }
   }
 
-  const handleGoogleLogin = () => {
-    signIn('google', {
-      prompt: 'select_account'
-    })
-  }
-
-  const handleSignUpFormOpen = () => {
-    setError('')
-    setMessage('')
-    setShowSignUpForm(true)
-  }
-
-  const handleLoginFormOpen = () => {
-    setError('')
-    setMessage('')
-    setShowLoginForm(true)
-  }
-
-  const handleSignUpSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    setMessage('')
-    setIsLoading(true)
-
-    try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(signUpData)
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        setMessage('✅ ' + data.message)
-        setShowSignUpForm(false)
-        setSignUpData({ name: '', email: '' })
-      } else {
-        setError('❌ ' + data.error)
-      }
-    } catch (error) {
-      setError('❌ 登録処理に失敗しました')
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handleTestEmail = async () => {
-    if (!signUpData.email.trim()) {
-      setError('テストメール送信にはメールアドレスが必要です')
-      return
-    }
-
-    setError('')
-    setMessage('')
-    setIsLoading(true)
-
-    try {
-      const response = await fetch('/api/debug/test-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: signUpData.email }),
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        setMessage('✅ テストメールが送信されました！メールボックスをご確認ください。')
-      } else {
-        setError('❌ ' + (data.error || 'テストメール送信に失敗しました'))
-      }
-    } catch (error) {
-      console.error('Test email error:', error)
-      setError('❌ テストメール送信中にエラーが発生しました')
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   // ローディング中
   if (isLoading || status === 'loading') {
     return (
@@ -269,134 +176,37 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
             </div>
           )}
 
-          <div className="space-y-5">
+          <div className="space-y-6">
             {/* ゲストモードボタン */}
             <button
               onClick={handleGuestMode}
-              className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-[#1E90FF] hover:bg-blue-600 text-white rounded-xl transition-all duration-300 font-black text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+              className="w-full flex items-center justify-center gap-4 px-8 py-8 bg-gradient-to-r from-[#1E90FF] to-[#00BFFF] hover:from-[#1873CC] hover:to-[#0099CC] text-white rounded-2xl transition-all duration-300 font-black text-xl shadow-2xl hover:shadow-blue-500/25 transform hover:scale-[1.02] hover:-translate-y-1"
             >
-              <GlobeAltIcon className="w-6 h-6" />
+              <GlobeAltIcon className="w-8 h-8" />
               ゲストとして始める
             </button>
 
-            {/* メールログインボタン */}
+            {/* Googleログインボタン（準備中） */}
             <button
-              onClick={handleLoginFormOpen}
-              className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-purple-600 hover:bg-purple-700 text-white rounded-xl transition-all duration-300 font-black text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+              disabled
+              className="w-full flex items-center justify-center gap-4 px-8 py-8 bg-gradient-to-r from-gray-600 to-gray-700 text-gray-400 rounded-2xl font-black text-xl shadow-2xl cursor-not-allowed opacity-70"
             >
-              <UserIcon className="w-6 h-6" />
-              メールでログイン
-            </button>
-
-            {/* Googleログインボタン */}
-            <button
-              onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-all duration-300 font-black text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
-            >
-              <UserIcon className="w-6 h-6" />
-              Googleでログイン
-            </button>
-
-            {/* サインアップボタン */}
-            <button
-              onClick={handleSignUpFormOpen}
-              className="w-full flex items-center justify-center gap-4 px-8 py-5 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all duration-300 font-black text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
-            >
-              <UserPlusIcon className="w-6 h-6" />
-              新規アカウント作成
+              <UserIcon className="w-8 h-8" />
+              <div className="flex items-center gap-2">
+                <span>Googleでログイン</span>
+                <span className="text-sm bg-gray-800 px-3 py-1 rounded-full">準備中</span>
+              </div>
             </button>
           </div>
 
           <div className="mt-10 text-center">
-            <p className="text-gray-400 font-medium">
-              ゲストモードでは、データはブラウザに一時的に保存されます<br />
-              アカウント登録では、チャット履歴が永続保存されます
+            <p className="text-gray-400 font-medium text-lg">
+              ゲストモードでは、データはAzure SQL Serverに永続保存されます<br />
+              <span className="text-blue-400 font-semibold">いつでも安心してご利用ください</span>
             </p>
           </div>
         </div>
       </div>
-
-      {/* サインアップフォームモーダル */}
-      {showSignUpForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
-          <div className="bg-[#1E1E1E] rounded-xl p-8 max-w-md w-full border border-gray-600">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-black text-white">新規アカウント作成</h3>
-              <button
-                onClick={() => setShowSignUpForm(false)}
-                className="text-gray-400 hover:text-white"
-              >
-                <XMarkIcon className="w-6 h-6" />
-              </button>
-            </div>
-
-            <form onSubmit={handleSignUpSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  お名前 *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={signUpData.name}
-                  onChange={(e) => setSignUpData({...signUpData, name: e.target.value})}
-                  className="w-full px-4 py-3 bg-[#2A2A2A] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
-                  placeholder="田中太郎"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  メールアドレス *
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={signUpData.email}
-                  onChange={(e) => setSignUpData({...signUpData, email: e.target.value})}
-                  className="w-full px-4 py-3 bg-[#2A2A2A] border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500"
-                  placeholder="example@gmail.com"
-                />
-              </div>
-
-              <div className="text-sm text-gray-400">
-                📧 入力したメールアドレスに認証リンクが送信されます。
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={() => setShowSignUpForm(false)}
-                  className="flex-1 py-3 px-4 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold transition-colors"
-                >
-                  キャンセル
-                </button>
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="flex-1 py-3 px-4 bg-green-600 hover:bg-green-700 disabled:bg-green-800 text-white rounded-lg font-semibold transition-colors"
-                >
-                  {isLoading ? '送信中...' : '認証メール送信'}
-                </button>
-              </div>
-
-              <div className="mt-4 pt-4 border-t border-gray-600">
-                <p className="text-sm text-gray-400 mb-3">
-                  🔧 メールが届かない場合は、テストメールで確認してください
-                </p>
-                <button
-                  type="button"
-                  onClick={handleTestEmail}
-                  disabled={isLoading}
-                  className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 text-white rounded-lg font-semibold transition-colors"
-                >
-                  {isLoading ? '送信中...' : '🧪 テストメール送信'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
