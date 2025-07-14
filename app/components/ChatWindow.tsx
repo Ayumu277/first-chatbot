@@ -302,7 +302,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       </div>
 
       {/* メッセージエリア */}
-      <div className="flex-1 overflow-y-auto scroll-smooth" style={{ paddingBottom: '25vh', scrollPaddingBottom: '25vh' }}>
+      <div className="flex-1 overflow-y-auto scroll-smooth" style={{ paddingBottom: '120px', scrollPaddingBottom: '120px' }}>
         {!currentSession || !currentSession.messages || currentSession.messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full p-8">
             <div className="text-center max-w-md">
@@ -332,7 +332,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       </div>
 
       {/* 入力エリア - 固定フッター（サイドバーを考慮） */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#0D1117] border-t border-gray-700 p-4 z-10 md:left-64 h-auto max-h-[20vh]" style={{ minHeight: '120px' }}>
+      <div className="fixed bottom-0 left-0 right-0 bg-[#0D1117] border-t border-gray-700 p-3 z-10 md:left-64">
         {/* アップロードされた画像のプレビュー */}
         {uploadedImage && (
           <div className="mb-3">
@@ -370,17 +370,17 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="メッセージを入力してください..."
-              className="w-full bg-gray-800 text-white rounded-lg px-4 py-3 pr-12 resize-none border border-gray-600 focus:border-blue-500 focus:outline-none min-h-[48px] max-h-32"
+              className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 pr-12 resize-none border border-gray-600 focus:border-blue-500 focus:outline-none min-h-[40px] max-h-24"
               rows={1}
               disabled={isApiLoading}
               style={{
                 height: 'auto',
-                minHeight: '48px'
+                minHeight: '40px'
               }}
               onInput={(e) => {
                 const target = e.target as HTMLTextAreaElement
                 target.style.height = 'auto'
-                target.style.height = Math.min(target.scrollHeight, 128) + 'px'
+                target.style.height = Math.min(target.scrollHeight, 96) + 'px'
               }}
             />
 
