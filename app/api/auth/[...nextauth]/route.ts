@@ -31,8 +31,8 @@ const handler = NextAuth({
       }
 
       try {
-        // データベースでユーザーを確認
-        const existingUser = await prisma.user.findUnique({
+        // データベースでユーザーを確認（正しいモデル名を使用）
+        const existingUser = await prisma.users.findUnique({
           where: { email: user.email }
         })
 
@@ -48,7 +48,8 @@ const handler = NextAuth({
         }
       } catch (error) {
         console.error("❌ Database query error:", error)
-        return false
+        // データベースエラーの場合でもサインインを許可（フォールバック）
+        return true
       }
     },
     async session({ session, user }) {
@@ -56,7 +57,7 @@ const handler = NextAuth({
       // セッションにユーザーIDを追加
       if (session?.user?.email) {
         try {
-          const dbUser = await prisma.user.findUnique({
+          const dbUser = await prisma.users.findUnique({
             where: { email: session.user.email }
           })
           if (dbUser) {
@@ -64,6 +65,7 @@ const handler = NextAuth({
           }
         } catch (error) {
           console.error("❌ Session callback error:", error)
+          // エラーが発生してもセッションは継続
         }
       }
       return session

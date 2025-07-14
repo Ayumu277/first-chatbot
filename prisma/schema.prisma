@@ -56,6 +56,8 @@ model email_verification_tokens {
   expires   DateTime
   createdAt DateTime @default(now())
   used      Boolean  @default(false)
+  userId    String?
+  users     users?   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model sessions {
@@ -67,19 +69,20 @@ model sessions {
 }
 
 model users {
-  id            String          @id
-  email         String?         @unique
-  name          String?
-  image         String?
-  isGuest       Boolean         @default(false)
-  guestToken    String?         @unique
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime
-  emailVerified DateTime?
-  password      String?
-  accounts      accounts[]
-  chat_sessions chat_sessions[]
-  sessions      sessions[]
+  id                          String                        @id
+  email                       String?                       @unique
+  name                        String?
+  image                       String?
+  isGuest                     Boolean                       @default(false)
+  guestToken                  String?                       @unique
+  createdAt                   DateTime                      @default(now())
+  updatedAt                   DateTime
+  emailVerified               DateTime?
+  password                    String?
+  accounts                    accounts[]
+  chat_sessions               chat_sessions[]
+  sessions                    sessions[]
+  email_verification_tokens   email_verification_tokens[]
 }
 
 model verificationtokens {
