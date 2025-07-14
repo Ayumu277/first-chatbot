@@ -71,14 +71,14 @@ export default function SessionItem({ session, isSelected, onSelect, onDelete }:
           <ChatBubbleLeftIcon className="h-4 w-4" />
         </div>
 
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between">
-            <h3 className="font-medium text-sm truncate">
+        <div className="flex-1 min-w-0 overflow-hidden">
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="font-medium text-sm truncate flex-1">
               {session.title}
             </h3>
 
-            <div className="flex items-center gap-1">
-              <span className="text-xs opacity-70">
+            <div className="flex items-center gap-1 flex-shrink-0">
+              <span className="text-xs opacity-70 whitespace-nowrap">
                 {formatTimestamp(session.updatedAt)}
               </span>
 
@@ -87,7 +87,7 @@ export default function SessionItem({ session, isSelected, onSelect, onDelete }:
                   e.stopPropagation()
                   setDropdownOpen(!dropdownOpen)
                 }}
-                className="p-1 rounded opacity-0 group-hover:opacity-100 hover:bg-gray-600 transition-all duration-200"
+                className="p-1 rounded opacity-0 group-hover:opacity-100 hover:bg-gray-600 transition-all duration-200 flex-shrink-0"
               >
                 <EllipsisVerticalIcon className="h-4 w-4" />
               </button>
