@@ -107,13 +107,6 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
                   // セッションをロード
                   try {
                     await loadSessions()
-
-                    // セッション読み込み後、最新のセッションがあれば選択
-                    const currentStore = useChatStore.getState()
-                    if (currentStore.sessions.length > 0 && !currentStore.currentSessionId) {
-                      const latestSession = currentStore.sessions[0]
-                      useChatStore.getState().selectSession(latestSession.id)
-                    }
                   } catch (error) {
                     console.error('❌ AuthWrapper: Failed to load guest sessions', error)
                   }

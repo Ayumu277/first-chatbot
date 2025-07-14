@@ -368,14 +368,19 @@ export const useChatStore = create<ChatState>()(
           const currentSessionExists = state.currentSessionId &&
             validatedSessions.some(s => s.id === state.currentSessionId)
 
-          // 現在のセッションが存在しない場合、最新のセッションを選択
-          if (!currentSessionExists && validatedSessions.length > 0) {
-            newCurrentSessionId = validatedSessions[0].id
+          // 現在のセッションが存在しない場合、nullに設定（自動選択はしない）
+          if (!currentSessionExists) {
+            newCurrentSessionId = null
           }
+
+          // セッション重複を防ぐために、IDベースで重複除去
+          const uniqueSessions = validatedSessions.filter((session, index, array) =>
+            array.findIndex(s => s.id === session.id) === index
+          )
 
           // データベースからのデータで確実に更新
           set({
-            sessions: validatedSessions,
+            sessions: uniqueSessions,
             currentSessionId: newCurrentSessionId
           })
 
