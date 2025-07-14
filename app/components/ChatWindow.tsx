@@ -34,8 +34,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   const {
     scrollContainerRef,
     scrollOnMessageUpdate,
-    handleScroll,
-    inputFooterHeight
+    handleScroll
   } = useAutoScroll()
 
   const {
@@ -113,7 +112,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   }
 
   return (
-    <div className="flex-1 flex flex-col bg-[#0D1117] relative h-screen overflow-hidden">
+    <div className="flex-1 bg-[#0D1117] relative h-screen grid grid-rows-[auto_1fr_auto] overflow-hidden max-h-screen">
       {/* ヘッダー */}
       <div className="flex-shrink-0 p-4 border-b border-gray-700 bg-[#0D1117] flex justify-between items-center">
         <div className="flex items-center gap-3">
@@ -130,20 +129,18 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         </button>
       </div>
 
-                  {/* メッセージエリア */}
+      {/* メッセージエリア - Grid行で自動的に残り空間を占有 */}
       <div
         ref={scrollContainerRef}
-        className="flex-1 overflow-y-auto scroll-smooth"
-        style={{
-          paddingBottom: `${inputFooterHeight}px`,
-          marginBottom: '0',
-          scrollPaddingBottom: `${inputFooterHeight}px`,
-          overscrollBehavior: 'contain'
-        }}
+        className="overflow-y-auto scroll-smooth bg-[#0D1117] px-4 py-6"
         onScroll={handleScroll}
+        style={{
+          minHeight: 0, // Grid子要素でのoverflow確保
+          scrollPaddingBottom: '2rem'
+        }}
       >
         {!currentSession || !currentSession.messages || currentSession.messages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full p-8">
+          <div className="flex flex-col items-center justify-center h-full">
             <div className="text-center max-w-md">
               <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">🤖</span>
@@ -157,24 +154,23 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
             </div>
           </div>
         ) : (
-          <MessageList
-            messages={currentSession.messages}
-            editingMessageIndex={editingMessageIndex}
-            editingContent={editingContent}
-            onEditMessage={editMessage}
-            onCancelEdit={cancelEdit}
-            onResendMessage={resendMessage}
-            onImageClick={handleImageClick}
-            setEditingContent={setEditingContent}
-          />
+          <div className="space-y-4 pb-8">
+            <MessageList
+              messages={currentSession.messages}
+              editingMessageIndex={editingMessageIndex}
+              editingContent={editingContent}
+              onEditMessage={editMessage}
+              onCancelEdit={cancelEdit}
+              onResendMessage={resendMessage}
+              onImageClick={handleImageClick}
+              setEditingContent={setEditingContent}
+            />
+          </div>
         )}
       </div>
 
-      {/* 入力エリア */}
-      <div
-        data-input-footer
-        className="fixed bottom-0 left-0 right-0 bg-gray-800 border-t-2 border-gray-600 p-4 z-10 md:left-64 shadow-lg"
-      >
+      {/* フッター入力エリア - Grid行で固定高 */}
+      <div className="bg-gray-800 border-t-2 border-gray-600 p-4 shadow-lg md:mr-0">
         {/* アップロードされた画像のプレビュー */}
         {uploadedImage && (
           <div className="mb-3">
