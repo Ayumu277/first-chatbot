@@ -182,33 +182,45 @@ export const useChatStore = create<ChatState>()(
           timestamp
         }
 
-        // ローカルに保存
-        set(state => ({
-          sessions: state.sessions.map(session => {
-            if (session.id === sessionId) {
-              const updatedMessages = [...(session.messages || []), newMessage]
-              let updatedTitle = session.title
-
-              // 最初のユーザーメッセージでタイトルを更新
-              if ((session.messages || []).length === 0 && message.role === 'user') {
-                updatedTitle = generateSessionTitle(message.content)
-              }
-
-              return {
-                ...session,
-                messages: updatedMessages,
-                title: updatedTitle,
-                updatedAt: new Date().toISOString()
-              }
-            }
-            return session
-          })
-        }))
-
-        // データベースに保存
+        // まずデータベースに保存してから、ローカルを更新
         try {
           await dbApi.addMessage(sessionId, newMessage)
           console.log('Message saved to database successfully')
+
+          // データベース保存成功後にローカルを更新
+          set(state => ({
+            sessions: state.sessions.map(session => {
+              if (session.id === sessionId) {
+                // 重複チェック：同じ内容のメッセージが既に存在しないか確認
+                const isDuplicate = session.messages.some(existingMsg =>
+                  existingMsg.content === newMessage.content &&
+                  existingMsg.role === newMessage.role &&
+                  Math.abs(new Date(existingMsg.timestamp).getTime() - new Date().getTime()) < 5000 // 5秒以内
+                )
+
+                if (isDuplicate) {
+                  console.log('Duplicate message detected, skipping local update')
+                  return session
+                }
+
+                const updatedMessages = [...(session.messages || []), newMessage]
+                let updatedTitle = session.title
+
+                // 最初のユーザーメッセージでタイトルを更新
+                if ((session.messages || []).length === 0 && message.role === 'user') {
+                  updatedTitle = generateSessionTitle(message.content)
+                }
+
+                return {
+                  ...session,
+                  messages: updatedMessages,
+                  title: updatedTitle,
+                  updatedAt: new Date().toISOString()
+                }
+              }
+              return session
+            })
+          }))
 
           // 最初のユーザーメッセージの場合、タイトルもデータベースで更新
           const session = state.sessions.find(s => s.id === sessionId)
@@ -219,6 +231,27 @@ export const useChatStore = create<ChatState>()(
           }
         } catch (error) {
           console.error('Database message save failed:', error)
+          // データベース保存に失敗した場合のみローカルに保存
+          set(state => ({
+            sessions: state.sessions.map(session => {
+              if (session.id === sessionId) {
+                const updatedMessages = [...(session.messages || []), newMessage]
+                let updatedTitle = session.title
+
+                if ((session.messages || []).length === 0 && message.role === 'user') {
+                  updatedTitle = generateSessionTitle(message.content)
+                }
+
+                return {
+                  ...session,
+                  messages: updatedMessages,
+                  title: updatedTitle,
+                  updatedAt: new Date().toISOString()
+                }
+              }
+              return session
+            })
+          }))
         }
       },
 
@@ -295,24 +328,47 @@ export const useChatStore = create<ChatState>()(
           console.log('Raw sessions from database:', sessions)
 
           // データベースからのセッションをフロントエンド形式に変換
-          const validatedSessions = sessions.map((session: any) => ({
-            id: session.id,
-            title: session.title,
-            createdAt: session.createdAt,
-            updatedAt: session.updatedAt,
-            messages: (session.chat_messages || []).map((msg: any) => ({
-              role: msg.role as 'user' | 'assistant',
-              content: msg.content,
-              timestamp: new Date(msg.timestamp).toLocaleTimeString('ja-JP', {
-                hour: '2-digit',
-                minute: '2-digit'
-              }),
-              imageBase64: msg.imageBase64 || undefined,
-              imagePreview: msg.imagePreview || undefined
-            }))
-          }))
+          const validatedSessions = sessions.map((session: any) => {
+            // メッセージの重複を除去
+            const uniqueMessages: ChatMessage[] = []
+            const seenMessages = new Set<string>()
 
-          console.log('Converted sessions:', validatedSessions)
+            (session.chat_messages || []).forEach((msg: any) => {
+              // メッセージの一意キーを作成（内容 + 役割 + 時間の組み合わせ）
+              const messageKey = `${msg.content}-${msg.role}-${new Date(msg.timestamp).getTime()}`
+
+              // 同じ内容で同じ役割のメッセージが5分以内にない場合のみ追加
+              const hasSimilarRecent = uniqueMessages.some(existingMsg =>
+                existingMsg.content === msg.content &&
+                existingMsg.role === msg.role &&
+                Math.abs(new Date(existingMsg.timestamp).getTime() - new Date(msg.timestamp).getTime()) < 300000 // 5分
+              )
+
+              if (!seenMessages.has(messageKey) && !hasSimilarRecent) {
+                seenMessages.add(messageKey)
+                uniqueMessages.push({
+                  role: msg.role as 'user' | 'assistant',
+                  content: msg.content,
+                  timestamp: new Date(msg.timestamp).toLocaleTimeString('ja-JP', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  }),
+                  imageBase64: msg.imageBase64 || undefined,
+                  imagePreview: msg.imagePreview || undefined
+                })
+              }
+            })
+
+            return {
+              id: session.id,
+              title: session.title,
+              createdAt: session.createdAt,
+              updatedAt: session.updatedAt,
+              messages: uniqueMessages
+            }
+          })
+
+          console.log('Converted sessions with deduplication:', validatedSessions)
 
           // currentSessionIdの設定ロジック
           let newCurrentSessionId = state.currentSessionId
