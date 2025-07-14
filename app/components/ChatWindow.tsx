@@ -302,7 +302,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       </div>
 
       {/* メッセージエリア */}
-      <div className="flex-1 overflow-y-auto scroll-smooth pb-32 md:pb-36" style={{ scrollPaddingBottom: '12rem' }}>
+      <div className="flex-1 overflow-y-auto scroll-smooth" style={{ paddingBottom: '25vh', scrollPaddingBottom: '25vh' }}>
         {!currentSession || !currentSession.messages || currentSession.messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full p-8">
             <div className="text-center max-w-md">
@@ -332,7 +332,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       </div>
 
       {/* 入力エリア - 固定フッター（サイドバーを考慮） */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#0D1117] border-t border-gray-700 p-4 z-10 md:left-64 h-auto min-h-[6rem]">
+      <div className="fixed bottom-0 left-0 right-0 bg-[#0D1117] border-t border-gray-700 p-4 z-10 md:left-64 h-auto max-h-[20vh]" style={{ minHeight: '120px' }}>
         {/* アップロードされた画像のプレビュー */}
         {uploadedImage && (
           <div className="mb-3">
