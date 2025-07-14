@@ -10,7 +10,7 @@ import { useChatStore } from './store/chat-store'
 export default function Home() {
   const [isClient, setIsClient] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const { currentSessionId, selectSession } = useChatStore()
+  const { currentSessionId, selectSession, getCurrentSession } = useChatStore()
 
   useEffect(() => {
     setIsClient(true)
@@ -25,8 +25,19 @@ export default function Home() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  // ページタイトルを動的に更新
+  useEffect(() => {
+    if (isClient) {
+      const currentSession = getCurrentSession()
+      const title = currentSession?.title || 'chatbot'
+      document.title = title
+    }
+  }, [isClient, currentSessionId, getCurrentSession])
+
   const handleChatSelect = (sessionId: string | null) => {
-    if (sessionId) selectSession(sessionId)
+    if (sessionId) {
+      selectSession(sessionId)
+    }
     setIsSidebarOpen(false)
   }
 

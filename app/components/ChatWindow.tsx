@@ -126,6 +126,13 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     setIsApiLoading(true)
 
     try {
+      // セッションが存在しない場合は新しいセッションを作成
+      let sessionId = currentSession?.id
+      if (!sessionId) {
+        const { createSession } = useChatStore.getState()
+        sessionId = await createSession()
+      }
+
       // ユーザーメッセージを追加
       const userMessage = {
         role: 'user' as const,
@@ -135,7 +142,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         imagePreview: imageToSend?.preview
       }
 
-      addMessage(currentSession?.id || '', userMessage)
+      addMessage(sessionId, userMessage)
 
       // API呼び出し
       const response = await fetch('/api/chat', {
@@ -149,7 +156,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
           imageBase64: imageToSend?.base64,
           imageMimeType: imageToSend?.mimeType,
           userId: currentUser?.id,
-          sessionId: currentSession?.id
+          sessionId: sessionId
         })
       })
 
@@ -166,16 +173,16 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         timestamp: new Date().toISOString()
       }
 
-      addMessage(currentSession?.id || '', aiMessage)
+      addMessage(sessionId, aiMessage)
 
-          } catch (error) {
-        console.error('メッセージ送信エラー:', error)
-        const errorMessage = {
-          role: 'assistant' as const,
-          content: '申し訳ございません。エラーが発生しました。もう一度お試しください。',
-          timestamp: new Date().toISOString()
-        }
-        addMessage(currentSession?.id || '', errorMessage)
+    } catch (error) {
+      console.error('メッセージ送信エラー:', error)
+      const errorMessage = {
+        role: 'assistant' as const,
+        content: '申し訳ございません。エラーが発生しました。もう一度お試しください。',
+        timestamp: new Date().toISOString()
+      }
+      addMessage(currentSession?.id || '', errorMessage)
     } finally {
       setIsApiLoading(false)
     }
@@ -275,40 +282,42 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
 
   return (
     <div className="flex-1 flex flex-col bg-[#0D1117] relative">
-      {/* チャットがない場合のウェルカム画面 */}
-      {!currentSession || !currentSession.messages || currentSession.messages.length === 0 ? (
-        <div className="flex-1 flex flex-col items-center justify-center p-8">
-          <div className="text-center max-w-md">
-            <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">🤖</span>
+      {/* メッセージエリア */}
+      <div className="flex-1 overflow-hidden">
+        {!currentSession || !currentSession.messages || currentSession.messages.length === 0 ? (
+          <div className="flex-1 flex flex-col items-center justify-center p-8 h-full">
+            <div className="text-center max-w-md">
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🤖</span>
+              </div>
+              <h2 className="text-2xl font-bold text-white mb-2">
+                AIチャットボットへようこそ
+              </h2>
+              <p className="text-gray-400 mb-6">
+                何でもお気軽にお聞きください。画像の送信にも対応しています。
+              </p>
+              <button
+                onClick={handleGoHome}
+                className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors mx-auto"
+              >
+                <HomeIcon className="h-4 w-4" />
+                ホームに戻る
+              </button>
             </div>
-            <h2 className="text-2xl font-bold text-white mb-2">
-              AIチャットボットへようこそ
-            </h2>
-            <p className="text-gray-400 mb-6">
-              何でもお気軽にお聞きください。画像の送信にも対応しています。
-            </p>
-            <button
-              onClick={handleGoHome}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors mx-auto"
-            >
-              <HomeIcon className="h-4 w-4" />
-              ホームに戻る
-            </button>
           </div>
-        </div>
-      ) : (
-        <MessageList
-          messages={currentSession.messages}
-          editingMessageIndex={editingMessageIndex}
-          editingContent={editingContent}
-          onEditMessage={handleEditMessage}
-          onCancelEdit={handleCancelEdit}
-          onResendMessage={handleResendMessage}
-          onImageClick={handleImageClick}
-          setEditingContent={setEditingContent}
-        />
-      )}
+        ) : (
+          <MessageList
+            messages={currentSession.messages}
+            editingMessageIndex={editingMessageIndex}
+            editingContent={editingContent}
+            onEditMessage={handleEditMessage}
+            onCancelEdit={handleCancelEdit}
+            onResendMessage={handleResendMessage}
+            onImageClick={handleImageClick}
+            setEditingContent={setEditingContent}
+          />
+        )}
+      </div>
 
       {/* 入力エリア - 常に表示 */}
       <div className="flex-shrink-0 p-4 border-t border-gray-700 bg-[#0D1117]">
