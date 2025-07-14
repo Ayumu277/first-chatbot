@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { useChatStore } from '../store/chat-store'
 import { UploadedImage, ChatMessage } from '../types/chat'
 
-export const useChatActions = () => {
+export const useChatActions = (onMessageUpdate?: () => void) => {
   const [isApiLoading, setIsApiLoading] = useState(false)
   const [editingMessageIndex, setEditingMessageIndex] = useState<number | null>(null)
   const [editingContent, setEditingContent] = useState('')
@@ -44,9 +44,10 @@ export const useChatActions = () => {
         imagePreview: imageToSend?.preview
       }
 
-      await addMessage(sessionId, userMessage)
+            await addMessage(sessionId, userMessage)
+      onMessageUpdate?.()
 
-             // 更新されたセッション状態を取得
+      // 更新されたセッション状態を取得
        const { getCurrentSession: getUpdatedSession } = useChatStore.getState()
        const updatedSession = getUpdatedSession()
 
@@ -79,6 +80,7 @@ export const useChatActions = () => {
       }
 
       await addMessage(sessionId, aiMessage)
+      onMessageUpdate?.()
 
     } catch (error) {
       console.error('メッセージ送信エラー:', error)
@@ -89,6 +91,7 @@ export const useChatActions = () => {
           content: '申し訳ございません。エラーが発生しました。もう一度お試しください。'
         }
         await addMessage(currentSession.id, errorMessage)
+        onMessageUpdate?.()
       }
     } finally {
       setIsApiLoading(false)
@@ -149,6 +152,7 @@ export const useChatActions = () => {
 
       if (currentSession?.id) {
         addMessage(currentSession.id, aiMessage)
+        onMessageUpdate?.()
       }
 
     } catch (error) {
@@ -160,6 +164,7 @@ export const useChatActions = () => {
           timestamp: new Date().toISOString()
         }
         addMessage(currentSession.id, errorMessage)
+        onMessageUpdate?.()
       }
     } finally {
       setIsApiLoading(false)

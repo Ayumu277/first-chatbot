@@ -5,6 +5,7 @@ import { PaperAirplaneIcon, XMarkIcon, HomeIcon } from '@heroicons/react/24/outl
 import { useChatStore } from '../store/chat-store'
 import { useChatInput } from '../hooks/useChatInput'
 import { useChatActions } from '../hooks/useChatActions'
+import { useAutoScroll } from '../hooks/useAutoScroll'
 import ImageUpload from './ImageUpload'
 import MessageList from './MessageList'
 
@@ -31,6 +32,12 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   } = useChatInput()
 
   const {
+    scrollContainerRef,
+    scrollOnMessageUpdate,
+    handleScroll
+  } = useAutoScroll()
+
+  const {
     isApiLoading,
     editingMessageIndex,
     editingContent,
@@ -39,7 +46,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     editMessage,
     cancelEdit,
     resendMessage
-  } = useChatActions()
+  } = useChatActions(scrollOnMessageUpdate)
 
   // ストア
   const {
@@ -55,6 +62,13 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   useEffect(() => {
     setIsClient(true)
   }, [])
+
+  // セッション変更時に最下部にスクロール
+  useEffect(() => {
+    if (currentSession) {
+      scrollOnMessageUpdate()
+    }
+  }, [currentSession?.id, scrollOnMessageUpdate])
 
   // クリーンアップ処理
   useEffect(() => {
@@ -116,7 +130,12 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       </div>
 
       {/* メッセージエリア */}
-      <div className="flex-1 overflow-y-auto scroll-smooth pb-20" style={{ marginBottom: '80px' }}>
+      <div
+        ref={scrollContainerRef}
+        className="flex-1 overflow-y-auto scroll-smooth pb-24"
+        style={{ marginBottom: '100px' }}
+        onScroll={handleScroll}
+      >
         {!currentSession || !currentSession.messages || currentSession.messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full p-8">
             <div className="text-center max-w-md">
