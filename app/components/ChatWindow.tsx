@@ -34,7 +34,8 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     clearSessions,
     isGuest,
     currentUser,
-    setGuest
+    setGuest,
+    loadSessions
   } = useChatStore()
 
   const currentSession = isClient ? getCurrentSession() : null
@@ -233,27 +234,27 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         // 必要に応じてセッションIDを更新する処理をここに追加
       }
 
-      // メッセージの追加はチャットAPIで既にデータベースに保存されているため
-      // ローカルストレージの更新のみ行う
-      await addMessage(currentSession.id, userMessage)
+                        // メッセージはAPIで既にデータベースに保存されているため
+      // ローカルストレージは更新せず、セッションを再読み込みして同期する
+      // これにより重複を防ぐ
 
-      // AIの応答を追加
-      const aiMessage = {
-        role: 'assistant' as const,
-        content: data.message
-      }
-
-      await addMessage(currentSession.id, aiMessage)
+      // 少し待ってからセッションを再読み込み（データベースの書き込み完了を待つ）
+      setTimeout(async () => {
+        await loadSessions()
+      }, 500)
 
     } catch (error) {
       console.error('Chat error:', error)
 
-      const errorMessage = {
-        role: 'assistant' as const,
-        content: error instanceof Error ? error.message : 'エラーが発生しました。もう一度お試しください。'
-      }
+      // エラーメッセージもAPIで保存されるため、ローカルでは保存しない
+      // 代わりに、エラーメッセージを表示するためのローカル状態を使用するか、
+      // 簡単なアラートを表示
+      alert(error instanceof Error ? error.message : 'エラーが発生しました。もう一度お試しください。')
 
-      await addMessage(currentSession.id, errorMessage)
+      // セッションを再読み込み
+      setTimeout(async () => {
+        await loadSessions()
+      }, 500)
     } finally {
       setIsApiLoading(false)
     }

@@ -84,10 +84,12 @@ export async function GET(request: NextRequest) {
 
     const newUser = await prisma.users.create({
       data: {
+        id: `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
         email: verificationToken.email,
         name: verificationToken.name,
         emailVerified: new Date(),
-        isGuest: false
+        isGuest: false,
+        updatedAt: new Date()
       }
     })
 
@@ -106,7 +108,7 @@ export async function GET(request: NextRequest) {
     console.log('✅ メール認証完了:', newUser.email)
 
     // 成功時のリダイレクト
-    const redirectUrl = `${BASE_URL}/?verified=true&email=${encodeURIComponent(newUser.email)}`
+    const redirectUrl = `${BASE_URL}/?verified=true&email=${encodeURIComponent(newUser.email || '')}`
     console.log('🔄 リダイレクト先:', redirectUrl)
 
     return NextResponse.redirect(redirectUrl)

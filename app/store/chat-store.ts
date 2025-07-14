@@ -319,11 +319,20 @@ export const useChatStore = create<ChatState>()(
             console.log('Auto-selecting latest session:', newCurrentSessionId)
           }
 
-          // データベースからのデータでLocalStorageを上書き
+          // データベースからのデータでLocalStorageを完全に上書き
+          // 古いデータを確実にクリアするために、一度空にしてから設定
           set({
-            sessions: validatedSessions,
-            currentSessionId: newCurrentSessionId
+            sessions: [],
+            currentSessionId: null
           })
+
+          // 少し待ってから新しいデータを設定
+          setTimeout(() => {
+            set({
+              sessions: validatedSessions,
+              currentSessionId: newCurrentSessionId
+            })
+          }, 50)
 
           console.log('Sessions loaded from database:', {
             sessionsCount: validatedSessions.length,

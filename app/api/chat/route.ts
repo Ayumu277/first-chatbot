@@ -92,6 +92,31 @@ export async function POST(request: NextRequest) {
         }
       })
       console.log('✅ User message saved to database')
+
+      // セッションのタイトルを更新（最初のメッセージの場合）
+      try {
+        const messageCount = await prisma.chat_messages.count({
+          where: {
+            sessionId: currentSessionId,
+            role: 'user'
+          }
+        })
+
+        // 最初のユーザーメッセージの場合、タイトルを更新
+        if (messageCount === 1) {
+          const newTitle = message.substring(0, 50) + (message.length > 50 ? '...' : '')
+          await prisma.chat_sessions.update({
+            where: { id: currentSessionId },
+            data: {
+              title: newTitle,
+              updatedAt: new Date()
+            }
+          })
+          console.log('✅ Session title updated:', newTitle)
+        }
+      } catch (titleError) {
+        console.error('❌ Failed to update session title:', titleError)
+      }
     } catch (error) {
       console.error('❌ Failed to save user message:', error)
       // エラーがあってもチャットは続行
