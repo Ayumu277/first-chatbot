@@ -302,7 +302,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       </div>
 
       {/* メッセージエリア */}
-      <div className="flex-1 overflow-y-auto" style={{ paddingBottom: '140px' }}>
+      <div className="flex-1 overflow-y-auto scroll-smooth" style={{ paddingBottom: '140px', scrollPaddingBottom: '140px' }}>
         {!currentSession || !currentSession.messages || currentSession.messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full p-8">
             <div className="text-center max-w-md">
