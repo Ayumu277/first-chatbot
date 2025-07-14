@@ -34,7 +34,8 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   const {
     scrollContainerRef,
     scrollOnMessageUpdate,
-    handleScroll
+    handleScroll,
+    inputFooterHeight
   } = useAutoScroll()
 
   const {
@@ -129,11 +130,16 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         </button>
       </div>
 
-      {/* メッセージエリア */}
+                  {/* メッセージエリア */}
       <div
         ref={scrollContainerRef}
-        className="flex-1 overflow-y-auto scroll-smooth pb-24"
-        style={{ marginBottom: '100px' }}
+        className="flex-1 overflow-y-auto scroll-smooth"
+        style={{
+          paddingBottom: `${inputFooterHeight}px`,
+          marginBottom: '0',
+          scrollPaddingBottom: `${inputFooterHeight}px`,
+          overscrollBehavior: 'contain'
+        }}
         onScroll={handleScroll}
       >
         {!currentSession || !currentSession.messages || currentSession.messages.length === 0 ? (
@@ -165,7 +171,10 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       </div>
 
       {/* 入力エリア */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-800 border-t-2 border-gray-600 p-4 z-10 md:left-64 shadow-lg">
+      <div
+        data-input-footer
+        className="fixed bottom-0 left-0 right-0 bg-gray-800 border-t-2 border-gray-600 p-4 z-10 md:left-64 shadow-lg"
+      >
         {/* アップロードされた画像のプレビュー */}
         {uploadedImage && (
           <div className="mb-3">
