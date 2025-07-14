@@ -1,8 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { PaperAirplaneIcon, XMarkIcon, HomeIcon } from '@heroicons/react/24/outline'
 import { useChatStore } from '../store/chat-store'
+import { useChatInput } from '../hooks/useChatInput'
+import { useChatActions } from '../hooks/useChatActions'
 import ImageUpload from './ImageUpload'
 import MessageList from './MessageList'
 
@@ -10,35 +12,41 @@ interface ChatWindowProps {
   chatId: string | null
 }
 
-interface UploadedImage {
-  file: File
-  base64: string
-  preview: string
-  mimeType: string
-}
-
 export default function ChatWindow({ chatId }: ChatWindowProps) {
-  const [inputMessage, setInputMessage] = useState('')
-  const [isApiLoading, setIsApiLoading] = useState(false)
-  const [editingMessageIndex, setEditingMessageIndex] = useState<number | null>(null)
-  const [editingContent, setEditingContent] = useState('')
   const [isClient, setIsClient] = useState(false)
-  const [uploadedImage, setUploadedImage] = useState<UploadedImage | null>(null)
-  const [isDragOver, setIsDragOver] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
+  // カスタムフック
+  const {
+    inputMessage,
+    setInputMessage,
+    uploadedImage,
+    isDragOver,
+    handleImageUpload,
+    handleImageRemove,
+    handleDragOver,
+    handleDragLeave,
+    handleDrop,
+    clearInput
+  } = useChatInput()
+
+  const {
+    isApiLoading,
+    editingMessageIndex,
+    editingContent,
+    setEditingContent,
+    sendMessage,
+    editMessage,
+    cancelEdit,
+    resendMessage
+  } = useChatActions()
+
+  // ストア
   const {
     getCurrentSession,
-    addMessage,
-    updateMessage,
-    isLoading,
-    setLoading,
     setUser,
-    clearSessions,
     isGuest,
-    currentUser,
-    setGuest,
-    loadSessions
+    setGuest
   } = useChatStore()
 
   const currentSession = isClient ? getCurrentSession() : null
@@ -57,224 +65,30 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
     }
   }, [uploadedImage])
 
-  // 画像アップロード処理
-  const handleImageUpload = (image: UploadedImage) => {
-    setUploadedImage(image)
-  }
-
-  // 画像削除
-  const handleImageRemove = () => {
-    setUploadedImage(null)
-  }
-
-  const handleGoHome = () => {
+  // イベントハンドラー
+  const handleGoHome = useCallback(() => {
     if (isGuest) {
       setUser(null)
       setGuest(false)
-    } else {
-      // 認証ユーザーの場合は単純にホーム画面に戻る
-      window.location.href = '/'
     }
-  }
+  }, [isGuest, setUser, setGuest])
 
-  // ドラッグ&ドロップ処理
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragOver(true)
-  }
+  const handleSendMessage = useCallback(() => {
+    sendMessage(inputMessage, uploadedImage, clearInput)
+  }, [sendMessage, inputMessage, uploadedImage, clearInput])
 
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragOver(false)
-  }
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragOver(false)
-
-    const files = e.dataTransfer.files
-    if (files.length > 0) {
-      const file = files[0]
-      if (file.type.startsWith('image/')) {
-        // ImageUploadコンポーネントの処理を直接呼び出す必要があるため、
-        // ここでは簡単な処理を行う
-        const reader = new FileReader()
-        reader.onload = () => {
-          const base64 = reader.result as string
-          const base64Data = base64.split(',')[1]
-          handleImageUpload({
-            file,
-            base64: base64Data,
-            preview: base64,
-            mimeType: file.type
-          })
-        }
-        reader.readAsDataURL(file)
-      }
-    }
-  }
-
-  const handleSendMessage = async () => {
-    if ((!inputMessage.trim() && !uploadedImage) || isApiLoading) return
-
-    const messageToSend = inputMessage.trim()
-    const imageToSend = uploadedImage
-
-    // 入力をクリア
-    setInputMessage('')
-    setUploadedImage(null)
-    setIsApiLoading(true)
-
-    try {
-      // セッションが存在しない場合は新しいセッションを作成
-      let sessionId = currentSession?.id
-      if (!sessionId) {
-        const { createSession } = useChatStore.getState()
-        sessionId = await createSession()
-      }
-
-      // ユーザーメッセージを追加（一回だけ）
-      const userMessage = {
-        role: 'user' as const,
-        content: messageToSend || '画像を送信しました',
-        imageBase64: imageToSend?.base64,
-        imagePreview: imageToSend?.preview
-      }
-
-      await addMessage(sessionId, userMessage)
-
-      // 現在のセッション状態を取得
-      const { getCurrentSession } = useChatStore.getState()
-      const updatedSession = getCurrentSession()
-
-      // API呼び出し
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: messageToSend,
-          conversationHistory: updatedSession?.messages || [],
-          imageBase64: imageToSend?.base64,
-          imageMimeType: imageToSend?.mimeType,
-          userId: currentUser?.id,
-          sessionId: sessionId
-        })
-      })
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-
-      const data = await response.json()
-
-      // AIの応答を追加（一回だけ）
-      const aiMessage = {
-        role: 'assistant' as const,
-        content: data.message
-      }
-
-      await addMessage(sessionId, aiMessage)
-
-    } catch (error) {
-      console.error('メッセージ送信エラー:', error)
-      const errorMessage = {
-        role: 'assistant' as const,
-        content: '申し訳ございません。エラーが発生しました。もう一度お試しください。'
-      }
-      if (currentSession?.id) {
-        await addMessage(currentSession.id, errorMessage)
-      }
-    } finally {
-      setIsApiLoading(false)
-    }
-  }
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSendMessage()
     }
-  }
+  }, [handleSendMessage])
 
-  const handleEditMessage = (messageIndex: number, content: string) => {
-    setEditingMessageIndex(messageIndex)
-    setEditingContent(content)
-  }
-
-  const handleCancelEdit = () => {
-    setEditingMessageIndex(null)
-    setEditingContent('')
-  }
-
-  const handleResendMessage = async () => {
-    if (!editingContent.trim()) return
-
-    const updatedMessage = {
-      role: 'user' as const,
-      content: editingContent.trim(),
-      timestamp: new Date().toISOString()
-    }
-
-    // メッセージを更新
-    if (editingMessageIndex !== null) {
-      updateMessage(currentSession?.id || '', editingMessageIndex, updatedMessage.content)
-    }
-
-    // 編集モードを終了
-    setEditingMessageIndex(null)
-    setEditingContent('')
-
-    // 新しいメッセージでAIに再送信
-    setIsApiLoading(true)
-
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: editingContent.trim(),
-          conversationHistory: currentSession?.messages || [],
-          userId: currentUser?.id,
-          sessionId: currentSession?.id
-        })
-      })
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-
-      const data = await response.json()
-
-      const aiMessage = {
-        role: 'assistant' as const,
-        content: data.message,
-        timestamp: new Date().toISOString()
-      }
-
-      addMessage(currentSession?.id || '', aiMessage)
-
-          } catch (error) {
-        console.error('メッセージ再送信エラー:', error)
-        const errorMessage = {
-          role: 'assistant' as const,
-          content: '申し訳ございません。エラーが発生しました。もう一度お試しください。',
-          timestamp: new Date().toISOString()
-        }
-        addMessage(currentSession?.id || '', errorMessage)
-    } finally {
-      setIsApiLoading(false)
-    }
-  }
-
-  const handleImageClick = (imageUrl: string) => {
+  const handleImageClick = useCallback((imageUrl: string) => {
     setSelectedImage(imageUrl)
-  }
+  }, [])
 
-  // サーバーサイドでは何も表示しない
+  // サーバーサイドレンダリング対応
   if (!isClient) {
     return (
       <div className="flex-1 flex items-center justify-center bg-[#0D1117]">
@@ -285,7 +99,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
 
   return (
     <div className="flex-1 flex flex-col bg-[#0D1117] relative h-screen overflow-hidden">
-      {/* ヘッダー - 常に表示 */}
+      {/* ヘッダー */}
       <div className="flex-shrink-0 p-4 border-b border-gray-700 bg-[#0D1117] flex justify-between items-center">
         <div className="flex items-center gap-3">
           <h1 className="text-lg font-semibold text-white">
@@ -302,7 +116,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
       </div>
 
       {/* メッセージエリア */}
-      <div className="flex-1 overflow-y-auto scroll-smooth" style={{ paddingBottom: '120px', scrollPaddingBottom: '120px' }}>
+      <div className="flex-1 overflow-y-auto scroll-smooth pb-20" style={{ marginBottom: '80px' }}>
         {!currentSession || !currentSession.messages || currentSession.messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full p-8">
             <div className="text-center max-w-md">
@@ -322,17 +136,17 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
             messages={currentSession.messages}
             editingMessageIndex={editingMessageIndex}
             editingContent={editingContent}
-            onEditMessage={handleEditMessage}
-            onCancelEdit={handleCancelEdit}
-            onResendMessage={handleResendMessage}
+            onEditMessage={editMessage}
+            onCancelEdit={cancelEdit}
+            onResendMessage={resendMessage}
             onImageClick={handleImageClick}
             setEditingContent={setEditingContent}
           />
         )}
       </div>
 
-      {/* 入力エリア - 固定フッター（サイドバーを考慮） */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#0D1117] border-t border-gray-700 p-3 z-10 md:left-64">
+      {/* 入力エリア */}
+      <div className="fixed bottom-0 left-0 right-0 bg-gray-800 border-t-2 border-gray-600 p-4 z-10 md:left-64 shadow-lg">
         {/* アップロードされた画像のプレビュー */}
         {uploadedImage && (
           <div className="mb-3">
@@ -370,17 +184,17 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="メッセージを入力してください..."
-              className="w-full bg-gray-800 text-white rounded-lg px-3 py-2 pr-12 resize-none border border-gray-600 focus:border-blue-500 focus:outline-none min-h-[40px] max-h-24"
+              className="w-full bg-gray-700 text-white rounded-lg px-4 py-3 pr-12 resize-none border-2 border-gray-600 focus:border-blue-500 focus:outline-none min-h-[48px] max-h-32 shadow-sm"
               rows={1}
               disabled={isApiLoading}
               style={{
                 height: 'auto',
-                minHeight: '40px'
+                minHeight: '48px'
               }}
               onInput={(e) => {
                 const target = e.target as HTMLTextAreaElement
                 target.style.height = 'auto'
-                target.style.height = Math.min(target.scrollHeight, 96) + 'px'
+                target.style.height = Math.min(target.scrollHeight, 128) + 'px'
               }}
             />
 
@@ -394,7 +208,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
           </div>
         </div>
 
-        {/* ローディング状態の表示 */}
+        {/* ローディング状態 */}
         {isApiLoading && (
           <div className="mt-2 text-center">
             <div className="inline-flex items-center gap-2 text-gray-400">
