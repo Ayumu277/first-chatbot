@@ -310,8 +310,28 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         />
       )}
 
-      {/* 入力エリア */}
-      <div className="flex-shrink-0 p-4 border-t border-gray-700">
+      {/* 入力エリア - 常に表示 */}
+      <div className="flex-shrink-0 p-4 border-t border-gray-700 bg-[#0D1117]">
+        {/* アップロードされた画像のプレビュー */}
+        {uploadedImage && (
+          <div className="mb-3">
+            <div className="relative inline-block">
+              <img
+                src={uploadedImage.preview}
+                alt="アップロード画像"
+                className="max-w-xs max-h-32 rounded-lg border border-gray-600"
+              />
+              <button
+                onClick={handleImageRemove}
+                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
+                title="画像を削除"
+              >
+                <XMarkIcon className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="flex gap-2 items-end">
           <ImageUpload
             uploadedImage={uploadedImage}
@@ -329,9 +349,18 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="メッセージを入力してください..."
-              className="w-full bg-gray-800 text-white rounded-lg px-4 py-3 pr-12 resize-none border border-gray-600 focus:border-blue-500 focus:outline-none"
+              className="w-full bg-gray-800 text-white rounded-lg px-4 py-3 pr-12 resize-none border border-gray-600 focus:border-blue-500 focus:outline-none min-h-[48px] max-h-32"
               rows={1}
               disabled={isApiLoading}
+              style={{
+                height: 'auto',
+                minHeight: '48px'
+              }}
+              onInput={(e) => {
+                const target = e.target as HTMLTextAreaElement
+                target.style.height = 'auto'
+                target.style.height = Math.min(target.scrollHeight, 128) + 'px'
+              }}
             />
 
             <button
@@ -343,6 +372,16 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
             </button>
           </div>
         </div>
+
+        {/* ローディング状態の表示 */}
+        {isApiLoading && (
+          <div className="mt-2 text-center">
+            <div className="inline-flex items-center gap-2 text-gray-400">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
+              <span>回答を生成中...</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 画像モーダル */}
@@ -363,6 +402,16 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
               alt="拡大表示"
               className="max-w-full max-h-full object-contain"
             />
+          </div>
+        </div>
+      )}
+
+      {/* ドラッグ&ドロップオーバーレイ */}
+      {isDragOver && (
+        <div className="absolute inset-0 bg-blue-500 bg-opacity-20 border-2 border-blue-500 border-dashed rounded-lg flex items-center justify-center z-10 pointer-events-none">
+          <div className="text-center">
+            <div className="text-6xl mb-4">📎</div>
+            <p className="text-blue-500 font-medium text-lg">画像をドロップしてください</p>
           </div>
         </div>
       )}

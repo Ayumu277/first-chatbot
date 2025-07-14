@@ -328,10 +328,10 @@ export const useChatStore = create<ChatState>()(
 
           // 少し待ってから新しいデータを設定
           setTimeout(() => {
-            set({
-              sessions: validatedSessions,
-              currentSessionId: newCurrentSessionId
-            })
+          set({
+            sessions: validatedSessions,
+            currentSessionId: newCurrentSessionId
+          })
           }, 50)
 
           console.log('Sessions loaded from database:', {

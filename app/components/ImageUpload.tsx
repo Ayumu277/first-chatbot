@@ -66,6 +66,13 @@ export default function ImageUpload({
       return
     }
 
+    // ファイルサイズ制限（10MB）
+    const maxSize = 10 * 1024 * 1024
+    if (file.size > maxSize) {
+      alert('ファイルサイズが大きすぎます。10MB以下のファイルを選択してください。')
+      return
+    }
+
     try {
       const base64 = await convertToBase64(file)
       const dataURL = await convertToDataURL(file)
@@ -97,7 +104,7 @@ export default function ImageUpload({
       <button
         type="button"
         onClick={() => fileInputRef.current?.click()}
-        className="p-2 text-gray-400 hover:text-gray-200 transition-colors"
+        className="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white transition-colors border border-gray-600 hover:border-gray-500"
         title="画像をアップロード"
       >
         <PaperClipIcon className="h-5 w-5" />
@@ -111,34 +118,6 @@ export default function ImageUpload({
         onChange={handleFileSelect}
         className="hidden"
       />
-
-      {/* ドラッグ&ドロップオーバーレイ */}
-      {isDragOver && (
-        <div className="absolute inset-0 bg-blue-500 bg-opacity-20 border-2 border-blue-500 border-dashed rounded-lg flex items-center justify-center z-10">
-          <div className="text-center">
-            <PhotoIcon className="h-12 w-12 text-blue-500 mx-auto mb-2" />
-            <p className="text-blue-500 font-medium">画像をドロップしてください</p>
-          </div>
-        </div>
-      )}
-
-      {/* アップロードされた画像のプレビュー */}
-      {uploadedImage && (
-        <div className="mt-2 relative inline-block">
-          <img
-            src={uploadedImage.preview}
-            alt="アップロード画像"
-            className="max-w-xs max-h-32 rounded-lg border border-gray-600"
-          />
-          <button
-            onClick={onImageRemove}
-            className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
-            title="画像を削除"
-          >
-            <XMarkIcon className="h-4 w-4" />
-          </button>
-        </div>
-      )}
 
       {/* ドラッグ&ドロップエリア */}
       <div
