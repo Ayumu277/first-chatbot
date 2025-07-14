@@ -6,6 +6,8 @@ import { useChatStore } from '../store/chat-store'
 import { useChatInput } from '../hooks/useChatInput'
 import { useChatActions } from '../hooks/useChatActions'
 import { useAutoScroll } from '../hooks/useAutoScroll'
+import { classNames } from '../utils/helpers'
+import { THEME_COLORS, SPACING, SIZES } from '../constants/theme'
 import ImageUpload from './ImageUpload'
 import MessageList from './MessageList'
 
@@ -112,7 +114,10 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
   }
 
   return (
-    <div className="flex-1 bg-[#0D1117] relative h-screen grid grid-rows-[auto_1fr_auto] overflow-hidden max-h-screen">
+    <div
+      className="flex-1 relative h-screen grid grid-rows-[auto_1fr_auto] overflow-hidden max-h-screen"
+      style={{ backgroundColor: THEME_COLORS.background.primary }}
+    >
       {/* ヘッダー */}
       <div className="flex-shrink-0 p-4 border-b border-gray-700 bg-[#0D1117] flex justify-between items-center">
         <div className="flex items-center gap-3">
@@ -154,7 +159,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
             </div>
           </div>
         ) : (
-          <div className="space-y-4 pb-8">
+          <div className="space-y-4 pb-16">
             <MessageList
               messages={currentSession.messages}
               editingMessageIndex={editingMessageIndex}

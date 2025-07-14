@@ -88,7 +88,7 @@ export const useChatActions = (onMessageUpdate?: () => void) => {
       if (currentSession?.id) {
         const errorMessage: ChatMessage = {
           role: 'assistant',
-          content: '申し訳ございません。エラーが発生しました。もう一度お試しください。'
+          content: 'ネットワークエラーが発生しました。接続を確認して、もう一度お試しください。'
         }
         await addMessage(currentSession.id, errorMessage)
         onMessageUpdate?.()

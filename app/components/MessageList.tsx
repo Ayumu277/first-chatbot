@@ -1,6 +1,8 @@
 'use client'
 
 import { UserIcon, CpuChipIcon, PencilIcon } from '@heroicons/react/24/outline'
+import { formatTimestamp, classNames } from '../utils/helpers'
+import { THEME_COLORS, SPACING } from '../constants/theme'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -31,21 +33,16 @@ export default function MessageList({
   onImageClick,
   setEditingContent
 }: MessageListProps) {
-  const formatTimestamp = (timestamp: string) => {
-    return new Date(timestamp).toLocaleTimeString('ja-JP', {
-      hour: '2-digit',
-      minute: '2-digit'
-    })
-  }
 
   return (
-    <div className="space-y-4">
+    <div className={SPACING.message}>
       {messages.map((message, index) => (
         <div
           key={index}
-          className={`flex gap-3 ${
+          className={classNames(
+            'flex gap-3',
             message.role === 'user' ? 'justify-end' : 'justify-start'
-          }`}
+          )}
         >
           {message.role === 'assistant' && (
             <div className="flex-shrink-0 w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
