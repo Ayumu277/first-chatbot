@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '../../../lib/prisma'
+import prisma from '../../../lib/prisma'
 
 // DELETE: セッションを削除
 export async function DELETE(

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '../../../lib/prisma'
+import prisma from '../../../lib/prisma'
 
 // 共通ゲストユーザーのID
 const SHARED_GUEST_USER_ID = 'shared_guest_user'
@@ -8,7 +8,6 @@ const SHARED_GUEST_TOKEN = 'shared_guest_token'
 // 共通ゲストユーザーを作成または取得
 export async function POST() {
   try {
-    console.log('ゲストユーザー作成APIが呼び出されました')
 
     // まず、既存の古いゲストユーザーをクリーンアップ
     try {
@@ -20,7 +19,6 @@ export async function POST() {
           }
         }
       })
-      console.log(`既存のゲストユーザー ${deletedCount.count} 件をクリーンアップしました`)
     } catch (cleanupError) {
       console.warn('ゲストユーザークリーンアップ中にエラー:', cleanupError)
     }
@@ -45,7 +43,6 @@ export async function POST() {
       }
     })
 
-    console.log('共通ゲストユーザーを取得/作成しました:', guestUser)
 
     const response = {
       success: true,
@@ -56,7 +53,6 @@ export async function POST() {
         guestToken: guestUser.guestToken
       }
     }
-    console.log('API応答:', response)
 
     return NextResponse.json(response)
   } catch (error) {
@@ -82,12 +78,10 @@ export async function POST() {
 // 共通ゲストユーザーを復元
 export async function GET(request: Request) {
   try {
-    console.log('ゲストユーザー復元APIが呼び出されました')
 
     // Authorization ヘッダーからトークンを取得
     const authHeader = request.headers.get('Authorization')
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      console.log('認証ヘッダーが見つかりません')
       return NextResponse.json(
         { success: false, error: 'Authorization header required' },
         { status: 401 }
@@ -95,7 +89,6 @@ export async function GET(request: Request) {
     }
 
     const guestToken = authHeader.substring(7) // "Bearer " を削除
-    console.log('ゲストトークン:', guestToken)
 
     // 共通ゲストトークンの場合
     if (guestToken === SHARED_GUEST_TOKEN) {
@@ -106,7 +99,6 @@ export async function GET(request: Request) {
       })
 
       if (guestUser) {
-        console.log('共通ゲストユーザーが見つかりました:', guestUser)
 
         const response = {
           success: true,
@@ -117,13 +109,11 @@ export async function GET(request: Request) {
             guestToken: guestUser.guestToken
           }
         }
-        console.log('API応答:', response)
 
         return NextResponse.json(response)
       }
     }
 
-    console.log('ゲストユーザーが見つかりません')
     return NextResponse.json(
       { success: false, error: 'Guest user not found' },
       { status: 404 }

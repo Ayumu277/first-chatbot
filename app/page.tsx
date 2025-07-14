@@ -57,16 +57,12 @@ export default function Home() {
         {/* モバイル用ハンバーガーボタン */}
         <button
           onClick={toggleSidebar}
-          className="md:hidden fixed top-4 left-4 z-50 p-2 bg-sidebar rounded-lg border border-theme hover:bg-gray-700 transition-colors"
-          style={{
-            backgroundColor: '#161B22',
-            borderColor: '#30363D'
-          }}
+          className="md:hidden fixed top-4 left-4 z-50 p-2 bg-[#161B22] rounded-lg border border-[#30363D] hover:bg-gray-700 transition-colors"
         >
           {isSidebarOpen ? (
-            <XMarkIcon className="w-6 h-6 text-light-theme" style={{color: '#C9D1D9'}} />
+            <XMarkIcon className="w-6 h-6 text-[#C9D1D9]" />
           ) : (
-            <Bars3Icon className="w-6 h-6 text-light-theme" style={{color: '#C9D1D9'}} />
+            <Bars3Icon className="w-6 h-6 text-[#C9D1D9]" />
           )}
         </button>
 

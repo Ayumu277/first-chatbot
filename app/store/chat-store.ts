@@ -140,7 +140,7 @@ export const useChatStore = create<ChatState>()(
             ),
             currentSessionId: dbSession.id
           }))
-          console.log('Session saved to database successfully')
+
           return dbSession.id
         } catch (error) {
           console.error('Database create failed, using local storage only:', error)
@@ -164,7 +164,6 @@ export const useChatStore = create<ChatState>()(
         // ゲストユーザーでもデータベースから削除するように変更
         try {
           await dbApi.deleteSession(sessionId)
-          console.log('Session deleted from database successfully')
         } catch (error) {
           console.error('Database delete failed:', error)
         }
@@ -185,7 +184,6 @@ export const useChatStore = create<ChatState>()(
         // まずデータベースに保存してから、ローカルを更新
         try {
           await dbApi.addMessage(sessionId, newMessage)
-          console.log('Message saved to database successfully')
 
           // データベース保存成功後にローカルを更新
           set(state => ({
@@ -199,7 +197,6 @@ export const useChatStore = create<ChatState>()(
                 )
 
                 if (isDuplicate) {
-                  console.log('Duplicate message detected, skipping local update')
                   return session
                 }
 
@@ -227,7 +224,6 @@ export const useChatStore = create<ChatState>()(
           if (session && session.messages.length === 0 && message.role === 'user') {
             const newTitle = generateSessionTitle(message.content)
             await dbApi.updateSession(sessionId, newTitle)
-            console.log('Session title updated in database:', newTitle)
           }
         } catch (error) {
           console.error('Database message save failed:', error)
@@ -297,7 +293,6 @@ export const useChatStore = create<ChatState>()(
         // バックグラウンドでデータベースを更新
         try {
           await dbApi.updateSession(sessionId, title)
-          console.log('Session title updated in database successfully')
         } catch (error) {
           console.error('Database title update failed:', error)
         }
@@ -319,19 +314,17 @@ export const useChatStore = create<ChatState>()(
       loadSessions: async () => {
         const state = get()
         if (!state.currentUser) {
-          console.log('No user authenticated, skipping session load')
           return
         }
 
         try {
           const sessions = await dbApi.getSessions(state.currentUser.id)
-          console.log('Raw sessions from database:', sessions)
 
           // データベースからのセッションをフロントエンド形式に変換
           const validatedSessions = sessions.map((session: any) => {
             // メッセージの重複を除去
             const uniqueMessages: ChatMessage[] = []
-            const seenMessages = new Set<string>()
+            const seenMessages = new Set() as Set<string>
 
             (session.chat_messages || []).forEach((msg: any) => {
               // メッセージの一意キーを作成（内容 + 役割 + 時間の組み合わせ）
@@ -368,8 +361,6 @@ export const useChatStore = create<ChatState>()(
             }
           })
 
-          console.log('Converted sessions with deduplication:', validatedSessions)
-
           // currentSessionIdの設定ロジック
           let newCurrentSessionId = state.currentSessionId
 
@@ -380,7 +371,6 @@ export const useChatStore = create<ChatState>()(
           // 現在のセッションが存在しない場合、最新のセッションを選択
           if (!currentSessionExists && validatedSessions.length > 0) {
             newCurrentSessionId = validatedSessions[0].id
-            console.log('Auto-selecting latest session:', newCurrentSessionId)
           }
 
           // データベースからのデータで確実に更新
@@ -389,11 +379,6 @@ export const useChatStore = create<ChatState>()(
             currentSessionId: newCurrentSessionId
           })
 
-          console.log('Sessions loaded from database:', {
-            sessionsCount: validatedSessions.length,
-            currentSessionId: newCurrentSessionId,
-            sessionsWithMessages: validatedSessions.filter(s => s.messages.length > 0).length
-          })
         } catch (error) {
           console.error('Failed to load sessions from database:', error)
         }

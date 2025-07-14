@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '../../lib/prisma'
+import prisma from '../../lib/prisma'
 
 // GET: ユーザーのチャットセッション一覧を取得
 export async function GET(request: NextRequest) {

@@ -1,9 +1,8 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { prisma } from "../../../lib/prisma"
+import prisma from "../../../lib/prisma"
 
-console.log("📦 DATABASE_URL is:", process.env.DATABASE_URL);
 
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -22,7 +21,6 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
-      console.log("🔐 SignIn callback:", { user, account, profile })
 
       // emailが存在することを確認
       if (!user.email) {
@@ -37,12 +35,9 @@ const handler = NextAuth({
         })
 
         if (existingUser) {
-          console.log("✅ User found in database:", existingUser.email)
           // ユーザーが存在する場合、サインインを許可
           return true
         } else {
-          console.log("❌ User not found in database:", user.email)
-          console.log("🛑 Account registration required")
           // ユーザーが存在しない場合、サインインを拒否
           return false
         }
@@ -53,7 +48,6 @@ const handler = NextAuth({
       }
     },
     async session({ session, user }) {
-      console.log("🔐 Session callback:", { session, user })
       // セッションにユーザーIDを追加
       if (session?.user?.email) {
         try {

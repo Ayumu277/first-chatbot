@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma, testDatabaseConnection } from '../../../lib/prisma'
+import prisma, { checkDatabaseConnection } from '../../../lib/prisma'
 import crypto from 'crypto'
 
 export async function POST(request: NextRequest) {
@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
 
     // Prisma接続テスト
     console.log('🔍 Prisma接続テストを実行中...')
-    const isConnected = await testDatabaseConnection()
+    const isConnected = await checkDatabaseConnection()
     if (!isConnected) {
       return NextResponse.json(
         { error: 'データベース接続に失敗しました。しばらく後にお試しください。' },
