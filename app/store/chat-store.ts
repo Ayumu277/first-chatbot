@@ -189,6 +189,7 @@ export const useChatStore = create<ChatState>()(
               const updatedMessages = [...(session.messages || []), newMessage]
               let updatedTitle = session.title
 
+              // 最初のユーザーメッセージでタイトルを更新
               if ((session.messages || []).length === 0 && message.role === 'user') {
                 updatedTitle = generateSessionTitle(message.content)
               }
@@ -204,10 +205,18 @@ export const useChatStore = create<ChatState>()(
           })
         }))
 
-        // ゲストユーザーでもデータベースに保存するように変更
+        // データベースに保存
         try {
           await dbApi.addMessage(sessionId, newMessage)
           console.log('Message saved to database successfully')
+
+          // 最初のユーザーメッセージの場合、タイトルもデータベースで更新
+          const session = state.sessions.find(s => s.id === sessionId)
+          if (session && session.messages.length === 0 && message.role === 'user') {
+            const newTitle = generateSessionTitle(message.content)
+            await dbApi.updateSession(sessionId, newTitle)
+            console.log('Session title updated in database:', newTitle)
+          }
         } catch (error) {
           console.error('Database message save failed:', error)
         }
@@ -281,7 +290,6 @@ export const useChatStore = create<ChatState>()(
           return
         }
 
-        // ゲストユーザーでもデータベースからロードするように変更
         try {
           const sessions = await dbApi.getSessions(state.currentUser.id)
           console.log('Raw sessions from database:', sessions)
@@ -319,20 +327,11 @@ export const useChatStore = create<ChatState>()(
             console.log('Auto-selecting latest session:', newCurrentSessionId)
           }
 
-          // データベースからのデータでLocalStorageを完全に上書き
-          // 古いデータを確実にクリアするために、一度空にしてから設定
-          set({
-            sessions: [],
-            currentSessionId: null
-          })
-
-          // 少し待ってから新しいデータを設定
-          setTimeout(() => {
+          // データベースからのデータで確実に更新
           set({
             sessions: validatedSessions,
             currentSessionId: newCurrentSessionId
           })
-          }, 50)
 
           console.log('Sessions loaded from database:', {
             sessionsCount: validatedSessions.length,

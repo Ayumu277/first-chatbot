@@ -133,16 +133,19 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         sessionId = await createSession()
       }
 
-      // ユーザーメッセージを追加
+      // ユーザーメッセージを追加（一回だけ）
       const userMessage = {
         role: 'user' as const,
         content: messageToSend || '画像を送信しました',
-        timestamp: new Date().toISOString(),
         imageBase64: imageToSend?.base64,
         imagePreview: imageToSend?.preview
       }
 
-      addMessage(sessionId, userMessage)
+      await addMessage(sessionId, userMessage)
+
+      // 現在のセッション状態を取得
+      const { getCurrentSession } = useChatStore.getState()
+      const updatedSession = getCurrentSession()
 
       // API呼び出し
       const response = await fetch('/api/chat', {
@@ -152,7 +155,7 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
         },
         body: JSON.stringify({
           message: messageToSend,
-          conversationHistory: currentSession?.messages || [],
+          conversationHistory: updatedSession?.messages || [],
           imageBase64: imageToSend?.base64,
           imageMimeType: imageToSend?.mimeType,
           userId: currentUser?.id,
@@ -166,23 +169,23 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
 
       const data = await response.json()
 
-      // AIの応答を追加
+      // AIの応答を追加（一回だけ）
       const aiMessage = {
         role: 'assistant' as const,
-        content: data.message,
-        timestamp: new Date().toISOString()
+        content: data.message
       }
 
-      addMessage(sessionId, aiMessage)
+      await addMessage(sessionId, aiMessage)
 
     } catch (error) {
       console.error('メッセージ送信エラー:', error)
       const errorMessage = {
         role: 'assistant' as const,
-        content: '申し訳ございません。エラーが発生しました。もう一度お試しください。',
-        timestamp: new Date().toISOString()
+        content: '申し訳ございません。エラーが発生しました。もう一度お試しください。'
       }
-      addMessage(currentSession?.id || '', errorMessage)
+      if (currentSession?.id) {
+        await addMessage(currentSession.id, errorMessage)
+      }
     } finally {
       setIsApiLoading(false)
     }
@@ -282,6 +285,22 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
 
   return (
     <div className="flex-1 flex flex-col bg-[#0D1117] relative">
+      {/* ヘッダー - 常に表示 */}
+      <div className="flex-shrink-0 p-4 border-b border-gray-700 bg-[#0D1117] flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <h1 className="text-lg font-semibold text-white">
+            {currentSession?.title || 'chatbot'}
+          </h1>
+        </div>
+        <button
+          onClick={handleGoHome}
+          className="flex items-center gap-2 px-3 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm"
+        >
+          <HomeIcon className="h-4 w-4" />
+          ホーム
+        </button>
+      </div>
+
       {/* メッセージエリア */}
       <div className="flex-1 overflow-hidden">
         {!currentSession || !currentSession.messages || currentSession.messages.length === 0 ? (
@@ -296,13 +315,6 @@ export default function ChatWindow({ chatId }: ChatWindowProps) {
               <p className="text-gray-400 mb-6">
                 何でもお気軽にお聞きください。画像の送信にも対応しています。
               </p>
-              <button
-                onClick={handleGoHome}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors mx-auto"
-              >
-                <HomeIcon className="h-4 w-4" />
-                ホームに戻る
-              </button>
             </div>
           </div>
         ) : (

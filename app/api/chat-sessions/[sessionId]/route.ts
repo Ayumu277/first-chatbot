@@ -33,6 +33,42 @@ export async function DELETE(
   }
 }
 
+// PATCH: セッションのタイトルを更新
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ sessionId: string }> }
+) {
+  try {
+    const { sessionId } = await params
+    const { title } = await request.json()
+
+    if (!title) {
+      return NextResponse.json(
+        { error: 'タイトルが必要です' },
+        { status: 400 }
+      )
+    }
+
+    const updatedSession = await prisma.chat_sessions.update({
+      where: {
+        id: sessionId
+      },
+      data: {
+        title: title,
+        updatedAt: new Date()
+      }
+    })
+
+    return NextResponse.json(updatedSession)
+  } catch (error) {
+    console.error('Failed to update session:', error)
+    return NextResponse.json(
+      { error: 'セッションの更新に失敗しました' },
+      { status: 500 }
+    )
+  }
+}
+
 // GET: セッションの詳細を取得
 export async function GET(
   request: NextRequest,
@@ -66,35 +102,6 @@ export async function GET(
     console.error('Failed to fetch session:', error)
     return NextResponse.json(
       { error: 'セッションの取得に失敗しました' },
-      { status: 500 }
-    )
-  }
-}
-
-// PATCH: セッションのタイトルを更新
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: Promise<{ sessionId: string }> }
-) {
-  try {
-    const { sessionId } = await params
-    const { title } = await request.json()
-
-    await prisma.chat_sessions.update({
-      where: {
-        id: sessionId
-      },
-      data: {
-        title,
-        updatedAt: new Date()
-      }
-    })
-
-    return NextResponse.json({ success: true })
-  } catch (error) {
-    console.error('Failed to update session:', error)
-    return NextResponse.json(
-      { error: 'セッションの更新に失敗しました' },
       { status: 500 }
     )
   }
