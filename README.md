@@ -300,9 +300,23 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+## 📁 ログ管理
+
+### ログファイルの場所
+- `logs/` - アプリケーションログ
+- `logs/archived/` - 過去のログファイル
+
+### ログの種類
+- `application.log` - 一般的な動作ログ
+- `error.log` - エラーログ
+- `deployment.log` - デプロイログ
+
+詳細については `logs/README.md` を参照してください。
+
+---
+
 ## 📞 サポート
 
 質問や問題がある場合は、[Issues](https://github.com/Ayumu277/first-chatbot/issues) でお知らせください。
 
 **Happy Coding! 🚀**
-# Force redeploy #午後

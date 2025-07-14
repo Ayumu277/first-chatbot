@@ -48,6 +48,18 @@ container-logs.zip
 LogFiles/
 deployments/
 
+# Logs and temporary files
+logs/
+*.zip
+*.txt
+!README.md
+!package*.json
+!tsconfig.json
+!tailwind.config.js
+!next.config.js
+!postcss.config.js
+!web.config
+
 # Build artifacts
 .next/
 dist/
