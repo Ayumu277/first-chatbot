@@ -48,17 +48,18 @@ model chat_sessions {
   users         users           @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model email_verification_tokens {
-  id        String   @id
-  email     String
-  token     String   @unique
-  name      String?
-  expires   DateTime
-  createdAt DateTime @default(now())
-  used      Boolean  @default(false)
-  userId    String?
-  users     users?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
+// ARCHIVED: メール認証機能は現在使用していないためコメントアウト
+// model email_verification_tokens {
+//   id        String   @id
+//   email     String
+//   token     String   @unique
+//   name      String?
+//   expires   DateTime
+//   createdAt DateTime @default(now())
+//   used      Boolean  @default(false)
+//   userId    String?
+//   users     users?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+// }
 
 model sessions {
   id           String   @id
@@ -82,7 +83,7 @@ model users {
   accounts                    accounts[]
   chat_sessions               chat_sessions[]
   sessions                    sessions[]
-  email_verification_tokens   email_verification_tokens[]
+  // email_verification_tokens   email_verification_tokens[] // ARCHIVED
 }
 
 model verificationtokens {

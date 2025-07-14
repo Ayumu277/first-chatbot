@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma, testDatabaseConnection } from '../../../lib/prisma'
-import { sendVerificationEmail } from '../../../lib/email'
 import crypto from 'crypto'
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('📧 メール登録APIが呼び出されました')
+    console.log('👤 ユーザー登録APIが呼び出されました')
 
     // Prisma接続テスト
     console.log('🔍 Prisma接続テストを実行中...')
@@ -37,7 +36,7 @@ export async function POST(request: NextRequest) {
 
     console.log('🔍 既存ユーザーをチェック中...', email)
 
-    // 既存ユーザーのチェック（認証済みユーザー）
+    // 既存ユーザーのチェック
     let existingUser
     try {
       existingUser = await prisma.users.findUnique({
@@ -55,107 +54,51 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (existingUser && existingUser.emailVerified) {
-      console.log('⚠️ 既に認証済みのユーザー:', email)
+    if (existingUser) {
+      console.log('⚠️ 既に登録済みのユーザー:', email)
       return NextResponse.json(
         { error: 'このメールアドレスは既に登録されています' },
         { status: 400 }
       )
     }
 
-    // 未認証のユーザーがいる場合、削除して再登録を許可
-    if (existingUser && !existingUser.emailVerified) {
-      console.log('🔄 未認証ユーザーを削除して再登録を許可:', email)
-      try {
-        await prisma.users.delete({
-          where: { email }
-        })
-        console.log('✅ 未認証ユーザー削除完了')
-      } catch (deleteError) {
-        console.error('❌ ユーザー削除エラー:', deleteError)
-      }
-    }
-
-    // 認証トークンの生成
-    const token = crypto.randomBytes(32).toString('hex')
-    const expires = new Date()
-    expires.setHours(expires.getHours() + 24) // 24時間後に期限切れ
-
-    console.log('🗑️ 既存の認証トークンを削除中...')
-
-    // 既存の認証トークンを削除（同じメールアドレス）
+    // 新しいユーザーを直接作成（メール認証なし）
+    console.log('👤 新しいユーザーを作成中...')
     try {
-      await prisma.email_verification_tokens.deleteMany({
-        where: { email }
-      })
-      console.log('✅ 既存トークン削除完了')
-    } catch (tokenDeleteError) {
-      console.error('⚠️ 既存トークン削除エラー:', tokenDeleteError)
-      // 削除エラーは致命的ではないので続行
-    }
-
-    console.log('🎫 新しい認証トークンを作成中...')
-
-    // 新しい認証トークンを保存
-    try {
-      await prisma.email_verification_tokens.create({
+      const userId = crypto.randomUUID()
+      const newUser = await prisma.users.create({
         data: {
-          email,
+          id: userId,
           name,
-          token,
-          expires
+          email,
+          emailVerified: new Date(), // 即座に認証済みとして設定
+          image: null,
+          password: null,
+          updatedAt: new Date()
         }
       })
-      console.log('✅ 認証トークン作成完了')
-    } catch (tokenCreateError) {
-      console.error('❌ 認証トークン作成エラー:', tokenCreateError)
-      return NextResponse.json(
-        {
-          error: '認証トークンの作成に失敗しました',
-          details: tokenCreateError instanceof Error ? tokenCreateError.message : 'Unknown token error'
-        },
-        { status: 500 }
-      )
-    }
 
-    console.log('✅ 認証トークンが作成されました:', {
-      email,
-      token: token.substring(0, 10) + '...',
-      expires: expires.toISOString()
-    })
-
-    // 確認メール送信
-    try {
-      await sendVerificationEmail(email, name, token)
-      console.log('✅ 確認メールが送信されました:', email)
+      console.log('✅ ユーザー作成完了:', {
+        id: newUser.id,
+        email: newUser.email,
+        name: newUser.name
+      })
 
       return NextResponse.json({
         success: true,
-        message: '登録が完了しました！確認メールをお送りしましたので、メールボックスをご確認ください。',
-        email,
-        debug: {
-          tokenCreated: true,
-          emailSent: true,
-          verificationUrl: `${process.env.NEXTAUTH_URL}/api/auth/verify-email?token=${token}`
+        message: 'アカウントの登録が完了しました！',
+        user: {
+          id: newUser.id,
+          email: newUser.email,
+          name: newUser.name
         }
       })
-    } catch (emailError) {
-      console.error('❌ 確認メール送信エラー:', emailError)
-
-      // メール送信に失敗した場合、作成したトークンを削除
-      try {
-        await prisma.emailVerificationToken.delete({
-          where: { token }
-        })
-        console.log('✅ エラー時のトークン削除完了')
-      } catch (cleanupError) {
-        console.error('⚠️ エラー時のトークン削除に失敗:', cleanupError)
-      }
-
+    } catch (createError) {
+      console.error('❌ ユーザー作成エラー:', createError)
       return NextResponse.json(
         {
-          error: 'メール送信に失敗しました。しばらく後にお試しください。',
-          details: emailError instanceof Error ? emailError.message : 'メール送信エラー'
+          error: 'ユーザーの作成に失敗しました',
+          details: createError instanceof Error ? createError.message : 'Unknown creation error'
         },
         { status: 500 }
       )
