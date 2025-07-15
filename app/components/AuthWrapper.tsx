@@ -257,11 +257,11 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
             </div>
           )}
 
-          <div className="space-y-8">
-            {/* メインゲストボタン - 近未来的デザイン */}
+          <div className="flex justify-center">
+            {/* メインゲストボタン - 近未来的デザイン（中央配置） */}
             <button
               onClick={handleGuestMode}
-              className="group relative w-full overflow-hidden"
+              className="group relative overflow-hidden"
             >
               {/* ボタンのベース */}
               <div className="relative flex items-center justify-center gap-6 px-16 py-20 bg-gradient-to-r from-[#0066ff] via-[#1E90FF] to-[#00aaff] rounded-xl transition-all duration-500 font-bold text-3xl shadow-2xl shadow-blue-500/40 transform group-hover:scale-[1.02] group-hover:shadow-blue-500/60">
@@ -283,22 +283,6 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
 
                 {/* パーティクル効果 */}
                 <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              </div>
-            </button>
-
-            {/* Googleログインボタン（準備中） - 近未来スタイル */}
-            <button
-              disabled
-              className="relative w-full overflow-hidden"
-            >
-              <div className="relative flex items-center justify-center gap-6 px-16 py-16 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 rounded-xl font-bold text-xl shadow-xl cursor-not-allowed border border-gray-600/50">
-                <UserIcon className="w-10 h-10 text-gray-400" />
-                <div className="flex items-center gap-4">
-                  <span className="text-gray-400 tracking-wide">Googleでログイン</span>
-                  <span className="text-sm bg-gray-900/80 px-4 py-2 rounded-lg font-medium text-gray-300 border border-gray-600/50">
-                    準備中
-                  </span>
-                </div>
               </div>
             </button>
           </div>
