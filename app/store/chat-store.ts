@@ -189,11 +189,10 @@ export const useChatStore = create<ChatState>()(
           set(state => ({
             sessions: state.sessions.map(session => {
               if (session.id === sessionId) {
-                // 重複チェック：同じ内容のメッセージが既に存在しないか確認
+                // 重複チェック：同じ内容と役割のメッセージが既に存在しないか確認
                 const isDuplicate = session.messages.some(existingMsg =>
-                  existingMsg.content === newMessage.content &&
-                  existingMsg.role === newMessage.role &&
-                  Math.abs(new Date(existingMsg.timestamp).getTime() - new Date().getTime()) < 5000 // 5秒以内
+                  existingMsg.content.trim() === newMessage.content.trim() &&
+                  existingMsg.role === newMessage.role
                 )
 
                 if (isDuplicate) {
@@ -322,22 +321,16 @@ export const useChatStore = create<ChatState>()(
 
           // データベースからのセッションをフロントエンド形式に変換
           const validatedSessions = sessions.map((session: any) => {
-            // メッセージの重複を除去
+            // メッセージの重複を除去（より厳密な重複チェック）
             const uniqueMessages: ChatMessage[] = []
             const seenMessages = new Set() as Set<string>
 
             (session.chat_messages || []).forEach((msg: any) => {
-              // メッセージの一意キーを作成（内容 + 役割 + 時間の組み合わせ）
-              const messageKey = `${msg.content}-${msg.role}-${new Date(msg.timestamp).getTime()}`
+              // より厳密な一意キーを作成（内容 + 役割の組み合わせのみ）
+              const messageKey = `${msg.content.trim()}-${msg.role}`
 
-              // 同じ内容で同じ役割のメッセージが5分以内にない場合のみ追加
-              const hasSimilarRecent = uniqueMessages.some(existingMsg =>
-                existingMsg.content === msg.content &&
-                existingMsg.role === msg.role &&
-                Math.abs(new Date(existingMsg.timestamp).getTime() - new Date(msg.timestamp).getTime()) < 300000 // 5分
-              )
-
-              if (!seenMessages.has(messageKey) && !hasSimilarRecent) {
+              // 完全に同じ内容と役割のメッセージは除外
+              if (!seenMessages.has(messageKey)) {
                 seenMessages.add(messageKey)
                 uniqueMessages.push({
                   role: msg.role as 'user' | 'assistant',
@@ -378,7 +371,7 @@ export const useChatStore = create<ChatState>()(
             array.findIndex(s => s.id === session.id) === index
           )
 
-          // データベースからのデータで確実に更新
+          // データベースからのデータで完全に置き換える（ローカルデータとの重複を防ぐ）
           set({
             sessions: uniqueSessions,
             currentSessionId: newCurrentSessionId
@@ -400,16 +393,17 @@ export const useChatStore = create<ChatState>()(
     {
       name: 'chat-sessions',
       partialize: (state) => {
-        // ゲストユーザーでもセッションを永続化するように変更
+        // 認証ユーザーの場合はメッセージを永続化せず、データベースから読み込む
+        // ゲストユーザーの場合のみローカルストレージにメッセージを保存
         return {
-          sessions: state.sessions.map(session => ({
+          sessions: state.isGuest ? state.sessions.map(session => ({
             ...session,
             messages: (session.messages || []).map(message => ({
               ...message,
               imageBase64: undefined, // 画像データは永続化しない
               imagePreview: undefined
             }))
-          })),
+          })) : [],
           currentSessionId: state.currentSessionId,
           currentUser: state.currentUser,
           isGuest: state.isGuest
